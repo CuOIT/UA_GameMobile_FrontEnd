@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UA Marketing Bootcamp for Unity Devs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#dashboard" aria-label="Dashboard">
+          <span class="brand-mark">UA</span>
+          <span>
+            <strong>Mobile Game UA</strong>
+            <small>30-day bootcamp</small>
+          </span>
+        </a>
+        <nav class="nav-list">
+          <a href="#dashboard" data-nav="dashboard">Dashboard</a>
+          <a href="#lessons" data-nav="lessons">30-Day Lessons</a>
+          <a href="#glossary" data-nav="glossary">Glossary</a>
+          <a href="#tools" data-nav="tools">Tools</a>
+          <a href="#cases" data-nav="cases">Case Studies</a>
+          <a href="#chat" data-nav="chat">AI Chat</a>
+          <a href="#plan" data-nav="plan">Final UA Plan</a>
+          <a href="#account" data-nav="account">Account</a>
+        </nav>
+        <section class="stage-filter" aria-label="Learner stage">
+          <label for="stageSelect">Learner stage</label>
+          <select id="stageSelect">
+            <option value="all">All stages</option>
+            <option value="idea">No game yet</option>
+            <option value="prototype">Prototype / pre-launch</option>
+            <option value="live">Newly live game</option>
+          </select>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Bilingual Vietnamese-first learning site</p>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button" id="exportStateBtn" type="button">Export progress</button>
+            <button class="ghost-button danger" id="resetStateBtn" type="button">Reset local data</button>
+          </div>
+        </header>
+        <div id="app" class="view" aria-live="polite"></div>
+      </main>
+    </div>
+
+    <template id="loadingTemplate">
+      <section class="panel">
+        <p>Loading static content...</p>
+      </section>
+    </template>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
+

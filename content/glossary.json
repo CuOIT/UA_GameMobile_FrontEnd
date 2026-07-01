@@ -1,0 +1,163 @@
+[
+    {
+        "analogy":  "Giống một feedback loop: build, measure, learn, rồi chỉnh game hoặc creative.",
+        "term":  "UA",
+        "vi":  "User Acquisition: cách đưa người chơi mới vào game bằng paid, organic và store discovery.",
+        "en":  "The practice of acquiring new users through paid and organic channels.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Giá mua một lượt thử game, chưa nói user đó có chất lượng không.",
+        "term":  "CPI",
+        "vi":  "Cost Per Install: chi phí trung bình để có một install.",
+        "en":  "Average media spend per install.",
+        "formula":  "Spend / Installs"
+    },
+    {
+        "analogy":  "Đo độ hấp dẫn của hook giống trailer thumbnail.",
+        "term":  "CTR",
+        "vi":  "Click-through rate: tỷ lệ người thấy ad rồi click.",
+        "en":  "Clicks divided by impressions.",
+        "formula":  "Clicks / Impressions"
+    },
+    {
+        "analogy":  "Store page có giữ đúng lời hứa của ad hay không.",
+        "term":  "CVR",
+        "vi":  "Conversion rate: tỷ lệ chuyển đổi từ click sang install hoặc store view sang install.",
+        "en":  "Conversions divided by previous funnel step.",
+        "formula":  "Installs / Clicks"
+    },
+    {
+        "analogy":  "Một chỉ số gọn để so sánh creative.",
+        "term":  "IPM",
+        "vi":  "Installs per Mille: số install trên 1.000 impressions.",
+        "en":  "Installs per 1,000 ad impressions.",
+        "formula":  "Installs / Impressions * 1000"
+    },
+    {
+        "analogy":  "Core loop có đủ lý do để mở game lại không.",
+        "term":  "Retention",
+        "vi":  "Tỷ lệ người chơi quay lại sau D1, D7 hoặc D30.",
+        "en":  "Share of users returning after a period.",
+        "formula":  "Returning users / Cohort size"
+    },
+    {
+        "analogy":  "Giống tách save files theo build version để debug đúng nguyên nhân.",
+        "term":  "Cohort",
+        "vi":  "Nhóm user có cùng điều kiện, thường theo ngày install, source hoặc campaign.",
+        "en":  "A grouped set of users used for time-based analysis.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Nhiệt độ economy và monetization mỗi ngày.",
+        "term":  "ARPDAU",
+        "vi":  "Doanh thu trung bình trên mỗi daily active user.",
+        "en":  "Average revenue per daily active user.",
+        "formula":  "Daily revenue / DAU"
+    },
+    {
+        "analogy":  "Trần bạn có thể trả cho một install trước khi lỗ.",
+        "term":  "LTV",
+        "vi":  "Lifetime Value: doanh thu dự kiến một user tạo ra trong vòng đời.",
+        "en":  "Expected lifetime revenue per user.",
+        "formula":  "ARPDAU * Average lifetime days"
+    },
+    {
+        "analogy":  "Campaign có đang tự nuôi được nó không.",
+        "term":  "ROAS",
+        "vi":  "Return on Ad Spend: doanh thu thu về so với tiền quảng cáo.",
+        "en":  "Revenue attributed to ads divided by ad spend.",
+        "formula":  "Attributed revenue / Spend"
+    },
+    {
+        "analogy":  "Thời gian từ lúc spawn user đến lúc user trả đủ chi phí spawn.",
+        "term":  "Payback window",
+        "vi":  "Khoảng thời gian cần để thu hồi chi phí UA.",
+        "en":  "Time needed for acquired users to repay spend.",
+        "formula":  "Days until cumulative revenue \u003e= CPI"
+    },
+    {
+        "analogy":  "Store page là scene chọn game trước khi player bấm Play.",
+        "term":  "ASO",
+        "vi":  "App Store Optimization: tối ưu store listing để tăng discovery và install conversion.",
+        "en":  "Optimizing app store assets and metadata.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Closed beta có đo lường UA và economy.",
+        "term":  "Soft launch",
+        "vi":  "Ra mắt giới hạn để kiểm tra product, UA và monetization trước global launch.",
+        "en":  "Limited launch for validation before broader release.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Log nguồn gốc bug/user để biết thay đổi nào tạo ra kết quả.",
+        "term":  "Attribution",
+        "vi":  "Quy gán install/revenue về nguồn quảng cáo hoặc campaign.",
+        "en":  "Connecting user actions to marketing sources.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Một permission gate ảnh hưởng observability của UA.",
+        "term":  "ATT",
+        "vi":  "Apple App Tracking Transparency: framework consent ảnh hưởng tracking user-level trên iOS.",
+        "en":  "Apple privacy framework requiring tracking permission.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Debug log bị nén và delay, nên phải thiết kế event kỹ hơn.",
+        "term":  "SKAN",
+        "vi":  "SKAdNetwork: hệ thống attribution bảo vệ privacy của Apple với signal bị giới hạn.",
+        "en":  "Apple privacy-preserving attribution framework.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "A/B test cảm nhận đầu vào trước khi user chạm game.",
+        "term":  "Creative testing",
+        "vi":  "Quy trình test hook, format, audience promise và visual angle của ad.",
+        "en":  "Testing ad variants to find scalable signals.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Một vertical slice siêu nhỏ của core loop.",
+        "term":  "Playable ad",
+        "vi":  "Ad tương tác mô phỏng gameplay ngắn để tăng intent.",
+        "en":  "Interactive ad that lets users try a simplified experience.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Content update cho ads, không chỉ cho game.",
+        "term":  "Creative fatigue",
+        "vi":  "Khi creative giảm hiệu quả vì audience đã thấy quá nhiều hoặc signal bão hòa.",
+        "en":  "Performance decay after repeated creative exposure.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "API contract giữa gameplay, analytics và UA.",
+        "term":  "Event taxonomy",
+        "vi":  "Danh sách event đo lường thống nhất cho funnel, retention và monetization.",
+        "en":  "Structured event naming and tracking plan.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Một experiment container có input, output và stop rule.",
+        "term":  "Campaign",
+        "vi":  "Cấu trúc chạy ads gồm objective, budget, audience, creative và optimization rule.",
+        "en":  "A paid acquisition setup inside an ad network.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Không phải game hay là campaign sẽ rẻ; genre quyết định nhiều constraint.",
+        "term":  "Genre-market fit",
+        "vi":  "Mức độ game, audience, price of traffic và monetization hợp nhau.",
+        "en":  "Fit between genre demand, audience, economics and market.",
+        "formula":  "n/a"
+    },
+    {
+        "analogy":  "Một black-box optimizer cần input và event signal sạch.",
+        "term":  "Ad network",
+        "vi":  "Nền tảng phân phối ads như Meta, Google, Unity, AppLovin hoặc ironSource.",
+        "en":  "Platform that buys/sells ad inventory and optimizes delivery.",
+        "formula":  "n/a"
+    }
+]

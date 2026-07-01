@@ -1,0 +1,332 @@
+{
+    "q01":  {
+                "question":  "Day 1: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q02":  {
+                "question":  "Day 2: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q03":  {
+                "question":  "Day 3: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q04":  {
+                "question":  "Day 4: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q05":  {
+                "question":  "Day 5: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q06":  {
+                "question":  "Day 6: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q07":  {
+                "question":  "Day 7: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q08":  {
+                "question":  "Day 8: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q09":  {
+                "question":  "Day 9: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q10":  {
+                "question":  "Day 10: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q11":  {
+                "question":  "Day 11: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q12":  {
+                "question":  "Day 12: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q13":  {
+                "question":  "Day 13: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q14":  {
+                "question":  "Day 14: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q15":  {
+                "question":  "Day 15: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q16":  {
+                "question":  "Day 16: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q17":  {
+                "question":  "Day 17: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q18":  {
+                "question":  "Day 18: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q19":  {
+                "question":  "Day 19: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q20":  {
+                "question":  "Day 20: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q21":  {
+                "question":  "Day 21: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q22":  {
+                "question":  "Day 22: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q23":  {
+                "question":  "Day 23: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q24":  {
+                "question":  "Day 24: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q25":  {
+                "question":  "Day 25: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q26":  {
+                "question":  "Day 26: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q27":  {
+                "question":  "Day 27: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q28":  {
+                "question":  "Day 28: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q29":  {
+                "question":  "Day 29: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            },
+    "q30":  {
+                "question":  "Day 30: What is the best practical takeaway?",
+                "options":  [
+                                "Define one measurable learning goal before spending",
+                                "Spend first and inspect later",
+                                "Only optimize visuals, not product metrics",
+                                "Ignore privacy and attribution limits"
+                            ],
+                "answer":  0,
+                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
+            }
+}

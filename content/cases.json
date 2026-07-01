@@ -1,0 +1,46 @@
+[
+    {
+        "tags":  [
+                     "prototype",
+                     "retention"
+                 ],
+        "reason":  "Acquisition is promising, but retention signal suggests the first-session experience is leaking.",
+        "metrics":  "CPI $0.42, CTR 1.8%, D1 22%, D7 4%, ARPDAU $0.03",
+        "context":  "A puzzle game gets cheap installs from a broad audience, but users leave before level 4.",
+        "title":  "Puzzle soft-launch with good CPI but weak D1",
+        "recommendation":  "Iterate product onboarding before scaling."
+    },
+    {
+        "tags":  [
+                     "creative",
+                     "scale"
+                 ],
+        "reason":  "Creative signal and retention both support a controlled scale test.",
+        "metrics":  "IPM 18 vs account avg 7, CPI $0.65, D1 38%, early ROAS stable",
+        "context":  "One combat-progress creative outperforms all economy-focused creatives.",
+        "title":  "Idle RPG creative spike",
+        "recommendation":  "Scale cautiously and make variants around the same player motivation."
+    },
+    {
+        "tags":  [
+                     "store",
+                     "creative"
+                 ],
+        "reason":  "The ad hook creates interest, but the store listing breaks continuity.",
+        "metrics":  "CTR 3.9%, CVR 11%, CPI $1.10, store screenshots old",
+        "context":  "Ads get clicks, but the store page does not convert.",
+        "title":  "Hyper-casual high CTR low CVR",
+        "recommendation":  "Fix store promise before blaming ad network."
+    },
+    {
+        "tags":  [
+                     "live",
+                     "budget"
+                 ],
+        "reason":  "Retention is not catastrophic, but payback math is not ready for scale.",
+        "metrics":  "CPI $0.80, D7 retention 16%, D7 ROAS 8%, target 20%",
+        "context":  "A newly live game has acceptable retention but weak monetization.",
+        "title":  "Live game ROAS below target",
+        "recommendation":  "Do not scale; test monetization/economy changes and lower-cost audiences."
+    }
+]

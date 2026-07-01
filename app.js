@@ -1,0 +1,1032 @@
+const contentRoot = "./content";
+const stateKey = "uaBootcampState.v1";
+
+const defaultState = {
+  stage: "all",
+  completedLessons: [],
+  bookmarks: [],
+  quizResults: {},
+  checklist: {},
+  chat: {
+    providerUrl: "",
+    apiKey: "",
+    model: "gpt-4o-mini",
+    memory: "Learner is a Unity developer studying mobile game UA marketing.",
+    messages: []
+  },
+  plan: {
+    hypothesis: "",
+    audience: "",
+    metricTargets: "",
+    tracking: "",
+    creativeMatrix: "",
+    budget: "",
+    successCriteria: "",
+    killCriteria: ""
+  }
+};
+
+const stageLabels = {
+  all: "All stages",
+  idea: "No game yet",
+  prototype: "Prototype / pre-launch",
+  live: "Newly live game"
+};
+
+const app = document.querySelector("#app");
+const title = document.querySelector("#pageTitle");
+const stageSelect = document.querySelector("#stageSelect");
+const navLinks = [...document.querySelectorAll("[data-nav]")];
+let data = {};
+let state = loadState();
+let supabaseClient = null;
+let currentUser = null;
+let authReady = false;
+let cloudStatus = "Local progress only";
+let cloudSaveTimer = null;
+
+init();
+
+async function init() {
+  renderLoading();
+  data = await loadContent();
+  applyConfiguredDefaults();
+  await initAuth();
+  stageSelect.value = state.stage;
+  stageSelect.addEventListener("change", () => {
+    state.stage = stageSelect.value;
+    saveState();
+    renderRoute();
+  });
+  document.querySelector("#resetStateBtn").addEventListener("click", resetState);
+  document.querySelector("#exportStateBtn").addEventListener("click", exportState);
+  window.addEventListener("hashchange", renderRoute);
+  if (!location.hash) location.hash = "#dashboard";
+  renderRoute();
+}
+
+async function loadContent() {
+  const [course, glossary, quizzes, calculators, checklists, cases, config] = await Promise.all([
+    fetchJson("course.json"),
+    fetchJson("glossary.json"),
+    fetchJson("quizzes.json"),
+    fetchJson("calculators.json"),
+    fetchJson("checklists.json"),
+    fetchJson("cases.json"),
+    fetchOptionalJson("app-config.json")
+  ]);
+  return { course, glossary, quizzes, calculators, checklists, cases, config };
+}
+
+async function fetchOptionalJson(file) {
+  try {
+    return await fetchJson(file);
+  } catch {
+    return {};
+  }
+}
+
+async function fetchJson(file) {
+  const response = await fetch(`${contentRoot}/${file}`);
+  if (!response.ok) throw new Error(`Could not load ${file}`);
+  return response.json();
+}
+
+async function fetchLesson(day) {
+  const padded = String(day).padStart(2, "0");
+  const response = await fetch(`${contentRoot}/lessons/day-${padded}.md`);
+  if (!response.ok) throw new Error(`Could not load day-${padded}.md`);
+  return response.text();
+}
+
+function loadState() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(stateKey) || "{}");
+    return {
+      ...defaultState,
+      ...parsed,
+      chat: { ...defaultState.chat, ...(parsed.chat || {}) },
+      plan: { ...defaultState.plan, ...(parsed.plan || {}) }
+    };
+  } catch {
+    return structuredClone(defaultState);
+  }
+}
+
+function saveState(options = {}) {
+  localStorage.setItem(stateKey, JSON.stringify(state));
+  if (!options.skipCloud) scheduleCloudSave();
+}
+
+function renderLoading() {
+  app.replaceChildren(document.querySelector("#loadingTemplate").content.cloneNode(true));
+}
+
+function renderRoute() {
+  const route = location.hash.replace("#", "") || "dashboard";
+  navLinks.forEach((link) => link.classList.toggle("active", route.startsWith(link.dataset.nav)));
+
+  if (route.startsWith("lesson-")) {
+    const day = Number(route.split("-")[1]);
+    renderLesson(day);
+    return;
+  }
+
+  const routes = {
+    dashboard: renderDashboard,
+    lessons: renderLessons,
+    glossary: renderGlossary,
+    tools: renderTools,
+    cases: renderCases,
+    chat: renderChat,
+    plan: renderPlan,
+    account: renderAccount
+  };
+  (routes[route] || renderDashboard)();
+}
+
+function applyConfiguredDefaults() {
+  const apiBaseUrl = (data.config?.apiBaseUrl || "").replace(/\/$/, "");
+  if (apiBaseUrl && !state.chat.providerUrl) {
+    state.chat.providerUrl = `${apiBaseUrl}/api/chat`;
+    saveState({ skipCloud: true });
+  }
+}
+async function initAuth() {
+  const config = data.config || {};
+  if (!config.supabaseUrl || !config.supabaseAnonKey) {
+    cloudStatus = "Cloud login is not configured. Fill content/app-config.json to enable Supabase sync.";
+    authReady = true;
+    return;
+  }
+
+  try {
+    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+    supabaseClient = createClient(config.supabaseUrl, config.supabaseAnonKey, {
+      auth: { persistSession: true, autoRefreshToken: true }
+    });
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    currentUser = sessionData.session?.user || null;
+    cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Cloud login ready.";
+
+    supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+      currentUser = session?.user || null;
+      cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Signed out. Local progress is still available.";
+      if (currentUser) await pullCloudProgress();
+      renderRoute();
+    });
+
+    if (currentUser) await pullCloudProgress();
+  } catch (error) {
+    cloudStatus = `Supabase client failed to load: ${error.message}`;
+  } finally {
+    authReady = true;
+  }
+}
+
+function cloudProgressFromState() {
+  return {
+    stage: state.stage,
+    completedLessons: state.completedLessons,
+    bookmarks: state.bookmarks,
+    quizResults: state.quizResults,
+    checklist: state.checklist,
+    plan: state.plan,
+    chat: { memory: state.chat?.memory || "" }
+  };
+}
+
+function mergeCloudProgress(progress = {}) {
+  const local = state;
+  const mergedPlan = { ...defaultState.plan, ...(progress.plan || {}) };
+  for (const [key, value] of Object.entries(local.plan || {})) {
+    if (String(value || "").trim()) mergedPlan[key] = value;
+  }
+
+  state = {
+    ...defaultState,
+    ...local,
+    stage: local.stage || progress.stage || defaultState.stage,
+    completedLessons: [...new Set([...(progress.completedLessons || []), ...(local.completedLessons || [])])].sort((a, b) => a - b),
+    bookmarks: [...new Set([...(progress.bookmarks || []), ...(local.bookmarks || [])])].sort((a, b) => a - b),
+    quizResults: { ...(progress.quizResults || {}), ...(local.quizResults || {}) },
+    checklist: { ...(progress.checklist || {}), ...(local.checklist || {}) },
+    plan: mergedPlan,
+    chat: {
+      ...defaultState.chat,
+      ...(local.chat || {}),
+      memory: local.chat?.memory || progress.chat?.memory || defaultState.chat.memory,
+      apiKey: local.chat?.apiKey || "",
+      messages: local.chat?.messages || []
+    }
+  };
+  saveState({ skipCloud: true });
+}
+
+async function pullCloudProgress() {
+  if (!supabaseClient || !currentUser) return;
+  cloudStatus = "Loading cloud progress...";
+  const { data: row, error } = await supabaseClient
+    .from("ua_user_progress")
+    .select("progress")
+    .eq("user_id", currentUser.id)
+    .maybeSingle();
+
+  if (error) {
+    cloudStatus = `Could not load cloud progress: ${error.message}`;
+    return;
+  }
+
+  if (row?.progress) {
+    mergeCloudProgress(row.progress);
+    cloudStatus = `Cloud progress merged for ${currentUser.email}`;
+  } else {
+    await pushCloudProgress();
+  }
+}
+
+async function pushCloudProgress() {
+  if (!supabaseClient || !currentUser) return;
+  const payload = cloudProgressFromState();
+  const { error } = await supabaseClient.from("ua_user_progress").upsert({
+    user_id: currentUser.id,
+    progress: payload,
+    updated_at: new Date().toISOString()
+  });
+  cloudStatus = error ? `Could not save cloud progress: ${error.message}` : `Cloud progress saved for ${currentUser.email}`;
+}
+
+function scheduleCloudSave() {
+  if (!supabaseClient || !currentUser) return;
+  clearTimeout(cloudSaveTimer);
+  cloudSaveTimer = setTimeout(() => {
+    pushCloudProgress().then(() => {
+      if (location.hash === "#account") renderAccount();
+    });
+  }, 900);
+}
+function filteredLessons() {
+  if (state.stage === "all") return data.course.lessons;
+  return data.course.lessons.filter((lesson) => lesson.stages.includes(state.stage));
+}
+
+function completionPercent() {
+  return Math.round((state.completedLessons.length / data.course.lessons.length) * 100);
+}
+
+function nextLesson() {
+  return data.course.lessons.find((lesson) => !state.completedLessons.includes(lesson.day)) || data.course.lessons[29];
+}
+
+function renderDashboard() {
+  title.textContent = "Dashboard";
+  const next = nextLesson();
+  const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  app.innerHTML = `
+    <section class="metric-row">
+      <div class="metric"><strong>${state.completedLessons.length}/30</strong><span>lessons completed</span></div>
+      <div class="metric"><strong>${completionPercent()}%</strong><span>course progress</span></div>
+      <div class="metric"><strong>${planFields}/8</strong><span>UA plan sections</span></div>
+      <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes attempted</span></div>
+    </section>
+    <section class="panel">
+      <h2>Learning progress</h2>
+      <p>Tiến độ khóa học được lưu cục bộ trong trình duyệt bằng localStorage. Không có account, DB, hay server-side tracking.</p>
+      <div class="progress-bar" aria-label="Course progress">
+        <div class="progress-fill" style="width:${completionPercent()}%"></div>
+      </div>
+    </section>
+    <section class="grid two">
+      <article class="panel">
+        <p class="eyebrow">Next lesson</p>
+        <h2>Day ${next.day}: ${escapeHtml(next.title)}</h2>
+        <p>${escapeHtml(next.summary)}</p>
+        <div class="tag-row">${renderTags(next.stages.map((stage) => stageLabels[stage]), "blue")}</div>
+        <a class="button" href="#lesson-${next.day}">Continue</a>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Unity dev lens</p>
+        <h2>UA is a product feedback loop</h2>
+        <p>Trang này dạy UA như một vòng lặp giữa creative, store, tracking, retention và economy. Bạn không cần code SDK trong MVP, nhưng cần biết event nào phải đo và quyết định nào phụ thuộc vào data.</p>
+        <a class="button" href="#plan">Open Final UA Plan</a>
+      </article>
+    </section>
+    <section class="grid three">
+      ${dashboardShortcut("Glossary", "CPI, LTV, ROAS, SKAN, cohort và các thuật ngữ được giải thích bằng tiếng Việt.", "#glossary")}
+      ${dashboardShortcut("Tools", "Máy tính break-even CPI, LTV rough estimate, ROAS target và test budget.", "#tools")}
+      ${dashboardShortcut("Case Studies", "Đọc dữ liệu mẫu và chọn scale, iterate hoặc kill campaign.", "#cases")}
+      ${dashboardShortcut("AI Chat", "Hỏi đáp theo context bài học, glossary và memory cục bộ.", "#chat")}
+    </section>
+  `;
+}
+
+function dashboardShortcut(name, copy, href) {
+  return `
+    <article class="panel">
+      <h3>${name}</h3>
+      <p>${copy}</p>
+      <a class="button" href="${href}">Open</a>
+    </article>
+  `;
+}
+
+function renderLessons() {
+  title.textContent = "30-Day Lessons";
+  const lessons = filteredLessons();
+  app.innerHTML = `
+    <section class="panel">
+      <h2>Course path</h2>
+      <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
+    </section>
+    <section class="lesson-list">
+      ${lessons.map(renderLessonCard).join("")}
+    </section>
+  `;
+}
+
+function renderLessonCard(lesson) {
+  const done = state.completedLessons.includes(lesson.day);
+  return `
+    <article class="lesson-card ${done ? "done" : ""}">
+      <div class="tag-row">
+        <span class="tag ${done ? "ok" : "warn"}">${done ? "Done" : `Day ${lesson.day}`}</span>
+        <span class="tag">${lesson.module}</span>
+      </div>
+      <h3>${escapeHtml(lesson.title)}</h3>
+      <p>${escapeHtml(lesson.summary)}</p>
+      <div class="tag-row">${renderTags(lesson.stages.map((stage) => stageLabels[stage]), "blue")}</div>
+      <a class="button" href="#lesson-${lesson.day}">Open lesson</a>
+    </article>
+  `;
+}
+
+async function renderLesson(day) {
+  const lesson = data.course.lessons.find((item) => item.day === day);
+  if (!lesson) {
+    renderLessons();
+    return;
+  }
+
+  title.textContent = `Day ${lesson.day}: ${lesson.title}`;
+  renderLoading();
+  const markdown = await fetchLesson(day);
+  const quiz = data.quizzes[lesson.quizId];
+  const checklist = data.checklists[lesson.checklistId] || [];
+  app.innerHTML = `
+    <section class="lesson-layout">
+      <article class="lesson-body">
+        <div class="panel">
+          <div class="tag-row">
+            <span class="tag warn">Day ${lesson.day}</span>
+            <span class="tag">${lesson.module}</span>
+            <span class="tag">${lesson.difficulty}</span>
+            <span class="tag">${lesson.estimatedMinutes} min</span>
+          </div>
+          <p>${escapeHtml(lesson.summary)}</p>
+          <button id="completeLessonBtn" type="button">${state.completedLessons.includes(day) ? "Mark as incomplete" : "Mark lesson done"}</button>
+          <button class="ghost-button" id="bookmarkLessonBtn" type="button">${state.bookmarks.includes(day) ? "Remove bookmark" : "Bookmark"}</button>
+        </div>
+        <div class="markdown">${renderMarkdown(stripFrontmatter(markdown))}</div>
+      </article>
+      <aside class="side-stack">
+        <section class="panel">
+          <h2>Related glossary</h2>
+          <div class="tag-row">
+            ${lesson.glossaryTerms.map((term) => `<a class="tag blue" href="#glossary" data-term="${term}">${term}</a>`).join("")}
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Checklist</h2>
+          <div class="checklist">
+            ${checklist.map((item, index) => renderCheckItem(lesson.checklistId, index, item)).join("")}
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Quiz</h2>
+          ${renderQuiz(lesson.quizId, quiz)}
+        </section>
+      </aside>
+    </section>
+  `;
+
+  document.querySelector("#completeLessonBtn").addEventListener("click", () => toggleLesson(day));
+  document.querySelector("#bookmarkLessonBtn").addEventListener("click", () => toggleBookmark(day));
+  document.querySelectorAll("[data-check]").forEach((input) => {
+    input.addEventListener("change", (event) => {
+      state.checklist[event.target.dataset.check] = event.target.checked;
+      saveState();
+    });
+  });
+  document.querySelectorAll("[data-quiz-option]").forEach((button) => {
+    button.addEventListener("click", () => answerQuiz(lesson.quizId, Number(button.dataset.index)));
+  });
+}
+
+function renderCheckItem(checklistId, index, item) {
+  const key = `${checklistId}:${index}`;
+  return `
+    <label class="check-item">
+      <input type="checkbox" data-check="${key}" ${state.checklist[key] ? "checked" : ""} />
+      <span>${escapeHtml(item)}</span>
+    </label>
+  `;
+}
+
+function renderQuiz(quizId, quiz) {
+  if (!quiz) return `<p class="empty">No quiz for this lesson.</p>`;
+  const result = state.quizResults[quizId];
+  return `
+    <p><strong>${escapeHtml(quiz.question)}</strong></p>
+    <div class="quiz-options">
+      ${quiz.options
+        .map((option, index) => {
+          const cls =
+            result === undefined ? "" : index === quiz.answer ? "correct" : index === result ? "wrong" : "";
+          return `<button class="quiz-option ${cls}" data-quiz-option="${quizId}" data-index="${index}" type="button">${escapeHtml(option)}</button>`;
+        })
+        .join("")}
+    </div>
+    ${result === undefined ? "" : `<p>${escapeHtml(quiz.explanation)}</p>`}
+  `;
+}
+
+function answerQuiz(quizId, answer) {
+  state.quizResults[quizId] = answer;
+  saveState();
+  renderRoute();
+}
+
+function toggleLesson(day) {
+  const set = new Set(state.completedLessons);
+  set.has(day) ? set.delete(day) : set.add(day);
+  state.completedLessons = [...set].sort((a, b) => a - b);
+  saveState();
+  renderRoute();
+}
+
+function toggleBookmark(day) {
+  const set = new Set(state.bookmarks);
+  set.has(day) ? set.delete(day) : set.add(day);
+  state.bookmarks = [...set].sort((a, b) => a - b);
+  saveState();
+  renderRoute();
+}
+
+function renderGlossary() {
+  title.textContent = "Glossary";
+  app.innerHTML = `
+    <section class="panel">
+      <h2>UA terms, explained for Unity developers</h2>
+      <div class="search-row">
+        <input id="termSearch" type="search" placeholder="Search terms: CPI, LTV, ROAS, SKAN..." />
+      </div>
+    </section>
+    <section class="term-grid" id="termGrid">
+      ${renderTermCards(data.glossary)}
+    </section>
+  `;
+  document.querySelector("#termSearch").addEventListener("input", (event) => {
+    const query = event.target.value.trim().toLowerCase();
+    const terms = data.glossary.filter((term) =>
+      [term.term, term.vi, term.en, term.analogy].join(" ").toLowerCase().includes(query)
+    );
+    document.querySelector("#termGrid").innerHTML = renderTermCards(terms);
+  });
+}
+
+function renderTermCards(terms) {
+  return terms
+    .map(
+      (term) => `
+      <article class="term-card">
+        <h3>${escapeHtml(term.term)}</h3>
+        <p>${escapeHtml(term.vi)}</p>
+        <p><strong>EN:</strong> ${escapeHtml(term.en)}</p>
+        ${term.formula ? `<p><span class="formula">${escapeHtml(term.formula)}</span></p>` : ""}
+        <p><strong>Unity lens:</strong> ${escapeHtml(term.analogy)}</p>
+      </article>
+    `
+    )
+    .join("");
+}
+
+function renderTools() {
+  title.textContent = "Tools";
+  app.innerHTML = `
+    <section class="panel">
+      <h2>Static calculators</h2>
+      <p>Các công cụ này dùng công thức đơn giản để giúp beginner hiểu quyết định UA. Kết quả là learning aid, không phải forecast tài chính chính thức.</p>
+    </section>
+    <section class="tool-grid">
+      ${data.calculators.map(renderTool).join("")}
+    </section>
+  `;
+  data.calculators.forEach((tool) => {
+    document.querySelector(`#${tool.id} button`).addEventListener("click", () => calculateTool(tool));
+  });
+}
+
+function renderTool(tool) {
+  return `
+    <article class="tool-card" id="${tool.id}">
+      <h3>${escapeHtml(tool.name)}</h3>
+      <p>${escapeHtml(tool.description)}</p>
+      <div class="tool-fields">
+        ${tool.fields
+          .map(
+            (field) => `
+          <label class="tool-field">
+            <span>${escapeHtml(field.label)}</span>
+            <input type="number" step="0.01" value="${field.default}" data-field="${field.key}" />
+          </label>
+        `
+          )
+          .join("")}
+      </div>
+      <button type="button">Calculate</button>
+      <div class="tool-result" data-result>Result appears here.</div>
+    </article>
+  `;
+}
+
+function calculateTool(tool) {
+  const root = document.querySelector(`#${tool.id}`);
+  const values = {};
+  root.querySelectorAll("[data-field]").forEach((input) => {
+    values[input.dataset.field] = Number(input.value);
+  });
+  let result = "";
+  if (tool.id === "breakEvenCpi") {
+    result = `Break-even CPI ≈ $${(values.ltv * values.grossMargin).toFixed(2)} per install`;
+  }
+  if (tool.id === "roughLtv") {
+    result = `Rough LTV ≈ $${(values.arpdau * values.avgLifetimeDays).toFixed(2)} per user`;
+  }
+  if (tool.id === "roasTarget") {
+    result = `Target ${values.day}-day revenue ≈ $${(values.spend * values.targetRoas).toFixed(2)}`;
+  }
+  if (tool.id === "testBudget") {
+    result = `Suggested test budget ≈ $${(values.cpi * values.installsPerCreative * values.creatives).toFixed(2)}`;
+  }
+  root.querySelector("[data-result]").textContent = result;
+}
+
+function renderCases() {
+  title.textContent = "Case Studies";
+  app.innerHTML = `
+    <section class="panel">
+      <h2>Read the signal, then choose</h2>
+      <p>Mỗi case dùng dữ liệu mẫu để luyện tư duy: scale, iterate hay kill. Không cần backend; dữ liệu nằm trong JSON.</p>
+    </section>
+    <section class="case-grid">
+      ${data.cases.map(renderCase).join("")}
+    </section>
+  `;
+}
+
+function renderChat() {
+  title.textContent = "AI Chat";
+  app.innerHTML = `
+    <section class="chat-layout">
+      <article class="panel chat-window">
+        <div>
+          <h2>Ask about your lessons</h2>
+          <p class="status-line">The chatbot uses context from 30 lessons, glossary, case studies, local memory, chat history, and your Final UA Plan. For production, point Provider URL to a Vercel/Netlify serverless proxy so the API key is not exposed in the browser.</p>
+        </div>
+        <div class="chat-log" id="chatLog">
+          ${renderMessages()}
+        </div>
+        <form class="chat-input" id="chatForm">
+          <textarea id="chatPrompt" placeholder="Example: My puzzle game has D1 retention 28% and CPI $0.55. Should I iterate creative or fix tutorial?"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </article>
+      <aside class="panel settings-stack">
+        <h2>Provider + memory</h2>
+        <label class="field">
+          <span>Provider URL</span>
+          <input id="providerUrl" value="${escapeHtml(state.chat.providerUrl)}" placeholder="https://api.openai.com/v1/chat/completions or /api/chat" />
+        </label>
+        <label class="field">
+          <span>Model</span>
+          <input id="chatModel" value="${escapeHtml(state.chat.model)}" placeholder="gpt-4o-mini" />
+        </label>
+        <label class="field">
+          <span>API key</span>
+          <input id="chatApiKey" type="password" value="${escapeHtml(state.chat.apiKey)}" placeholder="Stored only in this browser" />
+        </label>
+        <label class="field">
+          <span>Memory notes</span>
+          <textarea id="chatMemory" placeholder="Learner background, current game, preferred genre, constraints...">${escapeHtml(state.chat.memory)}</textarea>
+        </label>
+        <button id="saveChatSettings" type="button">Save settings</button>
+        <button class="ghost-button" id="clearChatHistory" type="button">Clear chat history</button>
+        <p class="status-line">Direct third-party provider URLs can fail because of CORS and would store the API key in localStorage. A serverless proxy is the right option for public deploys.</p>
+      </aside>
+    </section>
+  `;
+
+  document.querySelector("#saveChatSettings").addEventListener("click", saveChatSettings);
+  document.querySelector("#clearChatHistory").addEventListener("click", () => {
+    state.chat.messages = [];
+    saveState();
+    renderChat();
+  });
+  document.querySelector("#chatForm").addEventListener("submit", sendChatMessage);
+  scrollChatToBottom();
+}
+
+function renderMessages() {
+  if (!state.chat.messages.length) {
+    return `<p class="empty">No messages yet. Ask about a metric, lesson, checklist, creative test, or your final UA plan.</p>`;
+  }
+  return state.chat.messages
+    .map((message) => `<div class="message ${message.role}">${escapeHtml(message.content)}</div>`)
+    .join("");
+}
+
+function saveChatSettings() {
+  state.chat.providerUrl = document.querySelector("#providerUrl").value.trim();
+  state.chat.model = document.querySelector("#chatModel").value.trim() || "gpt-4o-mini";
+  state.chat.apiKey = document.querySelector("#chatApiKey").value.trim();
+  state.chat.memory = document.querySelector("#chatMemory").value.trim();
+  saveState();
+}
+
+async function sendChatMessage(event) {
+  event.preventDefault();
+  saveChatSettings();
+  const prompt = document.querySelector("#chatPrompt").value.trim();
+  if (!prompt) return;
+  if (!state.chat.providerUrl) {
+    state.chat.messages.push({
+      role: "assistant",
+      content: "Please set a Provider URL first. For public deploy, use a serverless proxy such as /api/chat."
+    });
+    saveState();
+    renderChat();
+    return;
+  }
+
+  state.chat.messages.push({ role: "user", content: prompt });
+  state.chat.messages.push({ role: "assistant", content: "Thinking with lesson context..." });
+  saveState();
+  renderChat();
+
+  try {
+    const context = await buildChatContext(prompt);
+    const messages = [
+      {
+        role: "system",
+        content:
+          "You are a bilingual Vietnamese-first mobile game UA tutor for Unity developers. Answer with practical, beginner-friendly guidance. Use English industry terms but explain them in Vietnamese. Do not invent numbers beyond the provided context; say when a value is an assumption."
+      },
+      { role: "system", content: `Learner memory:\n${state.chat.memory || "No memory notes yet."}` },
+      { role: "system", content: `Course context:\n${context}` },
+      ...state.chat.messages
+        .filter((message) => message.content !== "Thinking with lesson context...")
+        .slice(-10)
+    ];
+    const response = await fetch(state.chat.providerUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(state.chat.apiKey ? { Authorization: `Bearer ${state.chat.apiKey}` } : {})
+      },
+      body: JSON.stringify({
+        model: state.chat.model,
+        messages,
+        temperature: 0.4
+      })
+    });
+    if (!response.ok) throw new Error(`Provider returned ${response.status}`);
+    const json = await response.json();
+    const answer =
+      json?.choices?.[0]?.message?.content ||
+      json?.message?.content ||
+      json?.output_text ||
+      "Provider response did not include a recognized answer field.";
+    state.chat.messages[state.chat.messages.length - 1] = { role: "assistant", content: answer };
+  } catch (error) {
+    state.chat.messages[state.chat.messages.length - 1] = {
+      role: "assistant",
+      content: `Could not call provider: ${error.message}. Check Provider URL, CORS, API key, or use a serverless proxy.`
+    };
+  }
+  saveState();
+  renderChat();
+}
+
+async function buildChatContext(prompt) {
+  const query = prompt.toLowerCase();
+  const lessonScores = data.course.lessons
+    .map((lesson) => ({
+      lesson,
+      score: scoreText(query, [lesson.title, lesson.summary, lesson.module, lesson.glossaryTerms.join(" ")].join(" "))
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+
+  const lessonTexts = await Promise.all(
+    lessonScores.map(async ({ lesson }) => {
+      const markdown = await fetchLesson(lesson.day);
+      return `Day ${lesson.day}: ${lesson.title}\n${stripFrontmatter(markdown).slice(0, 1800)}`;
+    })
+  );
+  const glossary = data.glossary
+    .filter((term) => query.includes(term.term.toLowerCase()) || scoreText(query, `${term.vi} ${term.en}`) > 0)
+    .slice(0, 8)
+    .map((term) => `${term.term}: ${term.vi} Formula: ${term.formula || "n/a"}`)
+    .join("\n");
+  const plan = Object.entries(state.plan)
+    .filter(([, value]) => value.trim())
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+
+  return [
+    `Relevant lessons:\n${lessonTexts.join("\n\n---\n\n")}`,
+    `Relevant glossary:\n${glossary || "No exact glossary match."}`,
+    `Learner UA plan draft:\n${plan || "No plan fields filled yet."}`
+  ].join("\n\n");
+}
+
+function scoreText(query, text) {
+  const tokens = query.split(/[^a-z0-9$%.]+/i).filter((token) => token.length > 2);
+  const haystack = text.toLowerCase();
+  return tokens.reduce((score, token) => score + (haystack.includes(token) ? 1 : 0), 0);
+}
+
+function scrollChatToBottom() {
+  const log = document.querySelector("#chatLog");
+  if (log) log.scrollTop = log.scrollHeight;
+}
+function renderCase(item) {
+  return `
+    <article class="case-card">
+      <div class="tag-row">${renderTags(item.tags, "blue")}</div>
+      <h3>${escapeHtml(item.title)}</h3>
+      <p>${escapeHtml(item.context)}</p>
+      <p><span class="formula">${escapeHtml(item.metrics)}</span></p>
+      <p><strong>Recommended call:</strong> ${escapeHtml(item.recommendation)}</p>
+      <p>${escapeHtml(item.reason)}</p>
+    </article>
+  `;
+}
+
+async function submitAccountAuth(mode) {
+  if (!supabaseClient) return;
+  const email = document.querySelector("#accountEmail")?.value.trim();
+  const password = document.querySelector("#accountPassword")?.value;
+  if (!email || !password) {
+    cloudStatus = "Enter email and password first.";
+    renderAccount();
+    return;
+  }
+
+  const result = mode === "signup"
+    ? await supabaseClient.auth.signUp({ email, password })
+    : await supabaseClient.auth.signInWithPassword({ email, password });
+
+  if (result.error) {
+    cloudStatus = result.error.message;
+    renderAccount();
+    return;
+  }
+
+  currentUser = result.data.user || result.data.session?.user || currentUser;
+  cloudStatus = currentUser
+    ? `Signed in as ${currentUser.email}`
+    : "Check your email to confirm the account, then sign in.";
+  if (currentUser) await pullCloudProgress();
+  renderAccount();
+}
+
+async function signOutAccount() {
+  if (!supabaseClient) return;
+  await supabaseClient.auth.signOut();
+  currentUser = null;
+  cloudStatus = "Signed out. Local progress is still available.";
+  renderAccount();
+}
+
+function renderAccount() {
+  title.textContent = "Account";
+  const configured = Boolean(data.config?.supabaseUrl && data.config?.supabaseAnonKey);
+  const completed = state.completedLessons.length;
+  const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+
+  if (!configured) {
+    app.innerHTML = `
+      <section class="grid two">
+        <article class="panel">
+          <h2>Login is not configured yet</h2>
+          <p>This app is still using localStorage only. To enable login and cloud progress sync, create a Supabase project, run <code>supabase-schema.sql</code>, then fill <code>content/app-config.json</code>.</p>
+          <p class="status-line">Current local progress: ${completed}/30 lessons, ${planFields}/8 UA plan sections.</p>
+        </article>
+        <article class="panel">
+          <h2>Why Supabase?</h2>
+          <p>Supabase gives you Auth plus Postgres. The browser uses the public anon key, while row-level security ensures each user can read and write only their own progress row.</p>
+        </article>
+      </section>
+    `;
+    return;
+  }
+
+  const signedIn = Boolean(currentUser);
+  app.innerHTML = `
+    <section class="grid two">
+      <article class="panel settings-stack">
+        <h2>${signedIn ? "Signed in" : "Sign in"}</h2>
+        <p class="status-line">${escapeHtml(cloudStatus)}</p>
+        ${signedIn ? `
+          <p><strong>${escapeHtml(currentUser.email || currentUser.id)}</strong></p>
+          <button id="pushProgressBtn" type="button">Save local progress to cloud</button>
+          <button class="ghost-button" id="pullProgressBtn" type="button">Load cloud progress</button>
+          <button class="ghost-button danger" id="signOutBtn" type="button">Sign out</button>
+        ` : `
+          <label class="field">
+            <span>Email</span>
+            <input id="accountEmail" type="email" autocomplete="email" placeholder="you@example.com" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input id="accountPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" />
+          </label>
+          <div class="topbar-actions">
+            <button id="signInBtn" type="button">Sign in</button>
+            <button class="ghost-button" id="signUpBtn" type="button">Create account</button>
+          </div>
+        `}
+      </article>
+      <article class="panel">
+        <h2>Progress sync</h2>
+        <p>Local progress is always saved immediately in this browser. When signed in, the app also syncs lesson completion, bookmarks, quizzes, checklists, Final UA Plan, and chatbot memory to Supabase.</p>
+        <div class="metric-row">
+          <div class="metric"><strong>${completed}/30</strong><span>lessons</span></div>
+          <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes</span></div>
+          <div class="metric"><strong>${planFields}/8</strong><span>plan fields</span></div>
+          <div class="metric"><strong>${Object.values(state.checklist).filter(Boolean).length}</strong><span>checks</span></div>
+        </div>
+      </article>
+    </section>
+  `;
+
+  document.querySelector("#signInBtn")?.addEventListener("click", () => submitAccountAuth("signin"));
+  document.querySelector("#signUpBtn")?.addEventListener("click", () => submitAccountAuth("signup"));
+  document.querySelector("#signOutBtn")?.addEventListener("click", signOutAccount);
+  document.querySelector("#pushProgressBtn")?.addEventListener("click", async () => {
+    await pushCloudProgress();
+    renderAccount();
+  });
+  document.querySelector("#pullProgressBtn")?.addEventListener("click", async () => {
+    await pullCloudProgress();
+    renderAccount();
+  });
+}
+function renderPlan() {
+  title.textContent = "Final UA Plan";
+  app.innerHTML = `
+    <section class="grid two">
+      <form class="panel plan-form" id="planForm">
+        <h2>Build your UA / soft-launch plan</h2>
+        ${planField("hypothesis", "Game hypothesis", "Genre, core loop, why players should care.")}
+        ${planField("audience", "Target audience", "Player segment, motivation, region, competitor references.")}
+        ${planField("metricTargets", "Metric targets", "CPI, retention, ARPDAU, LTV, ROAS, payback window.")}
+        ${planField("tracking", "Tracking checklist", "Key events: install, tutorial, level, session, purchase, ad impression.")}
+        ${planField("creativeMatrix", "Creative matrix", "Hooks, ad formats, variants, learning goal per creative.")}
+        ${planField("budget", "Budget", "Daily spend, test budget, channel split, stop-loss rule.")}
+        ${planField("successCriteria", "Success criteria", "What must be true to iterate or scale.")}
+        ${planField("killCriteria", "Kill criteria", "What tells you to stop, change audience, or change game.")}
+      </form>
+      <section class="panel">
+        <h2>Preview</h2>
+        <pre class="plan-preview" id="planPreview"></pre>
+      </section>
+    </section>
+  `;
+  document.querySelectorAll("[data-plan-field]").forEach((field) => {
+    field.addEventListener("input", (event) => {
+      state.plan[event.target.dataset.planField] = event.target.value;
+      saveState();
+      updatePlanPreview();
+    });
+  });
+  updatePlanPreview();
+}
+
+function planField(key, label, placeholder) {
+  return `
+    <label class="field">
+      <span>${label}</span>
+      <textarea data-plan-field="${key}" placeholder="${placeholder}">${escapeHtml(state.plan[key] || "")}</textarea>
+    </label>
+  `;
+}
+
+function updatePlanPreview() {
+  const lines = [
+    "# UA / Soft-launch Plan",
+    "",
+    `## Game hypothesis\n${state.plan.hypothesis || "[empty]"}`,
+    `## Target audience\n${state.plan.audience || "[empty]"}`,
+    `## Metric targets\n${state.plan.metricTargets || "[empty]"}`,
+    `## Tracking checklist\n${state.plan.tracking || "[empty]"}`,
+    `## Creative matrix\n${state.plan.creativeMatrix || "[empty]"}`,
+    `## Budget\n${state.plan.budget || "[empty]"}`,
+    `## Success criteria\n${state.plan.successCriteria || "[empty]"}`,
+    `## Kill criteria\n${state.plan.killCriteria || "[empty]"}`
+  ];
+  document.querySelector("#planPreview").textContent = lines.join("\n\n");
+}
+
+function resetState() {
+  if (!confirm("Reset all local progress and UA plan answers?")) return;
+  state = structuredClone(defaultState);
+  localStorage.removeItem(stateKey);
+  stageSelect.value = state.stage;
+  renderRoute();
+}
+
+function exportState() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "ua-bootcamp-progress.json";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function renderTags(tags, variant = "") {
+  return tags.map((tag) => `<span class="tag ${variant}">${escapeHtml(tag)}</span>`).join("");
+}
+
+function stripFrontmatter(markdown) {
+  return markdown.replace(/^---[\s\S]*?---\s*/, "");
+}
+
+function renderMarkdown(markdown) {
+  const lines = markdown.split(/\r?\n/);
+  const html = [];
+  let inList = false;
+
+  const closeList = () => {
+    if (inList) {
+      html.push("</ul>");
+      inList = false;
+    }
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      closeList();
+      continue;
+    }
+    if (line.startsWith("## ")) {
+      closeList();
+      html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
+      continue;
+    }
+    if (line.startsWith("### ")) {
+      closeList();
+      html.push(`<h3>${inlineMarkdown(line.slice(4))}</h3>`);
+      continue;
+    }
+    if (line.startsWith("> ")) {
+      closeList();
+      html.push(`<blockquote>${inlineMarkdown(line.slice(2))}</blockquote>`);
+      continue;
+    }
+    if (line.startsWith("- ")) {
+      if (!inList) {
+        html.push("<ul>");
+        inList = true;
+      }
+      html.push(`<li>${inlineMarkdown(line.slice(2))}</li>`);
+      continue;
+    }
+    closeList();
+    html.push(`<p>${inlineMarkdown(line)}</p>`);
+  }
+  closeList();
+  return html.join("");
+}
+
+function inlineMarkdown(value) {
+  return escapeHtml(value)
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/`(.*?)`/g, "<code>$1</code>");
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+
