@@ -58,10 +58,8 @@ async function init() {
     saveState();
     renderRoute();
   });
-  document.querySelector("#topbarSignInBtn").addEventListener("click", () => submitAccountAuth("signin", { promptUser: true }));
-  document.querySelector("#topbarSignUpBtn").addEventListener("click", () => submitAccountAuth("signup", { promptUser: true }));
-  document.querySelector("#resetStateBtn").addEventListener("click", resetState);
-  document.querySelector("#exportStateBtn").addEventListener("click", exportState);
+  document.querySelector("#topbarLogoutBtn").addEventListener("click", signOutAccount);
+  updateAuthActions();
   window.addEventListener("hashchange", renderRoute);
   if (!location.hash) location.hash = "#dashboard";
   renderRoute();
@@ -142,8 +140,11 @@ function renderRoute() {
     cases: renderCases,
     chat: renderChat,
     plan: renderPlan,
-    account: renderAccount
+    account: renderAccount,
+    signin: () => renderAuthPage("signin"),
+    signup: () => renderAuthPage("signup")
   };
+  updateAuthActions();
   (routes[route] || renderDashboard)();
 }
 
@@ -264,6 +265,7 @@ function scheduleCloudSave() {
   cloudSaveTimer = setTimeout(() => {
     pushCloudProgress().then(() => {
       if (location.hash === "#account") renderAccount();
+      updateAuthActions();
     });
   }, 900);
 }
@@ -775,22 +777,20 @@ function renderCase(item) {
   `;
 }
 
-async function submitAccountAuth(mode, options = {}) {
+async function submitAccountAuth(mode) {
   if (!supabaseClient) {
     cloudStatus = "Login is not configured yet.";
-    renderRoute();
+    renderAuthPage(mode);
     return;
   }
 
-  const email = options.promptUser
-    ? prompt("Email")?.trim()
-    : document.querySelector("#accountEmail")?.value.trim();
-  if (!email) return;
-
-  const password = options.promptUser
-    ? prompt("Password")
-    : document.querySelector("#accountPassword")?.value;
-  if (!password) return;
+  const email = document.querySelector("#accountEmail")?.value.trim();
+  const password = document.querySelector("#accountPassword")?.value;
+  if (!email || !password) {
+    cloudStatus = "Enter email and password first.";
+    renderAuthPage(mode);
+    return;
+  }
 
   const result = mode === "signup"
     ? await supabaseClient.auth.signUp({ email, password })
@@ -798,7 +798,7 @@ async function submitAccountAuth(mode, options = {}) {
 
   if (result.error) {
     cloudStatus = result.error.message;
-    renderRoute();
+    renderAuthPage(mode);
     return;
   }
 
@@ -807,7 +807,8 @@ async function submitAccountAuth(mode, options = {}) {
     ? `Signed in as ${currentUser.email}`
     : "Check your email to confirm the account, then sign in.";
   if (currentUser) await pullCloudProgress();
-  renderRoute();
+  location.hash = "#dashboard";
+  updateAuthActions();
 }
 
 async function signOutAccount() {
@@ -815,9 +816,62 @@ async function signOutAccount() {
   await supabaseClient.auth.signOut();
   currentUser = null;
   cloudStatus = "Signed out. Local progress is still available.";
-  renderAccount();
+  updateAuthActions();
+  location.hash = "#dashboard";
+  renderRoute();
 }
 
+function updateAuthActions() {
+  const signedIn = Boolean(currentUser);
+  document.querySelector("#topbarSignInBtn")?.classList.toggle("hidden", signedIn);
+  document.querySelector("#topbarSignUpBtn")?.classList.toggle("hidden", signedIn);
+  document.querySelector("#topbarLogoutBtn")?.classList.toggle("hidden", !signedIn);
+}
+
+function renderAuthPage(mode) {
+  const isSignup = mode === "signup";
+  title.textContent = isSignup ? "Sign up" : "Sign in";
+
+  if (currentUser) {
+    app.innerHTML = `
+      <section class="panel settings-stack">
+        <h2>Signed in</h2>
+        <p><strong>${escapeHtml(currentUser.email || currentUser.id)}</strong></p>
+        <button class="ghost-button danger" id="authPageLogoutBtn" type="button">Log out</button>
+      </section>
+    `;
+    document.querySelector("#authPageLogoutBtn")?.addEventListener("click", signOutAccount);
+    return;
+  }
+
+  app.innerHTML = `
+    <section class="grid two">
+      <form class="panel settings-stack" id="authForm">
+        <h2>${isSignup ? "Create account" : "Sign in"}</h2>
+        <p class="status-line">${escapeHtml(cloudStatus)}</p>
+        <label class="field">
+          <span>Email</span>
+          <input id="accountEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input id="accountPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" required />
+        </label>
+        <button type="submit">${isSignup ? "Sign up" : "Sign in"}</button>
+        <a class="button ghost-button" href="#${isSignup ? "signin" : "signup"}">${isSignup ? "Already have an account? Sign in" : "Need an account? Sign up"}</a>
+      </form>
+      <article class="panel">
+        <h2>Cloud progress</h2>
+        <p>Signing in syncs lessons, quizzes, checklists, Final UA Plan, bookmarks, and chatbot memory with Supabase.</p>
+      </article>
+    </section>
+  `;
+
+  document.querySelector("#authForm")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    submitAccountAuth(mode);
+  });
+}
 function renderAccount() {
   title.textContent = "Account";
   const configured = Boolean(data.config?.supabaseUrl && data.config?.supabaseAnonKey);

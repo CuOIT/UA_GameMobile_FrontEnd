@@ -43,11 +43,10 @@
             <p class="eyebrow">Bilingual Vietnamese-first learning site</p>
             <h1 id="pageTitle">Dashboard</h1>
           </div>
-          <div class="topbar-actions">
-            <button id="topbarSignInBtn" type="button">Sign in</button>
-            <button class="ghost-button" id="topbarSignUpBtn" type="button">Sign up</button>
-            <button class="ghost-button" id="exportStateBtn" type="button">Export progress</button>
-            <button class="ghost-button danger" id="resetStateBtn" type="button">Reset local data</button>
+          <div class="topbar-actions" id="authActions">
+            <a class="button" id="topbarSignInBtn" href="#signin">Sign in</a>
+            <a class="button ghost-button" id="topbarSignUpBtn" href="#signup">Sign up</a>
+            <button class="ghost-button danger hidden" id="topbarLogoutBtn" type="button">Log out</button>
           </div>
         </header>
         <div id="app" class="view" aria-live="polite"></div>
