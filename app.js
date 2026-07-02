@@ -242,6 +242,7 @@ async function pullCloudProgress() {
 
   if (row?.progress) {
     mergeCloudProgress(row.progress);
+    await pushCloudProgress();
     cloudStatus = `Cloud progress merged for ${currentUser.email}`;
   } else {
     await pushCloudProgress();
@@ -807,11 +808,16 @@ async function submitAccountAuth(mode) {
     return;
   }
 
-  currentUser = result.data.user || result.data.session?.user || currentUser;
-  cloudStatus = currentUser
-    ? `Signed in as ${currentUser.email}`
-    : "Check your email to confirm the account, then sign in.";
-  if (currentUser) await pullCloudProgress();
+  currentUser = result.data.session?.user || null;
+  if (!currentUser) {
+    cloudStatus = "Check your email to confirm the account, then sign in.";
+    updateAuthActions();
+    renderAuthPage("signin");
+    return;
+  }
+
+  cloudStatus = `Signed in as ${currentUser.email}`;
+  await pullCloudProgress();
   location.hash = "#dashboard";
   updateAuthActions();
 }
