@@ -44,6 +44,7 @@ let currentUser = null;
 let authReady = false;
 let cloudStatus = "Local progress only";
 let cloudSaveTimer = null;
+let toastTimer = null;
 
 init();
 
@@ -120,6 +121,23 @@ function saveState(options = {}) {
 
 function renderLoading() {
   app.replaceChildren(document.querySelector("#loadingTemplate").content.cloneNode(true));
+}
+function notify(message, variant = "info") {
+  cloudStatus = `[${new Date().toLocaleTimeString()}] ${message}`;
+  let toast = document.querySelector("#appToast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "appToast";
+    toast.className = "app-toast";
+    document.body.appendChild(toast);
+  }
+  toast.className = `app-toast ${variant}`;
+  toast.textContent = cloudStatus;
+  toast.dataset.visible = "true";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.dataset.visible = "false";
+  }, 4200);
 }
 
 function renderRoute() {
@@ -785,38 +803,49 @@ function renderCase(item) {
 
 async function submitAccountAuth(mode) {
   if (!supabaseClient) {
-    cloudStatus = "Login is not configured yet.";
+    notify("Login is not configured yet.", "error");
     renderAuthPage(mode);
     return;
   }
 
   const email = document.querySelector("#accountEmail")?.value.trim();
   const password = document.querySelector("#accountPassword")?.value;
+  const confirmPassword = document.querySelector("#accountConfirmPassword")?.value;
   if (!email || !password) {
-    cloudStatus = "Enter email and password first.";
+    notify("Enter email and password first.", "error");
     renderAuthPage(mode);
     return;
   }
 
-  const result = mode === "signup"
+  if (mode === "signup" && password !== confirmPassword) {
+    notify("Password confirmation does not match.", "error");
+    renderAuthPage(mode);
+    return;
+  }
+
+  let result = mode === "signup"
     ? await supabaseClient.auth.signUp({ email, password })
     : await supabaseClient.auth.signInWithPassword({ email, password });
 
+  if (mode === "signup" && !result.error && !result.data.session) {
+    result = await supabaseClient.auth.signInWithPassword({ email, password });
+  }
+
   if (result.error) {
-    cloudStatus = result.error.message;
+    notify(result.error.message, "error");
     renderAuthPage(mode);
     return;
   }
 
   currentUser = result.data.session?.user || null;
   if (!currentUser) {
-    cloudStatus = "Check your email to confirm the account, then sign in.";
+    notify("Check your email to confirm the account, then sign in.", "warn");
     updateAuthActions();
     renderAuthPage("signin");
     return;
   }
 
-  cloudStatus = `Signed in as ${currentUser.email}`;
+  notify(`Signed in as ${currentUser.email}`, "success");
   await pullCloudProgress();
   location.hash = "#dashboard";
   updateAuthActions();
@@ -826,7 +855,7 @@ async function signOutAccount() {
   if (!supabaseClient) return;
   await supabaseClient.auth.signOut();
   currentUser = null;
-  cloudStatus = "Signed out. Local progress is still available.";
+  notify("Signed out. Local progress is still available.", "info");
   updateAuthActions();
   location.hash = "#dashboard";
   renderRoute();
@@ -866,8 +895,14 @@ function renderAuthPage(mode) {
         </label>
         <label class="field">
           <span>Password</span>
-          <input id="accountPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" required />
+          <input id="accountPassword" type="password" autocomplete="${isSignup ? "new-password" : "current-password"}" placeholder="At least 6 characters" required />
         </label>
+        ${isSignup ? `
+          <label class="field">
+            <span>Confirm password</span>
+            <input id="accountConfirmPassword" type="password" autocomplete="new-password" placeholder="Repeat password" required />
+          </label>
+        ` : ""}
         <button type="submit">${isSignup ? "Sign up" : "Sign in"}</button>
         <a class="button ghost-button" href="#${isSignup ? "signin" : "signup"}">${isSignup ? "Already have an account? Sign in" : "Need an account? Sign up"}</a>
       </form>

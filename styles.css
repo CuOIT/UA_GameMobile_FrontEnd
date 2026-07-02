@@ -667,3 +667,37 @@ button:disabled {
 .hidden {
   display: none !important;
 }
+
+.app-toast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 50;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #18211d;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.app-toast[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.app-toast.success {
+  background: var(--ok);
+}
+
+.app-toast.warn {
+  background: var(--warn);
+}
+
+.app-toast.error {
+  background: #9b2e20;
+}
