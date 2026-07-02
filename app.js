@@ -851,6 +851,21 @@ async function submitAccountAuth(mode) {
   updateAuthActions();
 }
 
+async function signInWithGoogle() {
+  if (!supabaseClient) {
+    notify("Login is not configured yet.", "error");
+    return;
+  }
+
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${window.location.origin}${window.location.pathname}`
+    }
+  });
+
+  if (error) notify(error.message, "error");
+}
 async function signOutAccount() {
   if (!supabaseClient) return;
   await supabaseClient.auth.signOut();
@@ -904,6 +919,7 @@ function renderAuthPage(mode) {
           </label>
         ` : ""}
         <button type="submit">${isSignup ? "Sign up" : "Sign in"}</button>
+        <button class="ghost-button" id="googleAuthBtn" type="button">Continue with Google</button>
         <a class="button ghost-button" href="#${isSignup ? "signin" : "signup"}">${isSignup ? "Already have an account? Sign in" : "Need an account? Sign up"}</a>
       </form>
       <article class="panel">
@@ -917,6 +933,7 @@ function renderAuthPage(mode) {
     event.preventDefault();
     submitAccountAuth(mode);
   });
+  document.querySelector("#googleAuthBtn")?.addEventListener("click", signInWithGoogle);
 }
 function renderAccount() {
   title.textContent = "Account";
