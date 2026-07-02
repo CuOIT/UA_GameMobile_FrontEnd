@@ -58,6 +58,8 @@ async function init() {
     saveState();
     renderRoute();
   });
+  document.querySelector("#topbarSignInBtn").addEventListener("click", () => submitAccountAuth("signin", { promptUser: true }));
+  document.querySelector("#topbarSignUpBtn").addEventListener("click", () => submitAccountAuth("signup", { promptUser: true }));
   document.querySelector("#resetStateBtn").addEventListener("click", resetState);
   document.querySelector("#exportStateBtn").addEventListener("click", exportState);
   window.addEventListener("hashchange", renderRoute);
@@ -773,15 +775,22 @@ function renderCase(item) {
   `;
 }
 
-async function submitAccountAuth(mode) {
-  if (!supabaseClient) return;
-  const email = document.querySelector("#accountEmail")?.value.trim();
-  const password = document.querySelector("#accountPassword")?.value;
-  if (!email || !password) {
-    cloudStatus = "Enter email and password first.";
-    renderAccount();
+async function submitAccountAuth(mode, options = {}) {
+  if (!supabaseClient) {
+    cloudStatus = "Login is not configured yet.";
+    renderRoute();
     return;
   }
+
+  const email = options.promptUser
+    ? prompt("Email")?.trim()
+    : document.querySelector("#accountEmail")?.value.trim();
+  if (!email) return;
+
+  const password = options.promptUser
+    ? prompt("Password")
+    : document.querySelector("#accountPassword")?.value;
+  if (!password) return;
 
   const result = mode === "signup"
     ? await supabaseClient.auth.signUp({ email, password })
@@ -789,7 +798,7 @@ async function submitAccountAuth(mode) {
 
   if (result.error) {
     cloudStatus = result.error.message;
-    renderAccount();
+    renderRoute();
     return;
   }
 
@@ -798,7 +807,7 @@ async function submitAccountAuth(mode) {
     ? `Signed in as ${currentUser.email}`
     : "Check your email to confirm the account, then sign in.";
   if (currentUser) await pullCloudProgress();
-  renderAccount();
+  renderRoute();
 }
 
 async function signOutAccount() {
@@ -836,7 +845,7 @@ function renderAccount() {
   app.innerHTML = `
     <section class="grid two">
       <article class="panel settings-stack">
-        <h2>${signedIn ? "Signed in" : "Sign in"}</h2>
+        <h2>${signedIn ? "Signed in" : "Account"}</h2>
         <p class="status-line">${escapeHtml(cloudStatus)}</p>
         ${signedIn ? `
           <p><strong>${escapeHtml(currentUser.email || currentUser.id)}</strong></p>
@@ -844,18 +853,7 @@ function renderAccount() {
           <button class="ghost-button" id="pullProgressBtn" type="button">Load cloud progress</button>
           <button class="ghost-button danger" id="signOutBtn" type="button">Sign out</button>
         ` : `
-          <label class="field">
-            <span>Email</span>
-            <input id="accountEmail" type="email" autocomplete="email" placeholder="you@example.com" />
-          </label>
-          <label class="field">
-            <span>Password</span>
-            <input id="accountPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters" />
-          </label>
-          <div class="topbar-actions">
-            <button id="signInBtn" type="button">Sign in</button>
-            <button class="ghost-button" id="signUpBtn" type="button">Create account</button>
-          </div>
+          <p>Use the Sign in or Sign up buttons in the top bar to enable cloud progress sync.</p>
         `}
       </article>
       <article class="panel">
@@ -871,8 +869,6 @@ function renderAccount() {
     </section>
   `;
 
-  document.querySelector("#signInBtn")?.addEventListener("click", () => submitAccountAuth("signin"));
-  document.querySelector("#signUpBtn")?.addEventListener("click", () => submitAccountAuth("signup"));
   document.querySelector("#signOutBtn")?.addEventListener("click", signOutAccount);
   document.querySelector("#pushProgressBtn")?.addEventListener("click", async () => {
     await pushCloudProgress();
