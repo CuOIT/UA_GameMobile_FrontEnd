@@ -1,5 +1,5 @@
 {
     "apiBaseUrl":  "http://127.0.0.1:8787",
-    "supabaseUrl":  "https://fykwoupyysyypucflaka.supabase.co/rest/v1/",
+    "supabaseUrl":  "https://fykwoupyysyypucflaka.supabase.co",
     "supabaseAnonKey":  "sb_publishable_c_g8WQLD7pOnZaXOeT-0_A_957-J4Zq"
 }
