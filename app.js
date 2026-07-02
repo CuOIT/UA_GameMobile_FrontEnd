@@ -255,8 +255,10 @@ async function pushCloudProgress() {
     user_id: currentUser.id,
     progress: payload,
     updated_at: new Date().toISOString()
-  });
+  }, { onConflict: "user_id" });
   cloudStatus = error ? `Could not save cloud progress: ${error.message}` : `Cloud progress saved for ${currentUser.email}`;
+  if (error) console.warn("Supabase progress save failed", error);
+  return !error;
 }
 
 function scheduleCloudSave() {
@@ -454,25 +456,28 @@ function renderQuiz(quizId, quiz) {
   `;
 }
 
-function answerQuiz(quizId, answer) {
+async function answerQuiz(quizId, answer) {
   state.quizResults[quizId] = answer;
-  saveState();
+  saveState({ skipCloud: true });
+  if (currentUser) await pushCloudProgress();
   renderRoute();
 }
 
-function toggleLesson(day) {
+async function toggleLesson(day) {
   const set = new Set(state.completedLessons);
   set.has(day) ? set.delete(day) : set.add(day);
   state.completedLessons = [...set].sort((a, b) => a - b);
-  saveState();
+  saveState({ skipCloud: true });
+  if (currentUser) await pushCloudProgress();
   renderRoute();
 }
 
-function toggleBookmark(day) {
+async function toggleBookmark(day) {
   const set = new Set(state.bookmarks);
   set.has(day) ? set.delete(day) : set.add(day);
   state.bookmarks = [...set].sort((a, b) => a - b);
-  saveState();
+  saveState({ skipCloud: true });
+  if (currentUser) await pushCloudProgress();
   renderRoute();
 }
 
