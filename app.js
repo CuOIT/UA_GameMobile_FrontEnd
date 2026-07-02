@@ -67,16 +67,27 @@ async function init() {
 }
 
 async function loadContent() {
-  const [course, glossary, quizzes, calculators, checklists, cases, config] = await Promise.all([
+  const config = await fetchOptionalJson("app-config.json");
+  const [course, glossary, quizzes, calculators, checklists, cases, dbContent] = await Promise.all([
     fetchJson("course.json"),
     fetchJson("glossary.json"),
     fetchJson("quizzes.json"),
     fetchJson("calculators.json"),
     fetchJson("checklists.json"),
     fetchJson("cases.json"),
-    fetchOptionalJson("app-config.json")
+    fetchDbContent(config)
   ]);
-  return { course, glossary, quizzes, calculators, checklists, cases, config };
+  return {
+    course,
+    glossary,
+    quizzes,
+    calculators,
+    checklists,
+    cases,
+    lessonMarkdown: {},
+    ...dbContent,
+    config
+  };
 }
 
 async function fetchOptionalJson(file) {
@@ -93,8 +104,60 @@ async function fetchJson(file) {
   return response.json();
 }
 
+async function getSupabaseClient(config) {
+  if (supabaseClient) return supabaseClient;
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey) return null;
+  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+  supabaseClient = createClient(config.supabaseUrl, config.supabaseAnonKey, {
+    auth: { persistSession: true, autoRefreshToken: true }
+  });
+  return supabaseClient;
+}
+
+async function fetchDbContent(config) {
+  try {
+    const client = await getSupabaseClient(config);
+    if (!client) return {};
+
+    const { data: rows, error } = await client
+      .from("ua_content_files")
+      .select("content_key, content_type, json_content, text_content");
+
+    if (error || !rows?.length) {
+      if (error) console.warn("Could not load DB course content", error);
+      return {};
+    }
+
+    const jsonKeys = {
+      "course.json": "course",
+      "glossary.json": "glossary",
+      "quizzes.json": "quizzes",
+      "calculators.json": "calculators",
+      "checklists.json": "checklists",
+      "cases.json": "cases"
+    };
+    const content = { lessonMarkdown: {} };
+
+    for (const row of rows) {
+      const jsonKey = jsonKeys[row.content_key];
+      if (jsonKey && row.content_type === "json") content[jsonKey] = row.json_content;
+
+      const lessonMatch = row.content_key.match(/^lessons\/day-(\d{2})\.md$/);
+      if (lessonMatch && row.content_type === "markdown") {
+        content.lessonMarkdown[lessonMatch[1]] = row.text_content;
+      }
+    }
+
+    return content;
+  } catch (error) {
+    console.warn("Falling back to static course content", error);
+    return {};
+  }
+}
+
 async function fetchLesson(day) {
   const padded = String(day).padStart(2, "0");
+  if (data.lessonMarkdown?.[padded]) return data.lessonMarkdown[padded];
   const response = await fetch(`${contentRoot}/lessons/day-${padded}.md`);
   if (!response.ok) throw new Error(`Could not load day-${padded}.md`);
   return response.text();
@@ -182,10 +245,7 @@ async function initAuth() {
   }
 
   try {
-    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-    supabaseClient = createClient(config.supabaseUrl, config.supabaseAnonKey, {
-      auth: { persistSession: true, autoRefreshToken: true }
-    });
+    supabaseClient = await getSupabaseClient(config);
     const { data: sessionData } = await supabaseClient.auth.getSession();
     currentUser = sessionData.session?.user || null;
     cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Cloud login ready.";
