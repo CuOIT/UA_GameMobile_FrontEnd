@@ -232,10 +232,20 @@ function notify(message, variant = "info") {
 
 function renderRoute() {
   const route = location.hash.replace("#", "") || "dashboard";
-  navLinks.forEach((link) => link.classList.toggle("active", route.startsWith(link.dataset.nav)));
+  
+  let cleanRoute = route;
+  let termParam = "";
+  if (route.includes("?")) {
+    const parts = route.split("?");
+    cleanRoute = parts[0];
+    const params = new URLSearchParams(parts[1]);
+    termParam = params.get("term") || "";
+  }
 
-  if (route.startsWith("lesson-")) {
-    const day = Number(route.split("-")[1]);
+  navLinks.forEach((link) => link.classList.toggle("active", cleanRoute.startsWith(link.dataset.nav)));
+
+  if (cleanRoute.startsWith("lesson-")) {
+    const day = Number(cleanRoute.split("-")[1]);
     renderLesson(day);
     return;
   }
@@ -243,7 +253,7 @@ function renderRoute() {
   const routes = {
     dashboard: renderDashboard,
     lessons: renderLessons,
-    glossary: renderGlossary,
+    glossary: () => renderGlossary(termParam),
     tools: renderTools,
     cases: renderCases,
     chat: renderChat,
@@ -253,7 +263,7 @@ function renderRoute() {
     signup: () => renderAuthPage("signup")
   };
   updateAuthActions();
-  (routes[route] || renderDashboard)();
+  (routes[cleanRoute] || renderDashboard)();
 }
 
 function applyConfiguredDefaults() {
@@ -649,7 +659,7 @@ async function toggleBookmark(day) {
   renderRoute();
 }
 
-function renderGlossary() {
+function renderGlossary(termParam = "") {
   title.textContent = "Glossary";
   app.innerHTML = `
     <section class="panel">
@@ -662,20 +672,33 @@ function renderGlossary() {
       ${renderTermCards(data.glossary)}
     </section>
   `;
-  document.querySelector("#termSearch").addEventListener("input", (event) => {
+  const searchInput = document.querySelector("#termSearch");
+  searchInput.addEventListener("input", (event) => {
     const query = event.target.value.trim().toLowerCase();
     const terms = data.glossary.filter((term) =>
       [term.term, term.vi, term.en, term.analogy].join(" ").toLowerCase().includes(query)
     );
     document.querySelector("#termGrid").innerHTML = renderTermCards(terms);
   });
+
+  if (termParam) {
+    setTimeout(() => {
+      const card = document.getElementById(`term-${termParam.toLowerCase()}`);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.style.borderColor = "var(--accent)";
+        card.style.boxShadow = "0 0 12px var(--accent)";
+        searchInput.value = termParam;
+      }
+    }, 150);
+  }
 }
 
 function renderTermCards(terms) {
   return terms
     .map(
       (term) => `
-      <article class="term-card">
+      <article class="term-card" id="term-${term.term.toLowerCase()}">
         <h3>${escapeHtml(term.term)}</h3>
         <p>${escapeHtml(term.vi)}</p>
         <p><strong>EN:</strong> ${escapeHtml(term.en)}</p>
@@ -1472,10 +1495,42 @@ function renderMarkdownChart(rows) {
   `;
 }
 function inlineMarkdown(value) {
-  return escapeHtml(value)
+  const html = escapeHtml(value)
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/`(.*?)`/g, "<code>$1</code>");
+  return parseGlossaryTerms(html);
+}
+
+function parseGlossaryTerms(text) {
+  if (!data || !data.glossary) return text;
+  
+  let result = text;
+  const sortedTerms = [...data.glossary].sort((a, b) => b.term.length - a.term.length);
+  
+  for (const termObj of sortedTerms) {
+    const term = termObj.term;
+    const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const tokens = result.split(/(<[^>]+>)/g);
+    for (let i = 0; i < tokens.length; i++) {
+      if (!tokens[i].startsWith("<")) {
+        const regex = new RegExp(`\\b(${escapedTerm})\\b`, 'g');
+        const tooltipHtml = `
+          <a class="glossary-link" href="#glossary?term=$1">
+            $1
+            <span class="glossary-tooltip">
+              <strong style="color:var(--accent);display:block;margin-bottom:4px;font-size:0.95rem;">${escapeHtml(termObj.en)}</strong>
+              <span style="color:#e2e8f0;display:block;font-size:0.85rem;line-height:1.3;">${escapeHtml(termObj.vi)}</span>
+              ${termObj.formula && termObj.formula !== "n/a" ? `<span class="glossary-tooltip-formula" style="margin-top:6px;font-family:monospace;color:#fb7185;background-color:#0f172a;padding:2px 6px;border-radius:4px;display:inline-block;font-size:0.75rem;">${escapeHtml(termObj.formula)}</span>` : ""}
+            </span>
+          </a>
+        `.trim().replace(/\s+/g, " ");
+        tokens[i] = tokens[i].replace(regex, tooltipHtml);
+      }
+    }
+    result = tokens.join("");
+  }
+  return result;
 }
 
 function escapeHtml(value) {

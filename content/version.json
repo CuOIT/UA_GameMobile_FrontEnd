@@ -1,7 +1,1 @@
-{
-    "appVersion":  "1.0.0",
-    "contentVersion":  "1.0.0",
-    "updatedAt":  "2026-07-03",
-    "changeLevel":  "major",
-    "notes":  "Initial tracked release baseline 1.0.0"
-}
+{" appVersion\: \1.1.0\, \contentVersion\: \1.1.0\, \updatedAt\: \2026-07-03\, \changeLevel\: \minor\, \notes\: \Interactive glossary tooltips Day 1 and Day 2 lesson optimizations.\}
