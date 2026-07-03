@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.2.1",
-  "contentVersion": "1.2.1",
+  "appVersion": "1.2.2",
+  "contentVersion": "1.2.2",
   "updatedAt": "2026-07-03",
   "changeLevel": "patch",
-  "notes": "Fix LaTeX rendering syntax in Day 1 lesson."
+  "notes": "Add accents to Vietnamese glossary term explanations."
 }
