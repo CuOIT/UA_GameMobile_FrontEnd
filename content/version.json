@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.2.0",
-  "contentVersion": "1.2.0",
+  "appVersion": "1.2.1",
+  "contentVersion": "1.2.1",
   "updatedAt": "2026-07-03",
-  "changeLevel": "minor",
-  "notes": "Glossary tooltip link styling and seenTerms deduplication, disk fetch prioritization, external link styling."
+  "changeLevel": "patch",
+  "notes": "Fix LaTeX rendering syntax in Day 1 lesson."
 }
