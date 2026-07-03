@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.2.4",
-  "contentVersion": "1.2.4",
+  "appVersion": "1.2.5",
+  "contentVersion": "1.2.5",
   "updatedAt": "2026-07-03",
-  "changeLevel": "patch",
-  "notes": "Fix encoding Mojibake and make progress sync note dynamic based on currentUser in app.js."
+  "changeLevel": "minor",
+  "notes": "Implement new /rlesson skill to automate lesson quality evaluation."
 }
