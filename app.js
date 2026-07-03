@@ -410,6 +410,9 @@ function renderDashboard() {
   title.textContent = "Dashboard";
   const next = nextLesson();
   const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  const progressSyncNote = currentUser 
+    ? "Tiến độ khóa học của bạn đã được đồng bộ hóa trực tuyến qua tài khoản."
+    : "Tiến độ khóa học hiện đang lưu tạm thời. Hãy Đăng nhập để đồng bộ hóa trực tuyến.";
   app.innerHTML = `
     <section class="metric-row">
       <div class="metric"><strong>${state.completedLessons.length}/30</strong><span>lessons completed</span></div>
@@ -419,7 +422,7 @@ function renderDashboard() {
     </section>
     <section class="panel">
       <h2>Learning progress</h2>
-      <p>TiÃƒÂ¡Ã‚ÂºÃ‚Â¿n Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢ khÃƒÆ’Ã‚Â³a hÃƒÂ¡Ã‚Â»Ã‚Âc Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c lÃƒâ€ Ã‚Â°u cÃƒÂ¡Ã‚Â»Ã‚Â¥c bÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢ trong trÃƒÆ’Ã‚Â¬nh duyÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t bÃƒÂ¡Ã‚ÂºÃ‚Â±ng localStorage. KhÃƒÆ’Ã‚Â´ng cÃƒÆ’Ã‚Â³ account, DB, hay server-side tracking.</p>
+      <p>${progressSyncNote}</p>
       <div class="progress-bar" aria-label="Course progress">
         <div class="progress-fill" style="width:${completionPercent()}%"></div>
       </div>
@@ -435,15 +438,15 @@ function renderDashboard() {
       <article class="panel">
         <p class="eyebrow">Unity dev lens</p>
         <h2>UA is a product feedback loop</h2>
-        <p>Trang nÃƒÆ’Ã‚Â y dÃƒÂ¡Ã‚ÂºÃ‚Â¡y UA nhÃƒâ€ Ã‚Â° mÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢t vÃƒÆ’Ã‚Â²ng lÃƒÂ¡Ã‚ÂºÃ‚Â·p giÃƒÂ¡Ã‚Â»Ã‚Â¯a creative, store, tracking, retention vÃƒÆ’Ã‚Â  economy. BÃƒÂ¡Ã‚ÂºÃ‚Â¡n khÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n code SDK trong MVP, nhÃƒâ€ Ã‚Â°ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n biÃƒÂ¡Ã‚ÂºÃ‚Â¿t event nÃƒÆ’Ã‚Â o phÃƒÂ¡Ã‚ÂºÃ‚Â£i Ãƒâ€žÃ¢â‚¬Ëœo vÃƒÆ’Ã‚Â  quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh nÃƒÆ’Ã‚Â o phÃƒÂ¡Ã‚Â»Ã‚Â¥ thuÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢c vÃƒÆ’Ã‚Â o data.</p>
+        <p>Trang này dạy UA như một vòng lặp giữa creative, store, tracking, retention và economy. Bạn không cần code SDK trong MVP, nhưng cần biết event nào phải đo và quyết định nào phụ thuộc vào data.</p>
         <a class="button" href="#plan">Open Final UA Plan</a>
       </article>
     </section>
     <section class="grid three">
-      ${dashboardShortcut("Glossary", "CPI, LTV, ROAS, SKAN, cohort vÃƒÆ’Ã‚Â  cÃƒÆ’Ã‚Â¡c thuÃƒÂ¡Ã‚ÂºÃ‚Â­t ngÃƒÂ¡Ã‚Â»Ã‚Â¯ Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c giÃƒÂ¡Ã‚ÂºÃ‚Â£i thÃƒÆ’Ã‚Â­ch bÃƒÂ¡Ã‚ÂºÃ‚Â±ng tiÃƒÂ¡Ã‚ÂºÃ‚Â¿ng ViÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t.", "#glossary")}
-      ${dashboardShortcut("Tools", "MÃƒÆ’Ã‚Â¡y tÃƒÆ’Ã‚Â­nh break-even CPI, LTV rough estimate, ROAS target vÃƒÆ’Ã‚Â  test budget.", "#tools")}
-      ${dashboardShortcut("Case Studies", "Ãƒâ€žÃ‚ÂÃƒÂ¡Ã‚Â»Ã‚Âc dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u mÃƒÂ¡Ã‚ÂºÃ‚Â«u vÃƒÆ’Ã‚Â  chÃƒÂ¡Ã‚Â»Ã‚Ân scale, iterate hoÃƒÂ¡Ã‚ÂºÃ‚Â·c kill campaign.", "#cases")}
-      ${dashboardShortcut("AI Chat", "HÃƒÂ¡Ã‚Â»Ã‚Âi Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡p theo context bÃƒÆ’Ã‚Â i hÃƒÂ¡Ã‚Â»Ã‚Âc, glossary vÃƒÆ’Ã‚Â  memory cÃƒÂ¡Ã‚Â»Ã‚Â¥c bÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢.", "#chat")}
+      ${dashboardShortcut("Glossary", "CPI, LTV, ROAS, SKAN, cohort và các thuật ngữ được giải thích bằng tiếng Việt.", "#glossary")}
+      ${dashboardShortcut("Tools", "Máy tính break-even CPI, LTV rough estimate, ROAS target và test budget.", "#tools")}
+      ${dashboardShortcut("Case Studies", "Đọc dữ liệu mẫu và chọn scale, iterate hoặc kill campaign.", "#cases")}
+      ${dashboardShortcut("AI Chat", "Hỏi đáp theo context bài học, glossary và memory cục bộ.", "#chat")}
     </section>
   `;
 }
@@ -464,7 +467,7 @@ function renderLessons() {
   app.innerHTML = `
     <section class="panel">
       <h2>Course path</h2>
-      <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. MÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i bÃƒÆ’Ã‚Â i cÃƒÆ’Ã‚Â³ nÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢i dung song ngÃƒÂ¡Ã‚Â»Ã‚Â¯, glossary liÃƒÆ’Ã‚Âªn quan, quiz ngÃƒÂ¡Ã‚ÂºÃ‚Â¯n vÃƒÆ’Ã‚Â  checklist thÃƒÂ¡Ã‚Â»Ã‚Â±c hÃƒÆ’Ã‚Â nh.</p>
+      <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
     </section>
     <section class="lesson-list">
       ${lessons.map(renderLessonCard).join("")}
@@ -546,7 +549,7 @@ async function renderLesson(day) {
         </section>
         <section class="panel ai-review-panel">
           <h2>AI quality review</h2>
-          <p class="status-line">ChÃƒÂ¡Ã‚ÂºÃ‚Â¥m lesson theo rubric: decision clarity, teaching depth, metric visuals, mistake coverage, lab output vÃƒÆ’Ã‚Â  actionability.</p>
+          <p class="status-line">Chấm lesson theo rubric: decision clarity, teaching depth, metric visuals, mistake coverage, lab output và actionability.</p>
           <button id="reviewLessonBtn" type="button">Review this lesson</button>
           <div class="review-output">${qualityReview ? escapeHtml(qualityReview) : "No AI review yet."}</div>
         </section>
@@ -719,7 +722,7 @@ function renderTools() {
   app.innerHTML = `
     <section class="panel">
       <h2>Static calculators</h2>
-      <p>CÃƒÆ’Ã‚Â¡c cÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚Â»Ã‚Â¥ nÃƒÆ’Ã‚Â y dÃƒÆ’Ã‚Â¹ng cÃƒÆ’Ã‚Â´ng thÃƒÂ¡Ã‚Â»Ã‚Â©c Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â¡n giÃƒÂ¡Ã‚ÂºÃ‚Â£n Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ giÃƒÆ’Ã‚Âºp beginner hiÃƒÂ¡Ã‚Â»Ã†â€™u quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh UA. KÃƒÂ¡Ã‚ÂºÃ‚Â¿t quÃƒÂ¡Ã‚ÂºÃ‚Â£ lÃƒÆ’Ã‚Â  learning aid, khÃƒÆ’Ã‚Â´ng phÃƒÂ¡Ã‚ÂºÃ‚Â£i forecast tÃƒÆ’Ã‚Â i chÃƒÆ’Ã‚Â­nh chÃƒÆ’Ã‚Â­nh thÃƒÂ¡Ã‚Â»Ã‚Â©c.</p>
+      <p>Các công cụ này dùng công thức đơn giản để giúp beginner hiểu quyết định UA. Kết quả là learning aid, không phải forecast tài chính chính thức.</p>
     </section>
     <section class="tool-grid">
       ${data.calculators.map(renderTool).join("")}
@@ -761,12 +764,12 @@ function calculateTool(tool) {
   });
   let result = "";
   if (tool.id === "breakEvenCpi") {
-    result = `Break-even CPI ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  $${(values.ltv * values.grossMargin).toFixed(2)} per install`;
+    result = `Break-even CPI ≈ $${(values.ltv * values.grossMargin).toFixed(2)} per install`;
   }
   if (tool.id === "sampleSize") {
     const installs = values.budget / values.cpi;
     const perCell = installs / values.cells;
-    result = `Estimated installs ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  ${installs.toFixed(0)} total, ${perCell.toFixed(0)} per creative cell. ${perCell < 30 ? "Reduce cells or treat results as very directional." : "Enough for directional creative learning, not final scale proof."}`;
+    result = `Estimated installs ≈ ${installs.toFixed(0)} total, ${perCell.toFixed(0)} per creative cell. ${perCell < 30 ? "Reduce cells or treat results as very directional." : "Enough for directional creative learning, not final scale proof."}`;
   }
   if (tool.id === "cohortReadout") {
     const d1 = (values.d1Users / values.installs) * 100;
@@ -776,7 +779,7 @@ function calculateTool(tool) {
     result = `D1 ${d1.toFixed(1)}%, D7 ${d7.toFixed(1)}%, CPI $${cpi.toFixed(2)}, D7 ROAS ${roas.toFixed(1)}%. Read with cohort size and attribution caveats.`;
   }
   if (tool.id === "testBudget") {
-    result = `Suggested test budget ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  $${(values.cpi * values.installsPerCreative * values.creatives).toFixed(2)}`;
+    result = `Suggested test budget ≈ $${(values.cpi * values.installsPerCreative * values.creatives).toFixed(2)}`;
   }
   root.querySelector("[data-result]").textContent = result;
 }
@@ -786,7 +789,7 @@ function renderCases() {
   app.innerHTML = `
     <section class="panel">
       <h2>Read the signal, then choose</h2>
-      <p>MÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i case dÃƒÆ’Ã‚Â¹ng dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u mÃƒÂ¡Ã‚ÂºÃ‚Â«u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ luyÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡n tÃƒâ€ Ã‚Â° duy: scale, iterate hay kill. KhÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n backend; dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u nÃƒÂ¡Ã‚ÂºÃ‚Â±m trong JSON.</p>
+      <p>Mỗi case dùng dữ liệu mẫu để luyện tư duy: scale, iterate hay kill. Không cần backend; dữ liệu nằm trong JSON.</p>
     </section>
     <section class="case-grid">
       ${data.cases.map(renderCase).join("")}
@@ -912,39 +915,39 @@ async function sendChatMessage(event) {
 
 async function reviewLessonQuality(lesson, markdown) {
   if (!state.chat.providerUrl) {
-    state.lessonReviews[lesson.day] = "ChÃƒâ€ Ã‚Â°a cÃƒÂ¡Ã‚ÂºÃ‚Â¥u hÃƒÆ’Ã‚Â¬nh Provider URL. VÃƒÆ’Ã‚Â o AI Chat Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ set Provider URL hoÃƒÂ¡Ã‚ÂºÃ‚Â·c dÃƒÆ’Ã‚Â¹ng backend /api/chat trÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc khi review lesson.";
+    state.lessonReviews[lesson.day] = "Chưa cấu hình Provider URL. Vào AI Chat để set Provider URL hoặc dùng backend /api/chat trước khi review lesson.";
     saveState();
     renderLesson(lesson.day);
     return;
   }
 
-  state.lessonReviews[lesson.day] = "AI Ãƒâ€žÃ¢â‚¬Ëœang Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡nh giÃƒÆ’Ã‚Â¡ chÃƒÂ¡Ã‚ÂºÃ‚Â¥t lÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£ng lesson...";
+  state.lessonReviews[lesson.day] = "AI đang đánh giá chất lượng lesson...";
   saveState();
   renderLesson(lesson.day);
 
   const rubric = `
-BÃƒÂ¡Ã‚ÂºÃ‚Â¡n lÃƒÆ’Ã‚Â  curriculum reviewer cho khÃƒÆ’Ã‚Â³a UA Marketing dÃƒÆ’Ã‚Â nh cho Unity indie/dev khÃƒÆ’Ã‚Â´ng chuyÃƒÆ’Ã‚Âªn UA.
-HÃƒÆ’Ã‚Â£y Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡nh giÃƒÆ’Ã‚Â¡ lesson theo thang 1-5 vÃƒÆ’Ã‚Â  trÃƒÂ¡Ã‚ÂºÃ‚Â£ lÃƒÂ¡Ã‚Â»Ã‚Âi bÃƒÂ¡Ã‚ÂºÃ‚Â±ng tiÃƒÂ¡Ã‚ÂºÃ‚Â¿ng ViÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t cÃƒÆ’Ã‚Â³ dÃƒÂ¡Ã‚ÂºÃ‚Â¥u, ngÃƒÂ¡Ã‚ÂºÃ‚Â¯n nhÃƒâ€ Ã‚Â°ng cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™.
-KhÃƒÆ’Ã‚Â´ng khen chung chung. ChÃƒÂ¡Ã‚Â»Ã¢â‚¬Â° ra Ãƒâ€žÃ¢â‚¬ËœiÃƒÂ¡Ã‚Â»Ã†â€™m thiÃƒÂ¡Ã‚ÂºÃ‚Â¿u cÃƒÆ’Ã‚Â³ thÃƒÂ¡Ã‚Â»Ã†â€™ sÃƒÂ¡Ã‚Â»Ã‚Â­a Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c.
+Bạn là curriculum reviewer cho khóa UA Marketing dành cho Unity indie/dev không chuyên UA.
+Hãy đánh giá lesson theo thang 1-5 và trả lời bằng tiếng Việt có dấu, ngắn nhưng cụ thể.
+Không khen chung chung. Chỉ ra điểm thiếu có thể sửa được.
 
 Rubric:
-1. Decision clarity: bÃƒÆ’Ã‚Â i cÃƒÆ’Ã‚Â³ dÃƒÂ¡Ã‚ÂºÃ‚Â¡y mÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢t quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™ khÃƒÆ’Ã‚Â´ng?
-2. Teaching depth: giÃƒÂ¡Ã‚ÂºÃ‚Â£i thÃƒÆ’Ã‚Â­ch Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Â§ sÃƒÆ’Ã‚Â¢u cho ngÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âi khÃƒÆ’Ã‚Â´ng biÃƒÂ¡Ã‚ÂºÃ‚Â¿t UA chÃƒâ€ Ã‚Â°a?
-3. Metric literacy: cÃƒÆ’Ã‚Â³ bÃƒÂ¡Ã‚ÂºÃ‚Â£ng sÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœ, biÃƒÂ¡Ã‚Â»Ã†â€™u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Å“, cÃƒÆ’Ã‚Â¡ch Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc sÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœ, thÃƒÂ¡Ã‚Â»Ã‚Â© tÃƒÂ¡Ã‚Â»Ã‚Â± Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc funnel khÃƒÆ’Ã‚Â´ng?
-4. Mistake coverage: cÃƒÆ’Ã‚Â³ lÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i thÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âng gÃƒÂ¡Ã‚ÂºÃ‚Â·p vÃƒÆ’Ã‚Â  correction khÃƒÆ’Ã‚Â´ng?
-5. Worked example: cÃƒÆ’Ã‚Â³ vÃƒÆ’Ã‚Â­ dÃƒÂ¡Ã‚Â»Ã‚Â¥ mÃƒÂ¡Ã‚ÂºÃ‚Â«u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Â§ cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™ Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ bÃƒÂ¡Ã‚ÂºÃ‚Â¯t chÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc khÃƒÆ’Ã‚Â´ng?
-6. Lab output: ngÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âi hÃƒÂ¡Ã‚Â»Ã‚Âc cÃƒÆ’Ã‚Â³ biÃƒÂ¡Ã‚ÂºÃ‚Â¿t output cuÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœi bÃƒÆ’Ã‚Â i trÃƒÆ’Ã‚Â´ng nhÃƒâ€ Ã‚Â° thÃƒÂ¡Ã‚ÂºÃ‚Â¿ nÃƒÆ’Ã‚Â o khÃƒÆ’Ã‚Â´ng?
-7. Actionability: Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc xong cÃƒÆ’Ã‚Â³ biÃƒÂ¡Ã‚ÂºÃ‚Â¿t lÃƒÆ’Ã‚Â m gÃƒÆ’Ã‚Â¬ tiÃƒÂ¡Ã‚ÂºÃ‚Â¿p theo khÃƒÆ’Ã‚Â´ng?
+1. Decision clarity: bài có dạy một quyết định cụ thể không?
+2. Teaching depth: giải thích đủ sâu cho người không biết UA chưa?
+3. Metric literacy: có bảng số, biểu đồ, cách đọc số, thứ tự đọc funnel không?
+4. Mistake coverage: có lỗi thường gặp và correction không?
+5. Worked example: có ví dụ mẫu đủ cụ thể để bắt chước không?
+6. Lab output: người học có biết output cuối bài trông như thế nào không?
+7. Actionability: đọc xong có biết làm gì tiếp theo không?
 
-Output format bÃƒÂ¡Ã‚ÂºÃ‚Â¯t buÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢c:
+Output format bắt buộc:
 ## Scorecard
-- Decision clarity: x/5 - lÃƒÆ’Ã‚Â½ do
-- Teaching depth: x/5 - lÃƒÆ’Ã‚Â½ do
-- Metric literacy: x/5 - lÃƒÆ’Ã‚Â½ do
-- Mistake coverage: x/5 - lÃƒÆ’Ã‚Â½ do
-- Worked example: x/5 - lÃƒÆ’Ã‚Â½ do
-- Lab output: x/5 - lÃƒÆ’Ã‚Â½ do
-- Actionability: x/5 - lÃƒÆ’Ã‚Â½ do
+- Decision clarity: x/5 - lý do
+- Teaching depth: x/5 - lý do
+- Metric literacy: x/5 - lý do
+- Mistake coverage: x/5 - lý do
+- Worked example: x/5 - lý do
+- Lab output: x/5 - lý do
+- Actionability: x/5 - lý do
 
 ## Top 5 fixes
 1. ...
@@ -953,14 +956,14 @@ Output format bÃƒÂ¡Ã‚ÂºÃ‚Â¯t buÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢c:
 - ...
 
 ## Rewrite priority
-NÃƒÆ’Ã‚Âªu 1-3 section cÃƒÂ¡Ã‚ÂºÃ‚Â§n sÃƒÂ¡Ã‚Â»Ã‚Â­a trÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc.
+Nêu 1-3 section cần sửa trước.
 `;
 
   const messages = [
     { role: "system", content: rubric },
     {
       role: "user",
-      content: `Lesson metadata:\n${JSON.stringify(lesson, null, 2)}\n\nLesson markdown:\n${stripFrontmatter(markdown).slice(0, 12000)}`
+      content: `Lesson metadata:\n\${JSON.stringify(lesson, null, 2)}\n\nLesson markdown:\n\${stripFrontmatter(markdown).slice(0, 12000)}`
     }
   ];
 
@@ -968,7 +971,7 @@ NÃƒÆ’Ã‚Âªu 1-3 section cÃƒÂ¡Ã‚ÂºÃ‚Â§n sÃƒÂ¡Ã‚Â»
     const answer = await callAiProvider(messages, 0.2);
     state.lessonReviews[lesson.day] = answer;
   } catch (error) {
-    state.lessonReviews[lesson.day] = `KhÃƒÆ’Ã‚Â´ng gÃƒÂ¡Ã‚Â»Ã‚Âi Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c AI provider: ${error.message}. KiÃƒÂ¡Ã‚Â»Ã†â€™m tra Provider URL/API key hoÃƒÂ¡Ã‚ÂºÃ‚Â·c dÃƒÆ’Ã‚Â¹ng backend /api/chat.`;
+    state.lessonReviews[lesson.day] = `Không gọi được AI provider: \${error.message}. Kiểm tra Provider URL/API key hoặc dùng backend /api/chat.`;
   }
 
   saveState();

@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.2.3",
-  "contentVersion": "1.2.3",
+  "appVersion": "1.2.4",
+  "contentVersion": "1.2.4",
   "updatedAt": "2026-07-03",
   "changeLevel": "patch",
-  "notes": "Optimize Day 1 chart with D1 Active Users unit, update format-spec and evaluation-rubric."
+  "notes": "Fix encoding Mojibake and make progress sync note dynamic based on currentUser in app.js."
 }
