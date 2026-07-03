@@ -1,6 +1,7 @@
 const contentRoot = "./content";
 const stateKey = "uaBootcampState.v1";
-const contentVersion = "lesson-6-order-1";
+const appVersion = "1.0.0";
+const contentVersion = appVersion;
 
 const defaultState = {
   stage: "all",
@@ -39,6 +40,7 @@ const stageLabels = {
 const app = document.querySelector("#app");
 const title = document.querySelector("#pageTitle");
 const stageSelect = document.querySelector("#stageSelect");
+const versionNote = document.querySelector("#appVersionNote");
 const navLinks = [...document.querySelectorAll("[data-nav]")];
 let data = {};
 let state = loadState();
@@ -54,6 +56,7 @@ init();
 async function init() {
   renderLoading();
   data = await loadContent();
+  renderVersionNote();
   applyConfiguredDefaults();
   await initAuth();
   stageSelect.value = state.stage;
@@ -71,13 +74,14 @@ async function init() {
 
 async function loadContent() {
   const config = await fetchOptionalJson("app-config.json");
-  const [course, glossary, quizzes, calculators, checklists, cases, dbContent] = await Promise.all([
+  const [course, glossary, quizzes, calculators, checklists, cases, version, dbContent] = await Promise.all([
     fetchJson("course.json"),
     fetchJson("glossary.json"),
     fetchJson("quizzes.json"),
     fetchJson("calculators.json"),
     fetchJson("checklists.json"),
     fetchJson("cases.json"),
+    fetchOptionalJson("version.json"),
     fetchDbContent(config)
   ]);
   const useDbContent = isCurrentDbContent(course, dbContent);
@@ -92,6 +96,7 @@ async function loadContent() {
     checklists,
     cases,
     lessonMarkdown: {},
+    version: version?.appVersion ? version : { appVersion, contentVersion, updatedAt: "2026-07-03" },
     ...(useDbContent ? dbContent : {}),
     config
   };
@@ -195,6 +200,13 @@ function loadState() {
 function saveState(options = {}) {
   localStorage.setItem(stateKey, JSON.stringify(state));
   if (!options.skipCloud) scheduleCloudSave();
+}
+
+function renderVersionNote() {
+  if (!versionNote) return;
+  const version = data.version?.appVersion || appVersion;
+  const updatedAt = data.version?.updatedAt ? ` · ${data.version.updatedAt}` : "";
+  versionNote.textContent = `Version ${version}${updatedAt}`;
 }
 
 function renderLoading() {

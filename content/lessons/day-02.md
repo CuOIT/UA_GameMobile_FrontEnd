@@ -9,245 +9,222 @@ artifact: "Puzzle market thesis"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **Puzzle market thesis**: một giả thuyết thị trường đủ cụ thể để biết game puzzle của bạn nên test với ai, lời hứa nào, ở market nào, và vì sao monetization hiện tại có cơ hội pay back.
+Sau bài này, bạn tạo được **Puzzle market thesis**: bản lập luận thiết lập giả thuyết thị trường chi tiết cho game của bạn. Bản luận điểm này giúp bạn xác định rõ: sẽ mua ad ở đâu, hứa hẹn động cơ gì, và mô hình kinh tế nào có cơ hội hoàn vốn (pay back).
 
-Kết quả cần có sau bài:
+Kết quả đạt được:
+- Định nghĩa phân nhóm người chơi mục tiêu (Target Player Segment) thay vì định nghĩa chung chung.
+- Khớp nối động cơ cốt lõi (Motivation) của người chơi với các creative hook tương ứng.
+- Thiết lập kịch bản chạy test hẹp (Initial Market) để tiết kiệm ngân sách kiểm chứng.
+- Viết điều kiện thất bại (Failure Condition) rõ ràng để đưa ra quyết định dừng hay tiếp tục chạy ad.
 
-- Một target player segment rõ hơn “người thích puzzle”.
-- Một motivation chính: relax, challenge, mastery, satisfying clear, daily habit hoặc collection.
-- Hai đến ba reference games để so sánh promise/store/monetization.
-- Một market assumption cho micro test, ví dụ Android tier-2/3, English-speaking broad, hoặc Vietnam/SEA soft signal.
-- Một risk note: market thesis yếu nhất ở đâu?
+---
 
 ## Why this matters
 
-Nhiều team nhỏ làm puzzle game vì nghĩ “puzzle dễ hiểu, audience rộng, CPI chắc rẻ”. Đây là giả định nguy hiểm. Puzzle đúng là dễ truyền tải trong creative, nhưng cũng là genre rất đông đối thủ, dễ bị copy về visual promise, và thường cần retention hoặc ad depth tốt để có LTV đủ trả CPI.
+Nhiều nhà phát triển indie Unity thường lựa chọn làm game puzzle vì cho rằng: *"Game puzzle dễ hiểu, tập người dùng rộng, giá cài đặt (CPI) chắc chắn sẽ rẻ"*. 
 
-Market thesis giúp bạn không test mù. Nó buộc bạn trả lời: người chơi nào sẽ quan tâm, họ quan tâm vì động lực gì, họ đang quen với loại store promise nào, và game của bạn có đủ production/monetization để phục vụ kỳ vọng đó không.
+Đây là một giả định vô cùng nguy hiểm. 
 
-Một market thesis tốt không cần đúng 100%. Nó cần đủ rõ để chạy test nhỏ và biết phải sửa gì nếu sai.
+Mặc dù game puzzle dễ truyền tải thông điệp trong video quảng cáo, nhưng đây cũng là thể loại có mức độ cạnh tranh khốc liệt nhất trên thị trường mobile. Hàng ngàn game có phong cách đồ họa tương tự nhau cùng đấu thầu mua người dùng, khiến giá thầu quảng cáo bị đẩy lên rất cao. Nếu game của bạn có chiều sâu giữ chân (retention) kém hoặc không thiết kế chuỗi xem ad rewarded tốt, giá trị trọn đời (LTV) sẽ không bao giờ đuổi kịp chi phí mua user (CPI). Bản luận điểm thị trường (market thesis) giúp bạn định hình rõ cơ hội hoàn vốn trước khi đổ tiền chạy chiến dịch ad thật.
+
+---
 
 ## Core model: market thesis không phải genre label
 
-“Puzzle” chỉ là genre label. Nó không nói người chơi muốn gì.
+"Puzzle" chỉ là một nhãn phân loại thể loại (genre label) của cửa hàng, nó không mô tả hành vi hay mong muốn của người dùng. Một bản Puzzle market thesis đầy đủ phải bao gồm 5 thành phần cấu trúc chặt chẽ:
 
-Một market thesis có 5 phần:
+1.  **Player Segment (Phân nhóm người chơi)**: Ai là người chơi game của bạn? (Không viết *"Mọi người"*).
+2.  **Motivation (Động cơ)**: Họ chơi vì cảm giác gì? (Mastery, Relax, Satisfying clear, hay Pride).
+3.  **Promise (Lời hứa creative)**: Video ad sẽ hứa hẹn trải nghiệm gì trong 3 giây đầu?
+4.  **Market context (Initial Market)**: Bạn sẽ chạy test ở khu vực nào để tối ưu chi phí học hỏi?
+5.  **Monetization path (Mô hình doanh thu)**: Dòng tiền nào (Ad eCPM hay IAP) sẽ gánh chi phí ad?
 
-| Thành phần | Câu hỏi cần trả lời | Ví dụ tốt | Ví dụ yếu |
-| --- | --- | --- | --- |
-| Player segment | Ai có khả năng quan tâm? | Người lớn muốn brain break ngắn, ít áp lực | Mọi người chơi puzzle |
-| Motivation | Họ chơi vì cảm giác nào? | Satisfying clear, calm logic, daily mastery | Vì game vui |
-| Promise | Creative/store hứa điều gì? | Clear a messy board in one smart move | Nhiều level hấp dẫn |
-| Market context | Test ở đâu trước? | Android SEA/tier-2 với CPI guardrail thấp | Test toàn cầu ngay |
-| Monetization path | Vì sao có thể pay back? | Ads + light IAP nếu session depth và rewarded engagement đủ | Có ads nên chắc có tiền |
+---
 
-Nếu bạn không viết được 5 phần này, bạn chưa có market thesis. Bạn mới có một ý tưởng game.
+## Puzzle market map (Bản đồ phân loại hướng đi)
 
-## Puzzle market map
+Dưới đây là bản đồ phân loại 5 hướng đi điển hình của puzzle game để học viên đối chiếu:
 
-Dùng bảng này để phân biệt các hướng puzzle thường gặp. Các dòng dưới đây không phải phân loại tuyệt đối, nhưng giúp bạn tránh gom tất cả puzzle vào một nhóm.
+| Puzzle angle | Động cơ người chơi (Motivation) | Creative hook tương ứng | Metric cần xem sớm | Monetization risk |
+| :--- | :--- | :--- | :---: | :--- |
+| **Calm daily puzzle** | Relax, tạo thói quen (routine). | "A 2-minute brain break" | D1/D7 Retention | Session ngắn, số lượng ad xem/ngày thấp. |
+| **Satisfying clear** | Thỏa mãn thị giác (satisfying). | "Clear chaos in one move" | CTR, Store CVR | Click ad rất nhiều nhưng rụng nhanh ở D1. |
+| **Hard challenge** | Thử thách trí tuệ, tự hào (mastery). | "Only 1% solve this" | Fail/retry rate | Rage-quit (ức chế thoát game), churn cao. |
+| **Collection/meta** | Tích lũy, trang trí (progression). | "Unlock rooms & gardens" | Session length | Chi phí sản xuất nội dung quá nặng cho team nhỏ. |
+| **Fast fail puzzle** | Kịch tính, thử lại nhanh (adrenaline). | "Can you beat this?" | CPI, early churn | Tệp user click ngẫu nhiên, LTV rất thấp. |
 
-| Puzzle angle | Player motivation | Creative hook thường hợp | Metric cần xem sớm | Monetization risk |
-| --- | --- | --- | --- | --- |
-| Calm daily puzzle | Relax, routine | “A 2-minute brain break” | D1/D7, daily challenge return | Session ngắn, ad depth thấp |
-| Satisfying clear puzzle | Visual satisfaction | “Clear chaos in one move” | CTR, IPM, level depth | Hook kéo curiosity nhưng D1 yếu |
-| Hard challenge puzzle | Mastery, pride | “Only 1% solve this” | CTR, fail/retry, D1 | Attract rage-click, churn cao |
-| Collection/meta puzzle | Completion, progress | “Unlock rooms/collections” | Session length, ad engagement | Production scope nặng |
-| Fast fail puzzle | Adrenaline, retry | “Can you beat this?” | CPI, early churn, level retry | Low intent traffic, weak LTV |
+---
+
+## Biểu đồ đánh giá mức độ tương thích thị trường (Market Fit Chart)
+
+Biểu đồ dưới đây thể hiện điểm số đánh giá mức độ tương thích của một kịch bản giả thuyết puzzle:
 
 :::chart
-title: Market fit scorecard example, 1-5
+title: Đánh giá Market Fit Scorecard của giả thuyết Hexa Puzzle (Thang điểm 1-5, cao là tốt)
 Audience clarity|4|Clear relaxing brain-break target
 Creative clarity|5|Board clear is visual in 1 second
-Production fit|3|Need many polished boards
-Retention path|2|Daily habit not proven yet
-Monetization path|3|Ads plus light IAP possible
+Production fit|3|Need many polished boards to sustain content depth
+Retention path|2|Daily habit return loops are not proven yet
+Monetization path|3|Rewarded ad economy needs placement optimization
 :::
 
-Cách đọc chart: điểm thấp nhất là nơi thesis dễ vỡ. Trong ví dụ này, creative rất dễ hiểu nhưng retention path yếu. Nghĩa là test đầu tiên không nên chỉ hỏi “CPI có rẻ không?”, mà phải hỏi “player có quay lại vì daily habit không?”.
+*Cách đọc chart*: Điểm số thấp nhất chính là nơi giả thuyết của bạn dễ bị vỡ nhất (ở đây là `Retention path` đạt 2/5). Bản đánh giá này nhắc nhở nhóm phát triển: mục tiêu của chiến dịch test đầu tiên không phải là scale ad, mà là kiểm chứng xem người chơi có quay lại game sau Ngày 1 hay không.
 
-## Worked example: market thesis cho puzzle game
-
-Giả sử game của bạn là block puzzle có cảm giác dọn dẹp board rất đã tay. Bạn có thể tóm tắt market thesis dưới dạng bảng trực quan:
-
-| Thành phần | Chi tiết giả thuyết | Ý nghĩa thực tế |
-| --- | --- | --- |
-| **Target Segment** | Adults who want a calm but satisfying 2-minute brain break. | Đối tượng: Người lớn cần nghỉ ngơi ngắn bằng câu đố nhẹ nhàng. |
-| **Creative Promise** | Visual board-clear (Dọn sạch bàn chơi bằng hiệu ứng thị giác). | Lời hứa quảng cáo chính dùng để thu hút sự chú ý. |
-| **Initial Market** | Android SEA / Tier-2 (với chi phí thấp). | Khu vực chạy thử nghiệm để tiết kiệm ngân sách. |
-| **Success Signals** | CTR/IPM tốt, CVR không lỗi, D1/level depth ổn định. | Dấu hiệu cho thấy giả thuyết đúng hướng. |
-| **Failure Condition** | CPI rất rẻ nhưng level depth và D1 cực kỳ thấp. | Nhận biết lỗi curiosity-trap (chỉ tò mò tải chứ không chơi). |
-
-Cách trình bày này tốt hơn “game puzzle cho mọi người” vì nó làm nổi bật rõ ràng segment, motivation, creative promise, market assumption, metric signal và failure condition.
-
-## Hướng dẫn đọc số cho genre fit
-
-### 1. Đừng dùng CPI để chứng minh genre fit một mình
-
-CPI thấp chỉ nói bạn mua được install rẻ. Nó chưa nói người chơi có phù hợp với game. Nếu CPI thấp nhưng level depth thấp và D1 yếu, bạn có thể đang mua curiosity traffic, không phải target player.
-
-### 2. Đọc CPI cùng retention và engagement
-
-Nếu CPI cao hơn kỳ vọng nhưng D1/engagement tốt, thesis có thể vẫn đáng test tiếp bằng creative/store optimization. Nếu CPI thấp nhưng retention hỏng, thesis có thể sai audience hoặc sai promise.
-
-### 3. Đọc market thesis bằng pattern, không bằng một số đơn lẻ
-
-| Pattern | Cách đọc | Action nên làm |
-| --- | --- | --- |
-| CPI thấp + D1 thấp | Cheap traffic nhưng fit yếu | Kiểm creative promise và onboarding trước khi scale |
-| CTR cao + CVR thấp | Hook có attention, store proof yếu | Sửa first screenshot/description |
-| D1 tốt + ARPDAU thấp | Có product interest nhưng monetization yếu | Test ad placement/rewarded economy |
-| CPI cao + D1 tốt | Audience có thể đúng nhưng creative/store chưa efficient | Tối ưu creative angle trước khi bỏ thesis |
-| CTR thấp + D1 tốt ở cohort nhỏ | Product có thể ổn, hook chưa truyền được | Làm lại opening 1-3 giây đầu |
-
-## Competitor teardown mẫu
-
-Bạn không cần phân tích 20 đối thủ. Với beginner, 3 reference games là đủ để bắt đầu.
-
-> [!TIP]
-> **Cách tìm đối thủ cùng quy mô (scope) trên Store**:
-> 1. Tìm các từ khóa cốt lõi của game (ví dụ: *wood block puzzle*, *screw sort*) trên Google Play.
-> 2. Bỏ qua các game ở top 1-5 quá lớn (như Candy Crush), cuộn xuống tìm các game có lượt tải từ 10k - 500k. Đây là những game có cùng quy mô sản xuất và ngân sách thử nghiệm thực tế với bạn.
-> 3. Chụp màn hình trang cửa hàng của họ để phân tích cách họ thể hiện ảnh chụp màn hình đầu tiên (store proof).
-
-| Reference | Visible promise | Store proof | Monetization hint | Pattern học được | Không nên copy |
-| --- | --- | --- | --- | --- | --- |
-| Calm block puzzle | Relaxing daily board clear | Screenshot sạch, ít UI | Ads nhẹ, remove ads/IAP | Calm + routine | Tone art y hệt |
-| Hard logic puzzle | Challenge and mastery | Level khó, fail state rõ | Hints/IAP | Pride hook | Claim “1% solve” nếu game không khó |
-| Decor/meta puzzle | Solve to unlock room | Before/after room visual | Ads + bundles | Progression proof | Meta scope quá lớn nếu team nhỏ |
-
-Cách đọc competitor đúng: tìm pattern của promise và proof. Đừng copy art, board, tagline hoặc screenshot. Bạn cần hiểu “vì sao người chơi tin lời hứa này trên store?”.
-
-## LTV và monetization fit ở mức beginner
-
-Bạn chưa cần forecast LTV phức tạp. Nhưng bạn cần biết monetization path có hợp genre angle không.
-
-| Thesis angle | LTV driver có thể có | Câu hỏi cần kiểm tra sớm |
-| --- | --- | --- |
-| Calm daily puzzle | D7/D14 habit, light ads | Người chơi có quay lại hàng ngày không? |
-| Satisfying clear | Ad engagement, session count | Sau khi thỏa mãn 1 lần, họ có chơi tiếp không? |
-| Hard challenge | Hints, retry, rewarded ads | Fail có làm họ muốn thử lại hay rời game? |
-| Collection/meta | Long-term progression, bundles | Team có sản xuất đủ content không? |
-
-Nếu thesis cần LTV cao nhưng game chỉ có session rất ngắn và không có return hook, bạn đang tự đặt campaign vào thế khó.
+---
 
 ## Real usecases đã đối chiếu nguồn
 
-Ở bài market thesis, case thực tế chỉ hữu ích khi bạn tách **genre label** khỏi **motivation + proof + monetization path**.
+### 1. Sơ đồ minh họa: Tách Genre Label khỏi Market Thesis
 
-![Day 2 market thesis visual](content/assets/usecases/day-02-market-thesis-visual.svg)
+![Genre label vs Market thesis components](content/assets/usecases/day-02-market-thesis-visual.png)
 
-*Visual minh họa: không phải dữ liệu campaign chính thức. Dùng để tách genre label khỏi motivation, proof và monetization path theo case Candy Crush + Bravestars.*
+> [!NOTE]
+> **Hướng dẫn đọc Sơ đồ Thesis (Hero Visual Readout)**:
+> *   **Học viên cần quan sát (Inspect)**: Cột bên trái màu đỏ thể hiện cách đặt giả thuyết sai lầm bằng nhãn thể loại chung chung (Genre Label). Cột bên phải màu xanh thể hiện cách xây dựng 5 thành phần chi tiết của Bản luận điểm thị trường (Market Thesis).
+> *   **Kết luận rút ra (Conclude)**: Việc chỉ định nghĩa game là "Puzzle" thu hút tệp user quá rộng dẫn tới giá thầu đắt đỏ. Chia nhỏ thành tệp "Adults seeking brain breaks" với hook "Clear chaos" giúp tối ưu hóa CPI và đo lường được LTV.
+> *   **Không được suy ra (Do not infer)**: Không suy ra rằng bạn bắt buộc phải có một lối chơi hoàn toàn mới lạ. Bạn vẫn có thể làm gameplay xếp gỗ truyền thống, nhưng góc tiếp cận UA (creative/store) phải cực kỳ cụ thể để lọc đúng tệp user.
 
-### Global case: Candy Crush Saga
+### 2. Case Study 1: Candy Crush Saga (King) — Định vị động cơ tiến trình
 
-![Candy Crush public Google Play screenshot](content/assets/usecases/candy-crush.png)
+![Candy Crush Saga Play Store listing](content/assets/usecases/candy-crush.png)
 
-*Public screenshot readout: ảnh Google Play cho thấy board objective, booster, combo visual và progression flavor. Dùng để đọc market thesis về level objective + reward loop, không dùng để suy benchmark. Nguồn ảnh: [Candy Crush Saga on Google Play](https://play.google.com/store/apps/details?id=com.king.candycrushsaga).*
+> [!NOTE]
+> **Hướng dẫn đọc Ảnh store của Candy Crush (Screenshot Readout)**:
+> *   **Học viên cần quan sát (Inspect)**: Quan sát ảnh screenshots hiển thị rõ mục tiêu màn chơi (board objective), hiệu ứng combo kẹo nổ rực rỡ và hệ thống bản đồ tiến trình (progression map).
+> *   **Kết luận rút ra (Conclude)**: Candy Crush không hứa hẹn "đố khó hóc búa". Họ hứa hẹn trải nghiệm nổ combo đã mắt (Satisfying blast) và hành trình phiêu lưu vượt ải dài hạn (Progression). Mô hình IAP mua lượt đi (moves) và booster bổ trợ hoạt động tốt nhờ thiết kế fail/retry hẹp ở các level cao.
+> *   **Không được suy ra (Do not infer)**: Không suy ra rằng game indie nhỏ của bạn nên sao chép hệ thống monetization này khi chưa có đủ số lượng màn chơi đồ sộ (>1000 levels) để tạo ra chiều sâu tiến trình tương đương.
 
-| Fact từ nguồn public | UA interpretation cho bài này | Không được suy ra |
+| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
 | --- | --- | --- |
-| Candy Crush Saga là free-to-play tile-matching game của King, phát hành trên Facebook rồi iOS/Android; gameplay là swap candy để match 3+, qua nhiều level với mục tiêu khác nhau. Nguồn: [Wikipedia - Candy Crush Saga](https://en.wikipedia.org/wiki/Candy_Crush_Saga) | “Match-3” không phải market thesis đủ dùng. Thesis mạnh hơn phải nói rõ level objective, progression, fail/retry, booster hoặc daily habit tạo lý do chơi tiếp. | Không suy ra benchmark CPI/D1 hiện tại của Candy Crush hoặc dùng doanh thu lịch sử để chứng minh game indie sẽ payback. |
-| Nguồn ghi game dùng freemium model và có in-app purchase giúp vượt board khó. | Monetization path phải khớp với friction của genre: nếu game có challenge/fail state hợp lý, hint/booster/IAP hoặc rewarded support mới có logic. | Không copy hệ thống monetization nếu game của bạn chưa có depth/fail/retry đủ thuyết phục. |
+| Candy Crush Saga áp dụng mô hình freemium với hệ thống bán booster/lượt chơi để vượt qua các board game có độ khó tăng dần. Nguồn: [Wikipedia - Candy Crush Saga](https://en.wikipedia.org/wiki/Candy_Crush_Saga) | Mô hình doanh thu (Monetization path) phải đi liền với thiết kế độ khó của game: hệ thống bán vật phẩm/hints chỉ hoạt động khi game tạo ra thử thách (friction) hợp lý cho người chơi. | Không copy hệ thống monetization nếu game của bạn chưa có thiết kế depth/fail/retry đủ thuyết phục người chơi mở ví. |
 
-**Decision rule học được:** market thesis không nên viết “puzzle popular”. Hãy viết: người chơi nào, động lực nào, level proof nào, và monetization path nào có thể hợp với động lực đó.
+### 3. Case Study 2: Wooden Slide (Bravestars Games) — Đa dạng hóa Portfolios
 
-### Vietnam case: Bravestars Games
+![Wooden Slide Play Store listing](content/assets/usecases/wooden-slide.png)
 
-![Bravestars Wooden Slide public Google Play screenshot](content/assets/usecases/wooden-slide.png)
+> [!NOTE]
+> **Hướng dẫn đọc Ảnh store của Wooden Slide (Screenshot Readout)**:
+> *   **Học viên cần quan sát (Inspect)**: Quan sát screenshot trang cửa hàng Wooden Slide thể hiện rõ lối chơi kéo trượt khối gỗ (Block Escape) với chất liệu gỗ mộc mạc và bảng logic không gian.
+> *   **Kết luận rút ra (Conclude)**: Tệp người chơi puzzle được chia thành nhiều nhánh động cơ rất khác nhau. Wooden Slide hướng tới động cơ "Calm logic" (tư duy sắp xếp không gian thư giãn), hoàn toàn khác với động cơ "Fast-paced match" của các game match-3.
+> *   **Không được suy ra (Do not infer)**: Không suy ra rằng mọi game của Bravestars đều đạt thứ hạng cao chỉ nhờ đồ họa gỗ. Thành công của portfolio này đến từ việc họ chọn đúng reference game có quy mô vừa phải để tối ưu hóa chi phí sản xuất.
 
-*Public screenshot readout: ảnh Google Play của Wooden Slide cho thấy sub-genre promise khác với match-3: block escape, spatial logic, path clearing. Dùng để nhắc rằng casual puzzle không phải một audience duy nhất. Nguồn ảnh: [Wooden Slide on Google Play](https://play.google.com/store/apps/details?id=slide.color.block.puzzle).*
-
-| Fact từ nguồn public | UA interpretation cho bài này | Không được suy ra |
+| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
 | --- | --- | --- |
-| Google Play developer page của Bravestars Games liệt kê nhiều casual/puzzle-like products như Wooden Slide: Block Escape, Nuts and Bolts Woody Puzzle, Woolloop! Color Puzzle, Goods Mix Puzzle Master, Save The Pets, Draw Bridge Puzzle. Nguồn: [Google Play - Bravestars Games](https://play.google.com/store/apps/developer?id=Bravestars+Games) | Một portfolio có nhiều sub-genre cho thấy “casual puzzle” không phải một audience duy nhất. Mỗi title hứa một motivation khác: block escape, nuts/bolts logic, color/wool, goods matching, rescue/drawing. | Không suy ra ranking, doanh thu, campaign spend hoặc tỷ lệ thành công của từng game nếu Google Play page không công bố. |
-| Nguồn public thể hiện nhiều promise bằng title/action rất cụ thể. | Khi chọn reference games, hãy so theo promise gần nhất với game của bạn, không chỉ chọn game top nổi tiếng. | Không gom tất cả thành “người chơi Bravestars-style”; phải viết motivation row riêng cho từng promise muốn test. |
+| Portfolio của Bravestars chứa hàng chục game casual puzzle khác nhau từ kéo trượt gỗ, ốc vít đến cứu thú cưng. Nguồn: [Google Play - Bravestars Games](https://play.google.com/store/apps/developer?id=Bravestars+Games) | Mỗi tựa game puzzle trong portfolio đại diện cho một giả thuyết thị trường (market thesis) riêng biệt nhắm vào các tệp động cơ người chơi khác nhau. | Không gom tất cả người chơi casual thành một tệp duy nhất; bạn phải viết bảng mô tả động cơ người chơi riêng biệt cho từng ý tưởng game. |
 
-**Decision rule học được:** nếu thesis của bạn có thể áp vào mọi game casual/puzzle trong portfolio, thesis đó quá rộng. Thu hẹp bằng motivation và proof cụ thể.
+---
 
-## Common mistakes
+## Worked example: market thesis cho puzzle game
 
-### Mistake 1: “Puzzle audience rất rộng”
+Một nhà phát triển Unity chạy thử nghiệm ngân sách `$120` cho tựa game block puzzle xếp gỗ nổ combo. 
 
-Audience rộng không có nghĩa bạn biết ai sẽ install và quay lại. Broad audience có thể giúp network tìm traffic, nhưng plan của bạn vẫn cần motivation rõ để đọc creative signal.
+*   **Giả thuyết Market Thesis ban đầu**:
+    *   *Target Segment*: Adults who want a calm but satisfying 2-minute brain break.
+    *   *Creative Promise*: Video ad hiển thị cảnh dọn sạch bàn chơi gỗ lộn xộn chỉ trong 1 nước đi (Satisfying clear).
+    *   *Initial Market*: Android SEA/Tier-2 (với CPI mục tiêu cắt lỗ là `< $0.25`).
+*   **Kết quả thực tế thu về sau 3 ngày**:
+    *   Ngân sách đã tiêu: $98.
+    *   Số install: 280 users.
+    *   CPI thực tế: `$98 / 280 = $0.35` (*Vượt trần cắt lỗ $0.25*).
+    *   D1 Retention: `38%` (*Rất cao, vượt kỳ vọng 30%*).
+    *   LTD thực tế: 6.5 ngày.
+    *   ARPDAU thực tế: $0.04.
+    *   LTV thực tế ước tính: `6.5 ngày x $0.04 = $0.26` (*Gần tiệm cận CPI*).
+*   **Phân tích chẩn đoán & Quyết định (Verdict)**:
+    *   Mặc dù CPI thực tế ($0.35) đắt hơn so với mốc cắt lỗ ban đầu ($0.25), nhưng tỷ lệ giữ chân Ngày 1 cực kỳ tốt (D1 = 38%) chứng minh sản phẩm đã đạt **Genre-Product Fit** (người dùng thực sự thích chơi game).
+    *   Lý do CPI cao là do video quảng cáo hiện tại chưa có intro 3 giây đầu đủ giật gân để hút click rẻ (CTR quảng cáo chỉ đạt 1.2%).
+    *   **Quyết định**: Không khai tử dự án. Giữ nguyên game, tiến hành sản xuất 3 video ad mới cải tiến visual combo rực rỡ hơn ở 3 giây đầu để kéo CPI xuống mốc `$0.20`, giúp chiến dịch đạt ROAS dương.
 
-Correction: viết audience bằng motivation, không chỉ bằng genre. Ví dụ “người muốn brain break nhẹ trong 2 phút” tốt hơn “người thích puzzle”.
+---
 
-### Mistake 2: Chọn competitor quá nổi nhưng không cùng scope
+## Common mistakes (Các sai lầm phổ biến)
 
-Nếu bạn so game indie prototype với một puzzle game top grossing có hàng năm live ops, meta system và production budget lớn, bạn sẽ học sai.
+*   **Mistake 1: Định nghĩa tệp người chơi chung chung là "Puzzle audience"**
+    *   *Correction*: Hãy viết rõ động cơ chơi game: *"Người lớn cần 2 phút nghỉ ngơi thư giãn đầu óc giữa giờ làm việc"* để dễ dàng định hình nội dung video quảng cáo.
+*   **Mistake 2: So sánh game của mình với các tựa game top 1 thị trường**
+    *   *Correction*: Hãy bỏ qua Candy Crush hay Royal Match. Hãy chọn các reference games có lượt tải từ `10k - 500k` trên store để học hỏi cấu trúc phễu thực tế phù hợp với quy mô team nhỏ.
+*   **Mistake 3: Đặt chỉ số Failure Condition quá cao trong lần test đầu**
+    *   *Correction*: Đừng ép buộc game phải đạt D1 Retention > 40% mới chạy tiếp. Đặt mức sàn thực tế `D1 > 20%` để lấy dữ liệu cải thiện sản phẩm, tránh khai tử game quá sớm vì kỳ vọng phi thực tế.
 
-Correction: chọn reference theo promise và scope gần hơn, không chỉ theo doanh thu hoặc ranking.
+---
 
-### Mistake 3: Nghĩ store screenshot đẹp là đủ
+## English Terms You Should Keep
 
-Screenshot đẹp nhưng không chứng minh creative promise thì vẫn có thể làm CVR yếu.
+*   **Genre-market fit**: Mức độ tương thích giữa cơ chế game, tệp đối tượng và mô hình kinh doanh trên thị trường.
+*   **CPI**: Cost Per Install (Chi phí mua một lượt cài đặt game).
+*   **LTV**: Lifetime Value (Giá trị doanh thu trọn đời dự kiến của một người chơi).
+*   **Market thesis**: Bản luận điểm giả thuyết thị trường (định vị đối tượng, lời hứa, thị trường và dòng tiền).
 
-Correction: screenshot đầu tiên phải trả lời “người vừa click ad có thấy đúng thứ họ mong không?”.
+---
 
-### Mistake 4: Không viết failure condition
+## Lab output example (Mẫu kết quả thực hành)
 
-Market thesis phải có điều kiện sai. Nếu không, bạn sẽ luôn tìm lý do để chạy tiếp.
+### Xem trước Bản luận điểm Thị trường (Puzzle Market Thesis Preview)
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                         PUZZLE MARKET THESIS                           │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. Segment: Adults seeking a calm 2-minute brain break                 │
+│ 2. Motivation: Satisfying board clear and visual feedback              │
+│ 3. Creative Hook: "Satisfying wood sorting combo with ASMR sound"      │
+│ 4. Test Market: Android SEA / Tier-2 | CPI ceiling: < $0.25            │
+│ 5. Monetization: Rewarded ads for hints + IAP remove ads ($0.99)       │
+│ 6. Failure Condition: CPI > $0.40 OR D1 Retention < 20%                │
+└────────────────────────────────────────────────────────────────────────┘
+```
 
-Correction: viết rõ “nếu pattern X xảy ra, thesis hiện tại yếu ở điểm Y”.
-> [!WARNING]
-> **Không đặt KPI Failure Condition quá cao**: Trong lần chạy thử đầu tiên, đừng đặt mục tiêu D1 retention phải đạt 40% mới giữ game. Đặt mức sàn thực tế (ví dụ: D1 > 20% hoặc level 3 reach > 30%) để lấy tín hiệu cải thiện sản phẩm, tránh khai tử dự án quá sớm vì kỳ vọng phi thực tế.
+Dưới đây là một mẫu Puzzle market thesis hoàn chỉnh dạng bảng mà học viên cần điền:
 
-## Lab output example
+| Thành phần giả thuyết | Thiết lập cụ thể cho game của bạn | Lý do lựa chọn |
+| :--- | :--- | :--- |
+| **Target segment** | Người đi làm văn phòng cần nghỉ ngơi ngắn. | Thời gian chơi ngắn, nhu cầu xả stress cao. |
+| **Động cơ (Motivation)** | Thỏa mãn thị giác khi dọn sạch bảng gỗ lộn xộn. | Phù hợp làm video ad dạng satisfing clear. |
+| **Reference games** | Wooden Slide, Nuts & Bolts (quy mô 100k tải). | Cùng phân khúc đồ họa gỗ mộc mạc dễ làm. |
+| **Initial market** | Android SEA (Việt Nam, Philippines). | Giá mua ad rẻ để tối ưu ngân sách test $100. |
+| **Monetization path** | Quảng cáo xen kẽ + Gói mua No Ads giá $0.99. | Phù hợp với tệp casual không thích nạp nhiều. |
+| **Failure condition** | CPI > $0.40 hoặc D1 Retention < 20%. | Mốc giới hạn kinh tế bắt buộc phải tắt campaign. |
 
-| Field | Example output |
-| --- | --- |
-| Target segment | Adults who want a calm 2-minute brain break. |
-| Motivation | Relaxing satisfaction from clearing a messy board. |
-| Reference games | Calm block puzzle, hard logic puzzle, decor/meta puzzle. |
-| Initial market | Android SEA/tier-2, micro-budget, broad interest. |
-| Creative promise | Clear chaos in one smart move. |
-| Monetization path | Ads + light IAP if D1 and rewarded engagement are acceptable. |
-| Fit risk | Hook may attract curiosity but not daily retention. |
-| Failure condition | CPI cheap but level depth and D1 weak. |
+---
 
 ## Practical Lab
 
 Làm trực tiếp trên game của bạn:
+1.  Chọn đúng 3 reference games có lượt tải từ 10k - 500k tương đồng với lối chơi của bạn.
+2.  Điền hoàn chỉnh bản luận điểm thị trường cho game của bạn theo mẫu ở phần **Lab output example**.
+3.  Áp dụng **Bảng quy trình kiểm tra chất lượng (Market Fit Quality Chain Check)** dưới đây để tự duyệt:
+    *   *Định vị động cơ*: Động cơ chơi game của bạn có được mô tả bằng một từ khóa cảm xúc cụ thể (không viết chung chung là "giải trí") không? (Đạt/Không)
+    *   *Tính thực tế của đối thủ*: 3 reference games lựa chọn có cùng quy mô sản xuất với team của bạn không (loại trừ các game top 10 tỷ đô)? (Đạt/Không)
+    *   *Khoảng giá test*: Khu vực chạy test (Initial Market) có mức giá CPI trung bình lịch sử tương thích với ngân sách hẹp của bạn không? (Đạt/Không)
+    *   *Ngưỡng cắt lỗ*: Bạn đã xác định rõ mốc CPI trần và D1 sàn để kích hoạt lệnh dừng campaign tự động chưa? (Đạt/Không)
 
-1. Chọn 3 reference games gần với game của bạn nhất về promise, không chỉ về genre.
-2. Với mỗi reference, ghi promise, first screenshot proof, monetization hint và pattern bạn học được.
-3. Viết target segment bằng motivation.
-4. Chọn một initial market cho test nhỏ và viết lý do.
-5. Viết một failure condition cho market thesis.
+---
 
 ## Final UA Plan Update
 
-Cập nhật field **Target audience** theo format:
+Cập nhật trường **Target audience** trong Final UA Plan theo định dạng chuẩn dưới đây:
 
 ```text
-Target segment: [ai]
-Motivation: [vì sao họ chơi]
-Reference games: [2-3 game/pattern]
-Initial market: [region/platform/channel assumption]
-Monetization fit: [ads/IAP path]
-Main risk: [điểm thesis dễ sai]
-Failure condition: [metric pattern làm thesis yếu]
+Target segment: [Phân nhóm đối tượng cụ thể]
+Motivation: [Động cơ chơi game cốt lõi]
+Reference games: [Danh sách 3 reference games cùng scope]
+Initial market: [Khu vực chạy test hẹp và lý do]
+Monetization fit: [Kế hoạch khai thác dòng tiền quảng cáo/IAP]
+Main risk: [Rủi ro lớn nhất của giả thuyết này]
+Failure condition: [Mốc metric kích hoạt dừng campaign ad]
 ```
+
+---
 
 ## Checklist Focus
 
-- Viết target segment bằng motivation, không chỉ bằng genre.
-- Chọn 3 reference games và ghi visible promise của từng game.
-- Ghi store proof: icon/screenshot/title chứng minh promise thế nào.
-- Chọn initial market cho micro-budget test và nêu lý do.
-- Viết monetization path và risk lớn nhất.
-- Viết failure condition để biết khi nào thesis sai.
+*   [ ] Xác định 3 đối thủ cạnh tranh cùng quy mô scope trên cửa hàng ứng dụng.
+*   [ ] Thiết lập đầy đủ 5 thành phần của bản Puzzle market thesis cho game của bạn.
+*   [ ] Hoàn thành 4 mục trong Bảng quy trình kiểm tra chất lượng (Market Fit Quality Chain Check).
+*   [ ] Cập nhật trường Target audience vào Final UA Plan.
 
-## English Terms You Should Keep
-
-- **Genre-market fit**: mức độ phù hợp giữa genre, audience, promise, market và monetization.
-- **CPI**: cost per install, cần đọc cùng retention/engagement.
-- **LTV**: lifetime value, ở bài này chỉ dùng như hướng suy nghĩ monetization path, chưa cần forecast chính xác.
-- **Market thesis**: giả thuyết về ai sẽ thích game, vì sao, ở đâu, và game có thể kiếm tiền bằng cách nào.
+---
 
 ## Curated References
 
-- Chưa cần đọc reference ngoài trước khi làm lab. Với bài này, reference quan trọng nhất là store pages và creatives của 3 game bạn chọn để teardown.
-
-> Practical rule: Market thesis tốt phải có segment, motivation, reference pattern, initial market, monetization path và failure condition. Nếu thiếu failure condition, bạn chưa có thesis để test.
+*   Tài liệu phân tích thị trường casual game của Deconstructor of Fun.
+*   Hướng dẫn nghiên cứu từ khóa và đối thủ cạnh tranh trên App Radar / Sensor Tower.
