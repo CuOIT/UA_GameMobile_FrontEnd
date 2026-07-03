@@ -1395,18 +1395,24 @@ function renderMarkdown(markdown) {
   return html.join("");
 }
 
+function normalizeMarkdownAssetPath(src) {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return escapeHtml(src);
+  const normalized = src.replace(/^\.\//, "");
+  return escapeHtml(normalized.startsWith("content/") ? normalized : `${contentRoot}/${normalized}`);
+}
+
 function renderMarkdownImage(alt, src, title = "") {
   const cleanSrc = String(src || "").trim();
-  const isAllowed = /^(https?:\/\/|\.\/|\/|content\/)/.test(cleanSrc);
-  if (!isAllowed) return "";
+  const safeSrc = normalizeMarkdownAssetPath(cleanSrc);
   const caption = title || alt;
   return `
     <figure class="markdown-figure">
-      <img src="${escapeHtml(cleanSrc)}" alt="${escapeHtml(alt || "Lesson visual")}" width="1200" height="620" decoding="async">
+      <img src="${safeSrc}" alt="${escapeHtml(alt || "Lesson visual")}" width="1200" height="620" decoding="async" loading="lazy">
       ${caption ? `<figcaption>${inlineMarkdown(caption)}</figcaption>` : ""}
     </figure>
   `;
 }
+
 function renderMarkdownTable(rows) {
   const parsed = rows
     .map((row) => row.split("|").slice(1, -1).map((cell) => cell.trim()))
@@ -1453,7 +1459,6 @@ function renderMarkdownChart(rows) {
     </figure>
   `;
 }
-
 function inlineMarkdown(value) {
   return escapeHtml(value)
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
@@ -1469,4 +1474,3 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-

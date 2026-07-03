@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   color-scheme: light;
   --bg: #f7f5ef;
   --surface: #ffffff;
@@ -404,6 +404,7 @@ button:disabled {
   height: auto;
   max-height: 520px;
   object-fit: contain;
+  border: 1px solid var(--line);
   border-radius: 6px;
   background: #ffffff;
 }
@@ -416,6 +417,7 @@ button:disabled {
 }
 
 .markdown-table-wrap {
+  width: 100%;
   overflow-x: auto;
   margin: 18px 0;
   border: 1px solid var(--line);
@@ -431,8 +433,8 @@ button:disabled {
 
 .markdown-table th,
 .markdown-table td {
+  border: 1px solid var(--line);
   padding: 10px 12px;
-  border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
   line-height: 1.45;
@@ -494,7 +496,6 @@ button:disabled {
   font-style: normal;
   font-size: 0.9rem;
 }
-
 .side-stack {
   display: grid;
   gap: 14px;
