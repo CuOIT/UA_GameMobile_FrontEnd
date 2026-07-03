@@ -1,332 +1,332 @@
 {
-    "q01":  {
-                "question":  "Day 1: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q02":  {
-                "question":  "Day 2: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q03":  {
-                "question":  "Day 3: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q04":  {
-                "question":  "Day 4: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q05":  {
-                "question":  "Day 5: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q06":  {
-                "question":  "Day 6: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q07":  {
-                "question":  "Day 7: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q08":  {
-                "question":  "Day 8: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q09":  {
-                "question":  "Day 9: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q10":  {
-                "question":  "Day 10: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q11":  {
-                "question":  "Day 11: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q12":  {
-                "question":  "Day 12: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q13":  {
-                "question":  "Day 13: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q14":  {
-                "question":  "Day 14: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q15":  {
-                "question":  "Day 15: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q16":  {
-                "question":  "Day 16: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q17":  {
-                "question":  "Day 17: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q18":  {
-                "question":  "Day 18: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q19":  {
-                "question":  "Day 19: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q20":  {
-                "question":  "Day 20: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q21":  {
-                "question":  "Day 21: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q22":  {
-                "question":  "Day 22: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q23":  {
-                "question":  "Day 23: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q24":  {
-                "question":  "Day 24: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q25":  {
-                "question":  "Day 25: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q26":  {
-                "question":  "Day 26: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q27":  {
-                "question":  "Day 27: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q28":  {
-                "question":  "Day 28: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q29":  {
-                "question":  "Day 29: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            },
-    "q30":  {
-                "question":  "Day 30: What is the best practical takeaway?",
-                "options":  [
-                                "Define one measurable learning goal before spending",
-                                "Spend first and inspect later",
-                                "Only optimize visuals, not product metrics",
-                                "Ignore privacy and attribution limits"
-                            ],
-                "answer":  0,
-                "explanation":  "A beginner UA workflow should define the learning goal, metric, and decision rule before budget is spent."
-            }
+  "q01": {
+    "question": "Day 1: What makes a first UA test useful for a Unity indie/dev?",
+    "options": [
+      "It answers one product learning question with a predefined next action",
+      "It buys as many cheap installs as possible before the game is instrumented",
+      "It proves the ad network is good or bad from CPI alone",
+      "It avoids writing a hypothesis so the result stays flexible"
+    ],
+    "answer": 0,
+    "explanation": "A micro-budget test must produce a decision artifact, not just a dashboard screenshot."
+  },
+  "q02": {
+    "question": "Day 2: Which statement is a usable market thesis?",
+    "options": [
+      "Puzzle is popular, so CPI should be cheap",
+      "Adults who want calm daily logic challenges may respond to clear before/after puzzle ads in tier-2 Android markets",
+      "The game has many levels, so it has high LTV",
+      "We will test every region and let the network decide everything"
+    ],
+    "answer": 1,
+    "explanation": "A useful thesis names audience, motivation, creative angle and region instead of relying on genre popularity."
+  },
+  "q03": {
+    "question": "Day 3: Why map motivation before creative production?",
+    "options": [
+      "It lets you make more unrelated creatives quickly",
+      "It ties ad hooks to store proof and first-session behavior",
+      "It replaces the need for retention metrics",
+      "It guarantees the lowest CPI"
+    ],
+    "answer": 1,
+    "explanation": "Motivation mapping keeps creative, store page and gameplay promise aligned."
+  },
+  "q04": {
+    "question": "Day 4: CTR is high but store CVR is weak. What is the first suspicion?",
+    "options": [
+      "The store page does not confirm the ad promise",
+      "The tutorial has too many analytics events",
+      "D7 retention is already proven",
+      "The game should immediately scale budget"
+    ],
+    "answer": 0,
+    "explanation": "High click intent with low install conversion often points to promise mismatch at the store listing."
+  },
+  "q05": {
+    "question": "Day 5: What is the safest use of a $100-500 soft-launch test?",
+    "options": [
+      "Prove global scale and stable LTV",
+      "Find obvious funnel, creative or tracking problems before larger spend",
+      "Skip retention because sample size is small",
+      "Run every possible creative and audience"
+    ],
+    "answer": 1,
+    "explanation": "Micro-budget testing is best for risk reduction and next-step decisions."
+  },
+  "q06": {
+    "question": "Day 6: Why avoid splitting a $300 test across many channels?",
+    "options": [
+      "It creates too little signal per channel to make a decision",
+      "It always increases ROAS",
+      "It removes the need for creative variants",
+      "It makes attribution perfect"
+    ],
+    "answer": 0,
+    "explanation": "Micro-budget needs concentrated learning, not fragmented noise."
+  },
+  "q07": {
+    "question": "Day 7: What must a hypothesis card include to be actionable?",
+    "options": [
+      "Player, promise, signal and next action",
+      "Only the game genre and planned spend",
+      "A guarantee that CPI will be low",
+      "All possible audiences at once"
+    ],
+    "answer": 0,
+    "explanation": "The card must connect the test to a decision."
+  },
+  "q08": {
+    "question": "Day 8: Which metric best tests whether the first-session promise is working?",
+    "options": [
+      "D1 retention or early return signal",
+      "Campaign name",
+      "Number of SDKs",
+      "Store icon file size"
+    ],
+    "answer": 0,
+    "explanation": "Retention and early return behavior show whether players found value after install."
+  },
+  "q09": {
+    "question": "Day 9: CPI drops sharply while D1 also drops. What is the safest read?",
+    "options": [
+      "Traffic quality or promise fit may have worsened",
+      "The campaign is automatically ready to scale",
+      "Store screenshots are definitely perfect",
+      "Retention no longer matters"
+    ],
+    "answer": 0,
+    "explanation": "Lower cost can be dangerous if user quality falls with it."
+  },
+  "q10": {
+    "question": "Day 10: What should you inspect before blaming an ad network for weak D1?",
+    "options": [
+      "Whether the first session delivered the creative promise",
+      "Whether the app icon uses enough colors",
+      "Whether there are more dashboards available",
+      "Whether the campaign name includes the genre"
+    ],
+    "answer": 0,
+    "explanation": "Weak retention often reflects promise or onboarding issues that media metrics cannot fix."
+  },
+  "q11": {
+    "question": "Day 11: Why use conservative LTV assumptions in a micro soft-launch?",
+    "options": [
+      "Early revenue data is noisy and easy to overread",
+      "It makes all campaigns look successful",
+      "It removes the need for retention",
+      "It proves IAP-heavy monetization automatically"
+    ],
+    "answer": 0,
+    "explanation": "Conservative assumptions prevent tiny early revenue spikes from causing overconfidence."
+  },
+  "q12": {
+    "question": "Day 12: What is missing from the statement 'ROAS target is 20%'?",
+    "options": [
+      "The time window and action rule",
+      "The app icon size",
+      "The number of store screenshots only",
+      "The developer machine name"
+    ],
+    "answer": 0,
+    "explanation": "ROAS without a window and decision rule is not operational."
+  },
+  "q13": {
+    "question": "Day 13: What is a healthy response to privacy-driven signal loss?",
+    "options": [
+      "Use directional evidence with written confidence levels",
+      "Assume every dashboard number is perfectly comparable",
+      "Ignore consent and platform policy",
+      "Stop measuring retention"
+    ],
+    "answer": 0,
+    "explanation": "Modern UA decisions need confidence notes and smaller next actions when signal is incomplete."
+  },
+  "q14": {
+    "question": "Day 14: What makes an event taxonomy useful for UA?",
+    "options": [
+      "Each event supports a decision and has stable naming",
+      "It logs every variable in the game",
+      "It uses random names per build",
+      "It exists only after campaigns have ended"
+    ],
+    "answer": 0,
+    "explanation": "A lean taxonomy supports decisions and remains stable across builds."
+  },
+  "q15": {
+    "question": "Day 15: What should one creative hook test?",
+    "options": [
+      "One player motivation",
+      "Every possible feature",
+      "Only the logo",
+      "The full tutorial"
+    ],
+    "answer": 0,
+    "explanation": "Single-motivation hooks make test results easier to interpret."
+  },
+  "q16": {
+    "question": "Day 16: When is a playable ad risky for a small puzzle team?",
+    "options": [
+      "When it promises interaction the real build cannot deliver",
+      "When it uses the same core mechanic honestly",
+      "When it has a clear learning goal",
+      "When it is tested after store readiness"
+    ],
+    "answer": 0,
+    "explanation": "A playable that overpromises can create retention mismatch."
+  },
+  "q17": {
+    "question": "Day 17: Why avoid changing hook, art style and CTA all at once?",
+    "options": [
+      "The result becomes hard to diagnose",
+      "It always lowers CPI",
+      "It removes creative fatigue",
+      "It guarantees store conversion"
+    ],
+    "answer": 0,
+    "explanation": "Too many simultaneous changes make the learning unclear."
+  },
+  "q18": {
+    "question": "Day 18: What should the first store screenshot do after a user clicks an ad?",
+    "options": [
+      "Confirm the same promise that earned the click",
+      "Show only settings screens",
+      "Hide gameplay until later",
+      "Contradict the ad to surprise users"
+    ],
+    "answer": 0,
+    "explanation": "Store continuity protects CVR and retention quality."
+  },
+  "q19": {
+    "question": "Day 19: What should you extract from competitor teardown?",
+    "options": [
+      "Patterns of promise and proof",
+      "Exact copied screenshots",
+      "A guarantee of low CPI",
+      "Only app names"
+    ],
+    "answer": 0,
+    "explanation": "The value is in patterns that inform your own test."
+  },
+  "q20": {
+    "question": "Day 20: If CTR decays but retained users remain strong, what is the better first move?",
+    "options": [
+      "Make variants around the same motivation",
+      "Kill the whole game immediately",
+      "Ignore creative and only add SDKs",
+      "Change every funnel link at once"
+    ],
+    "answer": 0,
+    "explanation": "Strong retained users suggest the promise is good; the asset may need refresh."
+  },
+  "q21": {
+    "question": "Day 21: What blocks a creative from entering the first test?",
+    "options": [
+      "The store page cannot confirm its promise",
+      "It has a clear learning goal",
+      "It maps to a player motivation",
+      "It has a matching screenshot"
+    ],
+    "answer": 0,
+    "explanation": "Promise continuity is required before paid traffic."
+  },
+  "q22": {
+    "question": "Day 22: What is the main danger of over-segmenting a micro campaign?",
+    "options": [
+      "Each cell gets too little signal",
+      "The app becomes smaller",
+      "Attribution becomes perfect",
+      "Creative fatigue disappears"
+    ],
+    "answer": 0,
+    "explanation": "Too many cells turn a small test into unreadable noise."
+  },
+  "q23": {
+    "question": "Day 23: Budget is fixed and expected CPI is higher than planned. What is the cleanest adjustment?",
+    "options": [
+      "Reduce variants or narrow the decision",
+      "Keep all variants and trust tiny samples",
+      "Ignore install count",
+      "Declare ROAS stable immediately"
+    ],
+    "answer": 0,
+    "explanation": "The decision scope must fit the budget and expected CPI."
+  },
+  "q24": {
+    "question": "Day 24: What should a campaign readout end with?",
+    "options": [
+      "One recommended call and confidence level",
+      "Every raw metric copied without interpretation",
+      "A new unrelated feature idea",
+      "Only the best-looking chart"
+    ],
+    "answer": 0,
+    "explanation": "Reports must drive decisions, not just archive numbers."
+  },
+  "q25": {
+    "question": "Day 25: What belongs in a good kill criterion?",
+    "options": [
+      "Metric condition, action and review point",
+      "A vague bad feeling",
+      "Only CPI with no retention context",
+      "A promise to decide later"
+    ],
+    "answer": 0,
+    "explanation": "Decision rules need specific conditions and actions."
+  },
+  "q26": {
+    "question": "Day 26: Why treat SDK choices as architecture decisions?",
+    "options": [
+      "They affect data, privacy, performance and launch risk",
+      "They are invisible to users and stores",
+      "They never change app behavior",
+      "They replace event taxonomy"
+    ],
+    "answer": 0,
+    "explanation": "SDKs influence compliance, measurement quality and runtime behavior."
+  },
+  "q27": {
+    "question": "Day 27: What is the most important output of a post-mortem?",
+    "options": [
+      "Which assumption changed and what action follows",
+      "A longer list of dashboards",
+      "A blame assignment",
+      "A promise to spend more immediately"
+    ],
+    "answer": 0,
+    "explanation": "Learning is reusable only when assumptions and actions are explicit."
+  },
+  "q28": {
+    "question": "Day 28: What makes a weekly UA rhythm practical for a small team?",
+    "options": [
+      "Owners, deadlines and decision points are named",
+      "Every task waits for perfect data",
+      "Creative production has no limit",
+      "Reports are written only when results are good"
+    ],
+    "answer": 0,
+    "explanation": "Small teams need cadence that turns learning into scheduled action."
+  },
+  "q29": {
+    "question": "Day 29: What should the capstone plan optimize for?",
+    "options": [
+      "A clear first test and decision rules",
+      "Maximum length and every possible idea",
+      "A guaranteed ROAS target",
+      "Only creative inspiration"
+    ],
+    "answer": 0,
+    "explanation": "The plan should guide a real first test."
+  },
+  "q30": {
+    "question": "Day 30: What makes the final next action strong?",
+    "options": [
+      "It is small, dated and measurable",
+      "It says 'improve UA' generally",
+      "It depends on perfect data",
+      "It avoids naming a risk"
+    ],
+    "answer": 0,
+    "explanation": "A concrete next action makes the course operational."
+  }
 }

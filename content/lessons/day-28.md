@@ -1,44 +1,59 @@
 ---
 day: 28
-title: "Week 4 synthesis: operating rhythm"
+title: "Weekly UA operating rhythm"
 module: "Week 4 - Campaign operation"
 stages: [prototype, live]
 related_terms: [Campaign, ROAS, Soft launch]
+artifact: "Weekly operating cadence"
 ---
 
 ## Mục tiêu / Goal
-Bài 28 tập trung vào **Operating cadence**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **Weekly operating cadence** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-UA rhythm cho team nhỏ nên cố định: weekly creative review, metric readout, product issue triage, next test plan. Cadence giúp UA gắn với development sprint.
+Bài này dùng **Weekly operating cadence** để làm rõ phần **hành động tiếp theo** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+UA operation is a rhythm: choose question, ship build/store changes, launch assets, read signal, decide, log learning and prepare the next sprint. For indie teams, cadence matters because production time is the bottleneck.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **Campaign, ROAS, Soft launch**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+Monday choose decision, Tuesday export creatives, Wednesday launch, Friday read early signal, next Monday decide whether the build or creative changes.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+A cadence is valid only if it names owner, deadline and decision meeting.
 
 ## Practical Lab
-Thiết kế lịch tuần: Monday report, Tuesday creative brief, Wednesday implementation, Friday decision.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Write a weekly cadence with day-by-day responsibilities for build, creative, reporting and decision.
 
-## Metric Focus
-Cadence tốt biến UA thành input cho roadmap.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Add the immediate next action and weekly cadence.
 
-## Common Mistake
-UA và dev chạy hai luồng riêng, không feedback cho nhau.
+## Checklist Focus
+- Write a weekly cadence.
+- Assign owner/deadline for build, creative and report tasks.
+- Add next decision meeting.
+- Update next action.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Idle RPG creative spike with stable cohorts: Scale cautiously and produce variants around the same motivation.
+- SDK readiness blocks launch: Delay paid traffic until event validation and disclosure review are complete.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- Creative test budget: Estimate spend needed for first-pass creative learning.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **Campaign**
+- **ROAS**
+- **Soft launch**
+
+## Curated References
+- Android Attribution Reporting for mobile: https://privacysandbox.google.com/private-advertising/attribution-reporting/android
+- Google AdMob Unity privacy strategies: https://developers.google.com/admob/unity/privacy/strategies
+
+> Practical rule: A cadence is valid only if it names owner, deadline and decision meeting.

@@ -1,44 +1,62 @@
 ---
 day: 29
-title: "Build your UA launch plan"
+title: "Build the one-page UA launch plan"
 module: "Capstone"
 stages: [idea, prototype, live]
 related_terms: [UA, Soft launch, Event taxonomy]
+artifact: "One-page launch plan"
 ---
 
 ## Mục tiêu / Goal
-Bài 29 tập trung vào **Launch plan**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **One-page launch plan** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Final UA plan gom toàn bộ: game hypothesis, audience, target metrics, tracking, creative matrix, budget, success criteria, kill criteria. Đây là artifact để chạy test thật.
+Bài này dùng **One-page launch plan** để làm rõ phần **hành động tiếp theo** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+The capstone is not a long strategy deck. It is a one-page operating plan: who the game is for, what promise is tested, how the build measures it, what assets run, how much is spent and what decision rules apply.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **UA, Soft launch, Event taxonomy**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+For puzzle, the page should make it obvious whether the next sprint is creative production, tracking validation, store cleanup or campaign launch.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+If a plan field does not affect a launch decision, shorten it.
 
 ## Practical Lab
-Điền đủ 8 phần trong Final UA Plan, dùng dữ liệu giả định nếu chưa có game live.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Fill every Final UA Plan field and cut each field until the preview fits one readable page.
 
-## Metric Focus
-Plan tốt có numbers, assumptions và decision rules.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Complete all plan fields, especially next action.
 
-## Common Mistake
-Plan dài nhưng không chỉ ra hành động đầu tiên.
+## Checklist Focus
+- Fill every Final UA Plan field.
+- Remove details that do not affect launch decisions.
+- Check budget, tracking and creative are aligned.
+- Write the first next action.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Micro-budget false positive: Log the signal as interesting but avoid scale until more installs or repeated evidence exists.
+- Puzzle soft-launch: cheap installs, weak D1: Pause scale and fix first-session proof before producing more traffic.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- Sample-size sanity check: Estimate whether a micro budget can feed the number of creative cells you want to test.
+- Creative test budget: Estimate spend needed for first-pass creative learning.
+- Break-even CPI guardrail: Estimate a rough CPI ceiling from LTV and gross margin assumptions.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **UA**
+- **Soft launch**
+- **Event taxonomy**
+
+## Curated References
+- Android Attribution Reporting for mobile: https://privacysandbox.google.com/private-advertising/attribution-reporting/android
+- Google AdMob Unity privacy strategies: https://developers.google.com/admob/unity/privacy/strategies
+- Apple AdAttributionKit: https://developer.apple.com/documentation/AdAttributionKit
+
+> Practical rule: If a plan field does not affect a launch decision, shorten it.

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Day 3 motivation map visual</title>
+  <desc id="desc">Illustrative motivation map comparing global and Vietnam source-backed cases.</desc>
+  <rect width="1200" height="620" fill="#f7faf8"/>
+  <rect x="36" y="34" width="1128" height="552" rx="22" fill="#ffffff" stroke="#d9e5df"/>
+  <text x="68" y="82" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#10251f">Day 3: Motivation map from real cases</text>
+  <text x="68" y="114" font-family="Inter, Arial, sans-serif" font-size="15" fill="#5b6b64">Illustrative visual only - not official Monopoly GO or Zego campaign data.</text>
+
+  <g transform="translate(68 152)">
+    <rect width="500" height="286" rx="18" fill="#f0f7ff" stroke="#c5d9ec"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#193452">Global case: Monopoly GO!</text>
+    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="14" fill="#34516c">Public loop: dice -> money -> landmarks -> limited events.</text>
+    <g transform="translate(40 105)">
+      <circle cx="42" cy="42" r="36" fill="#ffffff" stroke="#8bb2d3"/><text x="24" y="48" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#193452">Roll</text>
+      <path d="M88 42 H142" stroke="#6989a7" stroke-width="4" stroke-linecap="round"/><path d="M132 32 l18 10 -18 10" fill="none" stroke="#6989a7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="192" cy="42" r="36" fill="#ffffff" stroke="#8bb2d3"/><text x="170" y="48" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#193452">Build</text>
+      <path d="M238 42 H292" stroke="#6989a7" stroke-width="4" stroke-linecap="round"/><path d="M282 32 l18 10 -18 10" fill="none" stroke="#6989a7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="342" cy="42" r="36" fill="#ffffff" stroke="#8bb2d3"/><text x="322" y="48" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#193452">Event</text>
+    </g>
+    <text x="24" y="220" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#193452">Motivations to map</text>
+    <text x="24" y="246" font-family="Inter, Arial, sans-serif" font-size="14" fill="#34516c">Collection, progression, completion, social light competition, event urgency.</text>
+  </g>
+
+  <g transform="translate(620 152)">
+    <rect width="500" height="286" rx="18" fill="#fff6e8" stroke="#edcfad"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#4a2c14">Vietnam case: Zego Studio</text>
+    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6b4420">Public catalog gives many hook verbs and object promises.</text>
+    <g transform="translate(34 102)" font-family="Inter, Arial, sans-serif" font-size="13" fill="#4a2c14">
+      <text x="0" y="0" font-weight="800">Hook verb</text><text x="170" y="0" font-weight="800">Likely motivation</text><text x="332" y="0" font-weight="800">Proof needed</text>
+      <text x="0" y="38">Sort yarn</text><text x="170" y="38">Organize/relax</text><text x="332" y="38">Clear sort moment</text>
+      <text x="0" y="76">Rescue</text><text x="170" y="76">Urgency</text><text x="332" y="76">Saved character</text>
+      <text x="0" y="114">Tile match</text><text x="170" y="114">Completion</text><text x="332" y="114">Board clear</text>
+      <text x="0" y="152">Screw sort</text><text x="170" y="152">Logic/satisfaction</text><text x="332" y="152">Visible solution</text>
+    </g>
+  </g>
+
+  <g transform="translate(68 472)">
+    <text x="0" y="0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#10251f">Data readout example</text>
+    <g transform="translate(0 26)" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2f403a">
+      <text x="0" y="20">Challenge hook</text><rect x="140" y="8" width="250" height="16" rx="8" fill="#2f6d54"/><text x="410" y="20">CTR high, D1 low</text>
+      <text x="0" y="54">Relax hook</text><rect x="140" y="42" width="150" height="16" rx="8" fill="#7fa56a"/><text x="410" y="54">CTR medium, D1 stronger</text>
+      <text x="0" y="88">Decision</text><text x="140" y="88" font-weight="700">Do not pick the highest CTR until first-session proof and D1 are read.</text>
+    </g>
+  </g>
+</svg>

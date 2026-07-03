@@ -1,607 +1,1007 @@
 {
-    "lessons":  [
-                    {
-                        "day":  1,
-                        "title":  "UA mindset for Unity developers",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Understand UA as a product learning loop, not just buying installs.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "UA",
-                                              "Funnel",
-                                              "CPI"
-                                          ],
-                        "quizId":  "q01",
-                        "checklistId":  "c01",
-                        "markdown":  "lessons/day-01.md"
-                    },
-                    {
-                        "day":  2,
-                        "title":  "Mobile game market and genre fit",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Map genre, audience, region and monetization before spending.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Genre-market fit",
-                                              "CPI",
-                                              "LTV"
-                                          ],
-                        "quizId":  "q02",
-                        "checklistId":  "c02",
-                        "markdown":  "lessons/day-02.md"
-                    },
-                    {
-                        "day":  3,
-                        "title":  "Paid, organic and store discovery",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Separate paid UA, ASO, community and platform discovery.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ASO",
-                                              "CTR",
-                                              "CVR"
-                                          ],
-                        "quizId":  "q03",
-                        "checklistId":  "c03",
-                        "markdown":  "lessons/day-03.md"
-                    },
-                    {
-                        "day":  4,
-                        "title":  "Player funnel from impression to payer",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Trace the journey from ad impression to retained user and payer.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Funnel",
-                                              "IPM",
-                                              "CVR"
-                                          ],
-                        "quizId":  "q04",
-                        "checklistId":  "c04",
-                        "markdown":  "lessons/day-04.md"
-                    },
-                    {
-                        "day":  5,
-                        "title":  "Soft launch strategy",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Use limited markets and budgets to reduce launch risk.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Soft launch",
-                                              "Retention",
-                                              "Cohort"
-                                          ],
-                        "quizId":  "q05",
-                        "checklistId":  "c05",
-                        "markdown":  "lessons/day-05.md"
-                    },
-                    {
-                        "day":  6,
-                        "title":  "UA channels and ad networks",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Learn Meta, Google, Unity, AppLovin-style networks and what each optimizes.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Ad network",
-                                              "ROAS",
-                                              "Attribution"
-                                          ],
-                        "quizId":  "q06",
-                        "checklistId":  "c06",
-                        "markdown":  "lessons/day-06.md"
-                    },
-                    {
-                        "day":  7,
-                        "title":  "Week 1 synthesis: first UA hypothesis",
-                        "module":  "Week 1 - UA fundamentals",
-                        "summary":  "Turn market and funnel thinking into a testable UA hypothesis.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Beginner",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "UA",
-                                              "Funnel",
-                                              "Soft launch"
-                                          ],
-                        "quizId":  "q07",
-                        "checklistId":  "c07",
-                        "markdown":  "lessons/day-07.md"
-                    },
-                    {
-                        "day":  8,
-                        "title":  "Metric map for mobile games",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Connect installs, retention, monetization and creative metrics.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "CPI",
-                                              "Retention",
-                                              "ARPDAU"
-                                          ],
-                        "quizId":  "q08",
-                        "checklistId":  "c08",
-                        "markdown":  "lessons/day-08.md"
-                    },
-                    {
-                        "day":  9,
-                        "title":  "CPI, CTR, CVR and IPM",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Read acquisition efficiency without confusing surface metrics with quality.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "CPI",
-                                              "CTR",
-                                              "CVR",
-                                              "IPM"
-                                          ],
-                        "quizId":  "q09",
-                        "checklistId":  "c09",
-                        "markdown":  "lessons/day-09.md"
-                    },
-                    {
-                        "day":  10,
-                        "title":  "Retention and cohorts",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Use D1, D7 and cohort views to judge whether players come back.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Retention",
-                                              "Cohort"
-                                          ],
-                        "quizId":  "q10",
-                        "checklistId":  "c10",
-                        "markdown":  "lessons/day-10.md"
-                    },
-                    {
-                        "day":  11,
-                        "title":  "ARPDAU, LTV and payback",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Estimate economic ceiling before increasing spend.",
-                        "stages":  [
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ARPDAU",
-                                              "LTV",
-                                              "Payback window"
-                                          ],
-                        "quizId":  "q11",
-                        "checklistId":  "c11",
-                        "markdown":  "lessons/day-11.md"
-                    },
-                    {
-                        "day":  12,
-                        "title":  "ROAS and decision windows",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Define how soon a campaign must show revenue signal.",
-                        "stages":  [
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ROAS",
-                                              "LTV",
-                                              "Payback window"
-                                          ],
-                        "quizId":  "q12",
-                        "checklistId":  "c12",
-                        "markdown":  "lessons/day-12.md"
-                    },
-                    {
-                        "day":  13,
-                        "title":  "Attribution, ATT, SKAN and signal loss",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Understand why mobile measurement is incomplete and how to plan around it.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Attribution",
-                                              "ATT",
-                                              "SKAN"
-                                          ],
-                        "quizId":  "q13",
-                        "checklistId":  "c13",
-                        "markdown":  "lessons/day-13.md"
-                    },
-                    {
-                        "day":  14,
-                        "title":  "Tracking plan for Unity games",
-                        "module":  "Week 2 - Metrics and measurement",
-                        "summary":  "Choose conceptual game events before SDK implementation.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Event taxonomy",
-                                              "Attribution",
-                                              "Cohort"
-                                          ],
-                        "quizId":  "q14",
-                        "checklistId":  "c14",
-                        "markdown":  "lessons/day-14.md"
-                    },
-                    {
-                        "day":  15,
-                        "title":  "Creative strategy and ad hooks",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Turn player motivations into testable ad angles.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Creative testing",
-                                              "CTR",
-                                              "IPM"
-                                          ],
-                        "quizId":  "q15",
-                        "checklistId":  "c15",
-                        "markdown":  "lessons/day-15.md"
-                    },
-                    {
-                        "day":  16,
-                        "title":  "Video, static and playable ads",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Choose formats based on genre, clarity and production cost.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Playable ad",
-                                              "Creative testing",
-                                              "IPM"
-                                          ],
-                        "quizId":  "q16",
-                        "checklistId":  "c16",
-                        "markdown":  "lessons/day-16.md"
-                    },
-                    {
-                        "day":  17,
-                        "title":  "Creative test matrix",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Design variants so each test has one learning goal.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Creative testing",
-                                              "CTR",
-                                              "CVR"
-                                          ],
-                        "quizId":  "q17",
-                        "checklistId":  "c17",
-                        "markdown":  "lessons/day-17.md"
-                    },
-                    {
-                        "day":  18,
-                        "title":  "ASO basics for game pages",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Align icon, screenshots, title and description with UA promise.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ASO",
-                                              "CVR"
-                                          ],
-                        "quizId":  "q18",
-                        "checklistId":  "c18",
-                        "markdown":  "lessons/day-18.md"
-                    },
-                    {
-                        "day":  19,
-                        "title":  "Competitor teardown",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Analyze store pages and creatives without copying blindly.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Genre-market fit",
-                                              "ASO",
-                                              "Creative testing"
-                                          ],
-                        "quizId":  "q19",
-                        "checklistId":  "c19",
-                        "markdown":  "lessons/day-19.md"
-                    },
-                    {
-                        "day":  20,
-                        "title":  "Creative fatigue and iteration",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Recognize when a creative stops learning or stops scaling.",
-                        "stages":  [
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Creative fatigue",
-                                              "CTR",
-                                              "ROAS"
-                                          ],
-                        "quizId":  "q20",
-                        "checklistId":  "c20",
-                        "markdown":  "lessons/day-20.md"
-                    },
-                    {
-                        "day":  21,
-                        "title":  "Week 3 synthesis: store and creative readiness",
-                        "module":  "Week 3 - Creative and store readiness",
-                        "summary":  "Prepare your first creative set and store checklist.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Core",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ASO",
-                                              "Creative testing",
-                                              "Soft launch"
-                                          ],
-                        "quizId":  "q21",
-                        "checklistId":  "c21",
-                        "markdown":  "lessons/day-21.md"
-                    },
-                    {
-                        "day":  22,
-                        "title":  "Campaign structure for beginners",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Structure tests by audience, creative and optimization goal.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Ad network",
-                                              "Campaign",
-                                              "ROAS"
-                                          ],
-                        "quizId":  "q22",
-                        "checklistId":  "c22",
-                        "markdown":  "lessons/day-22.md"
-                    },
-                    {
-                        "day":  23,
-                        "title":  "Budget and sample size",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Avoid conclusions from tiny data while keeping spend controlled.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "CPI",
-                                              "Cohort",
-                                              "Payback window"
-                                          ],
-                        "quizId":  "q23",
-                        "checklistId":  "c23",
-                        "markdown":  "lessons/day-23.md"
-                    },
-                    {
-                        "day":  24,
-                        "title":  "Reading campaign reports",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Separate creative signal, audience signal and product signal.",
-                        "stages":  [
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "CTR",
-                                              "IPM",
-                                              "Retention",
-                                              "ROAS"
-                                          ],
-                        "quizId":  "q24",
-                        "checklistId":  "c24",
-                        "markdown":  "lessons/day-24.md"
-                    },
-                    {
-                        "day":  25,
-                        "title":  "Scale, iterate or kill",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Use predefined rules to reduce emotional campaign decisions.",
-                        "stages":  [
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ROAS",
-                                              "Retention",
-                                              "Creative testing"
-                                          ],
-                        "quizId":  "q25",
-                        "checklistId":  "c25",
-                        "markdown":  "lessons/day-25.md"
-                    },
-                    {
-                        "day":  26,
-                        "title":  "Privacy and SDK risk awareness",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Treat ad and analytics SDKs as product architecture decisions.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "ATT",
-                                              "SKAN",
-                                              "Event taxonomy"
-                                          ],
-                        "quizId":  "q26",
-                        "checklistId":  "c26",
-                        "markdown":  "lessons/day-26.md"
-                    },
-                    {
-                        "day":  27,
-                        "title":  "Post-mortem and learning log",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Document what each UA test taught you about product and market.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Cohort",
-                                              "Creative testing",
-                                              "UA"
-                                          ],
-                        "quizId":  "q27",
-                        "checklistId":  "c27",
-                        "markdown":  "lessons/day-27.md"
-                    },
-                    {
-                        "day":  28,
-                        "title":  "Week 4 synthesis: operating rhythm",
-                        "module":  "Week 4 - Campaign operation",
-                        "summary":  "Create a weekly UA operating cadence for a small team.",
-                        "stages":  [
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Campaign",
-                                              "ROAS",
-                                              "Soft launch"
-                                          ],
-                        "quizId":  "q28",
-                        "checklistId":  "c28",
-                        "markdown":  "lessons/day-28.md"
-                    },
-                    {
-                        "day":  29,
-                        "title":  "Build your UA launch plan",
-                        "module":  "Capstone",
-                        "summary":  "Draft the complete UA plan for your game or a sample Unity game.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "UA",
-                                              "Soft launch",
-                                              "Event taxonomy"
-                                          ],
-                        "quizId":  "q29",
-                        "checklistId":  "c29",
-                        "markdown":  "lessons/day-29.md"
-                    },
-                    {
-                        "day":  30,
-                        "title":  "Review, risk and next actions",
-                        "module":  "Capstone",
-                        "summary":  "Stress-test the plan and define the first real-world next step.",
-                        "stages":  [
-                                       "idea",
-                                       "prototype",
-                                       "live"
-                                   ],
-                        "difficulty":  "Practical",
-                        "estimatedMinutes":  25,
-                        "glossaryTerms":  [
-                                              "Payback window",
-                                              "ROAS",
-                                              "Retention"
-                                          ],
-                        "quizId":  "q30",
-                        "checklistId":  "c30",
-                        "markdown":  "lessons/day-30.md"
-                    }
-                ]
+  "meta": {
+    "title": "30-Day UA Marketing Bootcamp for Unity Indie Developers",
+    "audience": "Unity indie/dev preparing an Android-first, iOS-aware mobile puzzle micro soft-launch.",
+    "capstone": "One-page UA / soft-launch plan for a $100-500 test.",
+    "format": "25-35 minute workshop lessons with decision artifacts."
+  },
+  "references": [
+    {
+      "id": "android-attribution",
+      "title": "Android Attribution Reporting for mobile",
+      "url": "https://privacysandbox.google.com/private-advertising/attribution-reporting/android",
+      "note": "Privacy-preserving attribution design for Android apps and app-to-web measurement."
+    },
+    {
+      "id": "admob-unity-privacy",
+      "title": "Google AdMob Unity privacy strategies",
+      "url": "https://developers.google.com/admob/unity/privacy/strategies",
+      "note": "Unity-specific consent and privacy implementation considerations for ad monetization."
+    },
+    {
+      "id": "apple-adattributionkit",
+      "title": "Apple AdAttributionKit",
+      "url": "https://developer.apple.com/documentation/AdAttributionKit",
+      "note": "Apple attribution framework to understand alongside ATT and SKAN-era signal loss."
+    },
+    {
+      "id": "google-play-data-safety",
+      "title": "Google Play Data safety",
+      "url": "https://support.google.com/googleplay/android-developer/answer/10787469",
+      "note": "Disclosure thinking for SDKs, data collection, and store readiness."
+    }
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "title": "UA as a product learning loop",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Frame UA as a build-measure-learn loop between ad promise, store page, onboarding and metrics.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "UA learning loop map",
+      "planField": "hypothesis",
+      "caseIds": [
+        "puzzle-onboarding-leak"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "UA",
+        "Funnel",
+        "CPI"
+      ],
+      "quizId": "q01",
+      "checklistId": "c01",
+      "markdown": "lessons/day-01.md",
+      "learningOutcome": "Explain what your first UA test is trying to learn before any spend is committed.",
+      "referenceIds": []
+    },
+    {
+      "day": 2,
+      "title": "Puzzle market thesis and genre fit",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Turn genre, audience, region and monetization assumptions into a testable market thesis.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Puzzle market thesis",
+      "planField": "audience",
+      "caseIds": [
+        "hybrid-cheap-traffic"
+      ],
+      "toolIds": [
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Genre-market fit",
+        "CPI",
+        "LTV"
+      ],
+      "quizId": "q02",
+      "checklistId": "c02",
+      "markdown": "lessons/day-02.md",
+      "learningOutcome": "Define why this puzzle game has a reachable audience before choosing channels.",
+      "referenceIds": []
+    },
+    {
+      "day": 3,
+      "title": "Audience motivation map",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Map player motivations into ad hooks, store proof and first-session expectations.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Audience motivation map",
+      "planField": "audience",
+      "caseIds": [
+        "puzzle-store-mismatch"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Audience",
+        "Motivation",
+        "Hook"
+      ],
+      "quizId": "q03",
+      "checklistId": "c03",
+      "markdown": "lessons/day-03.md",
+      "learningOutcome": "Separate demographic guesses from behavior and motivation signals.",
+      "referenceIds": []
+    },
+    {
+      "day": 4,
+      "title": "Funnel from impression to retained player",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Trace the complete funnel so CPI, CVR and retention are read as connected signals.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Funnel leak map",
+      "planField": "metricTargets",
+      "caseIds": [
+        "puzzle-store-mismatch",
+        "puzzle-onboarding-leak"
+      ],
+      "toolIds": [
+        "cohortReadout"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Funnel",
+        "IPM",
+        "CVR"
+      ],
+      "quizId": "q04",
+      "checklistId": "c04",
+      "markdown": "lessons/day-04.md",
+      "learningOutcome": "Identify which part of the funnel is probably leaking from a simple metric pattern.",
+      "referenceIds": []
+    },
+    {
+      "day": 5,
+      "title": "Micro soft-launch strategy",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Design a small launch test that reduces risk without pretending micro-budget data is perfect.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Micro soft-launch outline",
+      "planField": "budget",
+      "caseIds": [
+        "micro-budget-false-positive"
+      ],
+      "toolIds": [
+        "sampleSize"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Soft launch",
+        "Retention",
+        "Cohort"
+      ],
+      "quizId": "q05",
+      "checklistId": "c05",
+      "markdown": "lessons/day-05.md",
+      "learningOutcome": "Choose what a $100-500 test can and cannot decide.",
+      "referenceIds": []
+    },
+    {
+      "day": 6,
+      "title": "Channel map for small Unity teams",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Compare Meta, Google, Unity/AppLovin-style networks, ASO and organic validation for a small test.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Channel selection note",
+      "planField": "budget",
+      "caseIds": [
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Ad network",
+        "Campaign",
+        "Optimization"
+      ],
+      "quizId": "q06",
+      "checklistId": "c06",
+      "markdown": "lessons/day-06.md",
+      "learningOutcome": "Choose a first channel based on learning goal, budget and creative readiness.",
+      "referenceIds": []
+    },
+    {
+      "day": 7,
+      "title": "Week 1 synthesis: first UA hypothesis",
+      "module": "Week 1 - UA fundamentals",
+      "summary": "Compress audience, funnel, channel and budget assumptions into one testable hypothesis.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "First UA hypothesis card",
+      "planField": "hypothesis",
+      "caseIds": [
+        "puzzle-onboarding-leak"
+      ],
+      "toolIds": [
+        "sampleSize"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "UA",
+        "Funnel",
+        "Soft launch"
+      ],
+      "quizId": "q07",
+      "checklistId": "c07",
+      "markdown": "lessons/day-07.md",
+      "learningOutcome": "Create a one-card hypothesis that can drive Week 2 measurement choices.",
+      "referenceIds": []
+    },
+    {
+      "day": 8,
+      "title": "Metric map for puzzle UA",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Connect acquisition, retention, monetization and creative metrics into one decision map.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Metric decision map",
+      "planField": "metricTargets",
+      "caseIds": [
+        "live-roas-shortfall"
+      ],
+      "toolIds": [
+        "cohortReadout",
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "CPI",
+        "Retention",
+        "ARPDAU"
+      ],
+      "quizId": "q08",
+      "checklistId": "c08",
+      "markdown": "lessons/day-08.md",
+      "learningOutcome": "Know which metric answers which business or product question.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 9,
+      "title": "CPI, CTR, CVR and IPM without vanity traps",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Read acquisition efficiency while avoiding decisions from surface metrics alone.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Acquisition signal readout",
+      "planField": "metricTargets",
+      "caseIds": [
+        "puzzle-store-mismatch",
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "CPI",
+        "CTR",
+        "CVR",
+        "IPM"
+      ],
+      "quizId": "q09",
+      "checklistId": "c09",
+      "markdown": "lessons/day-09.md",
+      "learningOutcome": "Diagnose whether an acquisition metric points to creative, store or audience issues.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 10,
+      "title": "Retention cohorts and first-session proof",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Use D1/D7 and early funnel behavior to judge whether players found value.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "First-session proof checklist",
+      "planField": "tracking",
+      "caseIds": [
+        "puzzle-onboarding-leak"
+      ],
+      "toolIds": [
+        "cohortReadout"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Retention",
+        "Cohort",
+        "Onboarding"
+      ],
+      "quizId": "q10",
+      "checklistId": "c10",
+      "markdown": "lessons/day-10.md",
+      "learningOutcome": "Connect retention movement to onboarding, level pacing and promise delivery.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 11,
+      "title": "ARPDAU, LTV and payback for ads plus light IAP",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Estimate economic ceiling without pretending early LTV is precise.",
+      "stages": [
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Rough economics note",
+      "planField": "metricTargets",
+      "caseIds": [
+        "live-roas-shortfall"
+      ],
+      "toolIds": [
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ARPDAU",
+        "LTV",
+        "Payback window"
+      ],
+      "quizId": "q11",
+      "checklistId": "c11",
+      "markdown": "lessons/day-11.md",
+      "learningOutcome": "Use rough LTV logic to set guardrails for spend and payback windows.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 12,
+      "title": "ROAS windows and signal delay",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Define how soon a campaign must show enough signal without overreacting to delayed revenue.",
+      "stages": [
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "ROAS decision window",
+      "planField": "successCriteria",
+      "caseIds": [
+        "live-roas-shortfall",
+        "micro-budget-false-positive"
+      ],
+      "toolIds": [
+        "cohortReadout"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ROAS",
+        "LTV",
+        "Payback window"
+      ],
+      "quizId": "q12",
+      "checklistId": "c12",
+      "markdown": "lessons/day-12.md",
+      "learningOutcome": "Write scale/hold/kill rules that respect measurement delay.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 13,
+      "title": "Attribution, ATT, SKAN and Android privacy signals",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Understand why mobile measurement is incomplete and how to make decisions with partial signal.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Measurement risk note",
+      "planField": "tracking",
+      "caseIds": [
+        "privacy-sdk-readiness"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Attribution",
+        "ATT",
+        "SKAN"
+      ],
+      "quizId": "q13",
+      "checklistId": "c13",
+      "markdown": "lessons/day-13.md",
+      "learningOutcome": "Explain signal loss and document how it affects your test decisions.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 14,
+      "title": "Event taxonomy for Unity games",
+      "module": "Week 2 - Metrics and measurement",
+      "summary": "Choose conceptual events before SDK implementation so UA decisions have usable logs.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Unity event taxonomy v1",
+      "planField": "tracking",
+      "caseIds": [
+        "privacy-sdk-readiness"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Event taxonomy",
+        "Attribution",
+        "Cohort"
+      ],
+      "quizId": "q14",
+      "checklistId": "c14",
+      "markdown": "lessons/day-14.md",
+      "learningOutcome": "Draft a lean event taxonomy that supports UA decisions without over-logging.",
+      "referenceIds": [
+        "android-attribution",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 15,
+      "title": "Creative hooks from player motivation",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Turn player motivations into ad hooks that can be tested cleanly.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Hook bank",
+      "planField": "creativeMatrix",
+      "caseIds": [
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Creative testing",
+        "CTR",
+        "IPM"
+      ],
+      "quizId": "q15",
+      "checklistId": "c15",
+      "markdown": "lessons/day-15.md",
+      "learningOutcome": "Create a small hook bank that tests motivations rather than random visuals.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 16,
+      "title": "Video, static and playable concepts",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Choose ad formats based on clarity, production cost and what the test needs to learn.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Format selection matrix",
+      "planField": "creativeMatrix",
+      "caseIds": [
+        "hybrid-cheap-traffic"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Playable ad",
+        "Creative testing",
+        "IPM"
+      ],
+      "quizId": "q16",
+      "checklistId": "c16",
+      "markdown": "lessons/day-16.md",
+      "learningOutcome": "Pick first creative formats without overproducing assets.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 17,
+      "title": "Creative test matrix",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Design variants so each test has one learning goal and a clear interpretation.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Creative test matrix v1",
+      "planField": "creativeMatrix",
+      "caseIds": [
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget",
+        "sampleSize"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Creative testing",
+        "CTR",
+        "CVR"
+      ],
+      "quizId": "q17",
+      "checklistId": "c17",
+      "markdown": "lessons/day-17.md",
+      "learningOutcome": "Build a small matrix of hooks, variants, metric reads and actions.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 18,
+      "title": "ASO and store promise continuity",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Align icon, screenshots, title and description with the ad promise before buying traffic.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Store promise checklist",
+      "planField": "creativeMatrix",
+      "caseIds": [
+        "puzzle-store-mismatch"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ASO",
+        "CVR",
+        "Store listing"
+      ],
+      "quizId": "q18",
+      "checklistId": "c18",
+      "markdown": "lessons/day-18.md",
+      "learningOutcome": "Audit the store page as part of the UA funnel, not as a separate branding task.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 19,
+      "title": "Competitor teardown without copying",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Analyze competitor store pages and creatives to find testable patterns, not clone work.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Competitor teardown sheet",
+      "planField": "audience",
+      "caseIds": [
+        "puzzle-store-mismatch"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Genre-market fit",
+        "ASO",
+        "Creative testing"
+      ],
+      "quizId": "q19",
+      "checklistId": "c19",
+      "markdown": "lessons/day-19.md",
+      "learningOutcome": "Extract market patterns while preserving your game's own promise.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 20,
+      "title": "Creative fatigue and iteration cadence",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Recognize when a creative stops learning, stops scaling or needs a new angle.",
+      "stages": [
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Creative iteration rule",
+      "planField": "successCriteria",
+      "caseIds": [
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Creative fatigue",
+        "CTR",
+        "ROAS"
+      ],
+      "quizId": "q20",
+      "checklistId": "c20",
+      "markdown": "lessons/day-20.md",
+      "learningOutcome": "Write rules for refreshing creatives without reacting to every noisy day.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 21,
+      "title": "Week 3 synthesis: creative and store readiness",
+      "module": "Week 3 - Creative and store readiness",
+      "summary": "Prepare the minimum creative set and store checklist for a real micro soft-launch.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Core",
+      "artifact": "Creative readiness packet",
+      "planField": "creativeMatrix",
+      "caseIds": [
+        "puzzle-store-mismatch",
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ASO",
+        "Creative testing",
+        "Soft launch"
+      ],
+      "quizId": "q21",
+      "checklistId": "c21",
+      "markdown": "lessons/day-21.md",
+      "learningOutcome": "Finish a ready-to-test packet: hooks, variants, store proof and acceptance rules.",
+      "referenceIds": [
+        "google-play-data-safety"
+      ]
+    },
+    {
+      "day": 22,
+      "title": "Campaign structure for a micro test",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Structure the first campaign around one learning goal, limited budget and readable reporting.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Campaign structure note",
+      "planField": "budget",
+      "caseIds": [
+        "micro-budget-false-positive"
+      ],
+      "toolIds": [
+        "sampleSize",
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Campaign",
+        "Ad set",
+        "ROAS"
+      ],
+      "quizId": "q22",
+      "checklistId": "c22",
+      "markdown": "lessons/day-22.md",
+      "learningOutcome": "Create a first campaign structure that does not fragment signal.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 23,
+      "title": "Budget and sample-size sanity",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Avoid conclusions from tiny data while keeping spend controlled.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Budget sanity sheet",
+      "planField": "budget",
+      "caseIds": [
+        "micro-budget-false-positive"
+      ],
+      "toolIds": [
+        "sampleSize",
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "CPI",
+        "Cohort",
+        "Sample size"
+      ],
+      "quizId": "q23",
+      "checklistId": "c23",
+      "markdown": "lessons/day-23.md",
+      "learningOutcome": "Estimate whether the budget can support the decision you want to make.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 24,
+      "title": "Reading campaign reports",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Separate creative signal, audience signal, store signal and product signal in a simple report.",
+      "stages": [
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Report readout template",
+      "planField": "successCriteria",
+      "caseIds": [
+        "puzzle-store-mismatch",
+        "puzzle-onboarding-leak",
+        "live-roas-shortfall"
+      ],
+      "toolIds": [
+        "cohortReadout"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "CTR",
+        "IPM",
+        "Retention",
+        "ROAS"
+      ],
+      "quizId": "q24",
+      "checklistId": "c24",
+      "markdown": "lessons/day-24.md",
+      "learningOutcome": "Write a report readout that recommends one action instead of listing metrics.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 25,
+      "title": "Scale, iterate or kill decision rules",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Use predefined rules to reduce emotional campaign decisions.",
+      "stages": [
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Scale-iterate-kill rules",
+      "planField": "killCriteria",
+      "caseIds": [
+        "live-roas-shortfall",
+        "idle-creative-spike"
+      ],
+      "toolIds": [
+        "cohortReadout",
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ROAS",
+        "Retention",
+        "Creative testing"
+      ],
+      "quizId": "q25",
+      "checklistId": "c25",
+      "markdown": "lessons/day-25.md",
+      "learningOutcome": "Write decision rules before seeing the report.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 26,
+      "title": "SDK, privacy and store-risk readiness",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Treat ad, analytics and attribution SDKs as product architecture and compliance decisions.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "SDK readiness checklist",
+      "planField": "tracking",
+      "caseIds": [
+        "privacy-sdk-readiness"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ATT",
+        "SKAN",
+        "Event taxonomy"
+      ],
+      "quizId": "q26",
+      "checklistId": "c26",
+      "markdown": "lessons/day-26.md",
+      "learningOutcome": "Identify SDK/data risks before public testing.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 27,
+      "title": "Post-mortem and learning log",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Document what each UA test taught about product, creative, store and market.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Learning log entry",
+      "planField": "successCriteria",
+      "caseIds": [
+        "micro-budget-false-positive"
+      ],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Cohort",
+        "Creative testing",
+        "UA"
+      ],
+      "quizId": "q27",
+      "checklistId": "c27",
+      "markdown": "lessons/day-27.md",
+      "learningOutcome": "Turn every test into reusable knowledge instead of a yes/no memory.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 28,
+      "title": "Weekly UA operating rhythm",
+      "module": "Week 4 - Campaign operation",
+      "summary": "Create a weekly cadence for creative production, reporting, build changes and decisions.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Weekly operating cadence",
+      "planField": "nextAction",
+      "caseIds": [
+        "idle-creative-spike",
+        "privacy-sdk-readiness"
+      ],
+      "toolIds": [
+        "testBudget"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Campaign",
+        "ROAS",
+        "Soft launch"
+      ],
+      "quizId": "q28",
+      "checklistId": "c28",
+      "markdown": "lessons/day-28.md",
+      "learningOutcome": "Plan a repeatable operating loop for a small Unity team.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 29,
+      "title": "Build the one-page UA launch plan",
+      "module": "Capstone",
+      "summary": "Assemble hypothesis, audience, tracking, creative, budget and decision rules into one page.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "One-page launch plan",
+      "planField": "nextAction",
+      "caseIds": [
+        "micro-budget-false-positive",
+        "puzzle-onboarding-leak"
+      ],
+      "toolIds": [
+        "sampleSize",
+        "testBudget",
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "UA",
+        "Soft launch",
+        "Event taxonomy"
+      ],
+      "quizId": "q29",
+      "checklistId": "c29",
+      "markdown": "lessons/day-29.md",
+      "learningOutcome": "Produce a launch plan that can guide the first micro soft-launch.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy",
+        "apple-adattributionkit"
+      ]
+    },
+    {
+      "day": 30,
+      "title": "Stress-test risks and choose next action",
+      "module": "Capstone",
+      "summary": "Review weak assumptions, measurement risks and the smallest real-world next step.",
+      "stages": [
+        "idea",
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Risk register and next action",
+      "planField": "nextAction",
+      "caseIds": [
+        "privacy-sdk-readiness",
+        "live-roas-shortfall"
+      ],
+      "toolIds": [
+        "cohortReadout",
+        "breakEvenCpi"
+      ],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Payback window",
+        "ROAS",
+        "Retention"
+      ],
+      "quizId": "q30",
+      "checklistId": "c30",
+      "markdown": "lessons/day-30.md",
+      "learningOutcome": "Leave the course with one concrete next action and a risk register.",
+      "referenceIds": [
+        "android-attribution",
+        "admob-unity-privacy",
+        "apple-adattributionkit"
+      ]
+    }
+  ]
 }

@@ -1,44 +1,58 @@
 ---
 day: 21
-title: "Week 3 synthesis: store and creative readiness"
+title: "Week 3 synthesis: creative and store readiness"
 module: "Week 3 - Creative and store readiness"
 stages: [prototype, live]
 related_terms: [ASO, Creative testing, Soft launch]
+artifact: "Creative readiness packet"
 ---
 
 ## Mục tiêu / Goal
-Bài 21 tập trung vào **Store creative readiness**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **Creative readiness packet** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Trước khi spend, bạn cần creative set tối thiểu, store page consistent, tracking plan và decision rule. Đây là readiness gate, không phải checklist trang trí.
+Bài này dùng **Creative readiness packet** để làm rõ phần **creative matrix** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+By the end of Week 3, the game should have a small creative packet, not a backlog of vague ad ideas. The packet includes hooks, assets, store proof and rules for reading the result.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **ASO, Creative testing, Soft launch**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+For puzzle: three hooks, two video variants each, updated screenshots, one store description aligned to the main promise and a decision matrix.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+Do not launch traffic to a creative promise the store page cannot confirm.
 
 ## Practical Lab
-Tạo readiness checklist gồm creative, ASO, events, budget, benchmark, kill rule.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Assemble your readiness packet and remove any creative that does not have matching store proof.
 
-## Metric Focus
-Readiness tốt làm test đầu tiên học được điều gì đó ngay cả khi fail.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Finalize creative matrix v1 and store readiness notes.
 
-## Common Mistake
-Launch test khi thiếu một mắt xích nên dữ liệu không action được.
+## Checklist Focus
+- Finalize three hooks and six variants or a smaller honest set.
+- Confirm store proof for each top hook.
+- Write acceptance and rejection rules.
+- Update creative matrix in Final UA Plan.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Puzzle ad hook wins clicks, store loses installs: Update store assets before blaming traffic quality.
+- Idle RPG creative spike with stable cohorts: Scale cautiously and produce variants around the same motivation.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- Creative test budget: Estimate spend needed for first-pass creative learning.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **ASO**
+- **Creative testing**
+- **Soft launch**
+
+## Curated References
+- Google Play Data safety: https://support.google.com/googleplay/android-developer/answer/10787469
+
+> Practical rule: Do not launch traffic to a creative promise the store page cannot confirm.

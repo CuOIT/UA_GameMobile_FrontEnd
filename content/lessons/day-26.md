@@ -1,44 +1,57 @@
 ---
 day: 26
-title: "Privacy and SDK risk awareness"
+title: "SDK, privacy and store-risk readiness"
 module: "Week 4 - Campaign operation"
 stages: [prototype, live]
 related_terms: [ATT, SKAN, Event taxonomy]
+artifact: "SDK readiness checklist"
 ---
 
 ## Mục tiêu / Goal
-Bài 26 tập trung vào **SDK privacy risk**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **SDK readiness checklist** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Ad/analytics SDK là kiến trúc sản phẩm: tăng observability nhưng thêm privacy, build size, dependency, consent và store compliance risk. Unity dev cần plan trước khi tích hợp.
+Bài này dùng **SDK readiness checklist** để làm rõ phần **tracking và event taxonomy** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+For Unity devs, UA readiness includes SDK count, consent flow, store data disclosures, ad placement behavior, build performance and event validation. This course stays conceptual, but the checklist should be concrete enough to hand to implementation.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **ATT, SKAN, Event taxonomy**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+Adding analytics, ads and attribution can change startup time, privacy disclosures and event quality. Those are launch risks, not just plugin tasks.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+No paid traffic before consent, event validation and store disclosure risks are reviewed.
 
 ## Practical Lab
-Tạo SDK decision checklist: purpose, event list, consent, data retention, bundle/dependency risk.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Write an SDK readiness checklist: SDKs, purpose, data collected, consent need, event validation and rollback plan.
 
-## Metric Focus
-Tracking quality phụ thuộc vào event taxonomy và consent reality.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Add SDK/privacy readiness notes to tracking.
 
-## Common Mistake
-Cài SDK trước, rồi mới hỏi event nào cần đo.
+## Checklist Focus
+- List SDKs and purpose.
+- Write data/consent risk per SDK.
+- Define event validation before campaign launch.
+- Update tracking checklist.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- SDK readiness blocks launch: Delay paid traffic until event validation and disclosure review are complete.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **ATT**
+- **SKAN**
+- **Event taxonomy**
+
+## Curated References
+- Android Attribution Reporting for mobile: https://privacysandbox.google.com/private-advertising/attribution-reporting/android
+- Google AdMob Unity privacy strategies: https://developers.google.com/admob/unity/privacy/strategies
+
+> Practical rule: No paid traffic before consent, event validation and store disclosure risks are reviewed.

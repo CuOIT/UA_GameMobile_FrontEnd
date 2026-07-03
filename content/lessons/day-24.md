@@ -4,41 +4,58 @@ title: "Reading campaign reports"
 module: "Week 4 - Campaign operation"
 stages: [live]
 related_terms: [CTR, IPM, Retention, ROAS]
+artifact: "Report readout template"
 ---
 
 ## Mục tiêu / Goal
-Bài 24 tập trung vào **Campaign reports**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **Report readout template** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Report cần tách creative signal, audience signal và product signal. Nếu CTR thấp, creative yếu; nếu CVR thấp, store mismatch; nếu retention thấp, product/onboarding hoặc ad promise sai.
+Bài này dùng **Report readout template** để làm rõ phần **tiêu chí scale/iterate** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+A report is useful when it explains signal by source: creative earned attention, store converted it, product retained it, monetization paid for it. Mixing these together creates bad fixes.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **CTR, IPM, Retention, ROAS**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+High IPM with weak D1 means the creative may be efficient at attracting installs, but the product promise or user quality needs inspection.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+Every report readout must end with one recommended call: scale, iterate creative, fix store, fix product, fix tracking or stop.
 
 ## Practical Lab
-Đọc case report mẫu và ghi nguyên nhân có khả năng nhất.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Write a one-page readout from a sample metric pattern using diagnosis, evidence, confidence and next action.
 
-## Metric Focus
-CTR, CVR, IPM, CPI, D1, ROAS đọc theo chuỗi, không đọc đơn lẻ.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Add report readout criteria to success criteria.
 
-## Common Mistake
-Đổ lỗi cho product khi vấn đề thật nằm ở store conversion.
+## Checklist Focus
+- Separate metrics into creative, store, product and monetization buckets.
+- Write diagnosis and confidence level.
+- Choose one recommended call.
+- Update success criteria.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Puzzle ad hook wins clicks, store loses installs: Update store assets before blaming traffic quality.
+- Puzzle soft-launch: cheap installs, weak D1: Pause scale and fix first-session proof before producing more traffic.
+- Live puzzle game: retention acceptable, ROAS short: Do not scale yet; test monetization placement and lower-cost creative angles.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- D1/D7 cohort readout: Turn basic cohort counts into retention, CPI and D7 ROAS directional signals.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **CTR**
+- **IPM**
+- **Retention**
+- **ROAS**
+
+## Curated References
+- Android Attribution Reporting for mobile: https://privacysandbox.google.com/private-advertising/attribution-reporting/android
+- Google AdMob Unity privacy strategies: https://developers.google.com/admob/unity/privacy/strategies
+
+> Practical rule: Every report readout must end with one recommended call: scale, iterate creative, fix store, fix product, fix tracking or stop.

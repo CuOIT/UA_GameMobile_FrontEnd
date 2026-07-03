@@ -1,44 +1,61 @@
 ---
 day: 30
-title: "Review, risk and next actions"
+title: "Stress-test risks and choose next action"
 module: "Capstone"
 stages: [idea, prototype, live]
 related_terms: [Payback window, ROAS, Retention]
+artifact: "Risk register and next action"
 ---
 
 ## Mục tiêu / Goal
-Bài 30 tập trung vào **Review risk**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **Risk register and next action** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Ngày cuối là stress test. Bạn kiểm tra assumption yếu nhất, rủi ro đo lường, rủi ro creative, rủi ro product và bước tiếp theo nhỏ nhất có thể chạy.
+Bài này dùng **Risk register and next action** để làm rõ phần **hành động tiếp theo** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+The final review should attack the plan. Look for weak assumptions: the promise may be unclear, tracking may be incomplete, store proof may be weak, budget may underfeed variants, or monetization may not support CPI.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **Payback window, ROAS, Retention**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+If the strongest risk is event validation, the next action is not launching ads. It is running a build QA checklist and verifying events before spend.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+The next action must be small, dated and measurable.
 
 ## Practical Lab
-Review Final UA Plan và đánh dấu 3 rủi ro lớn nhất cùng mitigation.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Write top five risks, mitigation for each and the smallest next action with owner/date.
 
-## Metric Focus
-Next action phải nhỏ, đo được, và có deadline.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Finalize next action, kill criteria and risk notes.
 
-## Common Mistake
-Kết thúc khóa với kiến thức nhưng không có experiment tiếp theo.
+## Checklist Focus
+- Write top five launch risks.
+- Add mitigation for each risk.
+- Choose one smallest next action with date/owner.
+- Finalize the one-page plan.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- SDK readiness blocks launch: Delay paid traffic until event validation and disclosure review are complete.
+- Live puzzle game: retention acceptable, ROAS short: Do not scale yet; test monetization placement and lower-cost creative angles.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- D1/D7 cohort readout: Turn basic cohort counts into retention, CPI and D7 ROAS directional signals.
+- Break-even CPI guardrail: Estimate a rough CPI ceiling from LTV and gross margin assumptions.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **Payback window**
+- **ROAS**
+- **Retention**
+
+## Curated References
+- Android Attribution Reporting for mobile: https://privacysandbox.google.com/private-advertising/attribution-reporting/android
+- Google AdMob Unity privacy strategies: https://developers.google.com/admob/unity/privacy/strategies
+- Apple AdAttributionKit: https://developer.apple.com/documentation/AdAttributionKit
+
+> Practical rule: The next action must be small, dated and measurable.

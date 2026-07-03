@@ -1,44 +1,57 @@
 ---
 day: 16
-title: "Video, static and playable ads"
+title: "Video, static and playable concepts"
 module: "Week 3 - Creative and store readiness"
 stages: [prototype, live]
 related_terms: [Playable ad, Creative testing, IPM]
+artifact: "Format selection matrix"
 ---
 
 ## Mục tiêu / Goal
-Bài 16 tập trung vào **Ad formats**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **Format selection matrix** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-Static nhanh để test promise, video tốt cho fantasy/progression, playable tốt cho mechanics rõ. Format chọn theo learning goal và production cost.
+Bài này dùng **Format selection matrix** để làm rõ phần **creative matrix** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+Format choice is a learning decision. Static can test promise cheaply. Short video can show before/after and motion clarity. Playable concepts can prove interaction but cost more and can mislead if the playable differs from the real game.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **Playable ad, Creative testing, IPM**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+A puzzle game may start with three short videos showing board setup, one satisfying move and result screen before building any playable.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+Use the cheapest format that can honestly prove the hook.
 
 ## Practical Lab
-Chọn format cho 3 hypotheses: mechanic clarity, fantasy appeal, reward loop.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+For your top three hooks, choose static, video or playable concept and write why.
 
-## Metric Focus
-Playable có thể tăng intent nhưng tốn production và dễ misrepresent game nếu làm quá khác.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Add format and production cost notes to the creative matrix.
 
-## Common Mistake
-Dùng playable khi core loop thật chưa đủ rõ.
+## Checklist Focus
+- Choose a format for each top hook.
+- Write what each format can prove.
+- Avoid formats that overpromise the build.
+- Update creative matrix with production scope.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Hybrid-casual runner: low CPI, low intent: Treat cheap traffic as low-intent until first-session depth improves.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
+- Creative test budget: Estimate spend needed for first-pass creative learning.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **Playable ad**
+- **Creative testing**
+- **IPM**
+
+## Curated References
+- Google Play Data safety: https://support.google.com/googleplay/android-developer/answer/10787469
+
+> Practical rule: Use the cheapest format that can honestly prove the hook.

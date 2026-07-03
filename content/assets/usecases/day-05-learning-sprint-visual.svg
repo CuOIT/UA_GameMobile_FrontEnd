@@ -1,0 +1,33 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" rx="32" fill="#F4F8F5"/>
+  <rect x="56" y="56" width="1488" height="788" rx="28" fill="#FFFFFF" stroke="#D8E4DC" stroke-width="2"/>
+  <text x="100" y="130" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">Micro soft-launch = learning sprint</text>
+  <text x="100" y="174" fill="#4D6B61" font-family="Segoe UI, Arial, sans-serif" font-size="24">Thiết kế test nhỏ để học nhanh, không phải để chứng minh scale economics.</text>
+
+  <line x1="160" y1="520" x2="1440" y2="520" stroke="#BCD1C6" stroke-width="10" stroke-linecap="round"/>
+
+  <circle cx="280" cy="520" r="84" fill="#E9F7EE" stroke="#2FA36B" stroke-width="8"/>
+  <circle cx="620" cy="520" r="84" fill="#EEF5FF" stroke="#4A83D8" stroke-width="8"/>
+  <circle cx="960" cy="520" r="84" fill="#FFF4E8" stroke="#D78A30" stroke-width="8"/>
+  <circle cx="1300" cy="520" r="84" fill="#FDECEF" stroke="#D45574" stroke-width="8"/>
+
+  <text x="228" y="505" fill="#17412E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">1. Ready</text>
+  <text x="219" y="540" fill="#17412E" font-family="Segoe UI, Arial, sans-serif" font-size="22">tracking, build,</text>
+  <text x="232" y="570" fill="#17412E" font-family="Segoe UI, Arial, sans-serif" font-size="22">store proof</text>
+
+  <text x="567" y="505" fill="#21406E" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">2. Run</text>
+  <text x="552" y="540" fill="#21406E" font-family="Segoe UI, Arial, sans-serif" font-size="22">1 region, 1 channel,</text>
+  <text x="567" y="570" fill="#21406E" font-family="Segoe UI, Arial, sans-serif" font-size="22">2-4 cells</text>
+
+  <text x="894" y="505" fill="#6B4314" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">3. Read</text>
+  <text x="874" y="540" fill="#6B4314" font-family="Segoe UI, Arial, sans-serif" font-size="22">promise fit, D1,</text>
+  <text x="870" y="570" fill="#6B4314" font-family="Segoe UI, Arial, sans-serif" font-size="22">tracking breaks</text>
+
+  <text x="1247" y="505" fill="#6D1F35" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">4. Decide</text>
+  <text x="1217" y="540" fill="#6D1F35" font-family="Segoe UI, Arial, sans-serif" font-size="22">pause, fix, rerun,</text>
+  <text x="1234" y="570" fill="#6D1F35" font-family="Segoe UI, Arial, sans-serif" font-size="22">or continue</text>
+
+  <rect x="120" y="694" width="1360" height="94" rx="18" fill="#F7FAF8" stroke="#D8E4DC"/>
+  <text x="160" y="746" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Decision rule:</text>
+  <text x="360" y="746" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="26">Nếu test không viết rõ điều gì được phép kết luận, bạn sẽ almost always over-read dữ liệu.</text>
+</svg>

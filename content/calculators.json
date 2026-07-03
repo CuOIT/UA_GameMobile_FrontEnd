@@ -1,80 +1,95 @@
 [
-    {
-        "description":  "Estimate the highest CPI you can pay before margin.",
-        "name":  "Break-even CPI",
-        "id":  "breakEvenCpi",
-        "fields":  [
-                       {
-                           "label":  "LTV ($)",
-                           "key":  "ltv",
-                           "default":  1.2
-                       },
-                       {
-                           "label":  "Gross margin",
-                           "key":  "grossMargin",
-                           "default":  0.7
-                       }
-                   ]
-    },
-    {
-        "description":  "Simple beginner LTV estimate from ARPDAU and lifetime.",
-        "name":  "Rough LTV",
-        "id":  "roughLtv",
-        "fields":  [
-                       {
-                           "label":  "ARPDAU ($)",
-                           "key":  "arpdau",
-                           "default":  0.08
-                       },
-                       {
-                           "label":  "Average lifetime days",
-                           "key":  "avgLifetimeDays",
-                           "default":  10
-                       }
-                   ]
-    },
-    {
-        "description":  "Convert spend and ROAS target into required attributed revenue.",
-        "name":  "ROAS target revenue",
-        "id":  "roasTarget",
-        "fields":  [
-                       {
-                           "label":  "Spend ($)",
-                           "key":  "spend",
-                           "default":  500
-                       },
-                       {
-                           "label":  "Target ROAS",
-                           "key":  "targetRoas",
-                           "default":  0.4
-                       },
-                       {
-                           "label":  "Day window",
-                           "key":  "day",
-                           "default":  7
-                       }
-                   ]
-    },
-    {
-        "description":  "Estimate budget for first-pass creative testing.",
-        "name":  "Creative test budget",
-        "id":  "testBudget",
-        "fields":  [
-                       {
-                           "label":  "Expected CPI ($)",
-                           "key":  "cpi",
-                           "default":  0.6
-                       },
-                       {
-                           "label":  "Installs per creative",
-                           "key":  "installsPerCreative",
-                           "default":  100
-                       },
-                       {
-                           "label":  "Creative count",
-                           "key":  "creatives",
-                           "default":  5
-                       }
-                   ]
-    }
+  {
+    "id": "sampleSize",
+    "name": "Sample-size sanity check",
+    "description": "Estimate whether a micro budget can feed the number of creative cells you want to test.",
+    "fields": [
+      {
+        "label": "Budget ($)",
+        "key": "budget",
+        "default": 300
+      },
+      {
+        "label": "Expected CPI ($)",
+        "key": "cpi",
+        "default": 0.6
+      },
+      {
+        "label": "Creative cells",
+        "key": "cells",
+        "default": 6
+      }
+    ]
+  },
+  {
+    "id": "breakEvenCpi",
+    "name": "Break-even CPI guardrail",
+    "description": "Estimate a rough CPI ceiling from LTV and gross margin assumptions.",
+    "fields": [
+      {
+        "label": "Rough LTV ($)",
+        "key": "ltv",
+        "default": 1.2
+      },
+      {
+        "label": "Gross margin",
+        "key": "grossMargin",
+        "default": 0.7
+      }
+    ]
+  },
+  {
+    "id": "testBudget",
+    "name": "Creative test budget",
+    "description": "Estimate spend needed for first-pass creative learning.",
+    "fields": [
+      {
+        "label": "Expected CPI ($)",
+        "key": "cpi",
+        "default": 0.6
+      },
+      {
+        "label": "Installs per cell",
+        "key": "installsPerCreative",
+        "default": 50
+      },
+      {
+        "label": "Creative cells",
+        "key": "creatives",
+        "default": 6
+      }
+    ]
+  },
+  {
+    "id": "cohortReadout",
+    "name": "D1/D7 cohort readout",
+    "description": "Turn basic cohort counts into retention, CPI and D7 ROAS directional signals.",
+    "fields": [
+      {
+        "label": "Installs",
+        "key": "installs",
+        "default": 300
+      },
+      {
+        "label": "D1 returning users",
+        "key": "d1Users",
+        "default": 90
+      },
+      {
+        "label": "D7 returning users",
+        "key": "d7Users",
+        "default": 45
+      },
+      {
+        "label": "Spend ($)",
+        "key": "spend",
+        "default": 180
+      },
+      {
+        "label": "D7 revenue ($)",
+        "key": "revenueD7",
+        "default": 25
+      }
+    ]
+  }
 ]

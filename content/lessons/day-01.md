@@ -1,44 +1,56 @@
 ---
 day: 1
-title: "UA mindset for Unity developers"
+title: "UA as a product learning loop"
 module: "Week 1 - UA fundamentals"
 stages: [idea, prototype, live]
 related_terms: [UA, Funnel, CPI]
+artifact: "UA learning loop map"
 ---
 
 ## Mục tiêu / Goal
-Bài 1 tập trung vào **UA mindset**. Sau bài này, bạn không chỉ nhớ thuật ngữ mà phải tạo được một artifact nhỏ cho UA plan: giả thuyết, checklist, metric target, creative angle, tracking note hoặc decision rule. Với Unity dev, mục tiêu là hiểu UA như một hệ thống feedback giữa game build, analytics, store page và campaign, không phải một công việc marketing tách rời.
+Sau bài này, bạn tạo được **UA learning loop map** để đưa vào 1-page UA / soft-launch plan. Trong 25-35 phút, mục tiêu không phải nhớ thêm thật nhiều thuật ngữ, mà là có một quyết định rõ hơn cho puzzle mobile prototype-to-soft-launch.
 
 ## Khái niệm chính / Core Idea
-UA không phải là mua install càng rẻ càng tốt. UA là hệ thống học nhanh: ad promise tạo expectation, store page xác nhận promise, game onboarding chứng minh promise, và metrics cho biết promise đó có thật không.
+Bài này dùng **UA learning loop map** để làm rõ phần **giả thuyết game** trong Final UA Plan. Với một puzzle mobile ở giai đoạn prototype-to-soft-launch, hãy đọc nội dung như một quyết định vận hành: bạn đang kiểm tra lời hứa nào, bằng metric nào, và nếu tín hiệu xấu thì sửa game, creative, store, tracking hay budget.
 
-Trong mobile game UA hiện nay, dữ liệu thường bị thiếu hoặc trễ vì privacy, attribution window và network optimization. Vì vậy người mới cần học cách ra quyết định bằng signal đủ tốt thay vì chờ dữ liệu hoàn hảo. Một bài học thực chiến luôn phải trả lời được: chúng ta đang test điều gì, metric nào chứng minh hoặc bác bỏ giả thuyết, và nếu kết quả xấu thì sửa creative, store, tracking hay product?
+For a Unity indie/dev, UA is not a marketing department bolted onto the game. Treat it like a product feedback loop: an ad creates a promise, the store page confirms that promise, the first session proves or breaks it, and analytics tells you where the promise leaked.
 
-## English Terms You Should Keep
-Các thuật ngữ liên quan hôm nay: **UA, Funnel, CPI**. Nên giữ tiếng Anh khi làm việc với dashboard, MMP, ad network hoặc tài liệu quốc tế, nhưng giải thích nội bộ bằng tiếng Việt để cả dev, designer và producer hiểu cùng một nghĩa. Ví dụ, khi nói CPI, đừng chỉ nói “giá install”; hãy nói rõ đó là media spend chia cho install và chưa chứng minh chất lượng user.
+## Puzzle Case Lens
+Áp dụng vào case puzzle chính: hãy nhìn ví dụ dưới đây như một tình huống debug funnel, không phải một benchmark cố định.
 
-## Unity Dev Lens
-Trong Unity, bạn quen nghĩ bằng systems: input, state, event, output. UA cũng vậy. Creative và store là input expectation; gameplay là runtime experience; analytics event là log; dashboard là debugger; UA decision là patch hoặc rollback. Nếu game không emit đúng event, marketer giống như debug build không có log. Nếu ad promise khác gameplay, retention giảm giống như tutorial dạy sai control.
+A puzzle prototype promises 'relaxing brain challenge in 10 seconds'. If players click the ad but quit during level 2, the UA problem may be onboarding clarity, not the ad network.
+
+## Decision Rule
+Quy tắc quyết định cho bài này:
+
+Do not spend until the test has one learning question, one primary metric and one next action for both good and bad results.
 
 ## Practical Lab
-Chọn một game bạn đang làm hoặc một game mẫu. Viết 3 giả thuyết: ai sẽ thích game, họ thích vì động lực nào, và quảng cáo nào có thể nói điều đó trong 3 giây đầu.
+Làm bài tập này trực tiếp trên game của bạn hoặc sample puzzle case. Kết quả cần đủ cụ thể để copy sang Final UA Plan.
 
-Cách làm: viết câu trả lời ngắn trong Final UA Plan, rồi tự hỏi “nếu ngày mai có report campaign, mình sẽ nhìn metric nào trước?”. Nếu không trả lời được, artifact của bạn vẫn còn quá mơ hồ.
+Draw a four-step loop for your puzzle game: ad promise, store proof, first-session proof, metric signal. Write the weakest link.
 
-## Metric Focus
-CPI chỉ là giá vào cửa; kết hợp với retention và LTV mới biết install đó có đáng mua không.
+## Final UA Plan Update
+Cập nhật đúng field liên quan trong plan, không ghi note chung chung.
 
-Không nên đọc metric đơn lẻ. CPI rẻ nhưng D1 thấp thường là traffic hoặc ad promise sai. CTR cao nhưng CVR thấp thường là store mismatch. D1 tốt nhưng ROAS thấp có thể là monetization/economy hoặc payback window chưa đủ dài. Beginner nên tập đọc chuỗi nguyên nhân trước khi tối ưu dashboard.
+Write the first version of your game hypothesis in one sentence: player, motivation, promise and proof.
 
-## Common Mistake
-Chạy campaign trước khi biết câu hỏi cần học.
+## Checklist Focus
+- Write one learning question for your first UA test.
+- Connect that question to one metric and one game/store/creative action.
+- Add the first hypothesis sentence to Final UA Plan.
+- Mark the biggest unknown: audience, creative, store, tracking or product.
 
-Cách tránh: luôn viết hypothesis và decision rule trước khi chạy test. Sau khi có data, chỉ được thay đổi kết luận nếu bạn ghi rõ assumption nào sai và bằng chứng nào mới xuất hiện.
+## Case / Tool Link
+- Puzzle soft-launch: cheap installs, weak D1: Pause scale and fix first-session proof before producing more traffic.
 
-## Update Your Final UA Plan
-- Ghi 1 insight cụ thể từ bài này.
-- Ghi 1 metric hoặc checklist item liên quan.
-- Ghi 1 quyết định sẽ làm khác trong game, creative, store, tracking hoặc budget.
-- Nếu chưa có game, dùng một sample game: casual puzzle, idle RPG hoặc hybrid-casual runner.
 
-> Practical rule: một bài học UA tốt phải để lại decision artifact, không chỉ để lại cảm giác “đã hiểu”.
+## English Terms You Should Keep
+- **UA**
+- **Funnel**
+- **CPI**
+
+## Curated References
+- Module này ưu tiên thực hành trên plan của bạn, không cần đọc reference ngoài trước khi làm lab.
+
+> Practical rule: Do not spend until the test has one learning question, one primary metric and one next action for both good and bad results.

@@ -1,46 +1,100 @@
 [
-    {
-        "tags":  [
-                     "prototype",
-                     "retention"
-                 ],
-        "reason":  "Acquisition is promising, but retention signal suggests the first-session experience is leaking.",
-        "metrics":  "CPI $0.42, CTR 1.8%, D1 22%, D7 4%, ARPDAU $0.03",
-        "context":  "A puzzle game gets cheap installs from a broad audience, but users leave before level 4.",
-        "title":  "Puzzle soft-launch with good CPI but weak D1",
-        "recommendation":  "Iterate product onboarding before scaling."
-    },
-    {
-        "tags":  [
-                     "creative",
-                     "scale"
-                 ],
-        "reason":  "Creative signal and retention both support a controlled scale test.",
-        "metrics":  "IPM 18 vs account avg 7, CPI $0.65, D1 38%, early ROAS stable",
-        "context":  "One combat-progress creative outperforms all economy-focused creatives.",
-        "title":  "Idle RPG creative spike",
-        "recommendation":  "Scale cautiously and make variants around the same player motivation."
-    },
-    {
-        "tags":  [
-                     "store",
-                     "creative"
-                 ],
-        "reason":  "The ad hook creates interest, but the store listing breaks continuity.",
-        "metrics":  "CTR 3.9%, CVR 11%, CPI $1.10, store screenshots old",
-        "context":  "Ads get clicks, but the store page does not convert.",
-        "title":  "Hyper-casual high CTR low CVR",
-        "recommendation":  "Fix store promise before blaming ad network."
-    },
-    {
-        "tags":  [
-                     "live",
-                     "budget"
-                 ],
-        "reason":  "Retention is not catastrophic, but payback math is not ready for scale.",
-        "metrics":  "CPI $0.80, D7 retention 16%, D7 ROAS 8%, target 20%",
-        "context":  "A newly live game has acceptable retention but weak monetization.",
-        "title":  "Live game ROAS below target",
-        "recommendation":  "Do not scale; test monetization/economy changes and lower-cost audiences."
-    }
+  {
+    "id": "puzzle-onboarding-leak",
+    "title": "Puzzle soft-launch: cheap installs, weak D1",
+    "tags": [
+      "puzzle",
+      "retention",
+      "prototype"
+    ],
+    "context": "A calming block puzzle gets affordable Android installs, but many users leave before completing the third board.",
+    "metrics": "CPI $0.42, CTR 1.8%, store CVR 32%, tutorial_complete 54%, D1 22%, D7 4%",
+    "recommendation": "Pause scale and fix first-session proof before producing more traffic.",
+    "reason": "Acquisition is promising, but the cohort fails before the game proves its core promise.",
+    "decision": "Fix onboarding/level pacing, then rerun the same best hook to isolate product change."
+  },
+  {
+    "id": "puzzle-store-mismatch",
+    "title": "Puzzle ad hook wins clicks, store loses installs",
+    "tags": [
+      "puzzle",
+      "store",
+      "creative"
+    ],
+    "context": "A satisfying-clear video earns clicks, but the store page shows old menu screenshots and no clear gameplay proof.",
+    "metrics": "CTR 3.9%, CVR 11%, CPI $1.10, D1 29%, first screenshot shows meta menu",
+    "recommendation": "Update store assets before blaming traffic quality.",
+    "reason": "The ad creates interest, but store continuity breaks the promise.",
+    "decision": "Replace first screenshot and short description, then retest the same creative."
+  },
+  {
+    "id": "idle-creative-spike",
+    "title": "Idle RPG creative spike with stable cohorts",
+    "tags": [
+      "idle",
+      "creative",
+      "scale"
+    ],
+    "context": "A combat-progression hook beats economy-focused creatives and retained users monetize at the same rate.",
+    "metrics": "IPM 18 vs account avg 7, CPI $0.65, D1 38%, D7 16%, early ROAS direction stable",
+    "recommendation": "Scale cautiously and produce variants around the same motivation.",
+    "reason": "Creative signal and cohort quality both support a controlled scale test.",
+    "decision": "Increase daily cap gradually and build three variants around combat progression."
+  },
+  {
+    "id": "hybrid-cheap-traffic",
+    "title": "Hybrid-casual runner: low CPI, low intent",
+    "tags": [
+      "hybrid-casual",
+      "audience",
+      "quality"
+    ],
+    "context": "A fast fail compilation gets cheap installs but players churn before seeing meta progression.",
+    "metrics": "CPI $0.28, CTR 2.6%, level_3_reach 31%, D1 18%, rewarded_ad_watched 5%",
+    "recommendation": "Treat cheap traffic as low-intent until first-session depth improves.",
+    "reason": "The ad may be attracting curiosity clicks rather than the intended player motivation.",
+    "decision": "Test a progression hook and improve early depth before increasing spend."
+  },
+  {
+    "id": "live-roas-shortfall",
+    "title": "Live puzzle game: retention acceptable, ROAS short",
+    "tags": [
+      "live",
+      "roas",
+      "monetization"
+    ],
+    "context": "A puzzle game has acceptable early retention but weak rewarded-ad engagement and slow payback.",
+    "metrics": "CPI $0.80, D1 34%, D7 16%, D7 ROAS 8%, target direction 15-20%",
+    "recommendation": "Do not scale yet; test monetization placement and lower-cost creative angles.",
+    "reason": "Retention is not the main blocker, but economics do not support scale.",
+    "decision": "Run monetization UX changes and retest with the same audience."
+  },
+  {
+    "id": "privacy-sdk-readiness",
+    "title": "SDK readiness blocks launch",
+    "tags": [
+      "privacy",
+      "sdk",
+      "tracking"
+    ],
+    "context": "The team added analytics, ads and attribution SDKs, but event names differ between builds and store data disclosure is incomplete.",
+    "metrics": "first_open duplicated, tutorial_complete missing on Android 14 test device, consent copy not reviewed",
+    "recommendation": "Delay paid traffic until event validation and disclosure review are complete.",
+    "reason": "Bad measurement creates false campaign decisions and store/privacy risk.",
+    "decision": "Run SDK readiness checklist and lock taxonomy before launch."
+  },
+  {
+    "id": "micro-budget-false-positive",
+    "title": "Micro-budget false positive",
+    "tags": [
+      "budget",
+      "sample-size",
+      "decision"
+    ],
+    "context": "One creative looks like a winner after 18 installs, but the next day its retention regresses toward the group average.",
+    "metrics": "Creative A: 18 installs, D1 44%; Creative B: 72 installs, D1 31%; group D1 30%",
+    "recommendation": "Log the signal as interesting but avoid scale until more installs or repeated evidence exists.",
+    "reason": "Tiny cohorts can exaggerate wins and losses.",
+    "decision": "Reduce variant count and rerun the top two concepts with clearer sample expectations."
+  }
 ]
