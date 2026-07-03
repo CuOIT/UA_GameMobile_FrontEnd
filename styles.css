@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: light;
   --bg: #f7f5ef;
   --surface: #ffffff;
@@ -390,6 +390,50 @@ button:disabled {
   background: var(--surface-2);
 }
 
+.markdown-figure {
+  margin: 20px 0;
+}
+
+.markdown-figure img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.markdown-figure figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.markdown-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 18px 0;
+}
+
+.markdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.markdown-table th,
+.markdown-table td {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-table th {
+  background: var(--surface-2);
+}
+
 .side-stack {
   display: grid;
   gap: 14px;
@@ -701,3 +745,4 @@ button:disabled {
 .app-toast.error {
   background: #9b2e20;
 }
+

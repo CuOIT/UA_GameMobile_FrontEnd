@@ -1,4 +1,4 @@
-const contentRoot = "./content";
+﻿const contentRoot = "./content";
 const stateKey = "uaBootcampState.v1";
 
 const defaultState = {
@@ -1150,12 +1150,38 @@ function renderMarkdown(markdown) {
     }
   };
 
-  for (const rawLine of lines) {
-    const line = rawLine.trim();
+  const isTableSeparator = (line) => /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(line);
+  const splitTableRow = (line) => line.replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index].trim();
     if (!line) {
       closeList();
       continue;
     }
+
+    const nextLine = lines[index + 1]?.trim() || "";
+    if (line.includes("|") && isTableSeparator(nextLine)) {
+      closeList();
+      const headers = splitTableRow(line);
+      const rows = [];
+      index += 2;
+      while (index < lines.length && lines[index].trim().includes("|")) {
+        rows.push(splitTableRow(lines[index].trim()));
+        index += 1;
+      }
+      index -= 1;
+      html.push(renderMarkdownTable(headers, rows));
+      continue;
+    }
+
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^\s)]+)(?:\s+"([^"]*)")?\)$/);
+    if (imageMatch) {
+      closeList();
+      html.push(renderMarkdownImage(imageMatch[1], imageMatch[2], imageMatch[3]));
+      continue;
+    }
+
     if (line.startsWith("## ")) {
       closeList();
       html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
@@ -1186,6 +1212,28 @@ function renderMarkdown(markdown) {
   return html.join("");
 }
 
+function renderMarkdownImage(alt, src, titleText = "") {
+  const safeSrc = normalizeMarkdownAssetPath(src);
+  const safeAlt = escapeHtml(alt || titleText || "Lesson visual");
+  const caption = alt ? `<figcaption>${inlineMarkdown(alt)}</figcaption>` : "";
+  return `<figure class="markdown-figure"><img src="${safeSrc}" alt="${safeAlt}" loading="lazy">${caption}</figure>`;
+}
+
+function normalizeMarkdownAssetPath(src) {
+  if (/^(https?:)?\/\//.test(src) || src.startsWith("data:")) return escapeHtml(src);
+  const normalized = src.replace(/^\.\//, "");
+  return escapeHtml(normalized.startsWith("content/") ? normalized : `${contentRoot}/${normalized}`);
+}
+
+function renderMarkdownTable(headers, rows) {
+  const headerHtml = headers.map((header) => `<th>${inlineMarkdown(header)}</th>`).join("");
+  const rowsHtml = rows.map((row) => {
+    const cells = headers.map((_, index) => `<td>${inlineMarkdown(row[index] || "")}</td>`).join("");
+    return `<tr>${cells}</tr>`;
+  }).join("");
+  return `<div class="markdown-table-wrap"><table class="markdown-table"><thead><tr>${headerHtml}</tr></thead><tbody>${rowsHtml}</tbody></table></div>`;
+}
+
 function inlineMarkdown(value) {
   return escapeHtml(value)
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -1200,6 +1248,7 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
 
 
 
