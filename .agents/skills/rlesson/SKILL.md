@@ -27,17 +27,20 @@ Score the lesson on a 1-5 scale based on the 7 criteria defined in [lesson-evalu
 7.  **Actionability**: Does the learner know exactly what field of their Final UA Plan to update and how?
 
 ### 3. Generate Evaluation Report
-Format the review report in Vietnamese according to the canonical template in [lesson-evaluation-rubric.md](file:///d:/ua-marketing-platform/frontend/lesson-evaluation-rubric.md):
+Format the review report in Vietnamese using a table for the scorecard as requested:
 
 ```markdown
 ### I. Bảng điểm chất lượng (Scorecard)
-- **Decision clarity**: X/5 - [Lý do cụ thể]
-- **Teaching depth**: X/5 - [Lý do cụ thể]
-- **Metric literacy**: X/5 - [Lý do cụ thể]
-- **Mistake coverage**: X/5 - [Lý do cụ thể]
-- **Worked example**: X/5 - [Lý do cụ thể]
-- **Lab output**: X/5 - [Lý do cụ thể]
-- **Actionability**: X/5 - [Lý do cụ thể]
+
+| Tiêu chí | Điểm số | Lý do chi tiết |
+| :--- | :---: | :--- |
+| **Decision clarity** | X/5 | [Lý do chi tiết...] |
+| **Teaching depth** | X/5 | [Lý do chi tiết...] |
+| **Metric literacy** | X/5 | [Lý do chi tiết...] |
+| **Mistake coverage** | X/5 | [Lý do chi tiết...] |
+| **Worked example** | X/5 | [Lý do chi tiết...] |
+| **Lab output** | X/5 | [Lý do chi tiết...] |
+| **Actionability** | X/5 | [Lý do chi tiết...] |
 
 ### II. Top 5 cải tiến cần làm ngay (Top 5 fixes)
 1. [Cải tiến 1]
