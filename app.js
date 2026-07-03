@@ -176,10 +176,14 @@ async function fetchDbContent(config) {
 
 async function fetchLesson(day) {
   const padded = String(day).padStart(2, "0");
+  try {
+    const response = await fetch(withContentVersion(`${contentRoot}/lessons/day-${padded}.md`));
+    if (response.ok) return await response.text();
+  } catch (err) {
+    console.warn(`Could not load local day-${padded}.md, falling back to cached content`, err);
+  }
   if (data.lessonMarkdown?.[padded]) return data.lessonMarkdown[padded];
-  const response = await fetch(withContentVersion(`${contentRoot}/lessons/day-${padded}.md`));
-  if (!response.ok) throw new Error(`Could not load day-${padded}.md`);
-  return response.text();
+  throw new Error(`Could not load day-${padded}.md`);
 }
 
 function loadState() {
@@ -1336,6 +1340,7 @@ function renderMarkdown(markdown) {
   let tableRows = [];
   let chartRows = [];
   let inChart = false;
+  const seenTerms = new Set();
 
   const closeList = () => {
     if (inList) {
@@ -1346,7 +1351,7 @@ function renderMarkdown(markdown) {
 
   const closeTable = () => {
     if (tableRows.length) {
-      html.push(renderMarkdownTable(tableRows));
+      html.push(renderMarkdownTable(tableRows, seenTerms));
       tableRows = [];
     }
   };
@@ -1395,22 +1400,22 @@ function renderMarkdown(markdown) {
     const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
     if (imageMatch) {
       closeList();
-      html.push(renderMarkdownImage(imageMatch[1], imageMatch[2], imageMatch[3]));
+      html.push(renderMarkdownImage(imageMatch[1], imageMatch[2], imageMatch[3], seenTerms));
       continue;
     }
     if (line.startsWith("## ")) {
       closeList();
-      html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
+      html.push(`<h2>${inlineMarkdown(line.slice(3), seenTerms)}</h2>`);
       continue;
     }
     if (line.startsWith("### ")) {
       closeList();
-      html.push(`<h3>${inlineMarkdown(line.slice(4))}</h3>`);
+      html.push(`<h3>${inlineMarkdown(line.slice(4), seenTerms)}</h3>`);
       continue;
     }
     if (line.startsWith("> ")) {
       closeList();
-      html.push(`<blockquote>${inlineMarkdown(line.slice(2))}</blockquote>`);
+      html.push(`<blockquote>${inlineMarkdown(line.slice(2), seenTerms)}</blockquote>`);
       continue;
     }
     if (line.startsWith("- ")) {
@@ -1418,11 +1423,11 @@ function renderMarkdown(markdown) {
         html.push("<ul>");
         inList = true;
       }
-      html.push(`<li>${inlineMarkdown(line.slice(2))}</li>`);
+      html.push(`<li>${inlineMarkdown(line.slice(2), seenTerms)}</li>`);
       continue;
     }
     closeList();
-    html.push(`<p>${inlineMarkdown(line)}</p>`);
+    html.push(`<p>${inlineMarkdown(line, seenTerms)}</p>`);
   }
   closeList();
   closeTable();
@@ -1436,31 +1441,31 @@ function normalizeMarkdownAssetPath(src) {
   return escapeHtml(normalized.startsWith("content/") ? normalized : `${contentRoot}/${normalized}`);
 }
 
-function renderMarkdownImage(alt, src, title = "") {
+function renderMarkdownImage(alt, src, title = "", seenTerms = null) {
   const cleanSrc = String(src || "").trim();
   const safeSrc = normalizeMarkdownAssetPath(cleanSrc);
   const caption = title || alt;
   return `
     <figure class="markdown-figure">
       <img src="${safeSrc}" alt="${escapeHtml(alt || "Lesson visual")}" width="1200" height="620" decoding="async" loading="lazy">
-      ${caption ? `<figcaption>${inlineMarkdown(caption)}</figcaption>` : ""}
+      ${caption ? `<figcaption>${inlineMarkdown(caption, seenTerms)}</figcaption>` : ""}
     </figure>
   `;
 }
 
-function renderMarkdownTable(rows) {
+function renderMarkdownTable(rows, seenTerms = null) {
   const parsed = rows
     .map((row) => row.split("|").slice(1, -1).map((cell) => cell.trim()))
     .filter((cells) => cells.some(Boolean));
-  if (parsed.length < 2) return parsed.map((cells) => `<p>${inlineMarkdown(cells.join(" | "))}</p>`).join("");
+  if (parsed.length < 2) return parsed.map((cells) => `<p>${inlineMarkdown(cells.join(" | "), seenTerms)}</p>`).join("");
   const separatorIndex = parsed.findIndex((cells) => cells.every((cell) => /^:?-{3,}:?$/.test(cell)));
   const header = parsed[0];
   const body = parsed.filter((_, index) => index !== 0 && index !== separatorIndex);
   return `
     <div class="markdown-table-wrap">
       <table class="markdown-table">
-        <thead><tr>${header.map((cell) => `<th>${inlineMarkdown(cell)}</th>`).join("")}</tr></thead>
-        <tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+        <thead><tr>${header.map((cell) => `<th>${inlineMarkdown(cell, seenTerms)}</th>`).join("")}</tr></thead>
+        <tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, seenTerms)}</td>`).join("")}</tr>`).join("")}</tbody>
       </table>
     </div>
   `;
@@ -1494,15 +1499,16 @@ function renderMarkdownChart(rows) {
     </figure>
   `;
 }
-function inlineMarkdown(value) {
+function inlineMarkdown(value, seenTerms = null) {
   const html = escapeHtml(value)
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/`(.*?)`/g, "<code>$1</code>");
-  return parseGlossaryTerms(html);
+    .replace(/`/g, "<code>") // Replace open backticks
+    .replace(/``?/g, "</code>"); // Replace close backticks or standard code tags
+  return parseGlossaryTerms(html, seenTerms);
 }
 
-function parseGlossaryTerms(text) {
+function parseGlossaryTerms(text, seenTerms = null) {
   if (!data || !data.glossary) return text;
   
   let result = text;
@@ -1510,25 +1516,38 @@ function parseGlossaryTerms(text) {
   
   for (const termObj of sortedTerms) {
     const term = termObj.term;
+    if (seenTerms && seenTerms.has(term)) {
+      continue;
+    }
     const escapedTerm = term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     const tokens = result.split(/(<[^>]+>)/g);
+    let matched = false;
     for (let i = 0; i < tokens.length; i++) {
       if (!tokens[i].startsWith("<")) {
-        const regex = new RegExp(`\\b(${escapedTerm})\\b`, 'g');
-        const tooltipHtml = `
-          <a class="glossary-link" href="#glossary?term=$1">
-            $1
-            <span class="glossary-tooltip">
-              <strong style="color:var(--accent);display:block;margin-bottom:4px;font-size:0.95rem;">${escapeHtml(termObj.en)}</strong>
-              <span style="color:#e2e8f0;display:block;font-size:0.85rem;line-height:1.3;">${escapeHtml(termObj.vi)}</span>
-              ${termObj.formula && termObj.formula !== "n/a" ? `<span class="glossary-tooltip-formula" style="margin-top:6px;font-family:monospace;color:#fb7185;background-color:#0f172a;padding:2px 6px;border-radius:4px;display:inline-block;font-size:0.75rem;">${escapeHtml(termObj.formula)}</span>` : ""}
-            </span>
-          </a>
-        `.trim().replace(/\s+/g, " ");
-        tokens[i] = tokens[i].replace(regex, tooltipHtml);
+        const regex = new RegExp(`\\b(${escapedTerm})\\b`, 'i');
+        if (regex.test(tokens[i])) {
+          matched = true;
+          const tooltipHtml = `
+            <a class="glossary-link" href="#glossary?term=$1">
+              $1
+              <span class="glossary-tooltip">
+                <strong style="color:var(--accent);display:block;margin-bottom:4px;font-size:0.95rem;">${escapeHtml(termObj.en)}</strong>
+                <span style="color:#e2e8f0;display:block;font-size:0.85rem;line-height:1.3;">${escapeHtml(termObj.vi)}</span>
+                ${termObj.formula && termObj.formula !== "n/a" ? `<span class="glossary-tooltip-formula" style="margin-top:6px;font-family:monospace;color:#fb7185;background-color:#0f172a;padding:2px 6px;border-radius:4px;display:inline-block;font-size:0.75rem;">${escapeHtml(termObj.formula)}</span>` : ""}
+              </span>
+            </a>
+          `.trim().replace(/\s+/g, " ");
+          tokens[i] = tokens[i].replace(regex, tooltipHtml);
+          break;
+        }
       }
     }
-    result = tokens.join("");
+    if (matched) {
+      result = tokens.join("");
+      if (seenTerms) {
+        seenTerms.add(term);
+      }
+    }
   }
   return result;
 }

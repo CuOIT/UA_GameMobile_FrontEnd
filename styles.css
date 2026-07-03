@@ -917,16 +917,16 @@ button:disabled {
 
 /* Glossary inline links and tooltips styling */
 .glossary-link {
-  color: var(--accent);
-  text-decoration: underline dashed var(--accent);
+  color: inherit;
+  border-bottom: 1px dotted var(--accent);
   cursor: help;
   position: relative;
-  display: inline-block;
+  display: inline;
 }
 
 .glossary-link:hover {
-  color: var(--accent-3);
-  text-decoration: underline solid var(--accent-3);
+  color: var(--accent);
+  border-bottom-style: solid;
 }
 
 .glossary-tooltip {
@@ -957,4 +957,27 @@ button:disabled {
   opacity: 1;
   transform: translateX(-50%) translateY(-2px);
 }
+
+/* External / reference markdown links styling */
+.markdown a:not(.glossary-link) {
+  color: #2563eb; /* Classic clean blue link */
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.markdown a:not(.glossary-link):hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Light/Dark mode resilience for markdown links */
+@media (prefers-color-scheme: dark) {
+  .markdown a:not(.glossary-link) {
+    color: #38bdf8; /* Bright sky blue under dark mode */
+  }
+  .markdown a:not(.glossary-link):hover {
+    color: #7dd3fc;
+  }
+}
+
 
