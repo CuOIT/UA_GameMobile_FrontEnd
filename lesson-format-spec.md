@@ -225,10 +225,11 @@ KhÃƒÂ´ng Ã„â€˜Ã†Â°Ã¡Â»Â£c:
 
 ### 6. `Chart / visual / table`
 
-PhÃ¡ÂºÂ£i cÃƒÂ³:
+Phải có:
 
-- 1 data-oriented visual hoÃ¡ÂºÂ·c chart Ã„â€˜Ã¡Â»Âc Ã„â€˜Ã†Â°Ã¡Â»Â£c
-- dÃƒÂ¹ng Ã„â€˜Ã¡Â»Æ’ so sÃƒÂ¡nh, chÃ¡ÂºÂ©n Ã„â€˜oÃƒÂ¡n, Ã†Â°u tiÃƒÂªn, hoÃ¡ÂºÂ·c Ã„â€˜Ã¡Â»Âc tradeoff
+- 1 data-oriented visual hoặc chart đọc được
+- Đặc biệt: Phải dùng các đơn vị đo lường thực tế trong ngành UA (như D1 Active Users/10k Impressions, CPI USD, ROAS %), tuyệt đối không dùng điểm ảo (Target Score, points) mà không có định nghĩa rõ ràng.
+- dùng để so sánh, chẩn đoán, ưu tiên, hoặc đọc tradeoff
 
 CÃƒÂ³ thÃ¡Â»Æ’ lÃƒÂ :
 

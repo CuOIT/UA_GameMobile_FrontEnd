@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.2.2",
-  "contentVersion": "1.2.2",
+  "appVersion": "1.2.3",
+  "contentVersion": "1.2.3",
   "updatedAt": "2026-07-03",
   "changeLevel": "patch",
-  "notes": "Add accents to Vietnamese glossary term explanations."
+  "notes": "Optimize Day 1 chart with D1 Active Users unit, update format-spec and evaluation-rubric."
 }

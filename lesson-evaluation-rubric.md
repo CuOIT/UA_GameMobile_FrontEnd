@@ -21,10 +21,10 @@ Tài liệu này định nghĩa hệ thống 7 tiêu chí đánh giá chất lư
     *   `1/5`: Quá nhiều biệt ngữ marketing (marketing jargon) không được giải nghĩa rõ ràng.
 
 ### 📈 3. Trực quan hóa Số liệu (Metric literacy)
-*   **Mô tả**: Bài học có bao gồm bảng biểu, sơ đồ dòng chảy (flowchart), biểu đồ dữ liệu (`:::chart`) và hướng dẫn cách đọc số cụ thể không?
+*   **Mô tả**: Bài học có bao gồm bảng biểu, sơ đồ dòng chảy (flowchart), biểu đồ dữ liệu (`:::chart`) và hướng dẫn cách đọc số cụ thể không? Các biểu đồ và bảng dữ liệu bắt buộc phải sử dụng các đơn vị đo lường chuẩn hóa thực tế của ngành UA (như D1 Active Users/10k Impressions, CPI USD, ROAS %) thay vì các điểm số ảo.
 *   **Thang điểm**:
-    *   `5/5`: Có bảng hướng dẫn đọc số (Pattern -> Chẩn đoán -> Hành động đúng -> Hành động sai) kèm biểu đồ trực quan.
-    *   `3/5`: Có bảng hoặc biểu đồ nhưng thiếu hướng dẫn chẩn đoán lỗi chi tiết dựa trên số liệu.
+    *   `5/5`: Có bảng hướng dẫn đọc số (Pattern -> Chẩn đoán -> Hành động đúng -> Hành động sai) kèm biểu đồ trực quan có đơn vị đo rõ ràng.
+    *   `3/5`: Có bảng hoặc biểu đồ nhưng thiếu hướng dẫn chẩn đoán lỗi chi tiết dựa trên số liệu hoặc biểu đồ dùng điểm số ảo.
     *   `1/5`: Chỉ ghi text suông, không có bảng số liệu hoặc biểu đồ hỗ trợ.
 
 ### 🛑 4. Cảnh báo Sai lầm (Mistake coverage)

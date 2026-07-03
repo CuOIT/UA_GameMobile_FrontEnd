@@ -77,17 +77,17 @@ Sơ đồ dưới đây minh họa dòng chảy của Chuỗi Lời hứa UA và
 
 ## 📊 Biểu đồ so sánh Phễu Mismatch vs Funnel Align
 
-Biểu đồ dưới đây đối chiếu hiệu năng kinh tế tổng thể giữa hai kịch bản phễu:
+Biểu đồ dưới đây đối chiếu số lượng người chơi thực sự hoạt động sau Ngày 1 thu về được trên mỗi 10.000 lượt hiển thị quảng cáo:
 
 ![Funnel alignment comparison chart](content/assets/usecases/day-01-data-visual.png)
 
 :::chart
-title: Hiệu suất phễu tích lũy dự kiến (Target Score, cao là tốt)
-Clickbait Funnel|12|High CTR but CVR and D1 Retention collapse due to mismatch
-Aligned Funnel|45|Moderate CTR but high CVR and D1 Retention optimize total cost
+title: Số User D1 hoạt động trên 10.000 lượt hiển thị (D1 Active Users / 10k Impressions, cao là tốt)
+Clickbait Funnel|2.4|High CTR (6%) but CVR (8%) and D1 (5%) collapse due to mismatch
+Aligned Funnel|24.0|Moderate CTR (2%) but high CVR (30%) and D1 (40%) optimize yield
 :::
 
-*Cách đọc chart:* Hãy tập trung tối ưu hóa **tổng điểm phễu tích lũy** thay vì chỉ chạy theo chỉ số click đầu vào (CTR). Một phễu hợp nhất (Aligned Funnel) mang lại hiệu quả kinh tế dài hạn tốt hơn gấp nhiều lần nhờ bảo vệ được tỷ lệ giữ chân người chơi thực tế.
+*Cách đọc chart:* Hãy tập trung tối ưu hóa **tổng hiệu suất thực tế của phễu** (ở đây là số user hoạt động Ngày 1) thay vì chạy theo chỉ số click đầu vào (CTR). Phễu hợp nhất (Aligned Funnel) mang lại số lượng người chơi Ngày 1 **gấp 10 lần** so với phễu clickbait trên cùng một lượng hiển thị quảng cáo.
 
 ---
 
