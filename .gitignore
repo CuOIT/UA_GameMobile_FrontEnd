@@ -1,0 +1,4 @@
+.env
+.env.*
+content/reviews/outputs/
+content/reviews/tmp/

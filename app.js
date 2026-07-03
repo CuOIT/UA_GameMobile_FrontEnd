@@ -1,5 +1,6 @@
 const contentRoot = "./content";
 const stateKey = "uaBootcampState.v1";
+const contentVersion = "lesson-6-order-1";
 
 const defaultState = {
   stage: "all",
@@ -7,6 +8,7 @@ const defaultState = {
   bookmarks: [],
   quizResults: {},
   checklist: {},
+  lessonReviews: {},
   chat: {
     providerUrl: "",
     apiKey: "",
@@ -22,7 +24,8 @@ const defaultState = {
     creativeMatrix: "",
     budget: "",
     successCriteria: "",
-    killCriteria: ""
+    killCriteria: "",
+    nextAction: ""
   }
 };
 
@@ -77,6 +80,10 @@ async function loadContent() {
     fetchJson("cases.json"),
     fetchDbContent(config)
   ]);
+  const useDbContent = isCurrentDbContent(course, dbContent);
+  if (Object.keys(dbContent).length && !useDbContent) {
+    console.warn("Ignoring legacy DB course content; using static content files instead.");
+  }
   return {
     course,
     glossary,
@@ -85,11 +92,18 @@ async function loadContent() {
     checklists,
     cases,
     lessonMarkdown: {},
-    ...dbContent,
+    ...(useDbContent ? dbContent : {}),
     config
   };
 }
 
+function isCurrentDbContent(staticCourse, dbContent = {}) {
+  if (!dbContent.course) return false;
+  return dbContent.course?.meta?.title && dbContent.course.meta.title === staticCourse?.meta?.title;
+}
+function withContentVersion(url) {
+  return `${url}${url.includes("?") ? "&" : "?"}v=${contentVersion}`;
+}
 async function fetchOptionalJson(file) {
   try {
     return await fetchJson(file);
@@ -99,7 +113,7 @@ async function fetchOptionalJson(file) {
 }
 
 async function fetchJson(file) {
-  const response = await fetch(`${contentRoot}/${file}`);
+  const response = await fetch(withContentVersion(`${contentRoot}/${file}`));
   if (!response.ok) throw new Error(`Could not load ${file}`);
   return response.json();
 }
@@ -158,7 +172,7 @@ async function fetchDbContent(config) {
 async function fetchLesson(day) {
   const padded = String(day).padStart(2, "0");
   if (data.lessonMarkdown?.[padded]) return data.lessonMarkdown[padded];
-  const response = await fetch(`${contentRoot}/lessons/day-${padded}.md`);
+  const response = await fetch(withContentVersion(`${contentRoot}/lessons/day-${padded}.md`));
   if (!response.ok) throw new Error(`Could not load day-${padded}.md`);
   return response.text();
 }
@@ -170,7 +184,8 @@ function loadState() {
       ...defaultState,
       ...parsed,
       chat: { ...defaultState.chat, ...(parsed.chat || {}) },
-      plan: { ...defaultState.plan, ...(parsed.plan || {}) }
+      plan: { ...defaultState.plan, ...(parsed.plan || {}) },
+      lessonReviews: { ...(parsed.lessonReviews || {}) }
     };
   } catch {
     return structuredClone(defaultState);
@@ -272,6 +287,7 @@ function cloudProgressFromState() {
     bookmarks: state.bookmarks,
     quizResults: state.quizResults,
     checklist: state.checklist,
+    lessonReviews: state.lessonReviews,
     plan: state.plan,
     chat: { memory: state.chat?.memory || "" }
   };
@@ -292,6 +308,7 @@ function mergeCloudProgress(progress = {}) {
     bookmarks: [...new Set([...(progress.bookmarks || []), ...(local.bookmarks || [])])].sort((a, b) => a - b),
     quizResults: { ...(progress.quizResults || {}), ...(local.quizResults || {}) },
     checklist: { ...(progress.checklist || {}), ...(local.checklist || {}) },
+    lessonReviews: { ...(progress.lessonReviews || {}), ...(local.lessonReviews || {}) },
     plan: mergedPlan,
     chat: {
       ...defaultState.chat,
@@ -371,12 +388,12 @@ function renderDashboard() {
     <section class="metric-row">
       <div class="metric"><strong>${state.completedLessons.length}/30</strong><span>lessons completed</span></div>
       <div class="metric"><strong>${completionPercent()}%</strong><span>course progress</span></div>
-      <div class="metric"><strong>${planFields}/8</strong><span>UA plan sections</span></div>
+      <div class="metric"><strong>${planFields}/9</strong><span>UA plan sections</span></div>
       <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes attempted</span></div>
     </section>
     <section class="panel">
       <h2>Learning progress</h2>
-      <p>Tiến độ khóa học được lưu cục bộ trong trình duyệt bằng localStorage. Không có account, DB, hay server-side tracking.</p>
+      <p>TiÃƒÂ¡Ã‚ÂºÃ‚Â¿n Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢ khÃƒÆ’Ã‚Â³a hÃƒÂ¡Ã‚Â»Ã‚Âc Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c lÃƒâ€ Ã‚Â°u cÃƒÂ¡Ã‚Â»Ã‚Â¥c bÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢ trong trÃƒÆ’Ã‚Â¬nh duyÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t bÃƒÂ¡Ã‚ÂºÃ‚Â±ng localStorage. KhÃƒÆ’Ã‚Â´ng cÃƒÆ’Ã‚Â³ account, DB, hay server-side tracking.</p>
       <div class="progress-bar" aria-label="Course progress">
         <div class="progress-fill" style="width:${completionPercent()}%"></div>
       </div>
@@ -392,15 +409,15 @@ function renderDashboard() {
       <article class="panel">
         <p class="eyebrow">Unity dev lens</p>
         <h2>UA is a product feedback loop</h2>
-        <p>Trang này dạy UA như một vòng lặp giữa creative, store, tracking, retention và economy. Bạn không cần code SDK trong MVP, nhưng cần biết event nào phải đo và quyết định nào phụ thuộc vào data.</p>
+        <p>Trang nÃƒÆ’Ã‚Â y dÃƒÂ¡Ã‚ÂºÃ‚Â¡y UA nhÃƒâ€ Ã‚Â° mÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢t vÃƒÆ’Ã‚Â²ng lÃƒÂ¡Ã‚ÂºÃ‚Â·p giÃƒÂ¡Ã‚Â»Ã‚Â¯a creative, store, tracking, retention vÃƒÆ’Ã‚Â  economy. BÃƒÂ¡Ã‚ÂºÃ‚Â¡n khÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n code SDK trong MVP, nhÃƒâ€ Ã‚Â°ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n biÃƒÂ¡Ã‚ÂºÃ‚Â¿t event nÃƒÆ’Ã‚Â o phÃƒÂ¡Ã‚ÂºÃ‚Â£i Ãƒâ€žÃ¢â‚¬Ëœo vÃƒÆ’Ã‚Â  quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh nÃƒÆ’Ã‚Â o phÃƒÂ¡Ã‚Â»Ã‚Â¥ thuÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢c vÃƒÆ’Ã‚Â o data.</p>
         <a class="button" href="#plan">Open Final UA Plan</a>
       </article>
     </section>
     <section class="grid three">
-      ${dashboardShortcut("Glossary", "CPI, LTV, ROAS, SKAN, cohort và các thuật ngữ được giải thích bằng tiếng Việt.", "#glossary")}
-      ${dashboardShortcut("Tools", "Máy tính break-even CPI, LTV rough estimate, ROAS target và test budget.", "#tools")}
-      ${dashboardShortcut("Case Studies", "Đọc dữ liệu mẫu và chọn scale, iterate hoặc kill campaign.", "#cases")}
-      ${dashboardShortcut("AI Chat", "Hỏi đáp theo context bài học, glossary và memory cục bộ.", "#chat")}
+      ${dashboardShortcut("Glossary", "CPI, LTV, ROAS, SKAN, cohort vÃƒÆ’Ã‚Â  cÃƒÆ’Ã‚Â¡c thuÃƒÂ¡Ã‚ÂºÃ‚Â­t ngÃƒÂ¡Ã‚Â»Ã‚Â¯ Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c giÃƒÂ¡Ã‚ÂºÃ‚Â£i thÃƒÆ’Ã‚Â­ch bÃƒÂ¡Ã‚ÂºÃ‚Â±ng tiÃƒÂ¡Ã‚ÂºÃ‚Â¿ng ViÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t.", "#glossary")}
+      ${dashboardShortcut("Tools", "MÃƒÆ’Ã‚Â¡y tÃƒÆ’Ã‚Â­nh break-even CPI, LTV rough estimate, ROAS target vÃƒÆ’Ã‚Â  test budget.", "#tools")}
+      ${dashboardShortcut("Case Studies", "Ãƒâ€žÃ‚ÂÃƒÂ¡Ã‚Â»Ã‚Âc dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u mÃƒÂ¡Ã‚ÂºÃ‚Â«u vÃƒÆ’Ã‚Â  chÃƒÂ¡Ã‚Â»Ã‚Ân scale, iterate hoÃƒÂ¡Ã‚ÂºÃ‚Â·c kill campaign.", "#cases")}
+      ${dashboardShortcut("AI Chat", "HÃƒÂ¡Ã‚Â»Ã‚Âi Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡p theo context bÃƒÆ’Ã‚Â i hÃƒÂ¡Ã‚Â»Ã‚Âc, glossary vÃƒÆ’Ã‚Â  memory cÃƒÂ¡Ã‚Â»Ã‚Â¥c bÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢.", "#chat")}
     </section>
   `;
 }
@@ -421,7 +438,7 @@ function renderLessons() {
   app.innerHTML = `
     <section class="panel">
       <h2>Course path</h2>
-      <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
+      <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. MÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i bÃƒÆ’Ã‚Â i cÃƒÆ’Ã‚Â³ nÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢i dung song ngÃƒÂ¡Ã‚Â»Ã‚Â¯, glossary liÃƒÆ’Ã‚Âªn quan, quiz ngÃƒÂ¡Ã‚ÂºÃ‚Â¯n vÃƒÆ’Ã‚Â  checklist thÃƒÂ¡Ã‚Â»Ã‚Â±c hÃƒÆ’Ã‚Â nh.</p>
     </section>
     <section class="lesson-list">
       ${lessons.map(renderLessonCard).join("")}
@@ -439,6 +456,7 @@ function renderLessonCard(lesson) {
       </div>
       <h3>${escapeHtml(lesson.title)}</h3>
       <p>${escapeHtml(lesson.summary)}</p>
+      ${lesson.artifact ? `<p><strong>Artifact:</strong> ${escapeHtml(lesson.artifact)}</p>` : ""}
       <div class="tag-row">${renderTags(lesson.stages.map((stage) => stageLabels[stage]), "blue")}</div>
       <a class="button" href="#lesson-${lesson.day}">Open lesson</a>
     </article>
@@ -457,6 +475,13 @@ async function renderLesson(day) {
   const markdown = await fetchLesson(day);
   const quiz = data.quizzes[lesson.quizId];
   const checklist = data.checklists[lesson.checklistId] || [];
+  const relatedCases = relatedItems(data.cases, lesson.caseIds);
+  const relatedTools = relatedItems(data.calculators, lesson.toolIds);
+  const relatedReferences = relatedItems(data.course.references || [], lesson.referenceIds);
+  const qualityReview = state.lessonReviews?.[day];
+  const lessonIndex = data.course.lessons.findIndex((item) => item.day === day);
+  const previousLesson = lessonIndex > 0 ? data.course.lessons[lessonIndex - 1] : null;
+  const nextLesson = lessonIndex >= 0 && lessonIndex < data.course.lessons.length - 1 ? data.course.lessons[lessonIndex + 1] : null;
   app.innerHTML = `
     <section class="lesson-layout">
       <article class="lesson-body">
@@ -468,10 +493,13 @@ async function renderLesson(day) {
             <span class="tag">${lesson.estimatedMinutes} min</span>
           </div>
           <p>${escapeHtml(lesson.summary)}</p>
+          ${lesson.learningOutcome ? `<p><strong>Outcome:</strong> ${escapeHtml(lesson.learningOutcome)}</p>` : ""}
+          ${lesson.artifact ? `<p><strong>Artifact:</strong> ${escapeHtml(lesson.artifact)}</p>` : ""}
           <button id="completeLessonBtn" type="button">${state.completedLessons.includes(day) ? "Mark as incomplete" : "Mark lesson done"}</button>
           <button class="ghost-button" id="bookmarkLessonBtn" type="button">${state.bookmarks.includes(day) ? "Remove bookmark" : "Bookmark"}</button>
         </div>
         <div class="markdown">${renderMarkdown(stripFrontmatter(markdown))}</div>
+        ${renderLessonNav(previousLesson, nextLesson)}
       </article>
       <aside class="side-stack">
         <section class="panel">
@@ -490,12 +518,40 @@ async function renderLesson(day) {
           <h2>Quiz</h2>
           ${renderQuiz(lesson.quizId, quiz)}
         </section>
+        <section class="panel ai-review-panel">
+          <h2>AI quality review</h2>
+          <p class="status-line">ChÃƒÂ¡Ã‚ÂºÃ‚Â¥m lesson theo rubric: decision clarity, teaching depth, metric visuals, mistake coverage, lab output vÃƒÆ’Ã‚Â  actionability.</p>
+          <button id="reviewLessonBtn" type="button">Review this lesson</button>
+          <div class="review-output">${qualityReview ? escapeHtml(qualityReview) : "No AI review yet."}</div>
+        </section>
+        ${relatedCases.length ? `
+        <section class="panel">
+          <h2>Related cases</h2>
+          <div class="mini-list">
+            ${relatedCases.map((item) => `<p><strong>${escapeHtml(item.title)}</strong><br>${escapeHtml(item.recommendation)}</p>`).join("")}
+          </div>
+        </section>` : ""}
+        ${relatedTools.length ? `
+        <section class="panel">
+          <h2>Useful tools</h2>
+          <div class="mini-list">
+            ${relatedTools.map((item) => `<p><a href="#tools"><strong>${escapeHtml(item.name)}</strong></a><br>${escapeHtml(item.description)}</p>`).join("")}
+          </div>
+        </section>` : ""}
+        ${relatedReferences.length ? `
+        <section class="panel">
+          <h2>Curated references</h2>
+          <div class="mini-list">
+            ${relatedReferences.map((item) => `<p><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"><strong>${escapeHtml(item.title)}</strong></a><br>${escapeHtml(item.note)}</p>`).join("")}
+          </div>
+        </section>` : ""}
       </aside>
     </section>
   `;
 
   document.querySelector("#completeLessonBtn").addEventListener("click", () => toggleLesson(day));
   document.querySelector("#bookmarkLessonBtn").addEventListener("click", () => toggleBookmark(day));
+  document.querySelector("#reviewLessonBtn")?.addEventListener("click", () => reviewLessonQuality(lesson, markdown));
   document.querySelectorAll("[data-check]").forEach((input) => {
     input.addEventListener("change", (event) => {
       state.checklist[event.target.dataset.check] = event.target.checked;
@@ -505,6 +561,27 @@ async function renderLesson(day) {
   document.querySelectorAll("[data-quiz-option]").forEach((button) => {
     button.addEventListener("click", () => answerQuiz(lesson.quizId, Number(button.dataset.index)));
   });
+}
+
+function renderLessonNav(previousLesson, nextLesson) {
+  if (!previousLesson && !nextLesson) return "";
+  const previous = previousLesson
+    ? `<a class="lesson-nav-link previous" href="#lesson-${previousLesson.day}"><span>Previous lesson</span><strong>Day ${previousLesson.day}: ${escapeHtml(previousLesson.title)}</strong></a>`
+    : `<span class="lesson-nav-link disabled"><span>Previous lesson</span><strong>No previous lesson</strong></span>`;
+  const next = nextLesson
+    ? `<a class="lesson-nav-link next" href="#lesson-${nextLesson.day}"><span>Next lesson</span><strong>Day ${nextLesson.day}: ${escapeHtml(nextLesson.title)}</strong></a>`
+    : `<span class="lesson-nav-link disabled"><span>Next lesson</span><strong>No next lesson</strong></span>`;
+  return `
+    <nav class="lesson-nav" aria-label="Lesson navigation">
+      ${previous}
+      ${next}
+    </nav>
+  `;
+}
+
+function relatedItems(items = [], ids = []) {
+  const wanted = new Set(ids || []);
+  return items.filter((item) => wanted.has(item.id));
 }
 
 function renderCheckItem(checklistId, index, item) {
@@ -603,7 +680,7 @@ function renderTools() {
   app.innerHTML = `
     <section class="panel">
       <h2>Static calculators</h2>
-      <p>Các công cụ này dùng công thức đơn giản để giúp beginner hiểu quyết định UA. Kết quả là learning aid, không phải forecast tài chính chính thức.</p>
+      <p>CÃƒÆ’Ã‚Â¡c cÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚Â»Ã‚Â¥ nÃƒÆ’Ã‚Â y dÃƒÆ’Ã‚Â¹ng cÃƒÆ’Ã‚Â´ng thÃƒÂ¡Ã‚Â»Ã‚Â©c Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â¡n giÃƒÂ¡Ã‚ÂºÃ‚Â£n Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ giÃƒÆ’Ã‚Âºp beginner hiÃƒÂ¡Ã‚Â»Ã†â€™u quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh UA. KÃƒÂ¡Ã‚ÂºÃ‚Â¿t quÃƒÂ¡Ã‚ÂºÃ‚Â£ lÃƒÆ’Ã‚Â  learning aid, khÃƒÆ’Ã‚Â´ng phÃƒÂ¡Ã‚ÂºÃ‚Â£i forecast tÃƒÆ’Ã‚Â i chÃƒÆ’Ã‚Â­nh chÃƒÆ’Ã‚Â­nh thÃƒÂ¡Ã‚Â»Ã‚Â©c.</p>
     </section>
     <section class="tool-grid">
       ${data.calculators.map(renderTool).join("")}
@@ -645,16 +722,22 @@ function calculateTool(tool) {
   });
   let result = "";
   if (tool.id === "breakEvenCpi") {
-    result = `Break-even CPI ≈ $${(values.ltv * values.grossMargin).toFixed(2)} per install`;
+    result = `Break-even CPI ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  $${(values.ltv * values.grossMargin).toFixed(2)} per install`;
   }
-  if (tool.id === "roughLtv") {
-    result = `Rough LTV ≈ $${(values.arpdau * values.avgLifetimeDays).toFixed(2)} per user`;
+  if (tool.id === "sampleSize") {
+    const installs = values.budget / values.cpi;
+    const perCell = installs / values.cells;
+    result = `Estimated installs ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  ${installs.toFixed(0)} total, ${perCell.toFixed(0)} per creative cell. ${perCell < 30 ? "Reduce cells or treat results as very directional." : "Enough for directional creative learning, not final scale proof."}`;
   }
-  if (tool.id === "roasTarget") {
-    result = `Target ${values.day}-day revenue ≈ $${(values.spend * values.targetRoas).toFixed(2)}`;
+  if (tool.id === "cohortReadout") {
+    const d1 = (values.d1Users / values.installs) * 100;
+    const d7 = (values.d7Users / values.installs) * 100;
+    const cpi = values.spend / values.installs;
+    const roas = (values.revenueD7 / values.spend) * 100;
+    result = `D1 ${d1.toFixed(1)}%, D7 ${d7.toFixed(1)}%, CPI $${cpi.toFixed(2)}, D7 ROAS ${roas.toFixed(1)}%. Read with cohort size and attribution caveats.`;
   }
   if (tool.id === "testBudget") {
-    result = `Suggested test budget ≈ $${(values.cpi * values.installsPerCreative * values.creatives).toFixed(2)}`;
+    result = `Suggested test budget ÃƒÂ¢Ã¢â‚¬Â°Ã‹â€  $${(values.cpi * values.installsPerCreative * values.creatives).toFixed(2)}`;
   }
   root.querySelector("[data-result]").textContent = result;
 }
@@ -664,7 +747,7 @@ function renderCases() {
   app.innerHTML = `
     <section class="panel">
       <h2>Read the signal, then choose</h2>
-      <p>Mỗi case dùng dữ liệu mẫu để luyện tư duy: scale, iterate hay kill. Không cần backend; dữ liệu nằm trong JSON.</p>
+      <p>MÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i case dÃƒÆ’Ã‚Â¹ng dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u mÃƒÂ¡Ã‚ÂºÃ‚Â«u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ luyÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡n tÃƒâ€ Ã‚Â° duy: scale, iterate hay kill. KhÃƒÆ’Ã‚Â´ng cÃƒÂ¡Ã‚ÂºÃ‚Â§n backend; dÃƒÂ¡Ã‚Â»Ã‚Â¯ liÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡u nÃƒÂ¡Ã‚ÂºÃ‚Â±m trong JSON.</p>
     </section>
     <section class="case-grid">
       ${data.cases.map(renderCase).join("")}
@@ -775,25 +858,8 @@ async function sendChatMessage(event) {
         .filter((message) => message.content !== "Thinking with lesson context...")
         .slice(-10)
     ];
-    const response = await fetch(state.chat.providerUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(state.chat.apiKey ? { Authorization: `Bearer ${state.chat.apiKey}` } : {})
-      },
-      body: JSON.stringify({
-        model: state.chat.model,
-        messages,
-        temperature: 0.4
-      })
-    });
-    if (!response.ok) throw new Error(`Provider returned ${response.status}`);
-    const json = await response.json();
-    const answer =
-      json?.choices?.[0]?.message?.content ||
-      json?.message?.content ||
-      json?.output_text ||
-      "Provider response did not include a recognized answer field.";
+    const answer = await callAiProvider(messages, 0.4);
+
     state.chat.messages[state.chat.messages.length - 1] = { role: "assistant", content: answer };
   } catch (error) {
     state.chat.messages[state.chat.messages.length - 1] = {
@@ -805,12 +871,99 @@ async function sendChatMessage(event) {
   renderChat();
 }
 
+async function reviewLessonQuality(lesson, markdown) {
+  if (!state.chat.providerUrl) {
+    state.lessonReviews[lesson.day] = "ChÃƒâ€ Ã‚Â°a cÃƒÂ¡Ã‚ÂºÃ‚Â¥u hÃƒÆ’Ã‚Â¬nh Provider URL. VÃƒÆ’Ã‚Â o AI Chat Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ set Provider URL hoÃƒÂ¡Ã‚ÂºÃ‚Â·c dÃƒÆ’Ã‚Â¹ng backend /api/chat trÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc khi review lesson.";
+    saveState();
+    renderLesson(lesson.day);
+    return;
+  }
+
+  state.lessonReviews[lesson.day] = "AI Ãƒâ€žÃ¢â‚¬Ëœang Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡nh giÃƒÆ’Ã‚Â¡ chÃƒÂ¡Ã‚ÂºÃ‚Â¥t lÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£ng lesson...";
+  saveState();
+  renderLesson(lesson.day);
+
+  const rubric = `
+BÃƒÂ¡Ã‚ÂºÃ‚Â¡n lÃƒÆ’Ã‚Â  curriculum reviewer cho khÃƒÆ’Ã‚Â³a UA Marketing dÃƒÆ’Ã‚Â nh cho Unity indie/dev khÃƒÆ’Ã‚Â´ng chuyÃƒÆ’Ã‚Âªn UA.
+HÃƒÆ’Ã‚Â£y Ãƒâ€žÃ¢â‚¬ËœÃƒÆ’Ã‚Â¡nh giÃƒÆ’Ã‚Â¡ lesson theo thang 1-5 vÃƒÆ’Ã‚Â  trÃƒÂ¡Ã‚ÂºÃ‚Â£ lÃƒÂ¡Ã‚Â»Ã‚Âi bÃƒÂ¡Ã‚ÂºÃ‚Â±ng tiÃƒÂ¡Ã‚ÂºÃ‚Â¿ng ViÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¡t cÃƒÆ’Ã‚Â³ dÃƒÂ¡Ã‚ÂºÃ‚Â¥u, ngÃƒÂ¡Ã‚ÂºÃ‚Â¯n nhÃƒâ€ Ã‚Â°ng cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™.
+KhÃƒÆ’Ã‚Â´ng khen chung chung. ChÃƒÂ¡Ã‚Â»Ã¢â‚¬Â° ra Ãƒâ€žÃ¢â‚¬ËœiÃƒÂ¡Ã‚Â»Ã†â€™m thiÃƒÂ¡Ã‚ÂºÃ‚Â¿u cÃƒÆ’Ã‚Â³ thÃƒÂ¡Ã‚Â»Ã†â€™ sÃƒÂ¡Ã‚Â»Ã‚Â­a Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c.
+
+Rubric:
+1. Decision clarity: bÃƒÆ’Ã‚Â i cÃƒÆ’Ã‚Â³ dÃƒÂ¡Ã‚ÂºÃ‚Â¡y mÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢t quyÃƒÂ¡Ã‚ÂºÃ‚Â¿t Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Â¹nh cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™ khÃƒÆ’Ã‚Â´ng?
+2. Teaching depth: giÃƒÂ¡Ã‚ÂºÃ‚Â£i thÃƒÆ’Ã‚Â­ch Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Â§ sÃƒÆ’Ã‚Â¢u cho ngÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âi khÃƒÆ’Ã‚Â´ng biÃƒÂ¡Ã‚ÂºÃ‚Â¿t UA chÃƒâ€ Ã‚Â°a?
+3. Metric literacy: cÃƒÆ’Ã‚Â³ bÃƒÂ¡Ã‚ÂºÃ‚Â£ng sÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœ, biÃƒÂ¡Ã‚Â»Ã†â€™u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã¢â‚¬Å“, cÃƒÆ’Ã‚Â¡ch Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc sÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœ, thÃƒÂ¡Ã‚Â»Ã‚Â© tÃƒÂ¡Ã‚Â»Ã‚Â± Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc funnel khÃƒÆ’Ã‚Â´ng?
+4. Mistake coverage: cÃƒÆ’Ã‚Â³ lÃƒÂ¡Ã‚Â»Ã¢â‚¬â€i thÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âng gÃƒÂ¡Ã‚ÂºÃ‚Â·p vÃƒÆ’Ã‚Â  correction khÃƒÆ’Ã‚Â´ng?
+5. Worked example: cÃƒÆ’Ã‚Â³ vÃƒÆ’Ã‚Â­ dÃƒÂ¡Ã‚Â»Ã‚Â¥ mÃƒÂ¡Ã‚ÂºÃ‚Â«u Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Â§ cÃƒÂ¡Ã‚Â»Ã‚Â¥ thÃƒÂ¡Ã‚Â»Ã†â€™ Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã†â€™ bÃƒÂ¡Ã‚ÂºÃ‚Â¯t chÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc khÃƒÆ’Ã‚Â´ng?
+6. Lab output: ngÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Âi hÃƒÂ¡Ã‚Â»Ã‚Âc cÃƒÆ’Ã‚Â³ biÃƒÂ¡Ã‚ÂºÃ‚Â¿t output cuÃƒÂ¡Ã‚Â»Ã¢â‚¬Ëœi bÃƒÆ’Ã‚Â i trÃƒÆ’Ã‚Â´ng nhÃƒâ€ Ã‚Â° thÃƒÂ¡Ã‚ÂºÃ‚Â¿ nÃƒÆ’Ã‚Â o khÃƒÆ’Ã‚Â´ng?
+7. Actionability: Ãƒâ€žÃ¢â‚¬ËœÃƒÂ¡Ã‚Â»Ã‚Âc xong cÃƒÆ’Ã‚Â³ biÃƒÂ¡Ã‚ÂºÃ‚Â¿t lÃƒÆ’Ã‚Â m gÃƒÆ’Ã‚Â¬ tiÃƒÂ¡Ã‚ÂºÃ‚Â¿p theo khÃƒÆ’Ã‚Â´ng?
+
+Output format bÃƒÂ¡Ã‚ÂºÃ‚Â¯t buÃƒÂ¡Ã‚Â»Ã¢â€žÂ¢c:
+## Scorecard
+- Decision clarity: x/5 - lÃƒÆ’Ã‚Â½ do
+- Teaching depth: x/5 - lÃƒÆ’Ã‚Â½ do
+- Metric literacy: x/5 - lÃƒÆ’Ã‚Â½ do
+- Mistake coverage: x/5 - lÃƒÆ’Ã‚Â½ do
+- Worked example: x/5 - lÃƒÆ’Ã‚Â½ do
+- Lab output: x/5 - lÃƒÆ’Ã‚Â½ do
+- Actionability: x/5 - lÃƒÆ’Ã‚Â½ do
+
+## Top 5 fixes
+1. ...
+
+## Missing visuals/tables
+- ...
+
+## Rewrite priority
+NÃƒÆ’Ã‚Âªu 1-3 section cÃƒÂ¡Ã‚ÂºÃ‚Â§n sÃƒÂ¡Ã‚Â»Ã‚Â­a trÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã¢â‚¬Âºc.
+`;
+
+  const messages = [
+    { role: "system", content: rubric },
+    {
+      role: "user",
+      content: `Lesson metadata:\n${JSON.stringify(lesson, null, 2)}\n\nLesson markdown:\n${stripFrontmatter(markdown).slice(0, 12000)}`
+    }
+  ];
+
+  try {
+    const answer = await callAiProvider(messages, 0.2);
+    state.lessonReviews[lesson.day] = answer;
+  } catch (error) {
+    state.lessonReviews[lesson.day] = `KhÃƒÆ’Ã‚Â´ng gÃƒÂ¡Ã‚Â»Ã‚Âi Ãƒâ€žÃ¢â‚¬ËœÃƒâ€ Ã‚Â°ÃƒÂ¡Ã‚Â»Ã‚Â£c AI provider: ${error.message}. KiÃƒÂ¡Ã‚Â»Ã†â€™m tra Provider URL/API key hoÃƒÂ¡Ã‚ÂºÃ‚Â·c dÃƒÆ’Ã‚Â¹ng backend /api/chat.`;
+  }
+
+  saveState();
+  renderLesson(lesson.day);
+}
+
+async function callAiProvider(messages, temperature = 0.4) {
+  const response = await fetch(state.chat.providerUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(state.chat.apiKey ? { Authorization: `Bearer ${state.chat.apiKey}` } : {})
+    },
+    body: JSON.stringify({
+      model: state.chat.model || "gpt-4o-mini",
+      messages,
+      temperature
+    })
+  });
+  if (!response.ok) throw new Error(`Provider returned ${response.status}`);
+  const json = await response.json();
+  return (
+    json?.choices?.[0]?.message?.content ||
+    json?.message?.content ||
+    json?.output_text ||
+    "Provider response did not include a recognized answer field."
+  );
+}
 async function buildChatContext(prompt) {
   const query = prompt.toLowerCase();
   const lessonScores = data.course.lessons
     .map((lesson) => ({
       lesson,
-      score: scoreText(query, [lesson.title, lesson.summary, lesson.module, lesson.glossaryTerms.join(" ")].join(" "))
+      score: scoreText(query, [lesson.title, lesson.summary, lesson.module, lesson.learningOutcome, lesson.artifact, lesson.glossaryTerms.join(" ")].join(" "))
     }))
     .sort((a, b) => b.score - a.score)
     .slice(0, 3);
@@ -857,6 +1010,7 @@ function renderCase(item) {
       <p><span class="formula">${escapeHtml(item.metrics)}</span></p>
       <p><strong>Recommended call:</strong> ${escapeHtml(item.recommendation)}</p>
       <p>${escapeHtml(item.reason)}</p>
+      ${item.decision ? `<p><strong>Decision:</strong> ${escapeHtml(item.decision)}</p>` : ""}
     </article>
   `;
 }
@@ -1007,7 +1161,7 @@ function renderAccount() {
         <article class="panel">
           <h2>Login is not configured yet</h2>
           <p>This app is still using localStorage only. To enable login and cloud progress sync, create a Supabase project, run <code>supabase-schema.sql</code>, then fill <code>content/app-config.json</code>.</p>
-          <p class="status-line">Current local progress: ${completed}/30 lessons, ${planFields}/8 UA plan sections.</p>
+          <p class="status-line">Current local progress: ${completed}/30 lessons, ${planFields}/9 UA plan sections.</p>
         </article>
         <article class="panel">
           <h2>Why Supabase?</h2>
@@ -1039,7 +1193,7 @@ function renderAccount() {
         <div class="metric-row">
           <div class="metric"><strong>${completed}/30</strong><span>lessons</span></div>
           <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes</span></div>
-          <div class="metric"><strong>${planFields}/8</strong><span>plan fields</span></div>
+          <div class="metric"><strong>${planFields}/9</strong><span>plan fields</span></div>
           <div class="metric"><strong>${Object.values(state.checklist).filter(Boolean).length}</strong><span>checks</span></div>
         </div>
       </article>
@@ -1070,6 +1224,7 @@ function renderPlan() {
         ${planField("budget", "Budget", "Daily spend, test budget, channel split, stop-loss rule.")}
         ${planField("successCriteria", "Success criteria", "What must be true to iterate or scale.")}
         ${planField("killCriteria", "Kill criteria", "What tells you to stop, change audience, or change game.")}
+        ${planField("nextAction", "Next action", "Smallest dated action after this plan: owner, deadline, evidence needed.")}
       </form>
       <section class="panel">
         <h2>Preview</h2>
@@ -1107,7 +1262,8 @@ function updatePlanPreview() {
     `## Creative matrix\n${state.plan.creativeMatrix || "[empty]"}`,
     `## Budget\n${state.plan.budget || "[empty]"}`,
     `## Success criteria\n${state.plan.successCriteria || "[empty]"}`,
-    `## Kill criteria\n${state.plan.killCriteria || "[empty]"}`
+    `## Kill criteria\n${state.plan.killCriteria || "[empty]"}`,
+    `## Next action\n${state.plan.nextAction || "[empty]"}`
   ];
   document.querySelector("#planPreview").textContent = lines.join("\n\n");
 }
@@ -1142,6 +1298,9 @@ function renderMarkdown(markdown) {
   const lines = markdown.split(/\r?\n/);
   const html = [];
   let inList = false;
+  let tableRows = [];
+  let chartRows = [];
+  let inChart = false;
 
   const closeList = () => {
     if (inList) {
@@ -1150,10 +1309,58 @@ function renderMarkdown(markdown) {
     }
   };
 
+  const closeTable = () => {
+    if (tableRows.length) {
+      html.push(renderMarkdownTable(tableRows));
+      tableRows = [];
+    }
+  };
+
+  const closeChart = () => {
+    if (chartRows.length) {
+      html.push(renderMarkdownChart(chartRows));
+      chartRows = [];
+    }
+    inChart = false;
+  };
+
   for (const rawLine of lines) {
     const line = rawLine.trim();
+
+    if (inChart) {
+      if (line === ":::") {
+        closeChart();
+      } else if (line) {
+        chartRows.push(line);
+      }
+      continue;
+    }
+
+    if (line === ":::chart") {
+      closeList();
+      closeTable();
+      inChart = true;
+      continue;
+    }
+
+    if (line.startsWith("|") && line.endsWith("|")) {
+      closeList();
+      tableRows.push(line);
+      continue;
+    }
+
     if (!line) {
       closeList();
+      closeTable();
+      continue;
+    }
+
+    closeTable();
+
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)$/);
+    if (imageMatch) {
+      closeList();
+      html.push(renderMarkdownImage(imageMatch[1], imageMatch[2], imageMatch[3]));
       continue;
     }
     if (line.startsWith("## ")) {
@@ -1183,11 +1390,73 @@ function renderMarkdown(markdown) {
     html.push(`<p>${inlineMarkdown(line)}</p>`);
   }
   closeList();
+  closeTable();
+  closeChart();
   return html.join("");
+}
+
+function renderMarkdownImage(alt, src, title = "") {
+  const cleanSrc = String(src || "").trim();
+  const isAllowed = /^(https?:\/\/|\.\/|\/|content\/)/.test(cleanSrc);
+  if (!isAllowed) return "";
+  const caption = title || alt;
+  return `
+    <figure class="markdown-figure">
+      <img src="${escapeHtml(cleanSrc)}" alt="${escapeHtml(alt || "Lesson visual")}" width="1200" height="620" decoding="async">
+      ${caption ? `<figcaption>${inlineMarkdown(caption)}</figcaption>` : ""}
+    </figure>
+  `;
+}
+function renderMarkdownTable(rows) {
+  const parsed = rows
+    .map((row) => row.split("|").slice(1, -1).map((cell) => cell.trim()))
+    .filter((cells) => cells.some(Boolean));
+  if (parsed.length < 2) return parsed.map((cells) => `<p>${inlineMarkdown(cells.join(" | "))}</p>`).join("");
+  const separatorIndex = parsed.findIndex((cells) => cells.every((cell) => /^:?-{3,}:?$/.test(cell)));
+  const header = parsed[0];
+  const body = parsed.filter((_, index) => index !== 0 && index !== separatorIndex);
+  return `
+    <div class="markdown-table-wrap">
+      <table class="markdown-table">
+        <thead><tr>${header.map((cell) => `<th>${inlineMarkdown(cell)}</th>`).join("")}</tr></thead>
+        <tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderMarkdownChart(rows) {
+  let title = "Metric visualization";
+  const points = [];
+  for (const row of rows) {
+    if (row.toLowerCase().startsWith("title:")) {
+      title = row.slice(6).trim();
+      continue;
+    }
+    const [label, rawValue, note = ""] = row.split("|").map((part) => part.trim());
+    const value = Number(rawValue);
+    if (label && Number.isFinite(value)) points.push({ label, value, note });
+  }
+  if (!points.length) return "";
+  const max = Math.max(...points.map((point) => point.value), 1);
+  return `
+    <figure class="metric-chart">
+      <figcaption>${escapeHtml(title)}</figcaption>
+      ${points.map((point) => `
+        <div class="metric-chart-row">
+          <span class="metric-chart-label">${escapeHtml(point.label)}</span>
+          <div class="metric-chart-track"><span style="width: ${Math.max((point.value / max) * 100, 2).toFixed(1)}%"></span></div>
+          <strong>${escapeHtml(point.value)}</strong>
+          ${point.note ? `<em>${escapeHtml(point.note)}</em>` : ""}
+        </div>
+      `).join("")}
+    </figure>
+  `;
 }
 
 function inlineMarkdown(value) {
   return escapeHtml(value)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>')
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/`(.*?)`/g, "<code>$1</code>");
 }
@@ -1200,6 +1469,4 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-
-
 
