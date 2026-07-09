@@ -1,4 +1,4 @@
----
+﻿---
 day: 8
 title: "Metric map for puzzle UA"
 module: "Week 2 - Metrics and measurement"
@@ -9,250 +9,510 @@ artifact: "Metric decision map"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **Metric decision map**: một bản đồ liên kết 4 câu hỏi tối ưu hóa cốt lõi với các chỉ số chính (Primary metrics), chỉ số phụ trợ (Supporting metrics) và quy tắc cắt lỗ (stop-loss rules).
+Sau bài này, bạn tạo được **Metric decision map**: một bản đồ nối từng câu hỏi UA với metric chính, metric hỗ trợ, ngưỡng đọc theo scenario và action kế tiếp.
 
-Kết quả cần có sau bài:
-- Phân biệt rõ ràng các nhóm chỉ số: Acquisition (Thu hút), Retention (Giữ chân), và Monetization (Doanh thu).
-- Hiểu cách chọn chỉ số phụ trợ để tránh hiện tượng "đọc số một chiều" (bẫy CPI rẻ nhưng D1 gãy).
-- Biết cách thiết lập các khoảng ra quyết định (decision ranges) tương thích riêng với từng thể loại game.
-- Cập nhật mục **Metric targets** trong Final UA Plan.
+Quyết định cần học: biết metric nào trả lời câu hỏi nào, và không dùng một metric đơn lẻ để ra quyết định.
+
+Kết quả cần có:
+
+- Map 3 tầng: acquisition, retention, monetization.
+- Metric pairs để chẩn đoán gãy ở creative, store, onboarding hay economy.
+- Stop-loss rule phù hợp ngân sách `$100-500`.
+- Cập nhật trường **Metric targets** trong Final UA Plan.
 
 ---
 
 ## Why this matters
 
-Nhiều nhà phát triển game Unity thường bắt đầu chiến dịch thử nghiệm $100-500 bằng cách mở trang tổng quan (dashboard) lên và nhìn vào một chỉ số duy nhất: **CPI** (giá mỗi lượt cài đặt). Nếu thấy CPI ở mức $0.15, họ ăn mừng; nếu thấy CPI lên tới $0.85, họ hoảng loạn.
+Dashboard UA luôn trông có vẻ khách quan, nhưng metric đứng một mình rất dễ lừa bạn.
 
-Đây là tư duy UA cực kỳ nguy hiểm. Một chỉ số đứng độc lập không bao giờ phản ánh đúng thực tế:
-- CPI rẻ có thể đến từ việc video quảng cáo giật gân, đánh lừa (clickbait) khiến người chơi bấm cài đặt nhưng thoát game ngay sau 1 phút chơi (D1 retention thảm hại).
-- CPI đắt ($1.2) nhưng người chơi lại cực kỳ chất lượng, tự nguyện xem nhiều ad rewarded hoặc mua gói IAP (LTV cao vượt trội), mang lại tỷ lệ ROAS dương.
+- `CPI` thấp có thể là traffic rẻ nhưng user không quay lại.
+- `CTR` cao có thể là clickbait, không phải fit.
+- `D1` tốt có thể là early gameplay ổn, nhưng monetization chưa đủ để hoàn vốn.
+- `ARPDAU` cao có thể đến từ ép quảng cáo quá sớm và làm hỏng D3/D7.
 
-Để không bị đánh lừa bởi dữ liệu, bạn cần xây dựng một **Metric decision map** giúp ràng buộc các chỉ số đầu phễu (Acquisition) với cuối phễu (Retention, Monetization) thành từng cặp chẩn đoán tương hỗ.
-
-![LTV vs CPI break even chart](content/assets/usecases/day-08-ltv-vs-cpi.png)
-
-> [!NOTE]
-> **Hướng dẫn đọc Biểu đồ hòa vốn LTV vs. CPI (LTV vs. CPI Visual Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Trục hoành là thời gian (30 ngày), trục tung là giá trị ($ USD). Quan sát đường LTV tăng dần từ Ngày 1 và cắt đường CPI nằm ngang ở Ngày 30 (Break-even Point).
-> *   **Kết luận rút ra (Conclude)**: Thời điểm hòa vốn (payback day) là Ngày 30. Mọi doanh thu phát sinh sau Ngày 30 của cohort này chính là lợi nhuận ròng của bạn. Nếu đường LTV đi ngang dưới đường CPI suốt đời game, chiến dịch đang chạy lỗ.
-> *   **Không được suy ra (Do not infer)**: Không suy ra rằng game nào cũng phải hòa vốn vào Ngày 30. Nhiều game puzzle lớn có payback window kéo dài tới 180 ngày hoặc hơn tùy thuộc vào nguồn vốn.
+Với micro soft-launch, bạn không cần một hệ thống BI phức tạp. Bạn cần một bản đồ quyết định rõ: nếu số A và B cùng xảy ra, hành động tiếp theo là gì. Metric map giúp team Unity không tranh luận cảm tính sau khi spend bắt đầu chạy.
 
 ---
 
-## Core model: Hệ thống cặp chỉ số chẩn đoán (Diagnostic Metrics Pairs)
+## Core model: metric trả lời câu hỏi, không trả lời mọi thứ
 
-Đừng đọc số đơn lẻ. Hãy luôn đọc chỉ số theo cặp để phát hiện điểm nghẽn thực sự của phễu:
+Mỗi metric chỉ có một "job" chính. Sai lầm là bắt một metric trả lời câu hỏi ngoài phạm vi của nó.
 
-1.  **Cặp Acquisition (Thu hút)**: `CTR` (Tỷ lệ click ad) kết hợp với `Store CVR` (Tỷ lệ cài đặt trên store).
-    *   *Mục đích*: Đo lường xem thông điệp quảng cáo và hình ảnh cửa hàng có đồng bộ không.
-2.  **Cặp Retention (Giữ chân)**: `D1 Retention` kết hợp với `Tutorial Completion Rate` (Tỷ lệ hoàn thành hướng dẫn).
-    *   *Mục đích*: Chẩn đoán xem người chơi thoát sớm do game dở hay do hướng dẫn ban đầu quá khó hiểu.
-3.  **Cặp Monetization (Doanh thu)**: `ARPDAU` (Doanh thu trung bình trên người dùng hoạt động ngày) kết hợp với `Ad Impression per DAU` (Số lượt xem ad trung bình của mỗi user).
-    *   *Mục đích*: Xem doanh thu tăng do người chơi thực sự gắn kết hay do game đang ép xem quá nhiều quảng cáo gây ức chế.
+| Câu hỏi vận hành | Metric chính | Metric hỗ trợ | Metric không nên dùng một mình |
+| --- | --- | --- | --- |
+| Ad có kéo sự chú ý đúng không? | CTR | IPM, thumb-stop/video hold | CPI |
+| Store có chứng minh promise không? | Store CVR | Click-to-install, screenshot order | CTR |
+| First session có giao đúng promise không? | Tutorial complete, level depth | D1 retention | CPI |
+| User có quay lại không? | D1/D3/D7 retention | Session count, level depth | Installs |
+| Economy có cơ hội hoàn vốn không? | ARPDAU, ROAS window | Ad impressions/user, payer conversion | D1 |
 
----
-
-## Khung Bản đồ Quyết định Số liệu mẫu (Main framework/map mẫu)
-
-Dưới đây là khung phân tích giúp bạn thiết lập các chỉ số ra quyết định tương ứng với mục tiêu kiểm chứng:
-
-| Câu hỏi kiểm chứng | Chỉ số chính (Primary) | Chỉ số phụ trợ (Supporting) | Ngưỡng quyết định giả định | Hành động sửa đổi nếu dưới ngưỡng |
-| :--- | :---: | :---: | :---: | :--- |
-| **1. Ad hứa hẹn có thu hút không?** | CTR | IPM | `> 2.0%` (CTR) | Thiết kế lại 3 giây đầu của video quảng cáo. |
-| **2. Trang store có thuyết phục cài đặt?** | Store CVR | Click-to-Install | `> 22%` (CVR) | Thay đổi thứ tự ảnh chụp màn hình store (screenshots). |
-| **3. Gameplay phiên đầu giữ chân tốt không?** | D1 Retention | Tutorial Complete | `> 30%` (D1) | Rút ngắn tutorial, làm Level 1-5 dễ thắng hơn. |
-| **4. Game có khả năng hoàn vốn không?** | D7 ROAS | ARPDAU | `> 15%` (D7 ROAS) | Bổ sung vị trí đặt quảng cáo nhận thưởng (rewarded ads). |
+Metric decision map luôn đọc theo cặp: `primary metric` cho tín hiệu chính, `supporting metric` để biết nguyên nhân.
 
 ---
 
-## Sơ đồ Phễu Số liệu UA (Hero visual or operating diagram)
+## Metric decision map mẫu
 
-Sơ đồ phễu dưới đây mô tả sự tương quan chặt chẽ giữa các tầng chỉ số từ lúc quảng cáo hiển thị đến khi người chơi tạo ra doanh thu:
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Metric decision map mẫu]
+Type: hero operating diagram.
+Lesson section: Metric decision map mẫu.
+Visual brief: turn the framework/table in this section into a clean, readable learning visual.
+Teaching job: help the learner inspect the decision logic faster than prose alone.
+Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
+Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
-![UA metrics funnel mapping](content/assets/usecases/day-08-hero-diagram.png)
 
-> [!NOTE]
-> **Hướng dẫn đọc Sơ đồ phễu số liệu (Hero Visual Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Xem xét sự phân rã từ tầng đầu phễu (CTR, IPM) -> giữa phễu (CVR, CPI) -> cuối phễu (Retention D1/D7) -> đáy phễu (ARPDAU, ROAS).
-> *   **Kết luận rút ra (Conclude)**: Chi phí Acquisition (CPI) phải luôn được cân bằng bởi Retention và Monetization để tạo ra LTV lớn hơn CPI. Nếu một mắt xích ở giữa bị gãy (ví dụ CVR thấp), toàn bộ phễu dưới sẽ mất đi lượng người dùng thử nghiệm.
-> *   **Không được suy ra (Do not infer)**: Không suy ra rằng bạn phải đo lường tất cả các chỉ số này ngay từ ngày đầu tiên. Trong giai đoạn prototype hẹp, hãy tập trung làm sạch CTR, CVR và D1 trước.
+| Decision question | Primary metric | Supporting metric | Scenario range để đọc | Nếu yếu thì làm gì |
+| --- | --- | --- | --- | --- |
+| Hook có đủ rõ để mua traffic học hỏi? | CTR | IPM | So với creative cùng campaign, không dùng benchmark chung | Sửa 3 giây đầu, không sửa product vội |
+| Store có khớp hook? | Store CVR | Click-to-install | Đọc theo traffic source và promise | Đổi screenshot/title/video preview |
+| Onboarding có làm rơi user? | Tutorial complete | Level 1-3 complete | Đọc theo build/version | Rút tutorial, đưa proof sớm hơn |
+| Retention có đủ để tiếp tục học? | D1/D3 | Session count, level depth | Đọc theo thesis: relax/challenge/meta | Sửa pacing hoặc promise |
+| Monetization có hướng? | ARPDAU | Ad impressions/user, rewarded opt-in | Chỉ đọc directional trong test nhỏ | Điều chỉnh placement, chưa scale |
+| Có nên dừng spend? | Spend cap | Installs + quality floor | Rule viết trước khi chạy | Pause, ghi diagnosis, không chase losses |
+
+Điểm quan trọng: `scenario range` là ngôn ngữ quyết định nội bộ, không phải benchmark vĩnh viễn. Bạn sẽ tinh chỉnh range sau mỗi cohort.
+
+### Metric owner and confidence layer
+
+Metric map chỉ thật sự dùng được khi mỗi số có **owner**, **window**, và **confidence level**. Nếu không, team sẽ tranh luận "D1 thấp" mà không biết D1 đó đến từ build nào, source nào, cohort nào, và event đã QA chưa.
+
+| Metric | Owner | Read window | Confidence nếu... | Decision được phép |
+| --- | --- | --- | --- | --- |
+| CTR/IPM | UA/operator | campaign day, creative variant | spend/impression đủ đọc direction và delivery không lệch quá mạnh | sửa creative opening, hook, thumbnail |
+| Store CVR | Store owner/UA | store visit -> install | traffic source rõ và store listing không đổi giữa test | sửa screenshot/title/proof |
+| Tutorial complete | Game/analytics owner | first session | event QA pass trên build live và không đổi tên event | sửa tutorial, level 1-3, proof moment |
+| D1/D3 | Product owner | cohort day | cohort đủ sạch theo source/build và crash không bất thường | hold/iterate promise, chưa scale lớn |
+| ARPDAU/ROAS | Monetization owner | D0/D3/D7 tùy rule | revenue delay được hiểu và sample không quá nhỏ | đặt guardrail, không kill sớm |
+
+Decision memo nên luôn ghi:
+
+```text
+Metric:
+Owner:
+Window:
+Confidence:
+Allowed decision:
+Not allowed decision:
+Next checkpoint:
+```
+
+Ví dụ: `D1 = 17%` không tự nói phải kill product. Nếu `tutorial_complete = 51%` và event đã QA, quyết định gần nhất là sửa first session. Nếu event chưa QA, quyết định gần nhất là QA tracking.
+
+### Metric authority matrix
+
+Metric map chỉ đủ sâu khi mỗi metric có "quyền quyết định" rõ ràng. Một metric có thể hữu ích để quan sát nhưng chưa đủ quyền để scale, kill hoặc đổi thesis.
+
+| Metric | Quyết định được phép | Quyết định bị cấm | Bằng chứng cần đi kèm |
+| --- | --- | --- | --- |
+| `CTR` / `IPM` | Sửa opening hook, thumbnail, first 3 seconds, angle wording | Kết luận user quality hoặc product fit | Store CVR và guardrail sau install không phản đối |
+| Store CVR | Sửa screenshot order, title/subtitle, preview proof | Kết luận gameplay yếu | Cùng source/campaign scope và store asset stable |
+| `tutorial_complete` | Sửa tutorial, first win, level 1-3 proof | Kết luận channel fail nếu acquisition/store vẫn ổn | Event QA pass, build/source segment rõ |
+| D1/D3 | Hold/iterate promise, kiểm pacing và motivation | Kill product từ một cohort nhỏ | Cohort sạch, crash không bất thường, sample đủ đọc direction |
+| ARPDAU/ROAS early | Đặt watchlist hoặc guardrail monetization | Scale/kill economy sớm | Revenue delay/window hiểu rõ, retention floor tạm ổn |
+| CPI | Giữ spend cap hoặc pause nếu cost vượt learning budget | Scale vì install rẻ hoặc kill vì install đắt | IPM, CVR, D1 và test scope đi kèm |
+
+Rule: quyết định phải đi theo metric có confidence cao nhất ở mắt xích đang gãy. Nếu metric đẹp nằm upstream nhưng guardrail downstream đỏ, action đúng là kiểm downstream trước khi tăng budget.
 
 ---
 
-## Bảng so sánh 3 kịch bản game puzzle (Chart/visual/table)
+## Hero visual: metric funnel decision map
 
-> [!WARNING]
-> **Cảnh báo về khoảng số liệu quyết định (Scenario-specific Decision Ranges)**:
-> Các con số mục tiêu dưới đây **KHÔNG** phải là benchmark cố định áp dụng cho mọi game puzzle. Đây là các khoảng số liệu tham khảo cụ thể cho 3 kịch bản vận hành khác nhau. Tùy thuộc vào thiết kế trò chơi và tệp khách hàng, bạn phải tự xác định khoảng số liệu phù hợp với game của mình.
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Hero visual: metric funnel decision map]
+Type: data visual/chart or decision board.
+Lesson section: Hero visual: metric funnel decision map.
+Visual brief: turn the framework/table in this section into a clean, readable learning visual.
+Teaching job: help the learner inspect the decision logic faster than prose alone.
+Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
+Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
-| Kịch bản game (Scenario) | Ngưỡng CPI Kỳ vọng | Ngưỡng D1 Tối thiểu | Ngưỡng ARPDAU Target | ROAS D30 Target |
-| :--- | :---: | :---: | :---: | :---: |
-| **A: Ad-heavy Puzzle (Casual)** | `$0.15 - $0.35` | `> 32%` | `$0.02 - $0.04` | `> 40%` |
-| **B: IAP-heavy Puzzle (Midcore)** | `$0.80 - $1.50` | `> 28%` | `$0.15 - $0.30` | `> 15%` |
-| **C: Hybrid-casual (Mix IAP & Ad)** | `$0.40 - $0.70` | `> 30%` | `$0.05 - $0.10` | `> 25%` |
+
+[METRIC FUNNEL DECISION MAP]
+
+```text
+Impression
+  Question: Ad co lam dung nguoi dung lai khong?
+  Read: CTR + IPM + thumb-stop/video hold
+  If weak: sua 3 giay dau, hook, visual promise
+        |
+        v
+Click -> Store page
+  Question: Store co chung minh dung promise cua ad khong?
+  Read: Store CVR + click-to-install + screenshot order
+  If weak: sua screenshot 1, title/subtitle, preview video
+        |
+        v
+Install -> Tutorial start
+  Question: User co vao duoc first session sach khong?
+  Read: install_to_tutorial_start + crash-free/session_start
+  If weak: kiem tra build, loading, permission, first open friction
+        |
+        v
+Tutorial -> Level 1-3 proof
+  Question: Gameplay co giao dung ad promise trong vai phut dau khong?
+  Read: tutorial_complete + level_3_complete + first_clear/combo event
+  If weak: sua onboarding, level pacing, proof moment
+        |
+        v
+D1/D3 Retention
+  Question: Promise co tao du ly do quay lai khong?
+  Read: D1 + D3 + session_count + level_depth by cohort
+  If weak: sua pacing, difficulty curve, motivation mismatch
+        |
+        v
+Revenue / Economy
+  Question: User giu duoc co tao duong hoan von khong?
+  Read: ARPDAU + rewarded_opt_in + ad_impressions/user + payer signal
+  If weak: test placement sau khi retention floor tam on, chua scale
+```
+
+| Funnel leak | Metric pair can xem | Diagnosis co kha nang | Action uu tien |
+| --- | --- | --- | --- |
+| Ad attention leak | `CTR + IPM` | Hook khong ro hoac promise khong thay trong 1-3 giay | Sua creative opening, giu store/product neu cac tang sau tot |
+| Store proof leak | `CTR + Store CVR` | Ad keo click nhung store khong chung minh promise | Sua screenshot/title/video preview theo dung hook |
+| Build/friction leak | `Install + tutorial_start` | User da install nhung khong vao duoc first session sach | QA crash/loading/permission, khong ket luan UA voi build loi |
+| Onboarding leak | `tutorial_complete + D1` | Game khong giao proof som, tutorial lam roi user | Rut tutorial, dua clear/win/proof moment vao level 1-3 |
+| Retention leak | `D1/D3 + session_count` | First session qua mong hoac motivation mismatch | Sua pacing/difficulty hoac quay lai motivation map |
+| Economy leak | `ARPDAU + ad_impressions/user` | Co user nhung placement/reward loop chua co huong | Test rewarded placement nhe, khong ep interstitial qua som |
+
+
+**Inspect:** mỗi đoạn funnel có metric riêng và action riêng.
+**Conclude:** khi metric gãy, bạn sửa đoạn funnel tương ứng thay vì đổi toàn bộ chiến dịch.
+**Do not infer:** funnel không chứng minh game có thể scale; nó chỉ giúp đọc test nhỏ có kỷ luật.
+
+---
+
+## Chart: three scenario readout
 
 :::chart
-title: Ngưỡng CPI Kỳ vọng theo từng kịch bản ($ USD)
-Ad-heavy Puzzle|0.25|Thấp, dễ thu hút lượng lớn người chơi casual
-IAP-heavy Puzzle|1.15|Cao, nhắm đối tượng có khả năng chi trả sâu
-Hybrid-casual|0.55|Trung bình, cân bằng cả hai nguồn doanh thu
+title: Example decision pressure by metric group, 1-5
+Creative pressure|4|CTR/IPM weak relative to other variants
+Store pressure|2|CVR acceptable for current promise
+Onboarding pressure|5|Tutorial complete is the biggest leak
+Retention pressure|4|D1 follows onboarding weakness
+Monetization pressure|1|Too early and sample too small
 :::
 
-*Cách đọc chart*: Game của bạn thuộc kịch bản nào thì chỉ đối chiếu số liệu theo dòng của kịch bản đó. Đừng lấy CPI của game thuần ad (`$0.25`) để ép cho game thuần IAP (`$1.15`), việc so sánh khập khiễng này sẽ dẫn tới quyết định sai lầm.
+**Inspect:** pressure cao nhất nằm ở onboarding, không phải acquisition.
+**Conclude:** action đúng là sửa first session trước khi làm thêm creative scale.
+**Do not infer:** chart không nói monetization chắc chắn tốt; nó chỉ nói monetization chưa phải vấn đề đọc được trong mẫu hiện tại.
 
 ---
 
-## Hướng dẫn đọc số và chẩn đoán phễu rò rỉ
+## Hướng dẫn đọc số
 
-Hãy chẩn đoán kết quả chạy chiến dịch dựa trên các cặp chỉ số dưới đây:
+| Pattern | Diagnosis | Next action đúng | Next action sai |
+| --- | --- | --- | --- |
+| CTR thấp, CVR/D1 tốt | Creative không truyền tải được product proof | Làm lại opening hook, giữ thesis | Đổi audience hoặc onboarding |
+| CTR cao, CVR thấp | Ad-store mismatch hoặc clickbait | Sửa store proof theo hook | Scale vì CTR cao |
+| CVR cao, tutorial complete thấp | Store hứa đúng nhưng first session rơi user | Sửa tutorial/level 1-3 | Làm thêm store screenshot |
+| D1 tốt, ARPDAU rất thấp | Game giữ được user nhưng economy chưa có placement | Test rewarded placement nhẹ | Nhồi interstitial sớm |
+| CPI cao, D1/ARPDAU tốt | User đắt nhưng chất lượng có thể có giá trị | Tối ưu creative/channel để hạ CPI | Kill product chỉ vì CPI |
+| CPI thấp, D1 thấp | Traffic rẻ nhưng không có value | Pause source/hook, kiểm tra mismatch | Tăng budget vì install rẻ |
 
-| Pattern số liệu | Chẩn đoán lỗi (Diagnosis) | Hành động ĐÚNG (Next Action) | Hành động SAI thường gặp |
-| :--- | :--- | :--- | :--- |
-| **CTR > 2.5%**<br>**CVR < 12%** | **Ad-Store Mismatch**: Quảng cáo thu hút tốt nhưng nội dung cửa hàng store lệch pha, không củng cố lời hứa. | Tạm dừng chiến dịch quảng cáo, làm lại ảnh chụp màn hình store (screenshots). | Tiếp tục chạy ad vì nghĩ CTR cao là ad tốt. |
-| **CTR > 2.2%**, **CVR > 25%**<br>**Tutorial Complete < 60%** | **Onboarding Friction**: Người chơi tải game vì tò mò nhưng bỏ cuộc ngay trong màn hướng dẫn đầu tiên. | Đơn giản hóa các bước tutorial, thêm chỉ dẫn visual trực quan rõ hơn. | Sửa lại gameplay ở các level cao hoặc đổi video ad. |
-| **CTR > 2.0%**, **CVR > 22%**<br>**D1 > 35%**, **D7 ROAS < 5%** | **Monetization Leak**: Game giữ chân người chơi rất tốt nhưng hệ thống quảng cáo nhận thưởng/IAP hoạt động kém. | Bổ dung thêm các vị trí gợi ý xem video nhận thưởng (rewarded ads), tối ưu gói IAP đầu tiên. | Đổi kênh chạy quảng cáo hoặc scale ngân sách. |
+Với test nhỏ, đọc theo severity: một metric gãy nhẹ chưa đủ kết luận, nhưng hai metric cùng tầng gãy thường đủ để chọn action.
 
-### Minh họa Đọc bảng Cohort Retention trên Giao diện Báo cáo
+Metric verdict ladder:
 
-Dưới đây là một bảng Cohort Heatmap mô phỏng dashboard thực tế giúp chẩn đoán sức khỏe giữ chân người chơi:
+| Verdict | Evidence pattern | Next action | What to avoid |
+| --- | --- | --- | --- |
+| Keep reading | Spend/install floor chưa đủ, event QA pass, no severe leak | Let campaign reach the pre-written read floor | Refreshing dashboard and changing assets hourly |
+| Fix creative | `CTR/IPM` weak while store/onboarding quality is acceptable | Rewrite first 1-3 seconds, thumbnail, promise clarity | Changing product or store before ad promise is readable |
+| Fix store proof | `CTR` acceptable but Store CVR/click-to-install weak | Rewrite screenshot order, title/subtitle, preview proof | Scaling because attention looks good |
+| Fix first session | Store CVR acceptable but tutorial/level proof and D1 weak | Shorten tutorial, move proof moment earlier, retest same thesis | Adding a new channel or killing the market thesis |
+| Fix economy later | Retention direction acceptable but ARPDAU/rewarded opt-in weak | Test gentle rewarded placement after retention floor | Forcing interstitials before retention is stable |
+| Pause source/hook | CPI cheap but D1/tutorial quality weak, or CPI high with no quality signal | Pause or isolate that source/hook and write caveat | Chasing cheap installs or blaming product from bad traffic |
+| Retest cleanly | More than one layer changed during the test | Freeze variables and rerun the smallest readable cell | Declaring a winner from a dirty report |
 
-![Cohort Retention Table Heatmap Mockup](content/assets/usecases/day-08-cohort-table.png)
-
-> [!NOTE]
-> **Hướng dẫn đọc Bảng Cohort Retention (Cohort Table Visual Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Cột `Cohort Date` phân nhóm người chơi cài đặt theo ngày, cột `Cohort Size` là số lượng cài đặt ngày hôm đó, các cột sau là tỷ lệ retention suy giảm theo thời gian (Day 1, Day 3, Day 7) biểu diễn bằng màu xanh từ đậm (retention cao) sang nhạt dần.
-> *   **Kết luận rút ra (Conclude)**: Cohort nào có màu nhạt đột ngột ở D1 (ví dụ dòng ngày 02/07 rớt xuống 12% so với 32% ngày trước đó) biểu thị có lỗi kỹ thuật phát sinh đột xuất (như build crash, server ngắt kết nối) hoặc chạy nhầm tập target ads kém chất lượng.
-> *   **Không được suy ra (Do not infer)**: Không tự suy ra tỷ lệ rụng này sẽ kéo dài mãi mãi theo đường thẳng tuyến tính. Retention thường giảm nhanh ở những ngày đầu và đi ngang thành một đường tiệm cận dài (tail retention).
+Decision rule: always name the **highest-confidence leak** before naming the winner. If the leak is upstream, do not diagnose downstream metrics yet; if the report is dirty, the action is a cleaner test, not a stronger opinion.
 
 ---
 
-## Worked example: Phân tích chẩn đoán cho Game Xếp hình Thư giãn (Calming Hex Puzzle)
+## Worked example: $250 calming puzzle test
 
-Nhà phát triển chạy thử nghiệm chiến dịch ad với ngân sách $250 trên Meta Ads cho game xếp hình lục giác thư giãn (Calming Hex Puzzle). Mục tiêu giả lập đặt ra:
-- CPI kỳ vọng: `$0.35 - $0.50`
-- D1 Retention đích: `> 30%`
-- Tỷ lệ hoàn thành Tutorial: `> 80%`
+Setup:
 
-**Kết quả thu thập được sau khi chi tiêu $250**:
-- Số lượt cài đặt (Installs): 625.
-- CPI thực tế tính toán: `$250 / 625 = $0.40` (*Đạt mức kỳ vọng*).
-- Tỷ lệ hoàn thành Tutorial: 52% (*Thấp nghiêm trọng*).
-- D1 Retention thực tế: 18% (*Không đạt chỉ tiêu*).
+```text
+Budget: $250
+Thesis: calming/satisfying block puzzle
+Primary question: promise chain có giữ được user sau install không?
+Stop-loss: pause nếu spend >= $80 và tutorial complete < 60% hoặc D1 < 18%
+```
 
-**Phân tích chẩn đoán & Tradeoff (Verdict)**:
-*   Mặc dù chi phí CPI (`$0.40`) nằm trong khoảng chấp nhận được, nhưng chất lượng người chơi ở lại cực kỳ kém (D1 = 18%).
-*   Nhìn sâu vào số liệu phụ trợ (Supporting metrics): Tỷ lệ hoàn thành Tutorial chỉ đạt 52%, nghĩa là gần một nửa số người chơi đã tải game về đã tắt game ngay khi đang làm khảo sát hoặc đang xem hướng dẫn cách chơi màn đầu tiên.
-*   **Hành động quyết định**: Đây không phải lỗi của chiến dịch marketing hay video quảng cáo (vì CPI đã đạt chuẩn). Lỗi nằm ở phần onboarding của game. Nhà phát triển quyết định tạm dừng chạy ads hoàn toàn, tiến hành sửa code game để bỏ bớt các hộp thoại hướng dẫn chữ dài dòng, thay bằng hướng dẫn chỉ ngón tay di chuyển khối động, rồi mới bật lại test sau.
+Kết quả sau $250:
+
+| Metric | Value | Read |
+| --- | ---: | --- |
+| Impressions | 62,500 | đủ để đọc creative direction sơ bộ |
+| CTR | 1.8% | hơi yếu, nhưng chưa fatal |
+| Store CVR | 36% | store proof ổn |
+| Installs | 405 | CPI khoảng $0.62 |
+| Tutorial complete | 51% | gãy nặng |
+| D1 retention | 17% | gãy theo onboarding |
+| ARPDAU | $0.018 | quá sớm để kết luận economy |
+
+Diagnosis:
+
+- Store không phải vấn đề chính vì CVR ổn.
+- Creative cần cải thiện, nhưng leak lớn nhất là tutorial/first session.
+- D1 thấp đi cùng tutorial complete thấp, nên không nên scale traffic.
+
+Verdict: **pause spend, fix onboarding, retest same thesis**. Không đổi market thesis và không thêm channel mới cho đến khi tutorial complete vượt floor nội bộ.
+
+### Decision memo and retest plan
+
+Sau worked example, output không nên là "D1 thấp". Output phải là một memo ngắn giúp team thống nhất hành động trong sprint tiếp theo.
+
+```text
+Metric decision memo
+- Highest-confidence leak: tutorial_complete at 51% after event QA.
+- Supporting pattern: D1 at 17% follows the onboarding leak.
+- Not the main leak: store proof, because Store CVR is acceptable for this test.
+- Decision: pause spend above maintenance cap, fix onboarding/level proof, retest same calming thesis.
+- Do not do: add a new channel, rewrite market thesis, or scale because CPI is cheap.
+```
+
+Retest plan:
+
+| Retest item | Keep unchanged | Change one thing | Metric to read | Pass signal | Fail signal |
+| --- | --- | --- | --- | --- | --- |
+| Same calming promise | hook family, store proof, channel | tutorial length/proof moment | tutorial_complete, D1 | tutorial rises without CVR collapse | tutorial still weak, D1 flat |
+| Opening clarity variant | market thesis, first level payoff | first 3 seconds creative | CTR, IPM, Store CVR | CTR/IPM improve and CVR holds | CTR improves but CVR drops |
+| Rewarded placement probe | retention build, traffic source | one gentle rewarded moment | rewarded_opt_in, ad impressions/user, D1 | opt-in appears without D1 drop | ad pressure hurts D1/session |
+
+Retest rule: chỉ đổi một tầng chính. Nếu vừa đổi creative, store, tutorial và ad placement, report sau đó sẽ lại không đọc được nguyên nhân.
+
+### Metric readout acceptance memo
+
+Trước khi đưa một report vào decision meeting, hãy viết acceptance memo. Memo này biến bảng số thành quyết định có ranh giới.
+
+```text
+Metric readout acceptance - Calming Puzzle Test 01
+
+Accepted source/window:
+- Acquisition: same channel, same country, same store page, 3-day read.
+- Gameplay: tutorial_complete and level_3_complete QA pass on build 0.3.7.
+- Monetization: ARPDAU is watchlist only, D0 window too early.
+
+Highest-confidence leak:
+- tutorial_complete 51%, supported by D1 17%.
+
+Decision allowed:
+- Pause scale.
+- Fix onboarding / first-session proof.
+- Retest same thesis with same store proof.
+
+Decision blocked:
+- Do not add a new channel.
+- Do not rewrite market thesis.
+- Do not judge economy from ARPDAU.
+- Do not scale because CPI looks acceptable.
+
+Next checkpoint:
+- Rerun clean cell after tutorial fix, read tutorial_complete + level_3_complete + D1.
+```
+
+Acceptance memo tốt luôn nói rõ **source/window nào được chấp nhận**. Nếu source/window không sạch, action đầu tiên là clean test hoặc QA measurement, không phải creative/product verdict.
+
+---
+
+## Metric instrumentation checklist
+
+| Area | Check | Vì sao cần |
+| --- | --- | --- |
+| Acquisition | Campaign/ad/source naming nhất quán | Biết creative nào tạo traffic nào |
+| Store | Tách traffic theo source nếu có thể | CVR khác nhau theo promise/channel |
+| Tutorial | `tutorial_start` và `tutorial_complete` | Biết user rơi trước khi hiểu game |
+| Level proof | `level_start`, `level_complete`, `level_fail` | Đọc level depth và friction |
+| Ads | `ad_impression`, `rewarded_started`, `rewarded_completed` | Đọc ARPDAU không tách khỏi ad pressure |
+| Cohort | Cài ngày nào, build nào | Không trộn bug build với performance marketing |
+
+Không cần log 80 event. Cần log đúng các event trả lời decision map.
 
 ---
 
 ## Real usecases đã đối chiếu nguồn
 
-### Case Study 1: Merge Mansion (Metacore) — Kỷ luật cắt lỗ và tối ưu Retention ở giai đoạn Soft Launch
+| Source | Observable fact | Lesson interpretation | Do not infer |
+| --- | --- | --- | --- |
+| [Firebase Analytics events](https://firebase.google.com/docs/analytics/events) | Firebase hỗ trợ logging events và recommended events để phân tích hành vi app/game. | Metric map cần event taxonomy tối thiểu trước khi đọc retention/onboarding. | Không cần log mọi hành vi hoặc copy toàn bộ recommended events nếu không phục vụ decision. |
+| [Google AdMob Unity rewarded ads](https://developers.google.com/admob/unity/rewarded) | AdMob Unity docs mô tả rewarded ad flow và callback/reward handling. | Monetization metric như rewarded opt-in/ad impressions cần implementation sạch để không đọc sai ARPDAU. | Không suy ra rewarded ads sẽ tăng LTV nếu placement làm hỏng retention. |
+| [Google Play Data safety](https://support.google.com/googleplay/android-developer/answer/10787469) | Google Play yêu cầu khai báo cách app thu thập/chia sẻ dữ liệu. | Metric tracking phải đi cùng data/privacy readiness, nhất là khi thêm SDK analytics/ads. | Không dùng tracking nhiều hơn chỉ vì muốn dashboard đẹp. |
 
-| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
+Usecase readout:
+
+| Inspect | Conclude | Do not infer |
 | --- | --- | --- |
-| Trong giai đoạn soft launch của *Merge Mansion*, Metacore thiết lập mốc kỷ luật rất nghiêm ngặt: D1 retention phải đạt `> 40%` và D7 retention đạt `> 20%`. Khi chỉ số rớt dưới mốc này, họ lập tức đóng chiến dịch UA paid để quay lại sửa onboarding quest pacing. Nguồn: [Phân tích chi tiết về Merge Mansion trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/8/22/merge-mansion) | Quyết định tạm dừng ad để sửa sản phẩm khi các metrics hỗ trợ (D1/D7) bị gãy là hành động tối ưu để bảo vệ ngân sách hẹp. | Không được tự suy diễn rằng game puzzle của bạn cũng có thể mở lại ad quy mô lớn giống Metacore nếu chưa thực sự vượt qua các ngưỡng chất lượng này. |
-
-### Case Study 2: Rovio (Sugar Blast) — Chuyển dịch từ Tối ưu cài đặt (CPI) sang Hoàn vốn (ROAS)
-
-| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
-| --- | --- | --- |
-| Rovio đã công bố chi tiết quá trình chuyển đổi cách chạy UA cho dòng game casual puzzle: từ việc đấu thầu CPI rẻ (chạy cài đặt đại trà) sang mô hình tối ưu theo giá trị (Value-Based / ROAS bidding). Việc tập trung vào D7 ROAS thay vì CPI rẻ giúp nâng cao LTV của tệp người dùng lên 22% nhờ lọc bỏ được các tệp click ảo. Nguồn: [The Game Analytics Masterclass trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/10/25/the-game-analytics-masterclass) | Chỉ số CPI rẻ đứng riêng lẻ là vô nghĩa nếu không đi kèm với chỉ số giữ chân và tỷ lệ hoàn vốn ROAS. | Không suy ra rằng game indie nhỏ của bạn cũng cần xây dựng hệ thống dự phóng LTV tự động phức tạp như các studio lớn ngay lập tức. |
+| Tài liệu SDK/event nói rõ event nào được log và callback nào tồn tại. | Metric chỉ đáng tin khi event được fire đúng thời điểm và đúng build. | Không suy ra số tốt/xấu trước khi QA event. |
 
 ---
 
-## Common mistakes (Các sai lầm phổ biến)
+## Common mistakes
 
-*   **Mistake 1: Chỉ nhìn vào CPI rẻ để đánh giá sự thành bại**
-    *   *Correction*: Luôn gắn kèm chỉ số Retention D1. Một user cài đặt giá $0.10 nhưng không bao giờ mở game lần thứ hai thì giá trị thực sự bằng 0.
-*   **Mistake 2: Thiếu quy tắc dừng chiến dịch (Stop-loss rules)**
-    *   *Correction*: Thiết lập quy tắc cắt lỗ tự động trước khi bấm nút chạy ad: *"Tắt ad ngay nếu sau khi tiêu hết $50 mà số lượt install thu về dưới 50"* (tương đương CPI > $1.00).
-*   **Mistake 3: Đọc số quá sớm khi chưa đủ mẫu kiểm chứng**
-    *   *Correction*: Với ngân sách $300, hãy đợi chiến dịch thu về tối thiểu 100-200 lượt cài đặt trước khi tiến hành phân tích chẩn đoán phễu để tránh sai số thống kê.
+- **Mistake - Correction:** Chỉ nhìn CPI.
+  **Correction:** CPI phải đi cùng D1 hoặc tutorial complete để biết install có value không.
+
+- **Mistake - Correction:** Copy benchmark trên mạng làm target cứng.
+  **Correction:** Viết scenario range theo thesis, channel, build và budget của bạn.
+
+- **Mistake - Correction:** Đọc ARPDAU quá sớm từ 100 installs.
+  **Correction:** Dùng ARPDAU early như directional signal, chưa làm scale rule.
+
+- **Mistake - Correction:** Sửa creative, store và onboarding cùng lúc sau một report.
+  **Correction:** Chọn leak lớn nhất theo metric pair, sửa một tầng để lần retest đọc được nguyên nhân.
+
+- **Mistake - Correction:** Không viết stop-loss trước khi chạy.
+  **Correction:** Stop-loss phải có spend cap, sample floor và quality floor trước khi campaign bật.
 
 ---
 
 ## English Terms You Should Keep
 
-*   **CPI**: Cost Per Install (Chi phí trung bình cho mỗi lượt cài đặt game).
-*   **Retention**: Tỷ lệ giữ chân người chơi sau X ngày (D1, D7, D30).
-*   **ARPDAU**: Average Revenue Per Active User (Doanh thu trung bình trên mỗi người dùng hoạt động ngày).
-*   **ROAS**: Return On Ad Spend (Tỷ lệ doanh thu thu về chia cho chi phí quảng cáo đã chi).
-*   **IPM**: Install Per Mille (Số lượt cài đặt tạo ra trên mỗi 1,000 lượt hiển thị ad).
+| Term | Nghĩa dùng trong bài |
+| --- | --- |
+| CPI | Cost Per Install, chi phí cho một install |
+| Retention | Tỷ lệ user quay lại sau D1/D3/D7 |
+| ARPDAU | Average Revenue Per Daily Active User |
+| ROAS | Return On Ad Spend, doanh thu / chi phí ads |
+| IPM | Installs per Mille, installs trên 1000 impressions |
+| Cohort | Nhóm user theo ngày cài/source/build để đọc hành vi cùng điều kiện |
+| Stop-loss | Quy tắc dừng spend khi tín hiệu vượt ngưỡng rủi ro |
 
 ---
 
-## Lab output example (Mẫu kết quả thực hành)
+## Lab output example
 
-### Xem trước Bản đồ Quyết định Số liệu (Metric Decision Map Preview)
 ```text
-┌────────────────────────────────────────────────────────────────────────┐
-│                        METRIC DECISION MAP                            │
-├────────────────────────────────────────────────────────────────────────┤
-│ 1. Question: Is the ad hook drawing clicks?                           │
-│    Primary: CTR (> 2.0%) | Supporting: IPM (> 15)                      │
-│    Fail-action: Redesign first 3s video hook with faster puzzle action │
-├────────────────────────────────────────────────────────────────────────┤
-│ 2. Question: Is the onboarding keeping players?                      │
-│    Primary: D1 (> 30%) | Supporting: Tutorial Completion (> 80%)       │
-│    Fail-action: Remove text popups, make level 1-3 winnable in 30s    │
-├────────────────────────────────────────────────────────────────────────┤
-│ 3. Guardrail: Stop-loss budget cap                                     │
-│    Rule: Pause campaign immediately if spend reaches $50 and         │
-│          installs < 50 (CPI ceiling target: $1.00)                     │
-└────────────────────────────────────────────────────────────────────────┘
+Metric Decision Map - v1
+
+Campaign question:
+- Does the calming/satisfying promise chain produce retained players?
+
+Acquisition:
+- Primary: CTR by creative
+- Supporting: IPM, Store CVR
+- Action if weak: rewrite first 3 seconds or screenshot proof
+
+Retention:
+- Primary: D1 retention
+- Supporting: tutorial_complete, level_3_complete
+- Action if weak: fix onboarding/level pacing before scaling
+
+Monetization:
+- Primary: ARPDAU early directional
+- Supporting: rewarded_opt_in, ad_impressions_per_user
+- Action if weak: test rewarded placement after retention floor is met
+
+Stop-loss:
+- Pause if spend >= $80 and installs < 120
+- Pause if tutorial_complete < 60%
+- Pause if D1 < 18% after enough installs for directional read
+
+Do not change yet:
+- Do not add a new channel until onboarding leak is fixed
 ```
 
-Dưới đây là một mẫu Metric decision map hoàn chỉnh dạng bảng mà học viên cần điền:
+Decision memo example:
 
-| Câu hỏi kiểm chứng | Chỉ số chính (Primary) | Chỉ số phụ trợ (Supporting) | Ngưỡng mục tiêu giả định | Hành động sửa đổi khi gãy số |
-| :--- | :---: | :---: | :---: | :--- |
-| **Ad hook có hút click?** | CTR | IPM | CTR > 2.2% | Thay đổi màu sắc của khối puzzle trong ad. |
-| **Store listing thuyết phục?** | Store CVR | Click-to-Install | CVR > 25% | Thay thế ảnh store bằng visual combo rõ ràng. |
-| **Onboarding giữ chân tốt?** | D1 Retention | Tutorial Complete | D1 > 32% | Đơn giản hóa bảng xếp hạng tân thủ. |
-| **Quy tắc cắt lỗ (Stop-loss)** | Tổng ngân sách | Số install tối thiểu | Lỗ tối đa $50 | Tắt campaign ngay lập tức để bảo vệ ngân sách. |
+```text
+Highest-confidence leak:
+Metric owner:
+Read window:
+Allowed decision:
+Not allowed decision:
+Retest cell:
+Next checkpoint:
+```
+
+Retest cell example:
+
+```text
+Keep unchanged: calming promise, store screenshot order, same source.
+Change one thing: shorten tutorial and surface satisfying clear in level 1.
+Read: tutorial_complete, level_3_complete, D1.
+Pass: onboarding rises and D1 no longer follows the leak.
+Fail: same leak persists, revisit promise-game fit before adding channel.
+```
+
+Metric authority example:
+
+```text
+Metric:
+Decision allowed:
+Decision blocked:
+Required companion metric:
+Confidence condition:
+```
 
 ---
 
 ## Practical Lab
 
-Làm trực tiếp cho game của bạn:
-1.  Điền hoàn chỉnh bản đồ quyết định số liệu cho game của bạn theo mẫu ở phần **Lab output example**.
-2.  Áp dụng **Bảng quy trình kiểm tra chất lượng (Metric Quality Chain Check)** dưới đây để tự duyệt:
-    *   *Cặp chỉ số*: Mọi chỉ số chính (Primary) đã được ghép cặp với ít nhất một chỉ số phụ trợ (Supporting) để chẩn đoán chưa? (Đạt/Không)
-    *   *Khoảng số liệu*: Các con số mục tiêu đã được tùy chỉnh tương thích với thể loại game puzzle của bạn chưa (tránh copy rập khuôn)? (Đạt/Không)
-    *   *Ngưỡng cắt lỗ*: Bạn đã ghi rõ mốc ngân sách tối đa và số install tối thiểu để tự động tắt campaign chưa? (Đạt/Không)
-    *   *Kịch bản hành động*: Hành động sửa đổi đã gắn trực tiếp vào sự gãy đổ của từng chỉ số cụ thể chưa? (Đạt/Không)
+1. Viết 3 câu hỏi bạn muốn campaign đầu trả lời.
+2. Với mỗi câu hỏi, chọn 1 primary metric và 1 supporting metric.
+3. Viết action nếu metric pair yếu.
+4. Viết stop-loss theo budget cap, installs floor và quality floor.
+5. Kiểm tra event trong Unity/Firebase/analytics SDK có đủ để đọc các metric đó không.
+6. Gán owner, window và confidence cho 5 metric quan trọng nhất.
+7. Viết một decision memo từ report giả lập.
+8. Viết một retest cell chỉ đổi một tầng chính.
+9. Viết metric authority cho 3 metric bạn dễ over-read nhất: metric đó được phép quyết định gì và bị cấm quyết định gì.
+10. Viết metric readout acceptance memo trước khi đưa report vào meeting.
+
+Pass lab khi bạn có thể nhìn một report giả lập và chọn đúng một action: creative, store, onboarding, economy hoặc pause.
 
 ---
 
 ## Final UA Plan Update
 
-Cập nhật trường **metrics** trong Final UA Plan theo định dạng chuẩn dưới đây:
+Cập nhật trường **Metric targets**:
 
 ```text
-- Acquisition Primary target: [Ngưỡng CTR mong muốn]
-- Acquisition Supporting target: [Ngưỡng IPM/CVR mong muốn]
-- Retention Primary target: [Ngưỡng D1 mong muốn]
-- Retention Supporting target: [Ngưỡng Tutorial Complete mong muốn]
-- Monetization Target (nếu có): [Ngưỡng ARPDAU/ROAS mong muốn]
-- Stop-loss Rule: [Chi tiết quy tắc tự động dừng campaign]
-- Post-fail Action Plan: [Kịch bản hành động tương ứng khi gãy số]
+Campaign question:
+Acquisition primary metric:
+Acquisition supporting metric:
+Retention primary metric:
+Retention supporting metric:
+Monetization metric:
+Stop-loss spend cap:
+Stop-loss quality floor:
+Sample floor before diagnosis:
+Action if creative leak:
+Action if store leak:
+Action if onboarding leak:
+Action if economy leak:
+Metric owner/window/confidence:
+Metric authority:
+Readout acceptance memo:
+Decision memo:
+Retest cell:
 ```
+
+Liên kết với Day 2-3: metric targets phải đọc được market thesis và motivation đã chọn. Nếu motivation là relax, đừng chỉ tối ưu CTR bằng challenge clickbait.
 
 ---
 
 ## Checklist Focus
 
-*   [ ] Thiết lập đầy đủ các cặp chỉ số chính và phụ trợ cho 3 tầng phễu (Acquisition, Retention, Monetization).
-*   [ ] Xác định rõ ngưỡng số mục tiêu riêng cho game của bạn dưới dạng khoảng quyết định.
-*   [ ] Đã hoàn thành 4 mục trong Bảng quy trình kiểm tra chất lượng (Metric Quality Chain Check).
-*   [ ] Cập nhật trường metrics vào Final UA Plan.
+- [ ] Mỗi câu hỏi campaign có primary + supporting metric.
+- [ ] Không có quyết định nào dựa trên CPI một mình.
+- [ ] Stop-loss viết trước khi chạy ads.
+- [ ] Event taxonomy đủ để đọc tutorial, level depth, D1 và ads.
+- [ ] Scenario ranges được ghi là directional, không phải benchmark cố định.
+- [ ] Metric chính có authority rõ: được phép và bị cấm quyết định gì.
+- [ ] Readout acceptance memo có source/window, decision allowed và decision blocked.
+- [ ] Final UA Plan có action cho từng leak.
 
 ---
 
 ## Curated References
 
-*   [The Game Analytics Masterclass trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/10/25/the-game-analytics-masterclass)
-*   Tài liệu đo lường chỉ số Cohort Retention của Firebase Analytics.
+- [Firebase Analytics - Events](https://firebase.google.com/docs/analytics/events)
+- [Google AdMob Unity - Rewarded ads](https://developers.google.com/admob/unity/rewarded)
+- [Google Play Help - Data safety](https://support.google.com/googleplay/android-developer/answer/10787469)

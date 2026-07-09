@@ -9,272 +9,473 @@ artifact: "Channel selection note"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **Channel selection note**: một ghi chú ra quyết định đủ ngắn để đưa vào 1-page UA / soft-launch plan, nhưng đủ rõ để biết **kênh nào nên chạy trước**, **kênh nào nên hoãn**, và **kênh đó sẽ dạy bạn điều gì**.
+Sau bài này, bạn tạo được **Channel selection note**: một ghi chú chọn `1 primary channel`, `1 deferred channel`, và `1 thing not testing yet` cho sprint UA đầu tiên.
 
-Kết quả cần có sau bài:
-- Không còn chọn channel theo kiểu “nghe nói channel này mạnh”.
-- Biết tách **learning job** của từng channel: creative learning, search intent, scale, hay store validation.
-- Chọn được `1` primary channel cho test `$100-500` thay vì rải tiền thành nhiều cụm noise.
-- Viết được lý do vì sao channel đó khớp với creative readiness, tracking readiness và stage hiện tại của game.
-- Cập nhật trường **Channel / test scope** trong Final UA Plan bằng một quyết định dùng được ngay.
+Quyết định bạn học cách đưa ra: **kênh nào trả lời learning question nhanh nhất với budget, creative và tracking hiện tại?**
+
+Output cần có:
+
+- Một `learning job` rõ cho kênh đầu tiên.
+- Rubric chấm ít nhất 3 channel options.
+- Lý do chọn `primary channel` và lý do hoãn kênh khác.
+- Risk note để tránh blame nhầm channel khi store/tracking/first session đang yếu.
+- Block copy được vào field **budget / test scope** trong Final UA Plan.
 
 ---
 
 ## Why this matters
 
-Một team Unity nhỏ thường mắc cùng một lỗi: vừa có ít ngân sách, vừa muốn “có mặt ở mọi nơi”. Kết quả là `$300` bị chia thành quá nhiều campaign, quá nhiều network, quá nhiều giả thuyết. Sau vài ngày, dashboard có số nhưng không có câu trả lời.
+Team nhỏ thường chọn channel theo danh tiếng: "Meta dễ test", "Google scale tốt", "Apple Search intent cao", "network game có user đúng genre". Các câu đó có thể đúng trong một ngữ cảnh nào đó, nhưng chưa đủ để quyết định sprint đầu tiên.
 
-Các kênh quảng cáo không thể thay thế cho nhau (not interchangeable):
-- Có channel mạnh về **creative learning** (kiểm chứng video quảng cáo).
-- Có channel mạnh về **high intent discovery** (bắt đúng nhu cầu người dùng chủ động tìm kiếm).
-- Có channel chỉ bắt đầu hữu ích khi account đã có nhiều dữ liệu conversion tích lũy hoặc hệ thống đo lường ổn định.
-- Có “channel” thực chất nên được xem là **store / ASO preparation** (chuẩn bị nội dung trang cửa hàng) chứ không phải paid acquisition sprint.
+Với `$100-500`, lỗi không phải là chọn channel "kém". Lỗi là **mở quá nhiều channel cùng lúc** hoặc chọn channel không trả lời được câu hỏi hiện tại.
 
-Với puzzle prototype Android-first, câu hỏi đúng thường không phải là “channel nào tốt nhất thị trường”, mà là:
-- Channel nào dạy mình nhanh nhất với budget nhỏ?
-- Channel nào cần quá nhiều conversion nên chưa phù hợp?
-- Channel nào sẽ làm mình đọc sai nếu store page và tracking còn yếu?
+Ví dụ:
 
----
+- Nếu bạn chưa có store screenshot khớp ad promise, channel nào cũng có thể trông tệ vì `Store CVR` bị rò.
+- Nếu tracking chưa đo `tutorial_complete`, channel nào cũng khó nói user quality sau install.
+- Nếu chỉ có 1 creative yếu, chạy social/video channel rồi kết luận "channel không hợp game" là quá vội.
+- Nếu dùng machine-led campaign quá sớm, bạn có thể nhận install nhưng khó biết asset/hook nào tạo learning.
 
-## Core model: chọn channel theo learning job, không theo danh tiếng
-
-Thay vì hỏi “nên chạy Meta, Google hay network game?”, hãy hỏi 4 câu theo thứ tự:
-
-| Câu hỏi | Nếu câu trả lời là “có” | Ý nghĩa chọn channel |
-| --- | --- | --- |
-| **Mình đã có 2-4 creative cells rõ hook chưa?** | Có | Có thể ưu tiên channel thiên về creative learning. |
-| **Store page đã đủ sạch để đọc CVR chưa?** | Chưa | Trì hoãn paid scale; ưu tiên sửa store hoặc làm validation hẹp hơn. |
-| **Tracking core đã đủ tin chưa?** | Chưa | Tránh channel phức tạp về optimization; test đơn giản hơn để debug signal. |
-| **Mục tiêu chính là học promise hay bắt intent?** | Promise | Social/video channel thường hợp hơn search-intent channel. |
-
-> [!IMPORTANT]
-> **Decision rule**: Với micro-budget, channel tốt nhất là channel tạo ra *tín hiệu có thể hành động*, không phải channel có vẻ “xịn” hơn trong các case study lớn.
+Bài này không dạy "channel nào tốt nhất". Nó dạy **channel nào hợp với câu hỏi học tập hiện tại**.
 
 ---
 
-## Sơ đồ Quyết định chọn Kênh quảng cáo / Hero Diagram
+## Core model: Channel = learning instrument
 
-![UA selection decision tree](content/assets/usecases/day-06-hero-diagram.png)
-*Sơ đồ cây quyết định: Bắt đầu từ câu hỏi học nhanh nhất của dự án để dẫn dắt tới nhóm kênh phù hợp.*
+Hãy xem mỗi channel như một dụng cụ đo. Dụng cụ khác nhau đo tín hiệu khác nhau.
 
----
+```text
+Learning question -> readiness -> channel fit -> metric readout -> next action
+```
 
-## Channel map mẫu
-
-| Channel family | Learning job mạnh nhất | Budget fit `$100-500` | Creative requirement | Measurement complexity | Khi nào nên là first test? | Khi nào chưa nên dùng sớm? |
-| --- | --- | --- | --- | --- | --- | --- |
-| **Meta-style social** | Creative learning, promise fit, CTR -> CVR readout | Khá hợp | Cần video hook đủ rõ | Vừa | Khi bạn đã có 2-4 ad angles và muốn biết promise nào đáng giữ. | Khi tracking đang hỏng hoặc store page quá yếu. |
-| **Google App Campaigns** | Broad app demand capture, machine-led distribution | Rất kém ở quy mô nhỏ | Cần asset pack đủ rộng (ảnh, text, video) | Tương đối cao | Khi build và measurement sạch hơn, muốn xem broad distribution phản ứng ra sao. | **Lưu ý kỹ thuật**: Máy học của Google cần tối thiểu 50 conversions/ngày để tối ưu. Với budget nhỏ, campaign dễ bị "nghẹn" (learning loop). |
-| **Rewarded / gaming network** | Gameplay-proof, install quality từ game-like audience | Tùy game, thường cần creative/gameplay proof rõ | Cần gameplay footage hợp ngữ cảnh game | Vừa đến cao | Khi core loop nhìn rất “gamey”, first-session proof đủ rõ. | Khi game còn thiếu first-win clarity hoặc ad chỉ là curiosity bait. |
-| **ASO / store listing cleanup** | Store proof, screenshot order, icon/subtitle fit | Rất hợp (0đ paid) | Không cần paid creative nhiều | Thấp | **Liên kết Lesson 4**: Khi CTR ổn nhưng CVR yếu (<22%), hãy sửa store trước khi chạy ads paid. | Khi bạn nhầm nó là “scale channel” thay vì prep work để giảm rò rỉ. |
-| **Apple Ads / Search intent** | High-intent iOS discovery | Không phải first choice cho Android-first micro test | Cần metadata và product page fit | Phức tạp | Khi đã iOS-aware hơn và muốn test search intent cụ thể. | **Hạn chế đo lường**: Kể từ iOS 14.5+ (ATT framework), việc đo lường chuyển đổi trên iOS rất nhiễu đối với team nhỏ. |
-
----
-
-## Đánh giá So sánh Đặc tính Kênh / Data Visual
-
-![UA selection data visual comparison](content/assets/usecases/day-06-data-visual.png)
-*Biểu đồ so sánh đa tiêu chí: Giúp nhận diện rõ các điểm đánh đổi (tradeoff) về tốc độ học, độ phức tạp đo lường và ngân sách.*
-
----
-
-### Bảng so sánh chi phí thiết lập ban đầu (Initial Setup Cost)
-
-| Kênh (Channel) | Chi phí thiết lập kỹ thuật | Chi phí sản xuất Creative | Độ khó vận hành (1-5) | Lưu ý cốt lõi |
-| :--- | :---: | :---: | :---: | :--- |
-| **Meta-style social** | Thấp (chỉ cần SDK cơ bản) | Cao (cần 2-4 video hook chất lượng) | 2/5 | Dễ chạy thử nhanh với ngân sách nhỏ. |
-| **Google App Campaigns** | Trung bình | Vừa (cần gom đủ asset pack ảnh/text/video) | 3/5 | Cần máy học tự động tối ưu, tránh chỉnh tay thủ công nhiều. |
-| **ASO / Store cleanup** | Thấp | Vừa (chụp screenshot, viết mô tả) | 1/5 | Tập trung sửa rò rỉ phễu store trước khi chạy bất kỳ ads nào. |
-| **Rewarded network** | Cao (cần custom SDK / ad mediator) | Cao (cần gameplay video chân thực) | 4/5 | Chỉ nên dùng khi game đã ổn định loop. |
-| **Apple Ads** | Thấp | Thấp (dùng chính assets của store) | 3/5 | Đấu thầu từ khóa thủ công (keyword bidding) trên iOS. |
-
----
-
-## Hướng dẫn đọc số và đọc tín hiệu theo channel
-
-| Pattern | Cách đọc | Next action đúng | Next action sai thường gặp |
+| Nếu learning question là... | Channel job cần ưu tiên | Metric đọc chính | Cần readiness gì trước? |
 | --- | --- | --- | --- |
-| **Social CTR có tín hiệu nhưng Store CVR yếu** | Channel đã dạy bạn về promise mismatch hoặc store proof yếu. | Sửa screenshot đầu, icon, subtitle, first screenshot narrative. | Kết luận luôn là social channel “không hiệu quả”. |
-| **Google distribution có install nhưng khó giải thích hook nào thắng** | Asset pack hoặc learning design quá broad cho budget hiện tại. | Quay lại test hẹp hơn, ít hypothesis hơn. | Đổ thêm budget chỉ để mong machine tự tối ưu ra câu trả lời. |
-| **Rewarded/game network CPI ổn nhưng D1 gãy** | Audience có thể click/try gameplay, nhưng first session chưa giữ được. | Sửa tutorial, first win, difficulty ramp. | Scale vì “install quality có vẻ tốt”. |
-| **Search-intent channel tap intent mạnh nhưng volume nhỏ** | Intent signal hữu ích, nhưng chưa chắc là first channel cho Android-first prototype. | Dùng như kênh bổ sung khi iOS/store metadata đã khá hơn. | Đọc nó như bằng chứng rằng paid strategy tổng thể đã xong. |
-| **ASO/store cleanup làm CVR nhích lên trước cả khi tăng spend** | Store proof đang là bottleneck thật. | Giữ channel plan gọn, chỉ scale paid sau khi listing đủ sạch (CVR > 22%). | Bỏ qua vì nghĩ “không phải paid nên không quan trọng”. |
+| Hook nào tạo interest sạch nhất? | Creative discovery / social video | CTR, IPM, Store CVR | 2-4 hooks rõ, store proof không quá yếu |
+| Store có xác nhận ad promise không? | Store/ASO cleanup hoặc store experiment | Store CVR, install rate | Ad promise rõ, screenshot/copy có thể thay |
+| First session có giữ user đúng promise không? | Paid traffic hẹp + event readout | tutorial_complete, level_3_reach, D1 | Event core sạch, onboarding ổn định |
+| Search intent có tồn tại không? | Search-intent channel | tap/search conversion, CVR | Metadata/store page tốt, iOS-aware nếu Apple Ads |
+| Broad machine distribution có ổn không? | App campaign / automated distribution | CPI, conversion quality, cohort | Asset pack tốt, tracking ổn, budget đỡ mỏng |
+
+Rule: **chọn channel theo việc nó có thể giúp bạn sửa quyết định kế tiếp không**, không theo việc nó nổi tiếng.
+
+---
+
+## Channel selection rubric mẫu
+
+Chấm mỗi channel từ `1-5`. Channel đầu tiên không cần điểm tổng cao nhất trong mọi mặt; nó cần điểm cao ở learning job hiện tại.
+
+| Criterion | 1 điểm | 3 điểm | 5 điểm |
+| --- | --- | --- | --- |
+| Budget fit | Cần nhiều spend mới đọc được | Có thể đọc directional signal | Phù hợp rõ với `$100-500` |
+| Creative fit | Asset hiện tại không đúng định dạng | Cần chỉnh nhẹ | Asset sẵn sàng |
+| Measurement clarity | Dashboard khó tách nguyên nhân | Đọc được vài metric | Metric map trực tiếp tới decision |
+| Speed of learning | Cần nhiều ngày/volume | Có tín hiệu sau một sprint | Có thể học nhanh trong 3-7 ngày |
+| Funnel risk | Store/tracking dễ làm nhiễu nặng | Có risk nhưng kiểm soát được | Risk thấp hoặc đã có guardrail |
+
+Template chấm:
+
+| Channel option | Budget fit | Creative fit | Measurement clarity | Speed | Funnel risk | Decision |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Meta-style social | 4 | 4 | 4 | 4 | 3 | Primary nếu goal là hook/promise fit |
+| Google App Campaign | 2 | 3 | 2 | 2 | 3 | Defer nếu budget/asset còn mỏng |
+| Apple Ads search | 2 | 3 | 4 | 3 | 3 | Later nếu iOS/search-intent là question |
+| Store/ASO cleanup | 5 | 3 | 4 | 4 | 4 | Do before paid nếu store proof yếu |
+| Gaming/rewarded network | 3 | 4 | 3 | 3 | 2 | Later nếu first-session proof đã rõ |
+
+### Channel readout contract
+
+Sau khi chọn primary channel, hãy viết contract trước khi spend. Contract này nói rõ channel được phép dạy điều gì, không được phép kết luận điều gì, và điều kiện nào khiến bạn phải hold.
+
+| Contract field | Câu hỏi | Ví dụ |
+| --- | --- | --- |
+| Learning job | Channel này phải trả lời câu hỏi nào? | Hook nào tạo promise fit sạch nhất? |
+| Minimum setup | Cần asset/store/event nào trước khi chạy? | 3 hooks, screenshot đầu khớp promise, `tutorial_complete` pass |
+| Readout path | Đọc metric theo chuỗi nào? | `CTR/IPM -> Store CVR -> tutorial_complete -> D1` |
+| Hold condition | Khi nào không được kết luận channel? | store thay đổi giữa test, event thiếu, spend lệch quá mạnh |
+| Not allowed conclusion | Điều gì report không được nói? | không kết luận channel xấu nếu store proof yếu |
+| Next action menu | Nếu pattern A/B/C xảy ra thì làm gì? | fix store, iterate hook, hold, or defer channel |
+
+Mẫu contract:
+
+```text
+Channel readout contract
+- Primary channel:
+- Learning job:
+- Minimum setup:
+- Readout path:
+- Hold condition:
+- Not allowed conclusion:
+- Next action menu:
+- Owner/review date:
+```
+
+Quy tắc: nếu không viết được "not allowed conclusion", rất dễ blame nhầm channel khi thực ra lỗi nằm ở store, tracking hoặc first session.
+
+---
+
+## Hero visual: decision tree chọn channel
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - UA selection decision tree]
+Type: hero operating diagram.
+Lesson section: Hero visual: decision tree chọn channel.
+Previous local asset to replace: content/assets/usecases/day-06-hero-diagram.png.
+Visual brief: UA selection decision tree.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
+
+**Visual readout**
+
+- **Inspect:** Decision tree bắt đầu từ readiness và learning question, không bắt đầu từ tên platform.
+- **Conclude:** Nếu creative/store/tracking chưa sạch, mở thêm channel sẽ làm kết quả khó đọc hơn.
+- **Do not infer:** Không suy ra kênh bị hoãn là kênh xấu. "Deferred" nghĩa là chưa đúng thời điểm hoặc chưa đúng câu hỏi.
+
+---
+
+## Channel family comparison
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - UA selection data visual comparison]
+Type: data visual/chart.
+Lesson section: Channel family comparison.
+Previous local asset to replace: content/assets/usecases/day-06-data-visual.png.
+Visual brief: UA selection data visual comparison.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
+
+:::chart
+title: Channel fit giả lập cho first sprint, 1-5
+Meta-style social|4|Fast creative and promise learning if assets are ready
+Store/ASO cleanup|5|Best if store proof is currently the bottleneck
+Google App Campaign|2|Useful later, harder to diagnose with thin budget
+Apple Ads search|3|Good intent read, less aligned with Android-first first sprint
+Gaming network|3|Good when gameplay proof and first session are already clear
+:::
+
+| Channel family | Learning job mạnh | Phù hợp first sprint khi | Nên hoãn khi |
+| --- | --- | --- | --- |
+| Meta-style social/app ads | Test creative promise và ad-to-store continuity | Có 2-4 video hooks, store proof tạm ổn, muốn đọc `CTR -> CVR` | Chỉ có 1 weak creative hoặc store chưa xác nhận promise |
+| Google App Campaigns | Automated distribution và asset mix learning | Asset pack đủ, tracking tốt, budget không quá mỏng | Cần biết chính xác hook nào thắng trong budget nhỏ |
+| Apple Ads/Search | Search intent và App Store discovery | iOS-aware, metadata tốt, muốn đọc intent cụ thể | Android-first sprint đầu và chưa có iOS readiness |
+| Store/ASO cleanup | Sửa bottleneck store trước paid spend | Ad interest có nhưng store proof yếu | Cần user quality/retention learning ngay |
+| Gaming/rewarded networks | Gameplay-context traffic, game-like audience | Core loop nhìn rõ, first-session proof khá tốt | Tutorial/first win còn mơ hồ |
+
+**Visual readout**
+
+- **Inspect:** Không có channel nào thắng mọi criterion. Mỗi channel mạnh ở một job.
+- **Conclude:** First sprint nên ưu tiên channel dễ trả lời câu hỏi hẹp nhất.
+- **Do not infer:** Điểm fit không phải benchmark thị trường. Nó là rubric để team tự chấm theo readiness hiện tại.
+
+---
+
+## Hướng dẫn đọc số theo channel
+
+Đọc channel qua funnel chain:
+
+```text
+channel placement -> ad promise -> store proof -> first-session proof -> metric pattern -> next action
+```
+
+| Pattern | Cách đọc | Next action đúng | Next action sai |
+| --- | --- | --- | --- |
+| Social CTR ổn, Store CVR yếu | Creative tạo interest nhưng store không xác nhận promise | Sửa first screenshot/copy hoặc giảm promise lệch | Kết luận social traffic kém |
+| Google automated campaign có install nhưng khó biết hook nào tốt | Setup quá broad cho câu hỏi creative | Quay lại test hẹp hơn hoặc nhóm asset theo theme rõ | Đổ thêm tiền để máy tự tìm câu trả lời |
+| Apple/search tap intent có nhưng volume nhỏ | Intent signal có ích nhưng không đủ broad learning | Dùng như supplemental read, không thay first sprint Android | Gọi đây là channel strategy hoàn chỉnh |
+| Gaming network CPI ổn, D1 yếu | Người chơi thử game nhưng first session không giữ được | Sửa onboarding/first win | Scale vì CPI có vẻ ổn |
+| Store cleanup tăng CVR trước paid scale | Store proof từng là bottleneck | Chạy paid sprint sau khi listing sạch hơn | Bỏ qua vì "không phải paid channel" |
+
+Một channel test tốt phải kết thúc bằng câu: "Channel này dạy mình X, nên tuần sau làm Y." Nếu chỉ kết thúc bằng "CPI bao nhiêu", bài test còn thiếu decision.
 
 ---
 
 ## Worked example: chọn channel cho puzzle prototype với `$300`
 
-Giả sử bạn có game puzzle match prototype, Android-first, hiện có:
-- `3` video hooks đủ xem được
-- store page còn hơi yếu ở screenshot đầu
-- tracking core đã có `first_open`, `tutorial_complete`, `level_complete`
-- chưa có đủ sample để tin vào optimization phức tạp
+Context:
 
-Bạn đang cân nhắc 3 hướng:
+- Android-first block puzzle prototype.
+- Có 3 video hooks: `relax clear`, `hard challenge`, `satisfying combo`.
+- Store screenshot đầu tạm ổn nhưng chưa hoàn hảo.
+- Tracking có `first_open`, `tutorial_complete`, `level_complete`.
+- Budget: `$300`, không đủ để mở 3 network cùng lúc.
 
-| Option | Tại sao hấp dẫn | Rủi ro chính | Kết luận cho vòng 1 |
-| --- | --- | --- | --- |
-| **Meta-style social** | Dễ test hook, dễ xem promise fit qua CTR -> CVR | Nếu store page yếu sẽ đọc ra mismatch rất nhanh | **Nên là primary channel** |
-| **Google App Campaigns** | Có vẻ “toàn diện”, máy tự phân phối nhiều bề mặt | Budget nhỏ dễ làm khó đọc asset/hook nào đang tạo tín hiệu | **Hoãn cho vòng sau** |
-| **Rewarded gaming network** | Có thể gần với game audience hơn | Nếu gameplay payoff chưa đủ rõ, signal dễ lẫn giữa curiosity và quality | **Chỉ test sau khi first-session proof tốt hơn** |
+Chấm rubric:
 
-**Recommended note cho vòng 1**:
-- Primary channel: `Meta-style social`
-- Secondary later: `Google App Campaigns`
-- Deferred: `Rewarded gaming network`
-- Reason: vòng đầu cần học **hook nào đáng giữ**, chưa cần broad machine distribution
+| Channel | Budget fit | Creative fit | Measurement clarity | Speed | Funnel risk | Read |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Meta-style social | 4 | 4 | 4 | 4 | 3 | Hợp để test hook/promise fit |
+| Google App Campaign | 2 | 3 | 2 | 2 | 3 | Có thể useful later, nhưng sprint này khó chẩn đoán |
+| Store/ASO cleanup | 5 | 3 | 4 | 4 | 4 | Cần làm song song nếu screenshot yếu |
+| Gaming network | 3 | 3 | 3 | 3 | 2 | Hoãn đến khi first-session proof rõ hơn |
 
-> [!NOTE]
-> **Bài học cần rút ra**: Channel choice ở giai đoạn sớm thường là một quyết định *debug funnel*, không phải một quyết định *media mix đầy đủ*.
+Decision:
 
----
+- **Primary channel:** Meta-style social/app ads.
+- **Deferred channel:** Google App Campaign.
+- **Not testing yet:** Gaming/rewarded network.
+- **Pre-work:** tighten first screenshot để không làm CVR nhiễu.
+- **Learning job:** hook nào tạo promise fit sạch nhất từ `CTR -> Store CVR -> tutorial_complete`.
 
-## Minh họa Quyết định Thử nghiệm Vòng 1 / Decision Board
+Verdict không phải "Meta tốt hơn Google". Verdict là: **với asset/readiness hiện tại, Meta-style social trả lời câu hỏi của sprint này rõ hơn**.
 
-![Worked Example Decision Cards](content/assets/usecases/day-06-worked-example.png)
-*Decision board phân tích nhanh ưu/nhược điểm và kết luận lựa chọn cho ngân sách micro-budget $300.*
+### Channel launch memo
 
----
+Khi chốt channel, output tốt nhất là một launch memo nhỏ để team chạy đúng scope và không tự thêm biến.
 
-## Implementation / operating checklist
+```text
+Channel launch memo
+- Primary channel: Meta-style social/app ads.
+- Learning job: compare 3 hook promises through CTR/IPM -> Store CVR -> tutorial_complete.
+- Budget: $300 total, one primary channel only.
+- Asset scope: 3 hooks, 1 variant each; no new hook family mid-test.
+- Store scope: screenshot 1 tightened before launch; no store change during read window.
+- Tracking scope: first_open, tutorial_complete, level_complete, D1 guardrail.
+- Hold rule: if spend distribution is unfair or tutorial event breaks, do not call channel winner/loser.
+- Deferred: Google App Campaign until asset pack/tracking mature.
+- Not testing yet: gaming network until first-session proof is stronger.
+```
 
-Trước khi chốt channel đầu tiên, cần qua checklist vận hành này:
+Decision memo sau report nên viết:
 
-| Hạng mục | Cần có | Nếu thiếu thì channel decision dễ sai ở đâu? |
+| Pattern | Channel verdict | Next action |
 | --- | --- | --- |
-| **Creative inventory** | Ít nhất `2-4` cells đủ khác nhau về hook | Không biết channel yếu hay hook yếu |
-| **Store readiness** | Icon, first screenshot, short description đủ khớp promise | CVR yếu nhưng blame nhầm cho channel |
-| **Event core** | `first_open`, `tutorial_start`, `tutorial_complete`, `level_complete` | D1/D0 quality không đọc nổi |
-| **Budget discipline** | Daily cap và stop-loss rule viết sẵn | Test lan ra nhiều kênh rồi không biết dừng ở đâu |
-| **Decision owner** | Một người chốt pause / continue / fix | Channel test xong nhưng không ai chuyển thành next step |
+| CTR/IPM khác nhau rõ, CVR/D1 đủ đọc | channel answered hook question | keep channel, iterate winning promise |
+| CTR tốt, CVR thấp across hooks | channel can create attention; store proof weak | fix store before judging channel |
+| CTR/CVR ổn, tutorial/D1 yếu | channel brought users, product proof weak | fix first session, rerun same channel later |
+| Spend lệch mạnh giữa hooks | delivery bias | hold verdict, rerun cleaner |
+| Tracking thiếu event chính | measurement block | fix tracking, no channel conclusion |
+
+Điểm quan trọng: channel verdict không phải "kênh tốt/xấu". Verdict tốt là "kênh này đã trả lời hoặc chưa trả lời learning job nào".
+
+### Channel decision certificate
+
+Trước khi launch channel đầu tiên, viết certificate ngắn để khóa scope và cách đọc. Certificate này là "giấy phép" cho channel test: nó nói kênh được dùng để học gì, điều gì phải pass trước spend, và kết luận nào bị cấm.
+
+| Certificate field | Câu hỏi cần khóa | Pass condition | Nếu fail |
+| --- | --- | --- | --- |
+| Primary channel | Kênh duy nhất của sprint là gì? | Một kênh chính, không chia ngân sách | Budget bị loãng |
+| Learning job | Kênh phải trả lời câu hỏi nào? | Một câu hẹp gắn với promise/store/first session | Channel test thành CPI report |
+| Minimum evidence | Asset/store/event nào phải sẵn sàng? | Hook assets, store proof, core events rõ | Không đọc user quality |
+| Deferred list | Kênh nào chưa test và vì sao? | Có condition để mở sau | Scope creep |
+| Blocked conclusions | Report không được kết luận gì? | Không blame channel nếu store/tracking fail | Team đổi channel cảm tính |
+| Review cadence | Ai đọc, khi nào, đọc bằng template nào? | Owner/date/report path rõ | Report không thành action |
+
+```text
+Channel decision certificate
+- Primary channel:
+- Learning job:
+- Minimum evidence before spend:
+- Deferred channels:
+- Blocked conclusions:
+- Review owner/date:
+- Condition to keep / defer / stop channel:
+```
+
+Certificate tốt có thể nói "channel này chỉ đọc hook/store direction, không đọc ROAS". Câu giới hạn như vậy không làm test yếu đi; nó làm report đáng tin hơn.
+
+---
+
+## Operating checklist trước khi chọn channel
+
+| Check | Pass khi | Nếu fail |
+| --- | --- | --- |
+| Learning question | Viết được một câu hỏi hẹp | Không chọn channel vội |
+| Creative inventory | Có 2-4 cells khác biệt rõ | Làm thêm hoặc giảm scope |
+| Store proof | First screenshot xác nhận hook chính | Sửa store trước |
+| Event core | Đọc được `first_open`, `tutorial_complete`, early progress | Fix tracking trước |
+| Budget concentration | Chỉ 1 primary channel cho first sprint | Dừng ý định chia quá nhiều |
+| Deferred list | Có ghi kênh hoãn và lý do | Dễ mở thêm channel theo cảm tính |
+| Owner | Có người chốt pause/continue/fix | Test xong không ai ra quyết định |
+
+Checklist này bảo vệ lesson 5: budget nhỏ cần learning density, và channel choice là nơi dễ làm density sụp nhất.
 
 ---
 
 ## Real usecases đã đối chiếu nguồn
 
-### Official product signal: Apple Ads / App Store search intent
+### Usecase 1: Meta app ads là discovery/creative surface
 
-| Fact từ nguồn public | Channel lesson | Không được suy ra |
+| Observable facts | Lesson interpretation | What not to infer |
 | --- | --- | --- |
-| Apple Ads mô tả ads xuất hiện ở Today tab, Search tab, Search Results và Product Pages; đồng thời nhấn mạnh search là một cách khám phá app quan trọng trong App Store. Nguồn: [Apple Ads - Ads on the App Store](https://ads.apple.com/app-store) | Đây là kênh có intent mạnh và placement rõ, phù hợp khi bạn cần đọc search discovery trên iOS. | Không suy ra mọi game Android-first budget nhỏ nên chạy Apple Ads ngay từ vòng đầu. |
-| Apple Ads product page nêu conversion rate cao cho top-of-search placements và mô tả các dashboard về installs, CPA, spend, impressions. Nguồn: [Apple Ads - Ads on the App Store](https://ads.apple.com/app-store) | Kênh search-intent thường hữu ích khi product metadata, product page và iOS measurement đã trưởng thành hơn. | Không copy các con số marketing đó thành benchmark cho indie puzzle prototype. |
+| Meta mô tả app ads có thể promote app across Facebook, Messenger, Instagram và Audience Network; app promotion objective có thể hướng tới installs hoặc app events. | Với sprint nhỏ có 2-4 hooks, Meta-style social có thể hữu ích để đọc creative promise và ad-to-store continuity. | Không suy ra Meta luôn là first channel. Nếu store/tracking yếu, channel readout vẫn nhiễu. |
 
-**Decision rule học được**: intent-rich channel rất giá trị, nhưng chỉ khi nó trả lời đúng câu hỏi bạn đang có.
+### Usecase 2: Google App Campaigns dựa nhiều vào assets và automation
 
-### Public market case: Zego Studio / Screw Sort 3D
-
-| Fact từ nguồn public | Channel lesson | Không được suy ra |
+| Observable facts | Lesson interpretation | What not to infer |
 | --- | --- | --- |
-| Google Play page của `Screw Sort 3D` cho thấy promise rất cụ thể quanh screw puzzle, ASMR satisfaction và object-action loop. Nguồn: [Google Play - Screw Sort 3D](https://play.google.com/store/apps/details?id=com.ig.screw.sort.puzzle) | Nếu store/listing đã nói promise rất rõ, paid social sẽ dễ đọc `promise fit` hơn vì CVR ít bị nhiễu hơn. | Không suy ra cứ có listing rõ là mọi channel paid sẽ hiệu quả ngay. |
-| Google Play developer page của `Zego Studio` cho thấy publisher có nhiều title puzzle/sort trong cùng catalog. Nguồn: [Google Play - Zego Studio](https://play.google.com/store/apps/developer?id=Zego+Studio) | Khi có nhiều sub-genre gần nhau, channel plan phải đi cùng hypothesis rõ; không nên gộp nhiều promise vào một sprint. | Không suy ra publisher catalog rộng là lý do để team nhỏ mở nhiều channel cùng lúc. |
+| Google Ads Help mô tả App campaigns dùng nhiều asset types như headlines, descriptions, images, videos và store assets; Google Ads API docs ghi App campaigns automate targeting and bidding based on goal and provided assets. | Google App Campaigns có thể mạnh khi asset pack và tracking đã đủ trưởng thành, nhưng với first micro sprint, automation có thể làm khó trả lời "hook nào đang dạy gì". | Không suy ra Google kém. Chỉ suy ra rằng nếu learning question cần diagnosis hẹp, setup broad có thể chưa hợp lúc này. |
 
-**Decision rule học được**: channel choice chỉ đúng khi đi cùng một hypothesis đủ hẹp.
+### Usecase 3: Apple Ads/Search là intent-rich nhưng platform-specific
 
----
+| Observable facts | Lesson interpretation | What not to infer |
+| --- | --- | --- |
+| Apple Ads có placements trong App Store journey như Today tab, Search tab, Search results và Product Pages; Search results ads tiếp cận user khi họ đang search app để download. | Đây là intent-rich surface, hữu ích khi bạn muốn đọc iOS/App Store search demand hoặc metadata fit. | Không suy ra Android-first puzzle prototype nên mở Apple Ads trong sprint đầu nếu iOS build, metadata và measurement chưa sẵn sàng. |
 
-## Minh họa Giao diện Điểm chạm Thực tế / Placements Screenshot
+### Usecase 4: Case nội bộ - creative spike với cohort ổn
 
-![Zego Screw Sort 3D on Google Play](content/assets/usecases/screw-sort.png)
-*Ảnh chụp cửa hàng thực tế của Screw Sort 3D (Zego Studio) thể hiện thông điệp hành động cực kỳ rõ ràng, giúp tăng tỷ lệ CVR trên store.*
-
----
-
-## Storyboard: Sự Khác Biệt Giữa Kênh Khám Phá và Kênh Tìm Kiếm
-
-Dưới đây là sơ đồ minh họa 4 phân cảnh phân biệt trạng thái người chơi và công việc của từng kênh quảng cáo:
-
-![Storyboard phân biệt kênh quảng cáo](content/assets/usecases/day-06-storyboard.png)
-
-| Phân cảnh (Frame) | Nội dung hình ảnh | Trạng thái người chơi | Job of Channel |
-| :---: | :--- | :--- | :--- |
-| **1** | User đang lướt mạng xã hội xem tin tức | Rảnh rỗi, không chủ động tìm game | **Creative Social**: Phải giật hook visual mạnh để bắt chú ý. |
-| **2** | User gõ tìm kiếm từ khóa "screw puzzle" trên store | Đang có nhu cầu giải trí cụ thể | **Search Intent**: Đấu thầu đúng từ khóa, CVR sẽ cực cao. |
-| **3** | User đang chơi một game puzzle khác và xem quảng cáo | Đang trong tâm thế chơi game | **Rewarded Network**: Cần đưa gameplay footage tương tự để mời gọi. |
-| **4** | User click ad và chuyển tới trang store sạch sẽ | Đang đối chiếu lời hứa quảng cáo | **Store Proof (ASO)**: Giữ chân và thuyết phục tải game. |
+| Observable facts | Lesson interpretation | What not to infer |
+| --- | --- | --- |
+| Case `Idle RPG creative spike`: combat-progression hook có IPM 18 so với account avg 7, CPI `$0.65`, D1 38%, D7 16%, early ROAS direction stable. Recommendation là scale cautiously và tạo variants quanh cùng motivation. | Khi creative signal và cohort quality cùng ổn, channel có thể được dùng để mở rộng có kiểm soát. | Không suy ra spike nào cũng nên scale. Bài học là phải đọc creative signal cùng cohort quality, không đọc IPM/CPI một mình. |
 
 ---
 
 ## Common mistakes
 
-*   **Mistake 1: Chọn channel theo danh tiếng thay vì learning question**
-    *   *Correction*: Viết learning question trước, rồi chọn channel nào trả lời câu hỏi đó nhanh nhất.
-*   **Mistake 2: Chia micro-budget cho nhiều channels để “test đủ thứ”**
-    *   *Correction*: Giữ `1` primary channel cho sprint đầu; deferred list để dành cho vòng sau.
-*   **Mistake 3: Thấy machine-led channel sang nên dùng ngay từ đầu**
-    *   *Correction*: Nếu creative, store và tracking chưa sạch, broad distribution chỉ làm danh tiếng mờ nhạt đi chẩn đoán thực tế.
-*   **Mistake 4: Xem ASO/store cleanup là việc phụ**
-    *   *Correction*: Với budget nhỏ, listing đôi khi là lever học nhanh hơn việc mở thêm paid channel.
+- **Mistake: Chọn channel theo danh tiếng** - **Correction:** Chọn theo learning question, readiness và metric readout cần có.
+- **Mistake: Chia `$300` cho 3-4 channels** - **Correction:** Chọn 1 primary channel, ghi deferred channels cho sprint sau.
+- **Mistake: Blame channel khi store proof yếu** - **Correction:** Nếu `CTR` có interest nhưng `Store CVR` yếu, sửa store trước khi đổi channel.
+- **Mistake: Dùng automated distribution để trả lời câu hỏi creative hẹp** - **Correction:** Nếu cần biết hook nào học được gì, test hẹp trước.
+- **Mistake: Xem ASO/store cleanup là việc phụ** - **Correction:** Store cleanup có thể là channel-readiness work quan trọng nhất trước paid spend.
+
+---
+
+## English Terms You Should Keep
+
+| Term | Cách hiểu trong bài |
+| --- | --- |
+| `Ad network` | Nơi mua hoặc phân phối traffic paid |
+| `Campaign` | Cấu trúc chạy ads gồm objective, budget, targeting/placement và assets |
+| `Optimization` | Cách platform hoặc team điều chỉnh để đạt goal đã chọn |
+| `Learning job` | Việc cụ thể channel phải dạy trong sprint này |
+| `Intent` | Mức chủ động tìm kiếm/quan tâm của user trước khi thấy ad |
+| `Primary channel` | Kênh chính duy nhất của sprint hiện tại |
+| `Deferred channel` | Kênh tốt nhưng hoãn vì chưa đúng readiness hoặc question |
+| `Placement` | Bề mặt ad xuất hiện: feed, search results, product page, in-game inventory |
 
 ---
 
 ## Lab output example
 
-| Field | Example output |
-| --- | --- |
-| **Learning job** | Learn which video hook creates the cleanest promise fit |
-| **Primary channel** | Meta-style social |
-| **Why this channel first** | Fast hook learning with small budget and limited creative set |
-| **Deferred channel** | Google App Campaigns |
-| **Why defer** | Need cleaner asset base and less ambiguous learning setup |
-| **Not testing yet** | Rewarded gaming network |
-| **Main risk to watch** | Store page may depress CVR and make the channel look worse than it is |
-| **Next step if useful** | Retest best hook after improving first screenshot and subtitle |
+```text
+Channel Selection Note - Sprint 01
+
+Learning question:
+Which puzzle hook creates cleaner promise fit from ad click to store install and tutorial completion?
+
+Primary channel:
+Meta-style social/app ads.
+
+Why this channel first:
+We have 3 short video hooks and need fast creative/promise learning. Budget is too small to split across multiple channels.
+
+Readout metrics:
+CTR/IPM -> Store CVR -> tutorial_complete -> D1 guardrail.
+
+Main risk:
+First screenshot may depress CVR and make the channel look worse than it is.
+
+Pre-work:
+Tighten first screenshot and short description around the selected promise.
+
+Deferred channel:
+Google App Campaigns, because the asset pack and tracking confidence are not ready for broad automated distribution.
+
+Not testing yet:
+Gaming/rewarded network, because first-session proof is not strong enough.
+
+Channel readout contract:
+- Minimum setup:
+- Hold condition:
+- Not allowed conclusion:
+- Owner/review date:
+
+Channel decision certificate:
+- Primary channel:
+- Learning job:
+- Minimum evidence before spend:
+- Deferred channels:
+- Blocked conclusions:
+- Review owner/date:
+```
 
 ---
 
 ## Practical Lab
 
 Làm trực tiếp cho game của bạn:
-1. Viết `learning question` của sprint tiếp theo bằng một câu.
-2. Liệt kê `3` channel options thực tế bạn có thể chạy.
-3. Chấm mỗi channel từ `1-5` theo `budget fit`, `creative fit`, `measurement complexity`, `speed of learning`.
-4. Chọn `1` primary channel và `1` deferred channel.
-5. Viết thêm 2 dòng cuối: `Channel này dạy mình điều gì nhanh nhất?` và `Channel này chưa thể dạy mình điều gì?`
+
+1. Viết learning question của sprint tiếp theo bằng một câu.
+2. Liệt kê 3 channel options thực tế.
+3. Chấm từng channel theo `budget fit`, `creative fit`, `measurement clarity`, `speed of learning`, `funnel risk`.
+4. Chọn đúng 1 primary channel.
+5. Ghi 1 deferred channel và lý do hoãn.
+6. Ghi 1 thing not testing yet để bảo vệ scope.
+7. Viết risk note: điều gì có thể làm bạn blame nhầm channel?
+8. Viết channel readout contract.
+9. Viết launch memo khóa asset/store/tracking scope.
+10. Viết Channel decision certificate.
+
+Quality chain check:
+
+- Nếu learning question chưa rõ, channel choice chưa có nghĩa.
+- Nếu store proof chưa sạch, paid channel readout sẽ nhiễu.
+- Nếu tracking chưa sạch, không dùng channel test để đọc user quality.
+- Nếu mở hơn 1 primary channel với `$100-500`, phải giảm scope.
 
 ---
 
 ## Final UA Plan Update
 
-Cập nhật trường **Channel / test scope** trong Final UA Plan theo mẫu:
+Cập nhật field **budget / test scope** trong Final UA Plan:
 
 ```text
-Primary channel: [kenh chinh]
-Learning job: [cau hoi hoc nhanh nhat]
-Why this channel first: [ly do chon]
-Budget fit: [danh gia ngan sach]
-Creative requirement: [yeu cau asset / hook]
-Main risk: [rui ro doc sai]
-Deferred channel: [kenh de sau]
-Not testing yet: [kenh chua test]
+Primary channel:
+[one channel]
+
+Learning job:
+[what this channel must teach]
+
+Why this channel first:
+[budget fit + creative readiness + measurement clarity]
+
+Readout metrics:
+[CTR/IPM -> Store CVR -> first-session metric -> guardrail]
+
+Main risk:
+[what could make us misread this channel]
+
+Channel readout contract:
+[learning job / setup / hold / not allowed conclusion]
+
+Channel decision certificate:
+[primary / minimum evidence / blocked conclusions / review cadence]
+
+Launch memo:
+[budget / asset scope / store scope / tracking scope / review date]
+
+Deferred channel:
+[channel to test later + condition for using it]
+
+Not testing yet:
+[channel/surface deliberately excluded from this sprint]
 ```
+
+Field liên quan sẽ được dùng lại ở Week 2-4: `creativeMatrix`, `metricTargets`, `successCriteria`, `nextAction`.
 
 ---
 
 ## Checklist Focus
 
-*   Chấm nhất 3 channel theo cùng một rubric.
-*   Chọn đúng 1 primary channel cho sprint đầu.
-*   Viết rõ vì sao channel đó khớp với learning question.
-*   Ghi rõ 1 deferred channel và 1 thứ chưa test yet.
-
----
-
-## English Terms You Should Keep
-
-*   **Ad network**: Nền tảng hoặc inventory dùng để mua traffic.
-*   **Campaign**: Cấu trúc chạy quảng cáo theo mục tiêu, budget và targeting.
-*   **Optimization**: Cách platform hoặc team điều chỉnh để cải thiện kết quả.
-*   **Learning job**: Điều cụ thể mà channel đó cần dạy bạn trong sprint hiện tại.
-*   **Intent**: Mức độ chủ động hoặc nhu cầu sẵn có của người dùng trước khi install.
-*   **daily cap**: Giới hạn ngân sách tối đa được phép chi tiêu trong một ngày của chiến dịch.
-*   **stop-loss rule**: Ngưỡng cắt lỗ tự động - quy tắc bắt buộc tắt chiến dịch nếu chỉ số tệ vượt qua mốc cho phép.
+- [ ] Chấm ít nhất 3 channel options bằng cùng một rubric.
+- [ ] Chọn đúng 1 primary channel cho first sprint.
+- [ ] Viết vì sao channel đó match learning question và asset readiness.
+- [ ] Ghi 1 deferred channel.
+- [ ] Ghi 1 thing not testing yet.
+- [ ] Ghi risk note để tránh blame nhầm channel.
+- [ ] Có Channel decision certificate.
+- [ ] Có blocked conclusions để không blame nhầm channel.
 
 ---
 
 ## Curated References
 
-*   [Apple Ads - Ads on the App Store](https://ads.apple.com/app-store)
-*   [Google Play - Screw Sort 3D](https://play.google.com/store/apps/details?id=com.ig.screw.sort.puzzle)
-*   [Google Play - Zego Studio](https://play.google.com/store/apps/developer?id=Zego+Studio)
-*   Với lesson này, reference chỉ để hiểu placement và market signal. Quyết định cuối vẫn phải quay về câu hỏi: `channel nào dạy mình nhanh nhất với budget hiện tại?`
+- [Meta Business Help - About app ads on Facebook, Instagram and Audience Network](https://www.facebook.com/business/help/1471413626484885) - official overview về app ads surfaces.
+- [Google Ads Help - Asset types for App campaigns](https://support.google.com/google-ads/answer/9948381?hl=en) - official source về asset inputs cho App campaigns.
+- [Google Ads API - App campaigns overview](https://developers.google.com/google-ads/api/docs/app-campaigns/overview) - official note về automated targeting/bidding dựa trên goal và assets.
+- [Apple Ads - Ads on the App Store](https://ads.apple.com/app-store) - App Store ad placements overview.
+- [Apple Ads Help - Search results](https://ads.apple.com/app-store/help/ad-placements/0082-search-results) - official page về search-intent placement.

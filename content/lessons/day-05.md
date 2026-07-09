@@ -9,248 +9,499 @@ artifact: "Micro soft-launch outline"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **Micro soft-launch outline**: một bản kế hoạch thử nghiệm 7 ngày đủ nhỏ để chạy với ngân sách `$100-500`, nhưng đủ rõ để biết mình đang học điều gì, dừng ở đâu, và bước tiếp theo là gì.
+Sau bài này, bạn tạo được **Micro soft-launch outline**: một kế hoạch test nhỏ dùng `$100-500` để giảm rủi ro trước khi launch rộng hơn.
 
-Kết quả cần có sau bài:
-- Không còn hiểu soft-launch như một “global launch thu nhỏ”.
-- Biết test nhỏ này **được phép kết luận gì** và **không được phép kết luận gì**.
-- Chọn được budget range, daily cap, số creative cell và stop-loss rule phù hợp.
-- Biết đọc khi nào tín hiệu xấu đến từ tracking, onboarding, store hay sample size quá bé.
-- Cập nhật trường **Budget / test scope** trong Final UA Plan bằng một outline có thể chạy thật.
+Quyết định bạn học cách đưa ra: **budget nhỏ này nên được thiết kế để học điều gì, và không được phép kết luận điều gì?**
+
+Output cuối bài:
+
+- Một `learning question` duy nhất cho test đầu tiên.
+- Budget tổng, daily cap, số creative cells và sample expectation.
+- Stop-loss rule, continue signal và confidence note.
+- Một block có thể copy vào field **budget** trong Final UA Plan.
+
+Micro soft-launch không phải "global launch thu nhỏ". Nó là một sprint để kiểm tra readiness: tracking có đọc được không, ad/store có cùng promise không, first session có giữ được người chơi đủ lâu để học tiếp không.
 
 ---
 
 ## Why this matters
 
-Với team indie Unity, micro soft-launch không phải là nơi để “chứng minh game này sẽ scale toàn cầu”. Nó là nơi để giảm rủi ro với chi phí thấp nhất có thể.
+Với team indie Unity, `$300` có thể rất quý nhưng vẫn quá nhỏ để chứng minh `ROAS`, `LTV`, scale toàn cầu hoặc winner tuyệt đối. Nếu bạn dùng micro-budget như một phép bói "game thắng hay thua", bạn sẽ đọc sai dữ liệu.
 
-Nếu bạn dùng `$300` như thể đó là budget để tìm winner tuyệt đối, bạn gần như chắc chắn sẽ đọc sai dữ liệu: một creative có thể trông như thắng chỉ vì cohort quá nhỏ; một game có thể trông như thua chỉ vì tracking hỏng ở tutorial hoặc store page mismatch.
+Một vài lỗi phổ biến:
 
-Một micro soft-launch tốt phải trả lời câu hỏi kiểu:
-- Hook nào đủ hứa hẹn để test tiếp?
-- Store page có đang giết CVR không?
-- Onboarding có đang làm D1 sập không?
-- Tracking có đủ sạch để mình tin lần test sau không?
+- Chia `$300` cho 10 creative cells, mỗi cell chỉ có vài install rồi vẫn chọn winner.
+- Thấy `CPI` thấp và scale, dù `D1 retention` hoặc `tutorial_complete` đang gãy.
+- Thấy một creative có D1 đẹp trên 18 installs rồi gọi là "best creative".
+- Không viết stop-loss trước, đến lúc số xấu lại đốt thêm "một ngày nữa cho chắc".
+
+Micro soft-launch tốt không cố trả lời "game này có thành công lớn không?". Nó trả lời câu hẹp hơn nhưng hữu ích hơn: **bước rủi ro nhất trước mắt nằm ở creative, store, first session, tracking hay sample design?**
 
 ---
 
-## Core model: micro soft-launch là learning sprint, không phải scale proof
+## Core model: Budget nhỏ phải mua learning density
 
-Hãy tách 4 lớp quyết định:
+Mỗi dollar trong micro soft-launch phải mua được một đơn vị học hỏi. Gọi đó là **learning density**.
 
-| Lớp quyết định | Test nhỏ có thể trả lời? | Cách dùng đúng |
-| --- | --- | --- |
-| **Tracking readiness** | Có | Kiểm tra event có bắn đúng, first_open có khớp install, tutorial_complete có hiện đủ. |
-| **Promise fit** | Có | Xem ad hook và store proof có kéo được CTR/CVR chấp nhận được không. |
-| **First-session proof** | Có | Xem onboarding, level 1-3, first win có cứu được D1 không. |
-| **Scale economics dài hạn** | Không đáng tin cậy | Không dùng `$100-500` để kết luận ROAS bền vững hay LTV ổn định. |
+```text
+Learning density = số quyết định đọc được / số biến đang test
+```
 
-> [!IMPORTANT]
-> **Quy tắc thực hành**: Nếu test của bạn không viết rõ *“test này được phép kết luận gì”*, bạn sẽ luôn có xu hướng over-read dữ liệu và scale sớm.
+Nếu bạn test quá nhiều biến cùng lúc, learning density giảm. Dashboard có nhiều hàng hơn, nhưng kết luận yếu hơn.
 
-## Hero visual: learning sprint flow
+| Lớp quyết định | Micro-budget có đọc được không? | Điều kiện để đọc được | Không nên kết luận |
+| --- | --- | --- | --- |
+| Tracking readiness | Có | Event tối thiểu chạy đúng trên device thật | Không đọc performance nếu event sai |
+| Creative promise | Có, ở mức directional | Ít cells, hook khác biệt rõ, store không quá yếu | Không gọi winner tuyệt đối từ sample nhỏ |
+| Store proof | Có | Ad promise và store screenshot có thể đối chiếu | Không đổ lỗi network khi CVR yếu |
+| First-session proof | Có, nếu có event sớm | Có `tutorial_complete`, `level_3_reach`, D1 hoặc session 2 | Không kết luận LTV dài hạn |
+| Scale economics | Rất yếu | Cần cohort/revenue lớn hơn nhiều | Không dùng `$100-500` để chứng minh ROAS bền vững |
 
-![Day 5 learning sprint visual](content/assets/usecases/day-05-learning-sprint-visual.svg "Visual này tóm tắt thứ tự ra quyết định: ready -> run -> read -> decide. Nó nhấn mạnh micro soft-launch là vòng học nhanh, không phải vòng chứng minh scale.")
-
-*Cách đọc visual này*: nếu team của bạn đang tranh luận về `ROAS`, `LTV` hay “bao giờ scale” trước cả khi xác thực `tracking`, `store proof` và `first-session proof`, bạn đang đọc sai vai trò của test nhỏ.
+Rule thực hành: **test nhỏ chỉ được kết luận những gì nó được thiết kế để kết luận**. Viết câu này trước khi launch.
 
 ---
 
 ## Micro soft-launch outline mẫu
 
-Dùng khung này để thiết kế test đầu tiên:
+Dùng bảng này như bản thiết kế sprint.
 
-| Block | Câu hỏi phải trả lời | Ví dụ cho puzzle prototype |
+| Block | Câu hỏi cần điền | Ví dụ cho puzzle prototype |
 | --- | --- | --- |
-| **Learning question** | Mình đang muốn học điều gì? | Hook “clear chaos” có kéo đúng người chơi hơn hook “only 1% solve this” không? |
-| **Region** | Test ở đâu để đủ rẻ nhưng không quá nhiễu? | Android tier-2 English market |
-| **Channel** | Chọn 1 kênh chính nào? | Một kênh creative-friendly duy nhất |
-| **Creative cells** | Bao nhiêu biến thể là đủ? | 2 hook x 2 variants = 4 cells |
-| **Daily cap** | Mỗi ngày đốt tối đa bao nhiêu? | `$30-$50/day` |
-| **Stop-loss rule** | Tín hiệu nào đủ xấu để dừng sớm? | Sau 2 ngày, nếu store CVR dưới ngưỡng tối thiểu và tutorial_complete gãy mạnh thì pause |
-| **Evidence to continue** | Dấu hiệu nào cho phép test tiếp? | Có ít nhất 1 hook giữ được CVR và D1 không gãy hoàn toàn |
+| Learning question | Test này học đúng một điều gì? | Hook "relax clear" có tạo promise fit tốt hơn hook "hard challenge" không? |
+| Budget | Tổng spend và daily cap? | `$300 total`, `$40/day`, giữ `$20` làm buffer |
+| Scope | Bao nhiêu region/channel/cell? | 1 Android market, 1 paid channel, 4 creative cells |
+| Expected installs | Budget / expected CPI / cells cho mỗi cell bao nhiêu install? | `$300 / $0.60 / 4 = ~125 installs per cell` trước hao hụt |
+| Primary metric | Metric nào trả lời learning question? | Store CVR + tutorial_complete |
+| Guardrail metric | Metric nào ngăn overread? | D1 retention và event validation |
+| Stop-loss | Khi nào dừng sớm? | 2 ngày liên tiếp: CVR yếu + tutorial_complete gãy + tracking sạch |
+| Continue signal | Khi nào test tiếp? | 1 hook có CVR ổn, tutorial không gãy, D1 không sụp so với group |
+| Not allowed to conclude | Test này không đủ quyền kết luận gì? | Không kết luận ROAS dài hạn hoặc global scale |
+
+Nếu bảng này có hơn 2 learning questions, hãy tách thành nhiều sprint. Một micro-budget không nên gánh cả market research, creative test, store test, onboarding test và monetization test cùng lúc.
+
+### Sprint decision contract
+
+Trước khi bật spend, hãy viết một **sprint decision contract**. Đây là thỏa thuận giúp team không đổi luật giữa trận khi số liệu bắt đầu nhiễu.
+
+| Contract field | Câu phải khóa trước launch | Ví dụ tốt |
+| --- | --- | --- |
+| Allowed conclusion | Nếu sprint có tín hiệu đủ sạch, team được phép kết luận điều gì? | "Hook relax clear đáng được test vòng 2 với biến store và build giữ nguyên." |
+| Blocked conclusion | Dù số đẹp, team vẫn không được kết luận điều gì? | "Không kết luận ROAS, LTV, global scale hoặc winner tuyệt đối." |
+| Frozen variables | Biến nào phải giữ nguyên để học được đúng câu hỏi? | Cùng build, cùng store screenshot chính, cùng region, cùng channel, chỉ đổi hook/variant. |
+| Review trigger | Khi nào phải dừng để đọc thay vì tiếp tục tiêu? | Khi đạt 60-70% budget, hoặc khi 2 ngày liên tiếp có cùng pattern xấu. |
+| Decision owner | Ai có quyền pause, continue, rerun? | UA owner đọc metric, product owner xác nhận first-session issue, founder duyệt spend vòng 2. |
+
+Decision contract không làm bài học phức tạp hơn. Nó làm **ranh giới kết luận** rõ hơn. Với budget nhỏ, rủi ro lớn nhất không phải là "không có data", mà là có data nhưng team tự cho nó nhiều quyền hơn nó thật sự có.
+
+Một ladder đơn giản:
+
+| Evidence level | Team được làm gì | Team chưa được làm gì |
+| --- | --- | --- |
+| Tracking lỗi | Fix instrumentation, rerun smoke | Đọc creative/store performance |
+| Sample quá mỏng | Ghi signal thú vị, gom cells, rerun | Chọn winner |
+| Store và first-session cùng ủng hộ một hook | Thiết kế sprint kế tiếp quanh hook đó | Scale budget lớn |
+| Store tốt nhưng first-session gãy | Sửa onboarding hoặc first 3 levels | Đổi channel ngay |
+| CPI rẻ nhưng retention gãy | Chẩn đoán promise mismatch hoặc traffic intent | Gọi là market fit |
+
+---
+
+## Hero visual: learning sprint flow
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Day 5 learning sprint visual]
+Type: hero operating diagram.
+Lesson section: Hero visual: learning sprint flow.
+Previous local asset to replace: content/assets/usecases/day-05-learning-sprint-visual.svg.
+Visual brief: Micro soft-launch flow: ready, run, read, decide..
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
+
+**Visual readout**
+
+- **Inspect:** Sơ đồ đi theo vòng `ready -> run -> read -> decide`, không đi thẳng từ `run` sang `scale`.
+- **Conclude:** Micro soft-launch là một learning sprint. Nếu readiness chưa qua, kết quả performance không đáng tin. Nếu readout chưa có confidence note, decision dễ bị overclaim.
+- **Do not infer:** Không suy ra rằng test nhỏ phải chậm hoặc phức tạp. Nó cần hẹp, có rule rõ, và đủ sạch để bước tiếp.
+
+---
+
+## Budget vs signal table
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Day 5 budget signal visual]
+Type: hero operating diagram.
+Lesson section: Budget vs signal table.
+Previous local asset to replace: content/assets/usecases/day-05-budget-signal-visual.svg.
+Visual brief: Budget split visual showing signal dilution when too many cells share a small budget..
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 :::chart
-title: Example confidence, 1-5
-Tracking readiness|4|Events mostly defined, still needs validation
-Creative clarity|4|Two usable hooks are ready
-Store readiness|3|Listing exists but first screenshot may still be weak
-Economics confidence|1|Too early for strong ROAS or LTV conclusions
+title: Installs per cell giả lập với budget $300 và CPI $0.60
+2 cells|250|Signal mỗi cell dễ đọc hơn, nhưng ít hypothesis
+4 cells|125|Cân bằng cho first creative read
+6 cells|83|Bắt đầu loãng, cần caution mạnh
+10 cells|50|Rất dễ overread winner/loss
 :::
 
-*Cách đọc chart*: Soft-launch nhỏ nên ưu tiên test khi `tracking`, `creative clarity` và `store readiness` đã đủ dùng. Nếu `economics confidence` còn thấp thì đó là trạng thái bình thường, không phải lý do để trì hoãn toàn bộ test.
+Số trên là mô phỏng để dạy cách chia budget, không phải guarantee.
 
-## Visual bổ sung: budget vs signal
+| Budget | Expected CPI | Cells | Installs/cell trước hao hụt | Confidence read |
+| ---: | ---: | ---: | ---: | --- |
+| `$150` | `$0.50` | 2 | 150 | Có thể đọc directional creative/store signal |
+| `$300` | `$0.60` | 4 | 125 | Hợp lý cho sprint đầu nếu tracking/store sạch |
+| `$300` | `$1.00` | 6 | 50 | Quá loãng để gọi winner; nên giảm cells |
+| `$500` | `$0.80` | 4 | 156 | Tốt hơn, nhưng vẫn chưa chứng minh LTV/ROAS |
 
-![Day 5 budget signal visual](content/assets/usecases/day-05-budget-signal-visual.svg "Visual này cho thấy cùng budget `$300`, càng chia nhiều cells thì signal trên mỗi cell càng loãng. Mục đích là buộc người học nghĩ về design của test, không chỉ nghĩ về tổng ngân sách.")
+**Visual readout**
 
-*Cách đọc visual này*: nếu test nhỏ của bạn có hơn `4` cells mà vẫn chỉ có `$100-500`, gần như luôn phải hỏi lại: mình đang tối ưu cho học được gì, hay chỉ đang gom thật nhiều giả thuyết trong một lần chạy?
+- **Inspect:** Cùng `$300`, khi cells tăng từ 2 lên 10, installs/cell giảm mạnh.
+- **Conclude:** Budget design là một phần của strategy. Càng nhiều biến, kết quả càng khó đọc.
+- **Do not infer:** Không suy ra "ít cells luôn tốt". Nếu hai hooks quá giống nhau, ít cells vẫn không học được gì. Cells phải ít **và** khác biệt có chủ ý.
 
 ---
 
 ## Hướng dẫn đọc số trong test nhỏ
 
-Hãy đọc dữ liệu theo mức độ “đủ để hành động”, không phải “đủ để chứng minh tuyệt đối”.
+Đọc dữ liệu theo thứ tự này:
 
-| Pattern | Cách đọc | Next action đúng | Next action sai thường gặp |
+1. **Data hygiene:** event có đầy đủ không, campaign/cell naming đúng không, install và `first_open` có lệch bất thường không?
+2. **Sample sanity:** mỗi cell có đủ install để đọc directional signal không, hay chỉ là vài chục users?
+3. **Creative/store fit:** `CTR/IPM` và `Store CVR` có cùng kể một câu chuyện không?
+4. **First-session proof:** `tutorial_complete`, `level_3_reach`, `session_2_start`, D1 có cho thấy promise được giao không?
+5. **Decision confidence:** kết luận là high, medium hay low confidence?
+
+| Pattern | Cách đọc | Next action đúng | Next action sai |
 | --- | --- | --- | --- |
-| **18 installs, D1 rất cao** | Cohort quá nhỏ, tín hiệu chỉ nên ghi chú là “interesting”. | Chạy lại với ít creative hơn hoặc thêm sample trước khi kết luận. | Scale ngay vì thấy creative “đang thắng”. |
-| **CTR khá, CVR thấp** | Hook có attention nhưng store chưa chứng minh promise. | Sửa screenshot đầu, icon, short description rồi test lại. | Đổi region hoặc đổi network ngay. |
-| **CVR ổn, D1 gãy** | Store không phải điểm hỏng chính. Lỗi nhiều khả năng nằm ở first session. | Kiểm tra tutorial, first win, difficulty ramp. | Tiếp tục đổ thêm budget vì “install vẫn có”. |
-| **Install ít hơn dự kiến** | Có thể do budget quá mỏng hoặc chia quá nhiều creative cells. | Giảm số cell, tăng signal per cell. | Kết luận luôn là game không có thị trường. |
+| 18 installs, D1 44% | Interesting nhưng cohort quá nhỏ | Rerun top concept với ít cells hơn | Scale ngay |
+| CTR cao, Store CVR thấp | Ad tạo tò mò, store không xác nhận promise | Sửa first screenshot/copy hoặc giảm clickbait | Tăng spend vì CTR đẹp |
+| Store CVR ổn, tutorial_complete thấp | First-session proof yếu | Sửa onboarding/level 1-3 | Đổi channel trước |
+| CPI thấp, D1 thấp | Có thể là low-intent traffic hoặc promise mismatch | Đọc cùng creative/store/session events | Gọi là market fit vì install rẻ |
+| Tracking thiếu event | Dashboard không đủ tin | Pause, fix instrumentation, rerun | Cố suy luận từ CPI/CTR |
+
+Với micro-budget, câu kết luận nên có dạng: "Tín hiệu này **gợi ý** X với confidence Y, nên next action là Z." Tránh câu: "Creative này thắng" nếu sample chưa đủ.
+
+---
 
 ## Worked example: test `$300` trong 7 ngày
 
-Giả sử bạn có một game puzzle prototype với 2 hook:
-- **A**: `Only 1% solve this`
-- **B**: `Clear the board and relax`
+Game: block puzzle thư giãn, Android prototype, đã có 2 ad hooks.
 
-Kế hoạch test:
+| Hook | Promise | Risk |
+| --- | --- | --- |
+| A - Challenge | "Only 1% solve this" | Kéo curiosity clicks nhưng người chơi không đúng motivation |
+| B - Relax clear | "Clear the board and relax" | Ít drama hơn, nhưng gần core loop thật |
 
-| Thành phần | Thiết lập |
+Plan:
+
+| Item | Setup |
 | --- | --- |
-| Budget tổng | `$300` |
-| Daily cap | `$40/day` trong 7 ngày, giữ phần còn lại cho ngày xác nhận |
-| Region | Android, 1 market chính |
-| Creative cells | 4 cells (2 hooks x 2 variants) |
-| Mục tiêu học | Hook nào tạo ra *promise fit* tốt hơn, không phải hook nào scale được ngay |
-| Stop-loss | Nếu sau 2 ngày 1 hook vừa có `Store CVR` yếu vừa có `tutorial_complete` gãy thì dừng cell đó |
+| Budget | `$300`, daily cap `$40`, giữ buffer để xác nhận ngày cuối |
+| Region/channel | 1 Android market, 1 paid channel |
+| Cells | 2 hooks x 2 variants = 4 cells |
+| Learning question | Hook nào tạo promise fit sạch hơn cho store và first session? |
+| Primary read | Store CVR + tutorial_complete |
+| Guardrail | D1 và event health |
+| Stop-loss | Pause cell nếu CVR yếu và tutorial_complete gãy trong 2 ngày liên tiếp |
 
 Kết quả giả lập sau 4 ngày:
 
-| Hook | CTR | Store CVR | CPI | Tutorial complete | D1 | Diagnosis |
-| --- | --- | --- | --- | --- | --- | --- |
-| **A** Challenge | 4.3% | 14% | Thấp | 48% | 12% | Hook kéo click tốt nhưng curiosity trap, store mismatch và first session không prove challenge đúng cách |
-| **B** Relax/Clear | 2.6% | 31% | Vừa | 71% | 27% | Promise fit tốt hơn, đáng giữ để test tiếp với sample lớn hơn |
+| Hook | CTR | Store CVR | CPI | tutorial_complete | D1 | Diagnosis |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| A - Challenge | 4.3% | 14% | `$0.42` | 48% | 12% | Curiosity click mạnh nhưng promise fit yếu |
+| B - Relax clear | 2.6% | 31% | `$0.68` | 71% | 27% | Ít click hơn nhưng người chơi hiểu đúng game hơn |
 
-> [!NOTE]
-> **Bài học cần rút ra**: Hook B không “thắng chung cuộc”. Nó chỉ là candidate tốt hơn cho vòng test tiếp theo. Micro soft-launch đúng nghĩa phải tạo ra *next test*, không phải *final winner*.
+Verdict:
+
+- Không scale Hook B ngay. Sample vẫn nhỏ.
+- Pause Hook A hoặc rewrite để giảm clickbait.
+- Giữ store assets nếu chúng xác nhận Hook B tốt.
+- Sprint tiếp theo: test 2 variants mới quanh "relax clear", giữ cùng first-session build để cô lập creative learning.
+
+Bài học: Hook B không "thắng thị trường". Nó chỉ là **candidate tốt hơn cho vòng test tiếp theo**.
+
+### Post-sprint readout memo
+
+Sau sprint, đừng chỉ chụp dashboard. Hãy viết memo ngắn theo cấu trúc cố định để biến số liệu thành quyết định.
+
+```text
+Post-sprint readout - Sprint 01
+
+Learning question:
+Hook nào tạo promise fit sạch hơn giữa ad, store và first session?
+
+Data health:
+Events clean. Campaign names map được về 4 cells. No obvious install/first_open gap.
+
+Signal read:
+Hook A có CTR cao và CPI rẻ hơn, nhưng Store CVR, tutorial_complete và D1 đều yếu.
+Hook B có CTR thấp hơn, CPI cao hơn, nhưng store proof và first-session proof sạch hơn.
+
+Decision:
+Do not scale. Continue learning around Hook B concept.
+
+Next sprint contract:
+Keep build, region, channel and store screenshot fixed.
+Create 2 new Hook B variants.
+Remove or rewrite Hook A clickbait promise.
+
+Confidence:
+Medium-low. Pattern is directionally useful, not enough for winner claim.
+
+Blocked conclusions:
+No ROAS claim, no LTV claim, no global launch readiness claim.
+```
+
+Memo này buộc team nói rõ **next sprint khác sprint trước ở biến nào**. Nếu sprint sau đổi hook, store, build, channel và region cùng lúc, kết quả mới sẽ lại khó đọc. Hãy chỉ đổi mắt xích đang cần học.
+
+### Sprint closure certificate
+
+Micro soft-launch chỉ đóng khi sprint có một call, một biến đổi cho sprint kế tiếp, và một danh sách kết luận bị khóa.
+
+```text
+Sprint closure certificate
+- Sprint decision:
+- Evidence used:
+- Confidence:
+- Next sprint variable:
+- Frozen variables:
+- Blocked conclusions:
+- Owner/date:
+```
+
+Certificate này giúp team không chuyển từ Sprint 01 sang Sprint 02 bằng cảm giác. Nếu không ghi được `next sprint variable`, sprint sau có nguy cơ đổi quá nhiều thứ và reset learning.
 
 ---
 
 ## Test readiness checklist cho Unity indie/dev
 
-Trước khi đốt đồng nào, test nhỏ phải qua checklist tối thiểu này:
+Trước khi chi tiền, test phải pass các quality gates này:
 
-| Hạng mục | Cần có | Nếu thiếu thì rủi ro gì? |
+| Gate | Pass khi | Nếu fail |
 | --- | --- | --- |
-| **Build stability** | Không crash ở first open, load time chấp nhận được | Install bị mất giá trị vì first_open fail |
-| **Event core** | `first_open`, `tutorial_start`, `tutorial_complete`, `level_start`, `level_complete` | Không biết D1 thấp do onboarding hay do tracking hỏng |
-| **Store assets** | Icon, screenshot đầu, mô tả ngắn khớp hook | CVR thấp nhưng không biết do game hay store |
-| **Creative scope** | Tối đa 2-4 cells cho micro-budget | Quá nhiều cell làm sample bị loãng |
-| **Decision owner** | Ai là người pause / continue / fix? | Test xong nhưng không ai chốt next action |
+| Build stability | Không crash ở first open, loading không kẹt trên device thật | Không launch paid traffic |
+| Event core | `first_open`, `tutorial_start`, `tutorial_complete`, `level_start`, `level_complete` bắn đúng | Fix tracking trước |
+| Store continuity | Icon, screenshot đầu và short description cùng promise với ad | Sửa store trước |
+| Creative scope | 2-4 cells với budget `$100-500`, mỗi cell có learning role rõ | Giảm cells |
+| Naming convention | Campaign/adset/creative name map được về hook và variant | Sửa naming trước |
+| Decision contract | Allowed conclusion, blocked conclusion, frozen variables và owner đã rõ | Không launch vì team sẽ đọc số theo cảm tính |
+| Decision owner | Ai pause, ai sửa, ai viết readout được ghi rõ | Không chạy vì decision sẽ trôi |
+
+Checklist này không nhằm làm chậm team. Nó bảo vệ bạn khỏi tình huống tệ nhất: tiêu tiền xong nhưng không biết dữ liệu nói gì.
+
+---
 
 ## Real usecases đã đối chiếu nguồn
 
-### Public image: Monopoly GO! app icon
+### Usecase 1: Google Play closed testing và feedback trước launch
 
-![Monopoly GO app icon](https://upload.wikimedia.org/wikipedia/en/e/ed/App_icon_of_Monopoly_Go%21%2C_Scopely%2C_2023.webp "Nguồn ảnh public từ Wikipedia infobox. Ảnh này không dùng để học benchmark, mà để nhắc rằng breakout hit thường có brand/IP strength và production value mà team indie không nên lấy làm baseline soft-launch.")
-
-*Public image readout*: chỉ riêng asset level cũng đã cho thấy đây là sản phẩm có brand recognition và presentation polish mạnh. Dùng ảnh này để nhắc người học rằng khi so với breakout hit, thứ cần học là **framework đọc test**, không phải tự áp scale expectation của họ vào game indie.
-
-### Global caution case: Monopoly GO!
-
-| Fact từ nguồn public | Micro soft-launch lesson | Không được suy ra |
+| Observable facts | Lesson interpretation | What not to infer |
 | --- | --- | --- |
-| Wikipedia mô tả Monopoly GO! là sản phẩm mobile của Scopely, phát hành ngày 11/04/2023 và đã scale rất lớn sau launch. Nguồn: [Wikipedia - Monopoly GO!](https://en.wikipedia.org/wiki/Monopoly_Go%21) | Đây là ví dụ điển hình cho việc **không được dùng kết quả scale của breakout hit làm mục tiêu cho soft-launch nhỏ**. | Không copy scale expectation, live-ops depth hay budget mindset của một IP lớn. |
-| Android Central review mô tả game có visual polish mạnh, loop mượt và monetization rất rõ. Nguồn: [Android Central review](https://www.androidcentral.com/gaming/monopoly-go-review) | Product có presentation mạnh thường làm người học mới dễ nhầm giữa “game tốt” và “test nhỏ của mình phải giống vậy mới được”. | Không suy ra team indie phải đạt production polish tương đương mới được test soft-launch. |
+| Google Play hỗ trợ internal/open/closed testing tracks, trong đó closed testing cho phép quản lý tester bằng email hoặc Google Groups và thu feedback trước production. | Micro soft-launch paid traffic không nên là lần đầu build gặp thiết bị thật/người thật. Với team nhỏ, closed testing là lớp readiness trước khi mua traffic. | Không suy ra closed testing thay thế UA test. Tester feedback không đại diện cho paid user motivation hoặc store conversion. |
 
-**Decision rule học được**: Test nhỏ của bạn chỉ nên cố tìm “next valid learning step”, không cố bắt chước outcome của một sản phẩm đã scale toàn cầu.
+### Usecase 2: TestFlight cho iOS-aware workflow
 
-### Market reference case: Zego Studio / Screw Sort 3D
-
-| Fact từ nguồn public | Micro soft-launch lesson | Không được suy ra |
+| Observable facts | Lesson interpretation | What not to infer |
 | --- | --- | --- |
-| Google Play developer page cho thấy Zego Studio có nhiều game puzzle/sort khác nhau trong cùng catalog. Nguồn: [Google Play - Zego Studio](https://play.google.com/store/apps/developer?id=Zego+Studio) | Catalog rộng cho thấy mỗi hook cần được test như một hypothesis riêng. Không nên gộp nhiều promise vào cùng một micro test nhỏ. | Không suy ra rằng chỉ vì cùng publisher thì mọi game đều nên chia sẻ một campaign setup. |
-| Trang Google Play của Screw Sort 3D cho thấy object/action promise rất cụ thể ngay từ screenshot đầu và phần mô tả nhấn mạnh “satisfying”, “logic”, “ASMR”, “screw jam”. Nguồn: [Screw Sort 3D on Google Play](https://play.google.com/store/apps/details?id=com.ig.screw.sort.puzzle) | Với budget nhỏ, promise càng cụ thể thì càng dễ đọc CVR và promise fit. | Không suy ra mọi puzzle prototype đều cần ngay lập tức mở rộng meta hoặc live-ops để test được. |
+| Apple TestFlight cho phép phân phối beta builds, quản lý tester và thu feedback trước khi submit App Store. | Dù bài này Android-first, iOS-aware team vẫn nên nghĩ theo cùng logic: trước khi đọc UA metrics, build phải đủ ổn để tester không chỉ báo lỗi cơ bản. | Không suy ra tín hiệu TestFlight có thể dùng như paid UA performance. Beta testers thường có intent khác user mua qua ad. |
 
-*Screenshot readout gợi ý cho người học*: khi mở trang Google Play của Screw Sort 3D, hãy đọc screenshot đầu theo 3 câu hỏi: `vật thể chính là gì`, `hành động chính là gì`, `satisfaction payoff là gì`. Nếu 3 câu này trả lời nhanh được, store page đang giúp CVR chứ không làm nhiễu promise.
+### Usecase 3: Store listing experiments
 
-**Decision rule học được**: Với micro-budget, càng ít hypothesis cùng chạy một lúc thì dữ liệu càng dễ đọc.
+| Observable facts | Lesson interpretation | What not to infer |
+| --- | --- | --- |
+| Google Play Store listing experiments cho phép test graphics/text để cải thiện install conversion và retention direction. | Store là một biến có thể test riêng. Nếu ad có interest nhưng CVR yếu, store experiment hoặc store asset rewrite có thể là next action đúng hơn tăng media spend. | Không suy ra micro-budget luôn đủ traffic để A/B store có kết luận mạnh. Khi sample nhỏ, ghi confidence thấp và dùng signal như directional. |
+
+### Usecase 4: Case nội bộ - micro-budget false positive
+
+| Observable facts | Lesson interpretation | What not to infer |
+| --- | --- | --- |
+| Case `Micro-budget false positive`: Creative A có 18 installs với D1 44%; Creative B có 72 installs với D1 31%; group D1 30%. Recommendation là log signal như interesting, không scale cho đến khi có thêm evidence. | Đây là pattern cốt lõi của bài: sample nhỏ có thể làm một cell trông quá đẹp hoặc quá xấu. | Không suy ra Creative A chắc chắn tốt hơn B. Với 18 installs, kết luận phải có confidence thấp. |
 
 ---
 
-## Common mistakes (Các sai lầm phổ biến)
+## Common mistakes
 
-*   **Mistake 1: Dùng test nhỏ để “chứng minh winner”**
-    *   *Correction*: Dùng test nhỏ để loại bỏ giả định xấu và chọn câu hỏi tốt hơn cho vòng tiếp theo.
-*   **Mistake 2: Chia `$300` cho quá nhiều audience hoặc quá nhiều creative cell**
-    *   *Correction*: Giữ 1 region, 1 channel chính, và số cell đủ ít để mỗi cell còn tạo ra tín hiệu đọc được.
-*   **Mistake 3: Thấy một cohort bé đẹp là scale ngay**
-    *   *Correction*: Ghi tín hiệu đó là “interesting”, rồi rerun với sample rõ hơn trước khi tăng budget.
-*   **Mistake 4: Không viết stop-loss rule từ trước**
-    *   *Correction*: Luôn định nghĩa trước điều kiện pause để tránh “đốt thêm một ngày nữa cho chắc”.
+- **Mistake: Dùng test nhỏ để chứng minh winner tuyệt đối** - **Correction:** Dùng test nhỏ để chọn next learning step và loại rủi ro rõ nhất.
+- **Mistake: Chia budget cho quá nhiều cells** - **Correction:** Giới hạn 2-4 cells nếu budget chỉ `$100-500`, trừ khi mục tiêu chỉ là smoke test rất thô.
+- **Mistake: Không viết `not allowed to conclude`** - **Correction:** Ghi rõ test này không kết luận ROAS/LTV/global scale.
+- **Mistake: Scale vì CPI rẻ** - **Correction:** CPI phải đọc cùng Store CVR, D1 và first-session events.
+- **Mistake: Rerun test nhưng đổi quá nhiều biến** - **Correction:** Sprint tiếp theo chỉ đổi mắt xích đã được chẩn đoán yếu nhất.
 
 ---
 
-## Lab output example (Mẫu kết quả thực hành)
+## English Terms You Should Keep
 
-| Field | Example output |
+| Term | Cách hiểu trong bài |
 | --- | --- |
-| **Learning question** | Does the relax hook produce cleaner promise fit than the challenge hook? |
-| **Budget** | `$300 total`, `$40/day` |
-| **Region / channel** | Android, one primary paid channel |
-| **Creative cells** | 4 |
-| **Stop-loss** | Pause any cell that shows weak Store CVR and broken tutorial completion after day 2 |
-| **Continue signal** | At least one cell keeps CVR acceptable and D1 not collapsing |
-| **What this test cannot prove** | Long-term ROAS or scalable LTV |
-| **Next step if useful** | Retest the best hook with fewer cells and stronger first-session proof |
+| `Soft launch` | Launch giới hạn để học trước khi mở rộng |
+| `Micro-budget` | Budget nhỏ `$100-500`, dùng để giảm rủi ro chứ không chứng minh scale |
+| `Cohort` | Nhóm user cùng điều kiện test hoặc cùng ngày install |
+| `Daily cap` | Trần chi tiêu mỗi ngày |
+| `Creative cell` | Một biến thể test cụ thể: hook/variant/audience setup |
+| `Stop-loss` | Điều kiện dừng sớm để tránh đốt tiền vào tín hiệu xấu |
+| `Continue signal` | Điều kiện đủ tốt để justify vòng test tiếp theo |
+| `Confidence note` | Ghi chú mức tin cậy của kết luận, đặc biệt khi sample nhỏ |
+
+---
+
+## Lab output example
+
+```text
+Micro Soft-launch Outline - Sprint 01
+
+Budget:
+$300 total, $40/day cap, $20 buffer.
+
+Learning question:
+Does the "relax clear" hook produce cleaner promise fit than the "hard challenge" hook?
+
+Scope:
+Android, one market, one paid channel, 4 creative cells.
+
+Expected sample:
+Expected CPI $0.60 -> about 500 installs total before platform variance -> about 125 installs/cell before uneven delivery.
+
+Primary metric:
+Store CVR + tutorial_complete.
+
+Guardrail:
+D1 retention, event health, first_open/install sanity.
+
+Decision contract:
+Allowed conclusion: choose the cleaner promise-fit candidate for Sprint 02.
+Blocked conclusion: no ROAS, no LTV, no global launch readiness, no final creative winner.
+Frozen variables: same build, same store screenshot, same channel, same market.
+Review trigger: read at 60-70% budget or after 2 repeated bad-pattern days.
+Decision owner: [name] pauses cells, [name] confirms product/session issue, [name] approves Sprint 02.
+
+Stop-loss:
+Pause any cell after 2 days if Store CVR is weak and tutorial_complete also breaks, assuming tracking is clean.
+
+Continue signal:
+At least one hook keeps store proof and first-session proof intact without relying only on CPI.
+
+Not allowed to conclude:
+This sprint cannot prove long-term ROAS, scalable LTV, or global launch readiness.
+
+Post-sprint readout:
+Decision: [pause / continue / rerun / fix tracking].
+Evidence: [data hygiene], [sample sanity], [creative-store fit], [first-session proof].
+Next sprint variable: [the one thing that changes].
+Confidence: [low / medium / high] because [reason].
+
+Sprint closure certificate:
+Sprint decision:
+Evidence used:
+Next sprint variable:
+Frozen variables:
+Blocked conclusions:
+```
+
+Một lab output tốt không chỉ ghi budget. Nó nói rõ **budget đó mua câu trả lời nào**.
 
 ---
 
 ## Practical Lab
 
 Làm trực tiếp cho game của bạn:
+
 1. Chọn một learning question duy nhất cho test `$100-500`.
-2. Chọn 1 region và 1 channel chính.
-3. Viết rõ số creative cells sẽ chạy và vì sao số đó không làm sample bị loãng.
-4. Ghi daily cap, stop-loss rule và continue signal.
-5. Viết thêm 2 dòng cuối: `Test này được phép kết luận gì?` và `Test này không được phép kết luận gì?`
+2. Chọn 1 region, 1 primary channel và tối đa 2-4 creative cells.
+3. Dùng calculator **Sample-size sanity check** để ước lượng installs/cell.
+4. Ghi primary metric, guardrail metric và event cần có.
+5. Viết stop-loss rule, continue signal và `not allowed to conclude`.
+6. Tự review: nếu test này thành công hoặc thất bại, team có biết sửa gì vào thứ Hai tuần sau không?
+7. Viết sprint decision contract: allowed conclusion, blocked conclusion, frozen variables, review trigger, decision owner.
+8. Viết trước khung post-sprint readout memo để sau test không chỉ chụp dashboard rồi tranh luận cảm tính.
+9. Viết sprint closure certificate sau khi đọc số.
+
+Quality chain check:
+
+- Nếu sample/cell quá thấp, giảm cells trước khi launch.
+- Nếu tracking chưa sạch, không đọc retention.
+- Nếu store chưa khớp promise, không blame channel.
+- Nếu stop-loss chưa viết, không bật daily spend.
+- Nếu `blocked conclusions` chưa rõ, không được dùng số đẹp để kể câu chuyện quá lớn.
+- Nếu sprint kế tiếp đổi hơn một biến chính, không thể biết biến nào tạo ra thay đổi.
 
 ---
 
 ## Final UA Plan Update
 
-Cập nhật trường **Budget / test scope** trong Final UA Plan theo mẫu:
+Cập nhật field **budget** trong Final UA Plan:
 
 ```text
-Budget: [tong ngan sach]
-Daily cap: [muc tran moi ngay]
-Primary learning question: [cau hoi test]
-Region: [thi truong test]
-Channel: [kenh chinh]
-Creative cells: [so bien the]
-Stop-loss rule: [dieu kien pause]
-Continue signal: [dieu kien test tiep]
-Not allowed to conclude: [dieu test nho nay khong du quyen ket luan]
+Budget:
+[total budget], [daily cap], [buffer if any]
+
+Primary learning question:
+[one question this micro soft-launch is allowed to answer]
+
+Scope:
+[region], [channel], [number of creative cells]
+
+Expected sample:
+[expected CPI] -> [estimated installs total] -> [estimated installs per cell]
+
+Primary metric:
+[metric that answers the question]
+
+Guardrail metric:
+[metric that prevents overread]
+
+Decision contract:
+Allowed conclusion: [what this sprint can decide]
+Blocked conclusion: [what this sprint cannot decide]
+Frozen variables: [build/store/channel/region/audience/etc.]
+Review trigger: [when the team must read and decide]
+Decision owner: [who pauses, who diagnoses, who approves next spend]
+
+Stop-loss rule:
+[condition to pause early]
+
+Continue signal:
+[condition to run the next sprint]
+
+Not allowed to conclude:
+[ROAS/LTV/scale/global readiness/etc.]
+
+Post-sprint readout:
+Decision: [pause / continue / rerun / fix tracking]
+Evidence summary: [what the data actually supports]
+Next sprint variable: [the single main variable to change]
+Confidence note: [low / medium / high + reason]
+Sprint closure certificate: [decision / evidence / frozen variables / blocked conclusions / owner]
 ```
+
+Field liên quan sẽ được dùng lại ở các bài sau: `metricTargets`, `creativeMatrix`, `successCriteria`, `killCriteria`, `nextAction`.
 
 ---
 
 ## Checklist Focus
 
-*   Chọn một learning question duy nhất cho test nhỏ.
-*   Viết rõ budget tổng, daily cap và số creative cells.
-*   Ghi stop-loss rule và continue signal trước khi launch.
-*   Viết rõ test này được phép kết luận gì và không được phép kết luận gì.
-
----
-
-## English Terms You Should Keep
-
-*   **Soft launch**: Giai đoạn launch giới hạn để học trước khi scale.
-*   **Retention**: Tỷ lệ người chơi quay lại sau một khoảng thời gian.
-*   **Cohort**: Nhóm người dùng cùng ngày cài đặt hoặc cùng điều kiện test.
-*   **Daily cap**: Mức trần chi tiêu mỗi ngày.
-*   **Stop-loss**: Điều kiện dừng sớm để tránh đốt thêm budget vào tín hiệu xấu.
-*   **Continue signal**: Dấu hiệu đủ tốt để justify một vòng test tiếp theo.
+- [ ] Learning question chỉ có một câu hỏi chính.
+- [ ] Budget tổng, daily cap và buffer đã rõ.
+- [ ] Số creative cells phù hợp với expected installs/cell.
+- [ ] Stop-loss rule viết trước launch.
+- [ ] Continue signal không dựa vào CPI một mình.
+- [ ] Có dòng `not allowed to conclude`.
+- [ ] Có sprint decision contract trước launch.
+- [ ] Có frozen variables để sprint kế tiếp không đổi quá nhiều thứ cùng lúc.
+- [ ] Có post-sprint readout memo sau khi đọc số.
+- [ ] Có sprint closure certificate.
+- [ ] Có owner cho pause/continue/fix.
 
 ---
 
 ## Curated References
 
-*   [Wikipedia - Monopoly GO!](https://en.wikipedia.org/wiki/Monopoly_Go%21)
-*   [Android Central - Monopoly GO review](https://www.androidcentral.com/gaming/monopoly-go-review)
-*   [Google Play - Zego Studio](https://play.google.com/store/apps/developer?id=Zego+Studio)
-*   [Google Play - Screw Sort 3D](https://play.google.com/store/apps/details?id=com.ig.screw.sort.puzzle)
-*   Module này ưu tiên thực hành trên game của bạn. Calculator phù hợp nhất để đi cùng bài này là **Sample-size sanity check** nhằm kiểm tra test có đang chia quá nhiều cell so với budget hay không.
+- [Google Play Help - Set up an open, closed, or internal test](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en) - nguồn chính thức về test tracks trước production.
+- [Google Play Console - Closed testing](https://play.google.com/console/about/closed-testing/) - best practices về closed test và tester feedback.
+- [Apple Developer - TestFlight](https://developer.apple.com/testflight/) - beta testing workflow cho iOS-aware teams.
+- [App Store Connect Help - TestFlight overview](https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview/) - quản lý beta builds và feedback trước release.
+- [Google Play Console - Store listing experiments](https://play.google.com/console/about/store-listing-experiments/) - official source về testing store graphics/text.

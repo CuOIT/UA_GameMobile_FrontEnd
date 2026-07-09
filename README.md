@@ -48,3 +48,17 @@ After backend deploy, update `content/app-config.json`:
 ## Supabase
 
 Run `supabase-schema.sql` in Supabase SQL Editor before enabling login/progress sync.
+
+To push the 30 optimized lesson Markdown files directly without opening SQL Editor:
+
+```powershell
+.\scripts\sync-lessons-to-supabase.ps1
+```
+
+Dry-run validation:
+
+```powershell
+.\scripts\sync-lessons-to-supabase.ps1 -DryRun
+```
+
+Lesson Markdown is loaded DB-first from `public.ua_content_files`; static files in `content/lessons` are the fallback.

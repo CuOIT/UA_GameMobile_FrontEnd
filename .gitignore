@@ -1,4 +1,5 @@
 .env
 .env.*
+.codebase-memory/
 content/reviews/outputs/
 content/reviews/tmp/

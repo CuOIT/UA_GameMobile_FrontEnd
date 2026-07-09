@@ -9,246 +9,504 @@ artifact: "Rough economics note"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **Rough economics note**: bản phác thảo mô hình kinh tế sơ khởi giúp ước lượng giá trị trọn đời (LTV) của người chơi và xác định trần chi phí cài đặt tối đa (CPI ceiling) cho phép.
+Sau bài này, bạn tạo được **Rough economics note**: một ghi chú kinh tế đủ đơn giản để quyết định có nên tiếp tục mua traffic, giảm spend, hay sửa monetization trước.
 
-Kết quả đạt được:
-- Phân tách được hai dòng doanh thu chính: Quảng cáo (Ad Revenue) và Mua hàng trong ứng dụng (IAP).
-- Áp dụng công thức tính toán LTV đơn giản dựa trên chỉ số giữ chân (Retention) và doanh thu ngày (ARPDAU).
-- Thiết lập 3 kịch bản kinh tế (Conservative, Expected, Optimistic) để làm điểm tựa quản trị rủi ro ngân sách.
-- Cập nhật các chỉ số kinh tế và trần CPI cắt lỗ vào Final UA Plan.
+Bạn sẽ không xây mô hình tài chính phức tạp. Bạn sẽ viết một guardrail vận hành:
+
+- `ARPDAU` hiện tại có đủ để nuôi `CPI` không?
+- `LTV` early estimate đang nằm dưới hay gần economics ceiling?
+- `Payback window` có hợp với budget và runway của team không?
+- Nếu retention ổn nhưng revenue yếu, sửa rewarded ad/IAP ở đâu?
+- Nếu revenue ngày đầu cao nhưng retention sụp, có phải monetization đang quá gắt không?
+
+Plan field cập nhật: **metricTargets**. Artifact: **Rough economics note**.
 
 ---
 
 ## Why this matters
 
-Lập trình viên Unity khi tự phát hành game thường rơi vào một trong hai thái cực sai lầm: hoặc là họ bỏ qua hoàn toàn các tính toán tài chính vì nghĩ nó quá phức tạp, hoặc là họ tin tưởng một cách ngây thơ rằng chỉ cần game có người chơi thì tự khắc sẽ có tiền hoàn vốn.
+Sau Day 9-10, bạn biết cách đọc acquisition và first-session quality. Nhưng một game live vẫn có thể gặp câu hỏi khó hơn: “Nếu user có vẻ ổn, mình có được mua thêm user không?”
 
-Với ngân sách nhỏ $100-500, doanh thu ban đầu từ quảng cáo xen kẽ (interstitial) hay vật phẩm IAP giá rẻ ($0.99) sẽ rất biến động và nhiễu loạn. Nếu bạn không có một mô hình kinh tế ước lượng (rough economics) để tính ra **một người chơi mang lại bao nhiêu tiền trong suốt cuộc đời của họ (LTV)**, bạn sẽ không thể biết được liệu mức CPI `$0.50` bạn đang trả trên Facebook Ads là đắt hay rẻ. 
+Team indie thường rơi vào hai lỗi:
 
-Nếu LTV thực tế của game chỉ đạt `$0.20`, thì việc bạn tiếp tục chạy ads mua user với giá `$0.40` chỉ đơn giản là đang đốt tiền một cách vô nghĩa. Bạn cần biết rõ ngưỡng trần chi phí của game mình.
+- Không tính economics vì nghĩ `$100-500` quá nhỏ để đo.
+- Tính economics quá tự tin, lấy vài ngày doanh thu non rồi forecast như chắc chắn.
 
----
+Cả hai đều nguy hiểm. Nếu `CPI` là `$0.60` còn LTV direction chỉ quanh `$0.20`, scale chỉ phóng to lỗ. Nếu retention ổn nhưng `ARPDAU` thấp, dừng UA ngay có thể bỏ lỡ cơ hội sửa rewarded placement. Nếu `ARPDAU` cao do ép interstitial quá sớm nhưng D1 sụp, revenue đó là “đốt cohort”, không phải monetization khỏe.
 
-## Core model: Phân rã Lifetime Value (LTV)
-
-Đối với game puzzle casual kết hợp quảng cáo và IAP nhẹ, giá trị trọn đời của người chơi (LTV) được phân rã thành hai thành phần chính:
-
-$$\text{LTV} = \text{LTV}_{\text{Ad}} + \text{LTV}_{\text{IAP}}$$
-
-Để ước lượng nhanh LTV mà không cần dùng đến các hàm tích phân phức tạp, bạn có thể áp dụng công thức thực tế dựa trên số ngày chơi trung bình (LTD - Lifetime Days) và doanh thu trung bình ngày (ARPDAU):
-
-$$\text{LTV} = \text{Lifetime Days (LTD)} \times \text{ARPDAU}$$
-
-Trong đó:
-*   **Lifetime Days (LTD)**: Tổng số ngày tích lũy người chơi hoạt động trong game (ước tính dựa trên diện tích dưới đường cong Retention). Ví dụ, nếu Retention D1 = 35%, D7 = 15%, D30 = 5%, một user trung bình sẽ hoạt động khoảng 4 - 6 ngày trong tháng đầu tiên.
-*   **ARPDAU (Average Revenue Per Active User)**: Doanh thu trung bình trên mỗi user hoạt động ngày.
-    
-    $$\text{ARPDAU} = \frac{\text{Tổng doanh thu quảng cáo + Tổng doanh thu IAP trong ngày}}{\text{Số người chơi hoạt động trong ngày đó}}$$
+Rough economics note giúp bạn đặt stop-loss trước khi cảm xúc thắng spreadsheet.
 
 ---
 
-## Khung Giả định kinh tế mẫu (Main framework/map mẫu)
+## Core model: economics ceiling, not exact prediction
 
-> [!WARNING]
-> Các con số dưới đây là mô phỏng giả lập cho kịch bản game Hexa Puzzle chạy ads và IAP nhẹ. Tuyệt đối không bê nguyên xi các số này làm benchmark cứng cho game của bạn, vì mỗi thể loại puzzle (như match-3 cạnh tranh so với sorting giải trí nhẹ) sẽ có hệ số ARPDAU và LTD hoàn toàn khác biệt.
+Với game puzzle ads + light IAP, bạn đọc economics bằng 4 khối:
 
-Dưới đây là khung xây dựng 3 kịch bản kinh tế giúp bạn xác định giới hạn an toàn cho chiến dịch UA:
+```text
+Retention depth -> Lifetime days
+Monetization intensity -> ARPDAU
+Lifetime days * ARPDAU -> rough LTV
+Rough LTV vs CPI -> buy / hold / stop decision
+```
 
-| Tham số kinh tế | Kịch bản Bi quan (Conservative) | Kịch bản Kỳ vọng (Expected) | Kịch bản Lạc quan (Optimistic) | Ý nghĩa quản trị |
-| :--- | :---: | :---: | :---: | :--- |
-| **D1 Retention** | Thấp hơn build/case mà bạn tin tưởng (ví dụ: <20%) | **Đạt vùng mục tiêu nội bộ (28% - 32%)** | Vượt rõ vùng mục tiêu nội bộ (>35%) | Chỉ số neo giữ chất lượng onboarding. |
-| **D30 Retention** | Mỏng, khó hoàn vốn (<2%) | **Đủ để nuôi doanh thu (4% - 6%)** | Dày, có chiều sâu giữ chân (>8%) | Chỉ số neo giữ chiều sâu của gameplay. |
-| **Lifetime Days (LTD)** | Ngắn (~3 ngày) | **Trung bình đủ dùng (5 - 6 ngày)** | Dài (>8 ngày) | Tổng số ngày active trung bình của 1 user. |
-| **ARPDAU thực tế** | Yếu (<$0.02) | **Đủ bù mô hình kinh tế ($0.04 - $0.06)** | Mạnh (>$0.10) | Khả năng khai thác quảng cáo/IAP. |
-| **LTV ước tính (30 ngày)** | Kém hơn CPI rõ rệt (<$0.10) | **Tiệm cận vùng có thể test tiếp ($0.20 - $0.35)** | Vượt CPI với biên an toàn (>$0.80) | Trần LTV dùng làm căn cứ mua ad. |
-| **CPI Trần cho phép (Ceiling)** | Rất thấp (<$0.08) | **Khớp kịch bản kỳ vọng ($0.18 - $0.28)** | Có room để scale (>$0.60) | **Stop-loss CPI**: Vượt mốc này là dừng và đọc lại economics. |
+Các công thức dùng cho sprint:
+
+```text
+ARPDAU = daily revenue / DAU
+
+Rough LTV ≈ estimated lifetime active days * ARPDAU
+
+Payback ratio at day N = cumulative revenue by cohort / acquisition cost for that cohort
+
+Stop-loss CPI ceiling = rough LTV * safety margin
+```
+
+Safety margin là phần giảm trừ để tránh forecast lạc quan. Ví dụ rough LTV direction là `$0.30`, team có thể đặt stop-loss CPI quanh `$0.18-$0.22` cho sprint này, tùy độ tin của data. Đây không phải công thức luật cứng; nó là cách bảo vệ budget khi signal còn non.
 
 ---
 
-## Sơ đồ Quy trình Tính LTV (Hero visual or operating diagram)
+## Khung Rough economics note mẫu
 
-Sơ đồ dưới đây minh họa cách các nguồn dữ liệu đầu vào kết hợp với nhau để tạo ra con số LTV cuối cùng:
+| Field | Cách điền | Vì sao cần |
+| :--- | :--- | :--- |
+| **Cohort scope** | Platform, country, channel, build version, install date. | Không trộn paid/organic hoặc build cũ/mới. |
+| **Revenue mix** | Ad %, IAP %, rewarded/interstitial/no-ads pack. | Biết doanh thu đến từ đâu và có phá retention không. |
+| **Retention anchor** | D1/D7/session depth hoặc lifetime active days estimate. | LTV không thể cao nếu user rời quá sớm. |
+| **ARPDAU direction** | Daily revenue / DAU theo cohort hoặc live segment. | Đo tốc độ kiếm tiền mỗi active user. |
+| **Rough LTV range** | Conservative / expected / optimistic. | Không tin một con số duy nhất. |
+| **Payback window** | Khi nào revenue cần bù đủ CPI? D7, D30, D60? | Biết team có đủ runway chờ không. |
+| **Stop-loss CPI** | CPI trần cho sprint này, có safety margin. | Ngăn scale khi economics âm. |
+| **Next action** | Scale nhẹ, hold, fix monetization, fix retention, hoặc stop. | Biến spreadsheet thành quyết định. |
 
-![LTV calculation components](content/assets/usecases/day-11-hero-diagram.png)
+Một note tốt luôn có dòng **Do not conclude**. Ví dụ: “Không kết luận LTV thật của game; đây chỉ là early guardrail cho paid test nhỏ.”
+
+### Revenue quality and confidence layer
+
+Không phải mọi revenue đều có cùng chất lượng. Với game puzzle nhỏ, revenue tốt là revenue xuất hiện **sau khi người chơi đã hiểu giá trị game**, không phá retention, và có thể lặp lại ở cohort kế tiếp. Revenue xấu là revenue đến từ việc ép quảng cáo quá sớm, làm D1/D3 rơi, hoặc chỉ xuất hiện trong một sample nhỏ rồi biến mất.
+
+| Revenue signal | Confidence nếu... | Decision được phép | Không được kết luận |
+| :--- | :--- | :--- | :--- |
+| Rewarded opt-in tăng | User tự chọn xem ad sau một value moment, D1/session depth không giảm | tối ưu reward value, placement, frequency | cứ thêm rewarded là LTV tăng |
+| Interstitial revenue tăng | xuất hiện sau first win/level depth, frequency cap rõ | test cap nhẹ và đọc retention guardrail | ARPDAU cao là monetization khỏe |
+| No-ads/IAP purchase có vài đơn | purchase gắn với pain point rõ và cohort không quá nhỏ | viết IAP hypothesis, test copy/price nhẹ | payer conversion đã ổn định |
+| ARPDAU tăng nhưng D1 giảm | revenue đến cùng retention damage | giảm ad pressure, kiểm placement | scale vì revenue/day đẹp |
+| Paid LTV thấp hơn organic | paid traffic intent khác hoặc promise mismatch | tách cohort, đọc lại creative/store promise | dùng organic LTV để justify paid UA |
+
+Confidence label nên đi cùng mỗi economics verdict:
+
+```text
+Economics confidence:
+- High enough to pause scale: CPI is far above rough LTV range.
+- Medium to test monetization: retention is workable, revenue mix has clear placement hypotheses.
+- Low to forecast LTV: cohort is small and payback window is immature.
+```
+
+Khi confidence khác nhau, quyết định cũng phải khác nhau. Bạn có thể **dừng scale** với confidence cao hơn việc **dự báo LTV thật**.
+
+---
+
+## Sơ đồ tính rough LTV
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - LTV calculation components]
+Type: hero operating diagram.
+Lesson section: Sơ đồ tính rough LTV.
+Previous local asset to replace: content/assets/usecases/day-11-hero-diagram.png.
+Visual brief: LTV calculation components.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 > [!NOTE]
-> **Hướng dẫn đọc Sơ đồ quy trình LTV (Hero Visual Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Hai nhánh chính dẫn vào phép nhân LTV: Nhánh bên trái là Retention Curve dùng để tính ra LTD (Lifetime Days); Nhánh bên phải là doanh thu chia đôi thành Ad ARPDAU (doanh thu quảng cáo) và IAP ARPU (doanh thu mua hàng).
-> *   **Kết luận rút ra (Conclude)**: LTV là sự đánh đổi (tradeoff) giữa thời gian chơi và tốc độ kiếm tiền. Game có ARPDAU cao nhưng người chơi thoát sạch ở Day 1 (LTD thấp) sẽ có LTV kém hơn game có ARPDAU thấp nhưng người chơi ở lại lâu dài (LTD cao).
-> *   **Không được suy ra (Do not infer)**: Không suy ra rằng việc tăng số lượng quảng cáo hiển thị sẽ tự động làm tăng LTV. Ép xem ad quá nhiều sẽ bẻ gãy đường cong Retention, làm LTD sụt giảm nghiêm trọng và kéo LTV đi xuống.
+> **Inspect**: Nhìn hai nhánh chính: retention tạo lifetime active days, còn monetization tạo `ARPDAU`. LTV direction chỉ xuất hiện khi hai nhánh này cùng tồn tại.
+>
+> **Conclude**: Nếu một nhánh yếu, đừng cố chữa bằng nhánh còn lại quá sớm. ARPDAU cao nhưng retention sụp có thể là ad aggression. Retention ổn nhưng ARPDAU thấp có thể là under-monetized.
+>
+> **Do not infer**: Không suy ra tăng số ad sẽ tự tăng LTV. Nếu ads phá first-session hoặc D1, lifetime days giảm và LTV có thể đi xuống.
 
 ---
 
-## Biểu đồ tích lũy LTV theo thời gian (Chart/visual/table)
+## Bảng scenario LTV và CPI ceiling
 
-Biểu đồ dưới đây biểu diễn tốc độ tích lũy LTV qua 90 ngày của 3 kịch bản kinh tế:
+Các số dưới đây là **scenario example** cho một live puzzle nhỏ có ads + light IAP. Dùng để học cách đặt guardrail, không dùng làm benchmark.
 
-![LTV projection scenarios](content/assets/usecases/day-11-data-visual.png)
+| Scenario | Retention / lifetime days direction | ARPDAU direction | Rough LTV | Stop-loss CPI idea | Decision posture |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Conservative** | D1 yếu hoặc session depth mỏng, ~2-3 active days | $0.015-$0.025 | $0.03-$0.08 | Rất thấp | Stop paid UA; fix product/monetization. |
+| **Expected** | First-session ổn, D1/D7 đủ để học tiếp, ~4-6 active days | $0.035-$0.060 | $0.14-$0.36 | Có safety margin dưới LTV | Hold or run controlled tests. |
+| **Optimistic** | Retention dày hơn cohort trước, ~7-10 active days | $0.070-$0.110 | $0.49-$1.10 | Có room scale nhỏ | Scale cautiously, watch guardrails. |
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - LTV projection scenarios]
+Type: data visual/chart.
+Lesson section: Bảng scenario LTV và CPI ceiling.
+Previous local asset to replace: content/assets/usecases/day-11-data-visual.png.
+Visual brief: LTV projection scenarios.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 :::chart
-title: LTV tích lũy dự kiến sau 30 ngày ($ USD)
-Conservative Scenario|0.06|Weak retention and poor ad integration
-Expected Scenario|0.27|Healthy casual puzzle metrics baseline
-Optimistic Scenario|0.82|Strong onboarding and high rewarded ad adoption
+title: Rough LTV range by scenario, illustrative only
+Conservative|0.06|Weak depth and weak monetization
+Expected|0.27|Enough signal for controlled testing
+Optimistic|0.82|Potential room for cautious scale
 :::
 
-*Cách đọc chart*: Khoảng cách giữa các kịch bản thể hiện rõ mức độ nhạy cảm của sản phẩm. Nhiệm vụ của vòng chạy test đầu tiên là thu thập số liệu thực tế để xem game đang nằm tiệm cận ở đường cong nào, từ đó đưa ra quyết định cắt lỗ, giữ test, hay scale nhẹ. Các con số trong ví dụ này là minh họa cho một puzzle game ads + light IAP, không phải benchmark cố định.
+**Inspect**: Khoảng cách giữa các scenario rất lớn. Chỉ cần retention hoặc ARPDAU lệch một chút, CPI ceiling thay đổi mạnh.
+
+**Conclude**: Khi data còn ít, hãy ra quyết định bằng range và stop-loss, không bằng forecast một dòng.
+
+**Do not infer**: Không nói game của bạn phải đạt `$0.27` LTV. Con số này chỉ minh họa cách biến LTV direction thành decision posture.
 
 ---
 
-## Hướng dẫn đọc số và chẩn đoán chỉ số tài chính
+## Hướng dẫn đọc số
 
-Hãy áp dụng bảng chẩn đoán 4 cột dưới đây để xử lý kết quả tài chính đầu tay:
+Đọc economics theo thứ tự này:
 
-| Pattern số liệu | Chẩn đoán lỗi (Diagnosis) | Hành động ĐÚNG (Next Action) | Hành động SAI thường gặp |
+1. **Tách cohort**: Paid users, organic users, country, build version, channel.
+2. **Kiểm retention guardrail**: Nếu D1/first-session yếu, revenue early có thể không bền.
+3. **Tách revenue mix**: Rewarded ads, interstitials, banners, IAP/no-ads.
+4. **Tính ARPDAU direction**: Daily revenue chia DAU, nhưng đọc theo vài ngày/cohort.
+5. **Ước tính lifetime days**: Dựa trên retention/session depth hiện có, luôn dùng range.
+6. **Tính rough LTV range**: Conservative, expected, optimistic.
+7. **So với CPI**: Nếu CPI vượt stop-loss, không scale.
+
+| Pattern | Diagnosis | Next action | Không nên làm |
 | :--- | :--- | :--- | :--- |
-| **ARPDAU = $0.01**<br>**Retention tốt (D1=35%)** | **Under-monetized**: Game giữ chân tốt nhưng thiết kế vị trí đặt ad / giá trị quà tặng rewarded ad quá kém, người chơi không có động lực click xem ad. | Thêm các điểm nút gọi xem rewarded ad (ví dụ: nhân đôi quà tặng cuối màn, hồi sinh khi sắp thua). | Vội vã tắt chiến dịch UA paid vì thấy doanh thu thấp. |
-| **ARPDAU = $0.09**<br>**Retention rụng (D1=10%)** | **Ad Aggression**: Game kiếm tiền nhanh nhưng hiển thị ad interstitial (quảng cáo ép buộc) quá dày đặc làm người chơi ức chế thoát game sớm. | Giới hạn tần suất ad (Daily Ad Limit), đặt khoảng nghỉ tối thiểu 90 giây giữa các màn ad ép buộc. | Tiếp tục chạy ad vì thấy ARPDAU ngày đầu cao. |
-| **CPI = $0.45**<br>**LTV ước tính = $0.20** | **Negative Margin**: Giá mua lượt cài đặt cao gấp đôi giá trị trọn đời của người chơi, chạy tiếp chắc chắn lỗ. | Tạm dừng chiến dịch ad. Tìm creative angle mới có giá rẻ hơn hoặc sửa lại kinh tế game để tăng LTV. | Tăng ngân sách chạy ad với hy vọng thuật toán tự tối ưu giúp CPI giảm. |
+| Retention ổn, ARPDAU thấp | Under-monetized hoặc rewarded value chưa hấp dẫn. | Test rewarded placement/reward value, no-ads pack, end-level offer. | Dừng game vì “không kiếm tiền” sau 2 ngày. |
+| ARPDAU cao, retention sụp | Ad aggression hoặc paywall/popup phá trải nghiệm. | Giảm interstitial, dời ad sau first win/level depth, kiểm D1. | Scale vì thấy revenue/day cao. |
+| CPI cao hơn rough LTV range | Negative unit economics trong sprint này. | Pause paid UA, giảm CPI bằng creative hoặc tăng LTV bằng product/monetization. | Tăng budget để thuật toán “học thêm”. |
+| LTV gần CPI nhưng sample nhỏ | Có thể còn học tiếp nhưng rủi ro cao. | Giữ daily cap thấp, thêm cohort, không scale. | Đọc như ROAS-positive chắc chắn. |
+| Organic LTV cao, paid LTV thấp | Paid traffic intent khác organic. | Tách cohorts, đọc creative promise và first-session fit. | Dùng organic average để justify paid spend. |
 
 ---
 
-## Worked example: Calming Hex Puzzle
+## Worked example: Live Calming Hex Puzzle
 
-Một nhà phát triển Unity chạy test $250 cho tựa game Calming Hex Puzzle với các ngưỡng trần LTV cụ thể cho từng kịch bản:
+Team có live build Android với ads + no-ads IAP. Sau Day 9-10:
 
-**Báo cáo thực tế sau 5 ngày**:
-- Ngân sách tiêu: $180.
-- Số install thu được: 300 users.
-- CPI thực tế: `$0.60`.
-- Retention D1: 32%.
-- ARPDAU thực tế: `$0.03`.
-- Tính toán LTD thực tế: 5.8 ngày.
-- LTV thực tế ước tính: `5.8 ngày x $0.03 = $0.17`.
+- Acquisition angle “real combo clear” có `CPI` khoảng `$0.48`.
+- First-session guardrail tạm ổn: `tutorial_complete 76%`, `D1 31%`.
+- Team muốn biết có nên tăng daily cap không.
 
-**Phân tích chẩn đoán & Quyết định (Verdict)**:
-*   Mô hình kinh tế (Economics Framework) đã định nghĩa kịch bản Conservative có trần CPI là `$0.08`, kịch bản Expected là `$0.22`, và kịch bản Optimistic là `$0.50`.
-*   Với LTV thực tế `$0.17`, game đang nằm ở giữa kịch bản Conservative và Expected. Mức CPI thực tế là `$0.60` đã vượt xa tất cả các ngưỡng trần cho phép (Ceilings). 
-*   **Hành động quyết định**: Tắt chiến dịch hiện tại để dừng lỗ. Tiến hành thiết kế 3 video quảng cáo mới xoay quanh chủ đề khác (ví dụ: thử thách đếm số combo nổ khối gỗ) để thử kéo CPI xuống vùng dưới `$0.20`, thay vì vội sửa cả gameplay.
+Economics readout sau cohort nhỏ:
+
+| Metric | Observed direction | Cách đọc |
+| :--- | :---: | :--- |
+| Paid installs | 420 | Sample nhỏ, chỉ đọc direction. |
+| Spend | $202 | CPI = `$0.48`. |
+| D1 | 31% | First-session không phải blocker chính trong sprint này. |
+| D7 early direction | 11% | Có depth vừa phải, chưa chứng minh long-term. |
+| DAU from cohort days 1-5 | 310 avg active-user-days total | Dùng để estimate lifetime days rất thận trọng. |
+| Ad revenue | $7.80 | Rewarded + interstitial còn mỏng. |
+| IAP revenue | $3.00 | Một vài no-ads purchases, chưa ổn định. |
+| ARPDAU direction | ~$0.035 | Monetization chưa đủ khỏe. |
+| Rough lifetime days range | 3.5-5.5 | Based on early retention, không forecast quá xa. |
+| Rough LTV range | `$0.12-$0.19` | Dưới CPI `$0.48`. |
+
+**Diagnosis**: Retention không tệ, nhưng economics chưa đủ mua traffic ở CPI hiện tại. Đây không phải “game chết”. Đây là “paid UA chưa có unit economics”.
+
+**Tradeoff**: Team có hai hướng: giảm CPI bằng creative/channel hoặc tăng ARPDAU bằng monetization. Vì first-session ổn, sửa monetization có thể đáng thử. Nhưng scale paid UA ngay là sai.
+
+**Verdict**:
+
+1. Không tăng daily cap.
+2. Giữ một test nhỏ nếu cần thêm cohort, nhưng đặt stop-loss CPI thấp hơn.
+3. Test rewarded ad ở end-level “double reward” và continue khi sắp thua, không đặt interstitial trước level 3.
+4. Test no-ads pack price/copy nhẹ, không ép popup sớm.
+5. Rerun economics note sau khi có cohort mới.
+
+### Payback decision ladder
+
+Worked example trên không chỉ nói "LTV thấp hơn CPI". Nó dạy cách chọn posture theo khoảng cách giữa `rough LTV`, `CPI`, `retention` và `confidence`.
+
+| Situation | Economics read | Decision posture | Sprint action |
+| :--- | :--- | :--- | :--- |
+| Rough LTV far below CPI, retention weak | product + economics đều chưa đủ | stop paid UA | sửa first-session/retention trước |
+| Rough LTV far below CPI, retention workable | monetization/CPI chưa đủ | hold cap, no scale | test rewarded/IAP và giảm CPI |
+| Rough LTV near CPI, sample small | có thể học tiếp nhưng rủi ro cao | controlled test | thêm cohort nhỏ, không tăng daily cap |
+| Rough LTV above CPI but payback slow | unit direction tốt nhưng cashflow căng | cautious scale | giới hạn cap theo runway/payback window |
+| ARPDAU high, retention falling | revenue có thể đang đốt cohort | reduce ad pressure | dời placement, cap interstitial |
+
+Decision memo cho case này:
+
+```text
+Economics decision memo
+- Confidence to scale: Low.
+- Confidence to continue tiny learning test: Medium.
+- Main blocker: rough LTV $0.12-$0.19 is far below CPI $0.48.
+- Product note: D1 31% means first-session is not the main blocker this sprint.
+- Monetization hypothesis: rewarded/no-ads value may be underdeveloped.
+- Action: hold paid UA cap, test monetization placement, test lower-CPI creative.
+- Do not conclude: final LTV, ROAS-positive potential, or product death.
+```
+
+Điểm quan trọng: economics note tốt không biến thành "có/không" tuyệt đối. Nó chia quyết định thành scale, hold, learn, fix, stop.
+
+### Economics action contract
+
+Một Rough economics note chỉ hữu ích khi nó nói rõ quyết định nào được phép làm ngay và quyết định nào chưa đủ bằng chứng. Với sample nhỏ, bạn thường có đủ confidence để **không scale**, nhưng chưa đủ confidence để **forecast LTV thật**.
+
+| Decision | Evidence tối thiểu | Action được phép | Action bị cấm |
+| :--- | :--- | :--- | :--- |
+| Stop scale / cap spend | CPI vượt xa rough LTV range, cohort scope rõ | giữ cap thấp, pause scale, giảm spend | kết luận game chết |
+| Keep tiny learning test | retention workable, sample nhỏ, economics chưa phá hẳn | mua thêm cohort nhỏ có cap | tăng daily cap vì "cần thêm data" |
+| Fix monetization | retention ổn, ARPDAU/revenue mix yếu, placement hypothesis rõ | test rewarded/no-ads/interstitial timing | nhồi ad sớm không có retention guardrail |
+| Reduce CPI | ARPDAU/retention có signal, CPI là bottleneck | test creative/channel/store efficiency | đổi monetization khi acquisition mới là leak |
+| Pause product/economics thesis | retention yếu và economics cũng yếu qua clean read | sửa first session hoặc rewrite promise | optimize ROAS trên user không ở lại |
+| Forecast LTV | cohort đủ lớn, window đủ dài, revenue mapping sạch | planning estimate with caveat | gọi early rough LTV là LTV thật |
+
+```text
+Economics action contract
+- Cohort scope:
+- Decision allowed now:
+- Decision not allowed yet:
+- Main blocker:
+- Action size:
+- Variables to keep stable:
+- Next read window:
+- Do not conclude:
+```
+
+Contract này bảo vệ team khỏi một lỗi rất phổ biến: dùng cùng một bảng số để vừa "không scale", vừa "forecast LTV", vừa "kill product". Mỗi decision cần mức bằng chứng khác nhau.
+
+---
+
+## Monetization and economics checklist
+
+| Check | Pass khi | Nếu fail thì sao |
+| :--- | :--- | :--- |
+| **Cohort split** | Paid/organic, country, build, channel tách rõ. | LTV bị pha loãng hoặc phóng đại. |
+| **Revenue source split** | Ad revenue và IAP revenue tách riêng. | Không biết nên sửa ad placement hay IAP offer. |
+| **Rewarded placement logic** | Rewarded ads là opt-in và xuất hiện ở điểm có giá trị. | Viewer rate thấp hoặc phá experience. |
+| **Interstitial frequency** | Không xuất hiện trước first win/early value; có cap/frequency. | ARPDAU tăng ngắn hạn, retention giảm. |
+| **IAP sanity** | No-ads/starter pack có giá và value rõ. | IAP quá sớm hoặc quá mơ hồ, conversion thấp. |
+| **Safety margin** | Stop-loss CPI thấp hơn rough LTV expected. | Team scale trên forecast quá đẹp. |
+| **Payback window** | D7/D30/D60 expectation phù hợp cash runway. | Game có thể “có LTV” nhưng team hết tiền trước khi payback. |
 
 ---
 
 ## Real usecases đã đối chiếu nguồn
 
-### Case Study: Thiết lập LTV Curve của Rovio (Sugar Blast)
+### Internal case: Live puzzle game, retention acceptable, ROAS short
 
-![Rovio Sugar Blast LTV optimization representation](content/assets/usecases/candy-crush.png)
-
-> [!NOTE]
-> **Hướng dẫn đọc Biểu đồ LTV:CAC Rovio (Screenshot Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Trục hoành là thời gian theo ngày cài đặt, trục tung thể hiện doanh thu tích lũy tăng trưởng (LTV). Chú ý cách đường cong LTV phân rã theo từng tệp (cohort) mua hàng IAP và xem ad.
-> *   **Kết luận rút ra (Conclude)**: Rovio tối ưu hóa chiến dịch dựa trên LTV cohorted tích lũy thay vì doanh thu ngày đầu. Việc theo dõi tốc độ hồi vốn (ROAS) tại các mốc D1, D7 giúp xác định chính xác thời điểm chiến dịch đạt điểm hòa vốn LTV = CAC.
-> *   **Không được suy ra (Do not infer)**: Không suy ra rằng game indie nhỏ của bạn cũng cần xây dựng thuật toán dự báo LTV tự động tương đương Rovio. Hãy dùng bảng tính Excel thủ công để tính LTD x ARPDAU đơn giản cho từng nhóm cài đặt theo tuần.
-
-| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
-| --- | --- | --- |
-| Rovio đã công bố chi tiết về mô hình tối ưu hóa giá trị (Value-Based Optimization), nhấn mạnh việc vẽ đường cong LTV:CAC phân rã theo cohort để đạt ROAS dương cho dòng game casual puzzle. Nguồn: [LTV Modeling của Rovio trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/10/25/the-game-analytics-masterclass) | LTV không phải là một số tĩnh. Nó là một đường cong tăng trưởng theo thời gian cần được đối chiếu trực tiếp với chi phí mua user (CPI) để tìm ra điểm hòa vốn. | Không tự suy diễn rằng game của bạn bắt buộc phải có mô hình LTV phức tạp như một studio lớn để bắt đầu chạy thử nghiệm ad hẹp $100. |
-
----
-
-## Checklist kỹ thuật monetization (Implementation checklist)
-
-Đảm bảo hệ thống quảng cáo và mua hàng hoạt động trơn tru trước khi chạy ad:
-
-| Hạng mục | Trạng thái cần đạt | Tác hại nếu bỏ qua |
+| Observable facts | Lesson interpretation | What not to infer |
 | :--- | :--- | :--- |
-| **1. Ad SDK Init** | Ad Mediation SDK (như Unity LevelPlay hoặc AppLovin) đã khởi tạo thành công và load được ad test. | Game mở lên không hiện ad, mất hoàn toàn nguồn thu quảng cáo. |
-| **2. Daily Ad Limit** | Cài đặt giới hạn tối đa 3 ad interstitial/user/ngày, khoảng nghỉ tối thiểu 90 giây giữa các màn. | Người chơi bị dội bom ad liên tục, dẫn tới gãy retention D1. |
-| **3. IAP Price Tier** | Gói IAP rẻ nhất (No Ads hoặc Starter Pack) được cấu hình đúng giá `$0.99` hoặc `$1.99`. | Giá gói quá cao khiến người dùng casual không bao giờ mở ví thử nghiệm. |
+| Case nội bộ `live-roas-shortfall`: `CPI $0.80`, `D1 34%`, `D7 16%`, `D7 ROAS 8%`, target direction 15-20%. | Retention không phải blocker chính. Economics shortfall có thể đến từ monetization placement, ARPDAU thấp, hoặc CPI quá cao. | Không scale chỉ vì retention acceptable. Không kill product ngay nếu monetization chưa được test đúng. |
+
+### Official monetization surfaces
+
+| Source signal | Cách dùng trong bài này | Không được suy ra |
+| :--- | :--- | :--- |
+| Unity LevelPlay Rewarded Ad là ad unit user-initiated, đổi full-screen ad lấy in-app reward. | Ưu tiên rewarded placement có value rõ thay vì ép interstitial sớm. | Rewarded ads không tự đảm bảo ARPDAU cao; reward value và timing vẫn cần test. |
+| AdMob cung cấp monetization reporting/insights và có thể tích hợp với Firebase để hiểu user interaction với ads. | Dùng reporting để tách revenue source và đọc ad behavior cùng cohort. | Không dùng aggregate revenue để justify paid UA nếu paid cohort riêng đang âm. |
+| Unity rewarded ads best practices nhấn mạnh placement/design phù hợp để tối ưu monetization. | Monetization là product design decision, không chỉ bật SDK. | Không nhồi ad vào mọi transition chỉ vì muốn tăng ARPDAU. |
 
 ---
 
-## Common mistakes (Các sai lầm phổ biến)
+## Common mistakes
 
-*   **Mistake 1: Ép người chơi xem quảng cáo xen kẽ (interstitial ad) quá sớm**
-    *   *Correction*: Tránh đặt ad ép buộc trước khi người chơi hoàn thành Level 3 hoặc trước khi họ chơi quá 2 phút. Hãy để họ cảm nhận giá trị game trước.
-*   **Mistake 2: Ước lượng LTV quá lạc quan để tự lừa dối bản thân**
-    *   *Correction*: Luôn lấy kịch bản bi quan (Conservative LTV) làm điểm tựa stop-loss khi thiết lập ngân sách thử nghiệm ban đầu.
-*   **Mistake 3: Không kiểm tra kỹ liên kết Ad Mediation SDK**
-    *   *Correction*: Hãy chạy thử nghiệm build trên thiết bị thật và tự tay click xem ad rewarded ít nhất 3 lần để đảm bảo event đếm impression gửi đi chính xác.
+**Mistake 1 - Dùng LTV early như forecast chắc chắn.**
+**Correction**: Gọi nó là rough LTV direction. Luôn dùng range và safety margin.
 
-### Đọc sai số kinh tế thường gặp (Top 3 Economics Data Traps)
+**Mistake 2 - Trộn paid với organic.**
+**Correction**: Paid cohorts thường có intent khác organic. Tách trước khi tính LTV/CPI ceiling.
 
-1.  **Organic Dilution Trap (Bẫy pha loãng lượng tự nhiên)**: Tính gộp cả organic install (lượng tải tự nhiên không qua ad) để tính LTD và ARPDAU trung bình cho paid campaign. Việc này sẽ thổi phồng ảo LTV của paid user, dẫn tới việc duy trì các campaign đang lỗ nặng mà không biết.
-2.  **Mediation Platform Cut (Quên trừ chiết khấu)**: Tính LTV dựa trên eCPM thô từ ad network mà quên trừ đi 15% - 30% phí nền tảng ad server/mediation và thuế nhà thầu. Khi hoàn vốn thực tế nhận về tài khoản sẽ bị thiếu hụt so với bảng tính.
-3.  **Paying vs Non-paying averaging (Trung bình cào bằng)**: Đo lường ARPDAU chung cho cả nhóm mà không phân nhóm (segment) hành vi người dùng. Đối với game hybrid, 2% người chơi IAP tạo ra 80% doanh thu; việc trung bình hóa cào bằng sẽ làm lu mờ hành vi rò rỉ của tệp VIP này.
+**Mistake 3 - Tăng interstitial để kéo ARPDAU.**
+**Correction**: Kiểm retention guardrail. Nếu D1/session depth sụp, ARPDAU cao là tín hiệu monetization quá gắt.
+
+**Mistake 4 - Quên payback window.**
+**Correction**: Một game có thể payback chậm hơn runway của team. Ghi rõ D7/D30/D60 expectation.
+
+**Mistake 5 - Chỉ sửa monetization khi CPI cao.**
+**Correction**: CPI cao có thể là creative/channel issue. Nếu ARPDAU và retention ổn nhưng CPI quá cao, quay lại Day 9 creative economics.
 
 ---
 
 ## English Terms You Should Keep
 
-*   **ARPDAU**: Average Revenue Per Active User (Doanh thu trung bình trên mỗi người dùng hoạt động ngày).
-*   **LTV**: Lifetime Value (Giá trị trọn đời của một người chơi).
-*   **Payback window**: Khoảng thời gian hoàn vốn (thời điểm doanh thu tích lũy bằng chi phí quảng cáo).
-*   **stop-loss CPI**: Trần chi phí cài đặt tối đa cho phép để dừng chiến dịch trước khi quá muộn.
-*   **Ad Mediation**: Hệ thống trung gian phân phối và tối ưu hóa doanh thu quảng cáo từ nhiều network.
+- **ARPDAU**: Average Revenue Per Daily Active User.
+- **LTV**: Lifetime Value, tổng giá trị kinh tế dự kiến từ một user.
+- **Payback window**: Thời gian cần để cumulative revenue bù acquisition cost.
+- **CPI ceiling**: CPI trần mà game có thể chịu trong một scenario.
+- **Stop-loss CPI**: CPI buộc phải dừng hoặc giảm spend.
+- **Ad mediation**: Nền tảng quản lý nhiều ad networks để tối ưu fill/eCPM.
+- **Rewarded ad**: Ad tự nguyện xem để nhận reward.
+- **Interstitial ad**: Ad toàn màn hình thường xuất hiện ở transition.
+- **Safety margin**: Biên an toàn trừ khỏi rough LTV trước khi đặt CPI ceiling.
 
 ---
 
-## Lab output example (Mẫu kết quả thực hành)
+## Lab output example
 
-### Xem trước Bản phác thảo Kinh tế (Rough Economics Note Preview)
 ```text
-┌────────────────────────────────────────────────────────────────────────┐
-│                        ROUGH ECONOMICS NOTE                            │
-├────────────────────────────────────────────────────────────────────────┤
-│ Target Scenario: Expected Puzzle Model                                 │
-│ Expected D1 Retention: 30% | Expected LTD: 5.5 days                    │
-│ Target ARPDAU: $0.05 (Ad: $0.04 | IAP: $0.01)                           │
-│ Calculated LTV: 5.5 days x $0.05 = $0.27                               │
-│ CPI Ceiling Target (Stop-loss): $0.22                                  │
-│ Primary Revenue Driver: Rewarded Ads (No-Ads package as secondary)     │
-└────────────────────────────────────────────────────────────────────────┘
+ROUGH ECONOMICS NOTE
+
+Cohort scope:
+Android paid / VN / build 0.4.1 / real combo clear creative / install week 2026-W27.
+
+Revenue mix:
+Rewarded ads primary, interstitial after level 4+, no-ads pack secondary.
+
+Retention anchor:
+D1 31%, early D7 direction 11%, estimated lifetime active days range 3.5-5.5.
+
+ARPDAU direction:
+Ad revenue + IAP revenue / DAU = ~$0.035.
+
+Rough LTV range:
+Conservative: 3.5 * $0.025 = $0.09
+Expected: 4.5 * $0.035 = $0.16
+Optimistic: 5.5 * $0.050 = $0.28
+
+Current CPI:
+$0.48
+
+Stop-loss CPI for next sprint:
+$0.14-$0.20 unless monetization improves.
+
+Diagnosis:
+Retention is workable, but economics cannot support CPI $0.48 yet.
+
+Next action:
+Do not scale. Test rewarded placement and no-ads pack. Also test lower-CPI creative variant.
+
+Do not conclude:
+Do not claim final LTV. Do not claim ROAS-positive. This is an early guardrail only.
+
+Economics action contract:
+- Decision allowed now:
+- Decision not allowed yet:
+- Main blocker:
+- Action size:
+- Variables to keep stable:
+- Next read window:
+- Do not conclude:
 ```
 
-Dưới đây là một mẫu Rough economics note hoàn chỉnh dạng bảng mà học viên cần điền:
+Sprint decision memo:
 
-| Chỉ số giả định | Kịch bản Bi quan | Kịch bản Kỳ vọng (Target) | Kịch bản Lạc quan | Cách đo lường thực tế |
-| :--- | :---: | :---: | :---: | :--- |
-| **D1 Retention** | 20% | **30%** | 35% | Cohort Retention chart. |
-| **LTD (Số ngày active)** | 3.0 ngày | **5.5 ngày** | 7.5 ngày | Diện tích dưới biểu đồ retention. |
-| **ARPDAU mục tiêu** | $0.02 | **$0.05** | $0.08 | Tổng doanh thu / Active Users. |
-| **LTV dự kiến** | $0.06 | **$0.27** | $0.60 | LTD x ARPDAU. |
-| **CPI Trần Stop-loss** | **$0.05** | **$0.22** | **$0.50** | Trần giá mua install trên Ads Manager. |
+```text
+Confidence to scale:
+Confidence to keep learning:
+Main economics blocker:
+Retention guardrail:
+Monetization hypothesis:
+CPI reduction hypothesis:
+Action this sprint:
+Do not conclude:
+Next read date/window:
+```
+
+Bảng nộp lab:
+
+| Field | Your value |
+| :--- | :--- |
+| Cohort scope | |
+| Revenue mix | |
+| D1 / D7 direction | |
+| Estimated lifetime active days range | |
+| ARPDAU direction | |
+| Conservative LTV | |
+| Expected LTV | |
+| Optimistic LTV | |
+| Current CPI | |
+| Stop-loss CPI | |
+| Payback window | |
+| Diagnosis | |
+| Next action | |
+| Confidence to scale | |
+| Confidence to keep learning | |
+| Monetization hypothesis | |
+| CPI reduction hypothesis | |
+| Decision allowed now | |
+| Decision not allowed yet | |
+| Variables to keep stable | |
+| Next read window | |
+| Do not conclude | |
 
 ---
 
 ## Practical Lab
 
 Làm trực tiếp cho game của bạn:
-1.  Điền hoàn chỉnh bản phác thảo kinh tế sơ khởi cho game của bạn theo mẫu ở phần **Lab output example**.
-2.  Áp dụng **Bảng quy trình kiểm tra chất lượng (Economics Quality Chain Check)** dưới đây để tự duyệt:
-    *   *Mô hình doanh thu*: Bạn đã ghi rõ doanh thu chính đến từ quảng cáo rewarded hay gói IAP cụ thể chưa? (Đạt/Không)
-    *   *Ràng buộc Stop-loss*: Ngưỡng trần CPI cắt lỗ của bạn có được đặt thấp hơn mốc LTV kỳ vọng với một biên an toàn rõ ràng không? (Đạt/Không)
-    *   *Tính hợp lý của LTD*: Con số Lifetime Days (LTD) đưa ra có dựa trên dữ liệu retention thực tế thay vì suy diễn lạc quan quá mức không? (Đạt/Không)
-    *   *Xác thực SDK*: Thiết bị test của bạn đã load và hiển thị thành công ít nhất một ad test trước khi cấu hình campaign chưa? (Đạt/Không)
+
+1. Chọn một paid cohort hoặc một live cohort rõ scope.
+2. Tách revenue: rewarded, interstitial, banner, IAP/no-ads.
+3. Ghi retention anchor: D1, D7 direction, session depth hoặc lifetime active days estimate.
+4. Tính ARPDAU direction.
+5. Tạo 3 scenario rough LTV: conservative, expected, optimistic.
+6. Đặt stop-loss CPI có safety margin.
+7. Viết decision: scale nhẹ, hold, fix monetization, reduce CPI, hoặc stop paid UA.
+8. Gán confidence cho từng quyết định: scale, keep learning, stop, forecast.
+9. Viết một sprint decision memo.
+10. Viết Economics action contract.
+
+Quality chain check:
+
+- Paid và organic đã tách chưa?
+- Có revenue mix chưa?
+- Có retention guardrail chưa?
+- Stop-loss CPI có thấp hơn expected LTV không?
+- Có dòng “do not conclude” chưa?
+- Memo có phân biệt confidence to scale và confidence to keep learning chưa?
+- Contract có tách decision allowed now và decision not allowed yet chưa?
 
 ---
 
 ## Final UA Plan Update
 
-Cập nhật trường **economics_guardrails** trong Final UA Plan theo định dạng chuẩn dưới đây:
+Cập nhật trường **metricTargets** trong Final UA Plan:
 
 ```text
-- Expected ARPDAU baseline: [Mốc ARPDAU kỳ vọng]
-- Primary revenue stream: [Quảng cáo hay IAP là chính]
-- LTD estimate: [Số ngày chơi active trung bình mong muốn]
-- Expected LTV threshold: [Mức LTV dự phóng]
-- Stop-loss CPI ceiling: [Trần CPI cắt lỗ bắt buộc]
+Economics guardrails:
+- Cohort scope: [platform / country / channel / build / install window]
+- Primary revenue stream: [rewarded / interstitial / IAP / no-ads pack]
+- ARPDAU direction: [range, not exact forecast]
+- Lifetime active days estimate: [conservative / expected / optimistic]
+- Rough LTV range: [conservative / expected / optimistic]
+- Current CPI: [observed]
+- Stop-loss CPI: [with safety margin]
+- Payback window: [D7 / D30 / D60 expectation]
+
+Action rules:
+- Retention good + ARPDAU weak: [monetization placement test]
+- ARPDAU high + retention weak: [reduce ad pressure]
+- CPI above stop-loss: [pause or reduce spend]
+- LTV close to CPI but sample small: [hold cap, gather cohort]
+- Confidence to scale: [high / medium / low + why]
+- Confidence to keep learning: [high / medium / low + why]
+- Decision allowed now: [stop scale / keep learning / fix monetization / reduce CPI]
+- Decision not allowed yet: [forecast LTV / scale / kill product / ROAS verdict]
+- Variables to keep stable: [cohort / build / channel / placement]
+- Sprint economics decision memo: [one paragraph]
 ```
+
+Plan field được cập nhật: **metricTargets**. Bài này cũng tạo input cho Day 12 về ROAS windows.
 
 ---
 
 ## Checklist Focus
 
-*   [ ] Thiết lập 3 kịch bản kinh tế LTV riêng biệt cho game của bạn.
-*   [ ] Xác định rõ trần CPI cắt lỗ bắt buộc dựa trên kịch bản kỳ vọng.
-*   [ ] Hoàn thành 4 mục trong Bảng quy trình kiểm tra chất lượng (Economics Quality Chain Check).
-*   [ ] Cập nhật trường economics_guardrails vào Final UA Plan.
+- [ ] Đã tạo Rough economics note cho một cohort rõ scope.
+- [ ] Đã tách paid/organic và revenue source.
+- [ ] Đã tính ARPDAU direction và rough LTV range.
+- [ ] Đã đặt stop-loss CPI có safety margin.
+- [ ] Đã ghi payback window phù hợp runway.
+- [ ] Đã viết Economics action contract.
+- [ ] Đã tách decision allowed now và decision not allowed yet.
+- [ ] Đã cập nhật **metricTargets** trong Final UA Plan.
 
 ---
 
 ## Curated References
 
-*   [The Game Analytics Masterclass trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/10/25/the-game-analytics-masterclass)
-*   Tài liệu hướng dẫn thiết lập Ad Placement và cấu hình eCPM floor trên AppLovin MAX / Unity LevelPlay.
+- [Unity LevelPlay - Rewarded ads integration for Unity](https://docs.unity.com/en-us/grow/levelplay/sdk/unity/rewarded-ad-integration-package) - Official Unity LevelPlay rewarded ad documentation describing user-initiated ads exchanged for in-app rewards.
+- [Google AdMob - Google for Developers](https://developers.google.com/admob) - Official AdMob developer surface for mobile app ad monetization and mediation integration.
+- [Unity Ads - Rewarded ads best practices](https://docs.unity3d.com/Packages/com.unity.ads%403.3/manual/MonetizationResourcesBestPracticesAds.html) - Unity guidance on designing rewarded ad monetization strategy and placements.

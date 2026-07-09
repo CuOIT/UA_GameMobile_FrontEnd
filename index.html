@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>UA Marketing Bootcamp for Unity Devs</title>
-    <link rel="stylesheet" href="./styles.css?v=1.0.0" />
+    <link rel="stylesheet" href="./styles.css?v=1.5.7" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   </head>
   <body>
+    <div class="reading-progress" id="readingProgress" aria-hidden="true">
+      <span></span>
+    </div>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Primary navigation">
         <a class="brand" href="#dashboard" aria-label="Dashboard">
@@ -17,14 +21,14 @@
           </span>
         </a>
         <nav class="nav-list">
-          <a href="#dashboard" data-nav="dashboard">Dashboard</a>
-          <a href="#lessons" data-nav="lessons">30-Day Lessons</a>
-          <a href="#glossary" data-nav="glossary">Glossary</a>
-          <a href="#tools" data-nav="tools">Tools</a>
-          <a href="#cases" data-nav="cases">Case Studies</a>
-          <a href="#chat" data-nav="chat">AI Chat</a>
-          <a href="#plan" data-nav="plan">Final UA Plan</a>
-          <a href="#account" data-nav="account">Account</a>
+          <a href="#dashboard" data-nav="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a>
+          <a href="#lessons" data-nav="lessons"><i data-lucide="book-open-check"></i>30-Day Lessons</a>
+          <a href="#glossary" data-nav="glossary"><i data-lucide="languages"></i>Glossary</a>
+          <a href="#tools" data-nav="tools"><i data-lucide="calculator"></i>Tools</a>
+          <a href="#cases" data-nav="cases"><i data-lucide="file-search"></i>Case Studies</a>
+          <a href="#chat" data-nav="chat"><i data-lucide="messages-square"></i>AI Chat</a>
+          <a href="#plan" data-nav="plan"><i data-lucide="clipboard-list"></i>Final UA Plan</a>
+          <a href="#account" data-nav="account"><i data-lucide="circle-user-round"></i>Account</a>
         </nav>
         <section class="stage-filter" aria-label="Learner stage">
           <label for="stageSelect">Learner stage</label>
@@ -47,9 +51,9 @@
             <h1 id="pageTitle">Dashboard</h1>
           </div>
           <div class="topbar-actions" id="authActions">
-            <a class="button" id="topbarSignInBtn" href="#signin">Sign in</a>
-            <a class="button ghost-button" id="topbarSignUpBtn" href="#signup">Sign up</a>
-            <button class="ghost-button danger hidden" id="topbarLogoutBtn" type="button">Log out</button>
+            <a class="button" id="topbarSignInBtn" href="#signin"><i data-lucide="log-in"></i>Sign in</a>
+            <a class="button ghost-button" id="topbarSignUpBtn" href="#signup"><i data-lucide="user-plus"></i>Sign up</a>
+            <button class="ghost-button danger hidden" id="topbarLogoutBtn" type="button"><i data-lucide="log-out"></i>Log out</button>
           </div>
         </header>
         <div id="app" class="view" aria-live="polite"></div>
@@ -62,7 +66,6 @@
       </section>
     </template>
 
-    <script src="./app.js?v=1.0.0" type="module"></script>
+    <script src="./app.js?v=1.5.7" type="module"></script>
   </body>
 </html>
-

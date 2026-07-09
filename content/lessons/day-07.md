@@ -9,264 +9,465 @@ artifact: "First UA hypothesis card"
 
 ## Mục tiêu / Goal
 
-Sau bài này, bạn tạo được **First UA hypothesis card**: một thẻ giả thuyết UA cốt lõi chứa 5 dòng quyết định liên kết chặt chẽ từ người chơi đến hành động sửa đổi. 
+Sau bài này, bạn tạo được **First UA hypothesis card**: một thẻ giả thuyết đủ cụ thể để chạy vòng test UA nhỏ đầu tiên mà không bị biến thành “bắn quảng cáo rồi cầu may”.
 
-Kết quả cần có sau bài:
-- Không còn viết giả thuyết chung chung kiểu "game hay sẽ có người chơi".
-- Ràng buộc được giả thuyết quảng cáo với điều kiện hành động (decision rule) cụ thể.
-- Biết khoanh vùng và phân bổ ngân sách thử nghiệm hẹp $100-500 mà không bị phân tán.
-- Cập nhật trường **First UA hypothesis** trong Final UA Plan.
+Quyết định cần ra sau bài:
+
+- Chọn **một** player motivation chính để test trước.
+- Viết rõ chuỗi `ad promise -> store proof -> first-session proof -> metric pattern -> next action`.
+- Định nghĩa budget scope, metric signal và action rule cho vòng test `$100-500`.
+- Cập nhật trường **hypothesis** trong Final UA Plan để Week 2 có thể đo đúng thứ cần đo.
+
+Thẻ này không nhằm dự đoán game chắc thắng. Nó nhằm ép team nói rõ: “Chúng ta đang kiểm chứng điều gì, bằng tín hiệu nào, và nếu tín hiệu lệch thì sửa phần nào trước?”
 
 ---
 
 ## Why this matters
 
-Kết thúc tuần đầu tiên (Week 1), bạn đã học về vòng lặp UA, chẩn đoán phễu rò rỉ và chọn kênh. Tuy nhiên, nếu bạn bước vào giai đoạn chạy test $100-500 chỉ với một đống note rời rạc, bạn sẽ rơi vào bẫy **chạy quảng cáo cầu may** (pray-and-play). 
+Sau 6 bài đầu, bạn đã có các mảnh riêng: UA loop, funnel leak, player motivation, store proof, budget và channel. Nhưng khi chuẩn bị chạy test thật, nhiều team indie lại gom các mảnh đó thành một câu rất mơ hồ:
 
-Ngân sách nhỏ không cho phép bạn test mọi thứ. Thẻ giả thuyết UA đầu tiên đóng vai trò như một bản cam kết vận hành: bạn phải viết rõ trước khi chạy ad rằng: *đối tượng nào, thích điều gì, được kiểm chứng bằng số liệu nào, và nếu số liệu đó gãy thì bạn sẽ sửa game ở đâu trước*. Nếu không có quy tắc quyết định (decision rule) này, bạn sẽ tiêu hết $300 mà vẫn không biết nên bỏ dự án hay sửa tiếp.
+> “Game puzzle casual của mình sẽ chạy Meta/TikTok để tìm user rẻ.”
 
----
+Câu này nghe hợp lý nhưng không giúp ra quyết định. Nếu `CPI` rẻ nhưng `D1` thấp, bạn sửa creative, store, tutorial hay level pacing? Nếu `CTR` cao nhưng store `CVR` thấp, bạn scale tiếp vì ad tốt hay dừng để sửa listing? Với budget nhỏ, một lần đọc sai có thể tiêu hết tiền trước khi học được điều quan trọng.
 
-## Core model: cấu trúc giả thuyết 5 dòng
-
-Một giả thuyết UA tốt không phải là một câu văn bay bổng, nó là một cấu trúc có tính kỷ luật gồm 5 thành phần:
-
-1.  **Player (Who)**: Đối tượng người chơi định nghĩa bằng hành vi/động lực (motivation).
-2.  **Promise (Hook)**: Lời hứa cốt lõi thể hiện qua video quảng cáo.
-3.  **Channel (Where)**: Kênh quảng cáo được chọn để tối ưu hóa học hỏi nhanh nhất.
-4.  **Metric (Verification)**: Chỉ số phễu cốt lõi và ngưỡng quyết định (threshold).
-5.  **Action (Decision Rule)**: Hành động sửa đổi cụ thể nếu chỉ số không đạt kỳ vọng.
+Lesson này biến Week 1 thành một **operating contract**. Trước khi chi tiền, team phải ghi rõ giả thuyết, bằng chứng mong đợi, guardrail metric và hành động tiếp theo. Làm vậy giúp bạn không tranh luận bằng cảm giác sau khi data về.
 
 ---
 
-## Khung Giả thuyết UA mẫu (Main framework/map mẫu)
+## Core model: Hypothesis = promise chain + action rule
 
-Dưới đây là khung phân rã giả thuyết mà bạn có thể áp dụng trực tiếp cho game của mình:
+Một giả thuyết UA tốt không phải là “tôi nghĩ game sẽ có người chơi”. Nó là một chuỗi kiểm chứng:
 
-| Thành phần | Câu hỏi định hướng | Ví dụ thực hành mẫu |
+**Player motivation** -> **Ad promise** -> **Store proof** -> **First-session proof** -> **Metric pattern** -> **Next action**
+
+Đọc theo logic vận hành:
+
+1. **Player motivation**: Người chơi tìm cảm giác gì? Nghỉ não, dọn dẹp thỏa mãn, thử thách trí tuệ, sưu tầm, hay tiến triển?
+2. **Ad promise**: Video/hook hứa đúng cảm giác đó bằng một hành động nhìn thấy được chưa?
+3. **Store proof**: Icon, screenshot đầu, short description có chứng minh cùng lời hứa không?
+4. **First-session proof**: 3-5 phút đầu trong game có giao ngay cảm giác mà ad/store đã hứa không?
+5. **Metric pattern**: Tín hiệu nào cho biết mắt xích nào đang lệch?
+6. **Next action**: Nếu lệch, team sửa creative, store, onboarding, level pacing hay dừng test?
+
+Nếu thiếu action rule, hypothesis chỉ là idea. Nếu thiếu store proof hoặc first-session proof, hypothesis dễ tạo click nhưng không tạo learning.
+
+---
+
+## Khung First UA hypothesis card mẫu
+
+Điền card theo 8 dòng. Dòng nào chưa điền được nghĩa là test chưa sẵn sàng.
+
+| Field | Câu hỏi phải trả lời | Ví dụ cho mobile puzzle |
 | :--- | :--- | :--- |
-| **1. Player** | Ai là người chơi có động lực phù hợp nhất? | Người làm việc văn phòng cần khoảng nghỉ não ngắn sau giờ làm (calm break). |
-| **2. Promise** | Ad hook nào sẽ hứa hẹn đúng động lực đó? | Video clip "Clear board" trong vòng 10 giây đem lại cảm giác dọn dẹp thỏa mãn. |
-| **3. Channel** | Kênh nào tối ưu nhất cho test đầu tiên? | Meta-style social để kiểm tra nhanh chỉ số CTR/CVR của hook. |
-| **4. Metric** | Chỉ số nào quyết định sự thành/bại của test? | CTR của ad đạt `> 2.2%`, tỷ lệ CVR trên store đạt `> 25%`, D1 đạt `> 30%`. |
-| **5. Action** | Nếu metric gãy, bước tiếp theo là gì? | Nếu CTR thấp: Sửa ad; Nếu CVR thấp: Sửa store listing; Nếu D1 thấp: Sửa onboarding/tutorial. |
+| **1. Player motivation** | Người chơi đến vì cảm giác nào, không phải chỉ vì genre nào? | Người chơi casual muốn một phiên “dọn não” 2 phút sau giờ làm. |
+| **2. Ad promise** | 3 giây đầu của ad hứa hành động/cảm giác gì? | “Clear a messy board in three satisfying moves.” |
+| **3. Store proof** | Screenshot/title nào chứng minh ad không nói quá? | Screenshot đầu là before/after board sạch, không phải menu/meta. |
+| **4. First-session proof** | Người chơi nhận được lời hứa ở đâu trong 3-5 phút đầu? | Level 1-3 cho combo dễ, board clear nhanh, không tutorial dài. |
+| **5. Channel/budget scope** | Test ở đâu, chi bao nhiêu, trong bao lâu, và không test gì? | Android, một social channel, `$300`, 3-5 ngày, không test monetization. |
+| **6. Primary signal** | Metric nào trả lời câu hỏi chính? | `CTR` cho ad promise hoặc `store CVR` cho store proof. |
+| **7. Guardrail signal** | Metric nào ngăn team đọc sai? | `tutorial_complete`, `D1`, hoặc early level completion. |
+| **8. Action rules** | Nếu good/weak/mixed thì làm gì? | Good: rerun variant. Weak CVR: sửa store. Weak D1: sửa first session. |
 
----
+Một card mạnh nên có phạm vi hẹp. Ví dụ “test Satisfying Clear cho Android puzzle trong 3 ngày” tốt hơn “test nhiều audience cho game puzzle”.
 
-## Sơ đồ Quy trình Kiểm chứng Giả thuyết (Hero visual or operating diagram)
+### Hypothesis decision contract
 
-Sơ đồ dưới đây minh họa dòng chảy của một Thẻ giả thuyết UA từ lúc thiết lập đến các nhánh quyết định hành động:
+Hypothesis card không chỉ ghi thứ sẽ test. Nó phải ghi rõ **quyết định nào được phép ra** sau test nhỏ, và **quyết định nào bị cấm** vì data chưa đủ. Đây là cách bảo vệ team khỏi over-read một sample `$100-500`.
 
-![UA selection decision tree](content/assets/usecases/day-07-hero-diagram.png)
-
-> [!NOTE]
-> **Hướng dẫn đọc Sơ đồ quy trình (Hero Visual Readout)**:
-> *   **Học viên cần quan sát (Inspect)**: Luồng đi tuần tự từ xác định Player -> thiết lập Promise -> chạy thử Channel -> đo lường Metric -> ra quyết định Action. Đây là một vòng lặp kín (loop), không phải đường thẳng một chiều.
-> *   **Kết luận rút ra (Conclude)**: Nhánh Action (Hành động) là mắt xích quan trọng nhất. Một giả thuyết mà không đi kèm kịch bản xử lý lỗi khi số liệu gãy (Fail Actions) thì chỉ là một ý tưởng lý thuyết suông.
-> *   **Không được suy ra (Do not infer)**: Không được suy ra rằng các mốc phần trăm hay kênh quảng cáo trong sơ đồ là cố định cho mọi game. Bạn bắt buộc phải tự tùy biến theo tình huống cụ thể của game mình.
-
----
-
-## Bảng so sánh Giả thuyết Yếu và Giả thuyết Mạnh
-
-Để tránh viết các giả thuyết mơ hồ, hãy đối chiếu bảng so sánh dưới đây trước khi chốt phương án:
-
-| Thành phần | Giả thuyết Yếu (Weak Hypothesis) | Giả thuyết Mạnh (Strong Hypothesis) | Lý do khác biệt |
+| Card field | Decision được phép | Decision bị cấm | Evidence cần có |
 | :--- | :--- | :--- | :--- |
-| **Player** | "Tất cả những ai thích chơi game puzzle." | "Người đi làm văn phòng cần một khoảng nghỉ não ngắn sau giờ làm (calm break)." | Xác định rõ hành vi và ngữ cảnh chơi game để làm video quảng cáo. |
-| **Promise** | "Game xếp hình rất hay và nhiều tính năng thú vị." | "Video clip hứa hẹn dọn dẹp board chơi sạch sẽ trong vòng 10 giây." | Đưa ra một hành động cụ thể, dễ kiểm chứng trong creative. |
-| **Metric** | "Đạt thật nhiều lượt tải với CPI rẻ nhất có thể." | "CTR > 2.0%, Store CVR > 22%, D1 Retention > 28%." | Có các con số mục tiêu rõ ràng để làm căn cứ chẩn đoán phễu. |
-| **Action** | "Nếu game fail thì sẽ đổi sang chạy kênh quảng cáo khác." | "Nếu CVR thấp: Sửa lại screenshot đầu của store; Nếu D1 thấp: Rút ngắn tutorial." | Có kịch bản sửa lỗi sản phẩm/onboarding cụ thể thay vì đổ lỗi cho kênh quảng cáo. |
+| Player motivation | Chọn một motivation để làm hook chính cho vòng kế tiếp | Kết luận đây là audience tốt/xấu vĩnh viễn | Motivation viết bằng tình huống chơi, không phải demographic |
+| Ad promise | Sửa hoặc giữ 3 giây đầu creative | Scale channel chỉ vì `CTR` cao | Creative có một promise nhìn thấy được, không trộn 3 promise |
+| Store proof | Sửa screenshot/title/copy nếu `CVR` yếu | Đổ lỗi product khi store chưa chứng minh promise | Screenshot đầu và short description lặp lại cùng promise |
+| First-session proof | Sửa tutorial/level pacing nếu D1/complete yếu | Kết luận motivation sai khi first session chưa deliver promise | Event/flow chứng minh payoff trong 3-5 phút đầu |
+| Primary signal | Chọn next action cho mắt xích chính | Gọi winner/loser nếu guardrail contradict | Metric gắn đúng câu hỏi học hỏi |
+| Guardrail signal | Chặn quyết định sai khi primary đẹp nhưng retention/product yếu | Bỏ qua guardrail để scale vì CPI rẻ | Event đã QA hoặc ít nhất có nguồn đo đáng tin |
+| Stop-loss rule | Dừng chi để diagnose đúng stage | Tiếp tục mua traffic vì "đã setup rồi" | Daily cap, pause condition và owner rõ |
+
+Một hypothesis chưa có blocked decisions vẫn còn quá rộng. Câu tốt nên có dạng: "Sau test này, chúng ta được phép quyết định sửa ad/store/onboarding cho promise X, nhưng chưa được phép kết luận LTV, monetization hoặc broad market fit."
 
 ---
 
-## Bảng so sánh 3 kịch bản giả thuyết điển hình (Chart/visual/table)
-
-Bảng so sánh độ tự tin (Confidence) và đặc điểm của 3 nhóm giả thuyết phổ biến cho game puzzle:
-
-| Nhóm giả thuyết | Player Motivation | Độ khó setup ad | Độ khó đo lường | Điểm tự tin (1-5) | Rủi ro chính |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **A: Calming Relax** | Nghỉ não, giảm stress | Thấp | Thấp | **4/5** | Churn cao nếu game có ad interstitial quá sớm gây đứt mạch. |
-| **B: Satisfying Clear** | Sắp xếp, dọn dẹp board | Trung bình | Thấp | **5/5** | Visual combo của game thật không đã mắt bằng ad. |
-| **C: Brain Challenge** | Chinh phục, trí tuệ cao | Thấp | Trung bình | **3/5** | Game quá khó làm người chơi chán nản thoát ngay ở Level 3. |
-
-:::chart
-title: Điểm tự tin của các kịch bản giả thuyết (Confidence Score, 1-5)
-Calming Relax|4|Audience clear, easy to prove gameplay
-Satisfying Clear|5|Strong visual hook, matches core puzzle loop
-Brain Challenge|3|High CTR possible, but high risk of early churn
-:::
-
-*Cách đọc chart*: Hãy ưu tiên chọn kịch bản giả thuyết có điểm tự tin cao nhất (ở đây là **Satisfying Clear**) để chạy vòng thử nghiệm $100-500 đầu tiên, vì nó dễ kiểm chứng và ít rủi ro sản xuất nhất.
-
----
-
-## Hướng dẫn đọc số và chẩn đoán giả thuyết (Decision Ranges)
-
-> [!WARNING]
-> **Lưu ý quan trọng cho học viên non-UA**:
-> Các con số dưới đây (CTR 2.2%, CVR 25%, D1 30%) chỉ là **ngưỡng quyết định giả định (scenario-specific decision ranges)** phục vụ cho ví dụ minh họa của một game puzzle thư giãn cụ thể. Đây **KHÔNG** phải là các chỉ số chuẩn tuyệt đối áp dụng cho mọi game. Mỗi trò chơi tùy thuộc vào dung lượng build, thiết kế ad, và đối tượng mục tiêu sẽ có các khoảng ra quyết định (decision ranges) khác nhau.
-
-Hãy chẩn đoán kết quả chạy test giả thuyết theo bảng quy tắc quyết định sau:
-
-| Pattern số liệu | Chẩn đoán (Diagnosis) | Hành động ĐÚNG (Next Action) | Hành động SAI thường gặp |
-| :--- | :--- | :--- | :--- |
-| **CTR > 2.5%** (Ad đạt)<br>**Store CVR < 15%** (Store gãy) | Lời hứa của ad kéo click tốt nhưng store listing không củng cố lời hứa đó. | Tạm dừng ad, sửa lại screenshot/icon trên store cho khớp video. | Đổi ad group hoặc target đối tượng mới. |
-| **CTR < 1.2%** (Ad gãy)<br>**D1 > 35%** (Game đạt) | Sản phẩm thực tế giữ chân rất tốt nhưng video quảng cáo quá mờ nhạt. | Làm lại ad hook 3 giây đầu tiên để giật sự chú ý. | Sửa lại gameplay hoặc tutorial của game. |
-| **CTR > 2.2%**, **CVR > 25%** (Đầu phễu tốt)<br>**D1 < 15%** (Cuối phễu gãy) | Ad và store đồng bộ tốt nhưng phiên chơi đầu (first session) thất bại. | Sửa onboarding, kiểm tra độ khó Level 1-5, rút ngắn tutorial. | Tăng ngân sách chạy tiếp vì thấy CPI rẻ. |
-
----
-
-## Worked example: Xây dựng và Chẩn đoán giả thuyết cho Calming Block Puzzle
-
-Giả sử bạn chạy một đợt test $300 cho game xếp hình khối màu sắc nhẹ nhàng (Calming Block Puzzle) với thẻ giả thuyết sau:
+## Sơ đồ vận hành hypothesis chain
 
 ```text
-- Player: Người chơi casual tìm kiếm khoảng nghỉ não nhanh (calm brain break).
-- Promise: Hook "Trò chơi dọn dẹp khối gỗ 2 phút thư giãn".
-- Channel: Meta Social (Facebook Ads).
-- Metric Target (Giả định riêng cho game này): CTR > 2.0%, Store CVR > 22%, D1 > 30%.
-- Action Plan: Nếu D1 < 20%, tiến hành sửa lại Flow hướng dẫn tân thủ (tutorial) trước khi thay đổi video.
+[VISUAL PLACEHOLDER: Third-party image request - UA hypothesis chain decision diagram]
+Type: hero operating diagram.
+Lesson section: Sơ đồ vận hành hypothesis chain.
+Previous local asset to replace: content/assets/usecases/day-07-hero-diagram.png.
+Visual brief: UA hypothesis chain decision diagram.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
 ```
 
-**Báo cáo thực tế sau 5 ngày chạy test**:
-- Ngân sách tiêu: $220.
-- Số lượt hiển thị: 80,000.
-- Lượt click: 1,920 (CTR = 2.4% - *Đạt mục tiêu*).
-- Số lượt cài đặt: 307 (Store CVR = 16% - *Không đạt, mục tiêu là 22%*).
-- Tỷ lệ hoàn thành Tutorial: 72% (*Khá tốt*).
-- Retention D1: 28% (*Gần đạt mục tiêu 30%*).
-
-**Phân tích chẩn đoán & Tradeoff**:
-*   Người chơi click nhiều (CTR 2.4%) chứng minh ad hook nói trúng nhu cầu thư giãn. 
-*   Tuy nhiên, điểm rò rỉ nghiêm trọng là trang store (CVR 16% so với ngưỡng mong muốn 22%). Học viên cần phân tích sự đánh đổi: nếu tiếp tục chạy ad, giá install (CPI) sẽ rất đắt do store chuyển đổi kém. Hành động khôn ngoan nhất là tạm dừng ad để bảo toàn ngân sách.
-*   **Hành động tiếp theo**: Tắt chiến dịch ad ngay. Không sửa game. Tiến hành thay thế 3 ảnh chụp màn hình đầu tiên trên store bằng ảnh hiển thị bàn chơi gỗ sạch sẽ và dòng text nhấn mạnh "Chơi offline, không áp lực thời gian". Sau đó mới bật lại test với $80 còn lại.
+> [!NOTE]
+> **Inspect**: Nhìn chuỗi từ trái sang phải: player motivation tạo ad promise, ad promise cần store proof, store proof phải được first-session proof xác nhận, rồi metric pattern mới dẫn tới next action.
+>
+> **Conclude**: Nếu một mắt xích yếu, đừng nhảy ngay sang kênh khác. Hãy sửa đúng mắt xích đang làm đứt chuỗi học hỏi.
+>
+> **Do not infer**: Sơ đồ không nói channel nào luôn tốt nhất hoặc metric nào là benchmark cố định. Nó chỉ dạy thứ tự chẩn đoán để micro-budget không bị tiêu vào quyết định sai.
 
 ---
 
-## Checklist vận hành kỹ thuật (Implementation checklist)
+## Bảng confidence cho 4 candidate hypotheses
 
-Đảm bảo các đầu việc kỹ thuật này phải sạch sẽ trước khi bấm nút chạy thử nghiệm:
+Đây là bảng mẫu để chọn hypothesis đầu tiên. Điểm confidence là **scenario-specific**, chỉ dùng để ưu tiên trong một game puzzle nhỏ có asset còn hạn chế.
 
-| Hạng mục | Trạng thái cần có | Tác hại nếu bỏ qua |
+| Candidate hypothesis | Player motivation | Asset readiness | Measurement clarity | Confidence | Rủi ro chính |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Satisfying Clear** | Dọn dẹp, clear board, nhìn kết quả ngay | Cao | Cao | **5/5** | Ad đẹp hơn gameplay thật, làm `D1` yếu. |
+| **Calming Relax** | Nghỉ não, không áp lực, chơi ngắn | Cao | Trung bình | **4/5** | Dễ hứa “relax” nhưng first session lại có popup/ad quá sớm. |
+| **Brain Challenge** | Thử thách, cảm giác thông minh | Trung bình | Trung bình | **3/5** | Người chơi click vì challenge nhưng churn nếu level đầu quá khó. |
+| **Mystery/Drama Rescue** | Cứu nhân vật, tò mò tình huống | Thấp | Thấp | **2/5** | Click cao nhưng intent lệch nếu game thật không có rescue loop. |
+
+:::chart
+title: Candidate hypothesis confidence, 1-5
+Satisfying Clear|5|Best fit when gameplay has visible clear/combo moments
+Calming Relax|4|Good if store and first session avoid pressure signals
+Brain Challenge|3|Needs careful early difficulty guardrail
+Mystery Rescue|2|High mismatch risk for a small puzzle prototype
+:::
+
+**Inspect**: Candidate có confidence cao thường là candidate có asset dễ làm, metric dễ đọc và risk mismatch thấp.
+
+**Conclude**: Với vòng test đầu, chọn hypothesis giúp team học nhanh nhất, không nhất thiết là ý tưởng “ngầu” nhất.
+
+**Do not infer**: Điểm trên không phải chuẩn thị trường. Nếu game của bạn có rescue mechanic thật, Mystery/Drama có thể tăng điểm. Nếu game không có combo rõ, Satisfying Clear có thể giảm điểm.
+
+---
+
+## Hướng dẫn đọc số
+
+Đừng đọc từng metric riêng lẻ. Hãy đọc theo cặp để biết mắt xích nào đang hỏng.
+
+| Pattern trong test nhỏ | Cách đọc đúng | Next action | Không nên làm |
+| :--- | :--- | :--- | :--- |
+| `CTR` ổn, `store CVR` yếu | Ad promise có thể kéo tò mò, nhưng store proof không củng cố lời hứa. | Giữ creative, sửa screenshot đầu, short description, feature graphic. | Đổi target audience ngay. |
+| `store CVR` ổn, `tutorial_complete`/`D1` yếu | Store bán đúng lời hứa, nhưng first session chưa giao được lời hứa đó. | Sửa onboarding, level 1-5, tutorial length, early fail state. | Scale vì CPI nhìn rẻ. |
+| `CTR` yếu, `D1` của user đã vào game ổn | Product có thể ổn, nhưng ad không truyền được motivation. | Làm lại 3 giây đầu, visual hook, claim cụ thể hơn. | Sửa gameplay trước khi sửa creative. |
+| `CPI` rẻ, retention yếu | Traffic rẻ có thể là low-intent hoặc promise mismatch. | Kiểm tra chain ad/store/first session trước khi tăng daily cap. | Kết luận “game có UA tốt” chỉ vì install rẻ. |
+| Sample quá nhỏ, signal lẫn lộn | Chưa đủ learning để kết luận mạnh. | Ghi “inconclusive”, giữ phạm vi hẹp, rerun cùng hypothesis nếu vẫn quan trọng. | Tạo 5 biến thể mới và làm nhiễu test. |
+
+Decision ranges nên được ghi dưới dạng **ngưỡng vận hành cho sprint này**, không phải benchmark vĩnh viễn. Ví dụ: “Nếu `store CVR` thấp hơn vùng kỳ vọng của sprint này và `CTR` vẫn ổn, chúng ta sửa store trước.” Cách viết này tốt hơn “CVR phải luôn trên X%”.
+
+---
+
+## Worked example: Calming Block Puzzle hypothesis
+
+Giả sử team có một prototype block puzzle nhẹ, Android-first, budget còn `$300`. Team chọn hypothesis:
+
+```text
+Player motivation:
+Người chơi casual cần một phiên nghỉ não 2 phút, không áp lực thời gian.
+
+Ad promise:
+Video 10 giây cho thấy board lộn xộn được clear thành sạch, âm thanh nhẹ, không countdown.
+
+Store proof:
+Screenshot đầu là before/after board clear, headline "Relaxing block puzzle, no timer pressure".
+
+First-session proof:
+Level 1-3 cho clear/combo dễ trong 60 giây đầu, không interstitial trước khi hoàn thành level 3.
+
+Channel/budget:
+Android social test, $300 cap, 3-5 ngày, chỉ test một promise.
+
+Primary signal:
+CTR và store CVR để kiểm tra ad -> store continuity.
+
+Guardrail:
+tutorial_complete, level_3_complete, D1.
+
+Action rules:
+Weak CTR -> remake hook.
+Good CTR + weak CVR -> fix store assets.
+Good CVR + weak D1 -> fix first-session pacing.
+```
+
+Kết quả sau khi tiêu `$220`:
+
+| Signal | Quan sát | Cách đọc |
 | :--- | :--- | :--- |
-| **1. Trình theo dõi (Attribution)** | Đã test thử link tải quảng cáo và Firebase/Unity Analytics nhận đúng event `first_open`. | Không thể đo lường được install thuộc về ad group nào, mất dấu phễu. |
-| **2. Event Taxonomy** | Đã nhúng đúng các event snake_case: `tutorial_start`, `tutorial_complete`, `level_complete`. | Không chẩn đoán được người chơi thoát game do tutorial khó hay do màn chơi lỗi. |
-| **3. Giới hạn ngày (Daily Cap)** | Đã cấu hình ngân sách giới hạn ngày $15-30/ngày. | Tài khoản bị cắn hết $300 trong vòng vài tiếng do thuật toán phân phối quá nhanh, mất cơ hội học hỏi. |
-| **4. Người chốt (Decision Owner)** | Xác định rõ 1 thành viên chịu trách nhiệm tắt/bật chiến dịch theo đúng rules đã ghi. | Quảng cáo chạy quá stop-loss mà không ai tắt do bận tranh cãi sửa game hay sửa ad. |
+| `CTR` | 2.4% | Hook có khả năng chạm đúng motivation nghỉ não trong sample này. |
+| `store CVR` | 16% | Store proof yếu so với lời hứa của ad trong sprint này. |
+| `tutorial_complete` | 72% | Người đã vào game không bị tutorial chặn quá nặng. |
+| `D1` | 28% | Chưa đủ mạnh để scale, nhưng không phải điểm gãy đầu tiên. |
+
+**Diagnosis**: Mắt xích yếu nhất là `store proof`, không phải gameplay. Nếu team sửa game ngay, họ có thể bỏ qua vấn đề thật: store page chưa chứng minh lời hứa “calm/no pressure”.
+
+**Tradeoff**: Dừng ad sớm có vẻ tiếc vì `CTR` đang ổn, nhưng tiếp tục chi sẽ mua thêm click đi qua một store page chưa thuyết phục. Với `$80` còn lại, hành động tốt hơn là thay screenshot đầu và short description, rồi retest cùng creative để isolate store change.
+
+**Next action**:
+
+1. Pause campaign.
+2. Thay screenshot đầu bằng before/after board clear.
+3. Đổi short description sang một promise cụ thể: “No timer, quick relaxing boards.”
+4. Rerun cùng ad hook bằng phần budget còn lại.
+5. Không sửa level pacing cho đến khi store proof được kiểm lại.
+
+### First readout memo
+
+Sau khi tiêu một phần budget đầu tiên, đừng chỉ gửi bảng metric. Viết memo 8-10 dòng để khóa cách đọc trước khi team tranh luận.
+
+```text
+First UA hypothesis readout - Calming Block Puzzle
+
+Hypothesis tested:
+Casual players want a calm 2-minute clear-board session.
+
+Budget spent:
+$220 of $300, Android social, one promise, no monetization test.
+
+Observed pattern:
+- CTR healthy for this sprint.
+- Store CVR weak relative to the ad promise.
+- Tutorial completion acceptable.
+- D1 directional but not a scale signal yet.
+
+Decision allowed:
+Repair store proof and rerun the same ad hook with remaining budget.
+
+Decision blocked:
+- Do not scale because CPI looks cheap.
+- Do not rewrite core gameplay yet.
+- Do not conclude calm motivation is bad until store proof is retested.
+
+Next action owner:
+Store owner replaces screenshot 1 and short description; UA owner reruns same creative.
+```
+
+Readout memo tốt phải có ba dòng bắt buộc: **observed pattern**, **decision allowed**, **decision blocked**. Nếu thiếu dòng blocked, team rất dễ dùng số nhỏ để kể câu chuyện quá lớn.
+
+---
+
+## Quality chain verification checklist
+
+Trước khi chạy test, kiểm thẻ hypothesis bằng checklist này.
+
+| Check | Câu hỏi kiểm tra | Pass khi |
+| :--- | :--- | :--- |
+| **Motivation clarity** | Player được định nghĩa bằng motivation hay bằng demographic chung chung? | Có cụm như “muốn nghỉ não”, “thích clear board”, “thích thử thách ngắn”. |
+| **Promise visibility** | Ad promise có thể nhìn thấy trong 3 giây đầu không? | Một người ngoài team xem frame đầu vẫn hiểu hook. |
+| **Store continuity** | Screenshot/title có lặp lại đúng lời hứa của ad không? | Store không chuyển sang nói feature/meta khác. |
+| **First-session proof** | Game giao lời hứa trong 3-5 phút đầu không? | Có event/flow đo được: `tutorial_complete`, `level_3_complete`, `first_combo`. |
+| **Measurement readiness** | Primary signal và guardrail đã gắn với event/metric thật chưa? | Không có metric “cảm giác tốt”; tất cả có nguồn đo. |
+| **Action rule** | Team biết sửa gì nếu từng signal yếu chưa? | Mỗi failure pattern có một owner và một next action. |
+| **Stop-loss** | Biết khi nào không chi tiếp không? | Có daily cap và ngưỡng “pause to diagnose”. |
+
+Nếu một check chưa pass, đừng mở rộng test. Thu hẹp hypothesis trước.
 
 ---
 
 ## Real usecases đã đối chiếu nguồn
 
-### Global Case study: Royal Match
+### Internal case: Puzzle soft-launch cheap installs, weak D1
 
-![Royal Match public Google Play screenshot](content/assets/usecases/royal-match.png)
+| Observable facts | Lesson interpretation | What not to infer |
+| :--- | :--- | :--- |
+| Case data nội bộ: `CPI $0.42`, `CTR 1.8%`, `store CVR 32%`, `tutorial_complete 54%`, `D1 22%`, `D7 4%`. | Store đang chuyển đổi khá tốt, nhưng first session không giao đủ promise để giữ người chơi. Hypothesis card cần action rule cho onboarding/level pacing. | Không kết luận channel tốt chỉ vì CPI rẻ. Cũng không kết luận creative vô dụng khi store CVR vẫn ổn. |
+
+### Public case: Royal Match as promise continuity caution
+
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Royal Match public Google Play screenshot]
+Type: public screenshot/source visual.
+Lesson section: Public case: Royal Match as promise continuity caution.
+Previous local asset to replace: content/assets/usecases/royal-match.png.
+Visual brief: Royal Match public Google Play screenshot.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 > [!NOTE]
-> **Hướng dẫn đọc Ảnh minh họa (Screenshot Readout Table)**:
-> *   **Học viên cần quan sát (Inspect)**: Quan sát screenshot đầu tiên trên store hiển thị trực tiếp bàn cứu Vua Robert và dòng chữ "No Ads, No Wifi".
-> *   **Kết luận rút ra (Conclude)**: Dream Games thiết kế store để củng cố ngay lập tức thông điệp cốt lõi từ video quảng cáo kéo chốt. Sự đồng bộ tuyệt đối này tạo ra một tín hiệu định hướng (directional signal) mạnh mẽ giúp giảm thiểu rò rỉ từ click sang cài đặt.
-> *   **Không được suy ra (Do not infer)**: Không được suy ra rằng bạn bắt buộc phải làm game cứu vua hoặc copy y hệt layout này thì game mới thành công. Yếu tố cốt lõi cần học hỏi là **sự đồng bộ thông điệp**, không phải sao chép gameplay.
+> **Inspect**: Screenshot/market-facing surface của Royal Match tập trung vào nhân vật King Robert, puzzle board, và cảm giác match-3 rõ ràng. Bài phân tích của Deconstructor of Fun cũng nhấn mạnh tốc độ, độ mượt, power-up và cảm giác agency trong core gameplay.
+>
+> **Conclude**: Khi ad/store/gameplay cùng củng cố một promise, funnel dễ được đọc hơn: người chơi click vì điều gì, store xác nhận điều gì, first session giao điều gì.
+>
+> **Do not infer**: Không copy “cứu vua”, layout store, ngân sách UA hay kỳ vọng scale của Royal Match. Với indie team, bài học là **continuity of promise**, không phải bắt chước execution của studio lớn.
 
-| Fact từ nguồn public | UA Interpretation cho bài học này | Không được suy ra |
-| --- | --- | --- |
-| Royal Match (phát hành bởi Dream Games) đạt được hiệu quả UA vượt trội nhờ đồng bộ hóa triệt để visual assets trên store với các video ad kéo chốt cứu Robert phổ biến. Nguồn: [Phân tích sự ra mắt của Royal Match trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/3/11/royal-match) | Đây là minh chứng thực tế cho thấy sự liên tục của giả thuyết (ad promise -> store proof -> gameplay proof) giúp bảo vệ hiệu suất phễu chuyển đổi. | Không tự suy diễn rằng game indie puzzle nhỏ có thể scale ngân sách khổng lồ hoặc đạt kết quả nhanh chóng như Dream Games. |
+| Source signal | Cách dùng trong lesson này | Không được suy ra |
+| :--- | :--- | :--- |
+| Deconstructor of Fun phân tích Royal Match như một puzzle game có cảm giác chơi nhanh, mượt, power-up generous và agency cao. | Nếu hypothesis của bạn hứa “satisfying/clear/control”, first session phải giao cảm giác đó thật, không chỉ nói trên ad. | Không dùng Royal Match làm benchmark KPI cho game nhỏ. |
+| Google Play có Store Listing Experiments để A/B test graphics và localized text nhằm cải thiện installs/retention direction. | Nếu `CTR` ổn nhưng `store CVR` yếu, store asset test là action hợp lý trước khi đổ lỗi cho channel. | Không hiểu A/B test store là cách sửa retention nếu first session thật sự yếu. |
 
 ---
 
-## Common mistakes (Các sai lầm phổ biến)
+## Common mistakes
 
-*   **Mistake 1: Giả thuyết thiếu điều kiện hành động (Decision Rule)**
-    *   *Correction*: Luôn viết sẵn hành động sửa đổi tương ứng: *"Nếu metric A dưới X%, chúng tôi sẽ làm hành động B"*. Đừng để đến khi số liệu về mới bắt đầu suy nghĩ.
-*   **Mistake 2: Test quá nhiều creative hook khác nhau cùng lúc**
-    *   *Correction*: Với budget $300, giới hạn tối đa 2 nhóm giả thuyết (ad angles) để đảm bảo mỗi nhóm nhận đủ lượng conversion tối thiểu phục vụ chẩn đoán.
-*   **Mistake 3: Đọc sai tín hiệu do quên cảnh báo bẫy Clickbait**
-    *   *Correction*: CTR cao vọt (>5%) từ ad giả gameplay (fake ad) không phải là dấu hiệu chiến thắng nếu store CVR và D1 của bạn bị gãy. Hãy luôn đánh giá chéo cả chuỗi metric.
+**Mistake 1 - “Everyone who likes puzzle” là audience.**
+
+**Correction**: Viết motivation cụ thể: “người muốn nghỉ não 2 phút”, “người thích dọn board sạch”, “người thích thử thách logic ngắn”.
+
+**Mistake 2 - Chỉ ghi target metric, không ghi action rule.**
+
+**Correction**: Mỗi metric yếu phải dẫn tới một hành động. `CTR` yếu -> sửa hook. `store CVR` yếu -> sửa listing. `D1` yếu -> sửa first session.
+
+**Mistake 3 - Test 4 promises trong một budget nhỏ.**
+
+**Correction**: Với `$100-500`, ưu tiên một promise chính và tối đa một biến thể gần. Nhiều promise làm data khó đọc hơn, không “an toàn” hơn.
+
+**Mistake 4 - Thấy CPI rẻ rồi scale.**
+
+**Correction**: CPI rẻ chỉ nói bạn mua install rẻ trong điều kiện hiện tại. Nếu `tutorial_complete`, `D1`, hoặc `level_3_complete` yếu, scale chỉ phóng to vấn đề.
+
+**Mistake 5 - Dùng benchmark như luật cứng.**
+
+**Correction**: Ghi decision ranges cho sprint cụ thể. Một con số chỉ có nghĩa khi gắn với game, channel, creative, country, build size và sample.
 
 ---
 
 ## English Terms You Should Keep
 
-*   **UA**: User Acquisition (Hoạt động thu hút người dùng mới).
-*   **Funnel**: Phễu chuyển đổi từ click ad đến trải nghiệm game.
-*   **Soft launch**: Giai đoạn phát hành thử nghiệm hẹp để đo lường.
-*   **daily cap**: Giới hạn ngân sách chi tiêu tối đa mỗi ngày.
-*   **stop-loss rule**: Ngưỡng cắt lỗ tự động để bảo vệ ngân sách.
+- **UA hypothesis**: Giả thuyết user acquisition cần kiểm chứng bằng traffic thật.
+- **Ad promise**: Lời hứa mà creative tạo ra cho người xem.
+- **Store proof**: Bằng chứng trên store page cho thấy lời hứa của ad là thật.
+- **First-session proof**: Bằng chứng trong 3-5 phút đầu rằng game giao đúng promise.
+- **Primary signal**: Metric chính để trả lời câu hỏi test.
+- **Guardrail metric**: Metric phụ giúp tránh đọc sai primary signal.
+- **Decision range**: Khoảng vận hành dùng để ra quyết định trong sprint, không phải benchmark cố định.
+- **Stop-loss rule**: Quy tắc dừng chi để bảo vệ budget khi signal đủ xấu.
 
 ---
 
-## Lab output example (Mẫu kết quả thực hành)
+## Lab output example
 
-### Xem trước Thẻ giả thuyết UA (First UA Hypothesis Card Preview)
 ```text
-┌────────────────────────────────────────────────────────────────────────┐
-│                      FIRST UA HYPOTHESIS CARD                          │
-├────────────────────────────────────────────────────────────────────────┤
-│ Motivation: Satisfying Clear                                           │
-│ Player: Casual gamers who love organizing chaotic boards               │
-│ Promise: "Clean the board in 3 smart taps" video creative              │
-│ Channel: Meta-style social (Facebook Ads)                              │
-│ Metrics: CTR > 2.0% | Store CVR > 22% | D1 > 28%                       │
-│ Fail-safe: If CVR < 18%, pause and update Play Store main screenshot  │
-└────────────────────────────────────────────────────────────────────────┘
+FIRST UA HYPOTHESIS CARD
+
+Game:
+Calming Block Puzzle, Android prototype.
+
+Player motivation:
+Casual player wants a calm 2-minute brain break after work.
+
+Ad promise:
+"Clear a messy wooden board in three satisfying moves."
+
+Store proof:
+First screenshot shows before/after board clear. Short description says "No timer, quick relaxing boards."
+
+First-session proof:
+Player can clear level 1 within 45 seconds and trigger one satisfying combo before any monetization prompt.
+
+Channel/budget scope:
+Android social test, $300 total, $25/day cap, 3-5 days, one promise only.
+
+Primary signal:
+CTR and store CVR for ad -> store continuity.
+
+Guardrail:
+tutorial_complete, level_3_complete, D1.
+
+Action rules:
+- Weak CTR: remake first 3 seconds of video.
+- Good CTR + weak store CVR: replace first screenshot and short description.
+- Good store CVR + weak D1: shorten tutorial and rebalance level 1-3.
+- Cheap CPI + weak D1: do not scale; diagnose promise mismatch.
+- Inconclusive sample: rerun same hypothesis or narrow country/budget, do not add five new ideas.
+
+Decision contract:
+- Allowed decision: choose whether the first repair should be creative, store, or first-session pacing.
+- Blocked decision: do not conclude channel scalability, LTV, monetization strength, or broad market fit.
+- Stop-loss: pause after $300 or earlier if CTR/CVR/D1 pattern clearly points to one broken stage.
+
+Readout memo:
+- Observed pattern:
+- Decision allowed:
+- Decision blocked:
+- Next action owner:
 ```
 
-Dưới đây là một mẫu Thẻ giả thuyết UA dạng bảng hoàn chỉnh mà học viên cần điền:
-
-| Field | Dữ liệu đầu ra mẫu (Lab Output) |
-| --- | --- |
-| **Primary motivation** | Satisfying Clear |
-| **Player Statement** | Casual gamers who love sorting and organizing chaotic boards. |
-| **Ad Hook Promise** | "Clean the board in 3 smart taps" video creative. |
-| **Test Channel** | Meta-style social (Facebook Ads). |
-| **Verification Metrics** | CTR > 2.0%, Store CVR > 22%, D1 > 28% (Scenario-specific targets). |
-| **If CTR is weak (<1.5%)** | Remake the first 3 seconds of the video showing the combo explosion. |
-| **If Store CVR is weak (<18%)** | Replace the main store screenshot with a clear before/after cleaning comparison. |
-| **If D1 is weak (<20%)** | Streamline level 1-3 pacing and make combos easier to achieve. |
+Một lab output đạt chuẩn phải cho người khác trong team đọc và biết ngay test đang hỏi gì, đo gì, và sửa gì.
 
 ---
 
 ## Practical Lab
 
 Làm trực tiếp cho game của bạn:
-1.  Sử dụng khung mẫu ở trên để viết Thẻ giả thuyết UA đầu tiên cho game puzzle của bạn.
-2.  Xác định đúng 3 ngưỡng chỉ số quyết định (CTR, Store CVR, D1) mà bạn hướng tới (đây là scenario-specific range riêng cho game của bạn).
-3.  Áp dụng **Bảng quy trình kiểm tra chất lượng (Hypothesis Quality Chain Check)** dưới đây để tự duyệt thẻ:
-    *   *Player check*: Bạn đã định nghĩa người chơi theo hành vi/động lực cụ thể thay vì tuổi tác chưa? (Đạt/Không)
-    *   *Promise check*: Video ad của bạn có cam kết duy nhất một core action tương ứng với động lực đó không? (Đạt/Không)
-    *   *Channel check*: Kênh quảng cáo đã chọn có tối ưu nhất để trả lời câu hỏi học hỏi nhanh nhất không? (Đạt/Không)
-    *   *Action check*: Bạn đã ghi rõ hành động sửa game/store cụ thể tương ứng cho từng chỉ số bị gãy chưa? (Đạt/Không)
+
+1. Chọn **một** motivation chính từ Week 1.
+2. Viết ad promise bằng một hành động nhìn thấy được trong 3 giây đầu.
+3. Ghi store proof: screenshot, icon, title hoặc short description nào chứng minh promise đó.
+4. Ghi first-session proof: level/event/flow nào giao promise trong 3-5 phút đầu.
+5. Chọn primary signal và guardrail metric.
+6. Viết 3 action rules: weak ad, weak store, weak first session.
+7. Ghi rõ điều **không test** trong sprint này.
+8. Viết 2 quyết định được phép ra sau test và 3 quyết định bị cấm vì sample nhỏ.
+9. Chuẩn bị readout memo mẫu gồm observed pattern, decision allowed, decision blocked và owner.
+
+Quality chain check trước khi nộp:
+
+- Nếu bỏ tên game đi, card vẫn nói rõ người chơi muốn cảm giác gì không?
+- Nếu nhìn ad mà không đọc caption, promise có hiểu được không?
+- Nếu nhìn screenshot đầu, người chơi có thấy cùng promise không?
+- Nếu chơi 3 phút đầu, người chơi có nhận được promise không?
+- Nếu một metric yếu, team có biết sửa asset/flow nào không?
 
 ---
 
 ## Final UA Plan Update
 
-Cập nhật trường **hypothesis** trong Final UA Plan theo định dạng chuẩn dưới đây:
+Cập nhật trường **hypothesis** trong Final UA Plan bằng mẫu này:
 
 ```text
-- Primary Motivation: [Motivation chính của game]
-- Player: [Chân dung đối tượng dựa trên hành vi]
-- Ad Hook Promise: [Lời hứa ad hook chính]
-- Test Channel: [Kênh lựa chọn chạy thử]
-- Verification Targets: [Ngưỡng CTR, CVR, D1 tối thiểu]
-- Action Plan - Weak CTR: [Sửa creative như thế nào]
-- Action Plan - Weak CVR: [Sửa store page như thế nào]
-- Action Plan - Weak D1: [Sửa onboarding/gameplay như thế nào]
+Hypothesis:
+We believe [player motivation] will respond to [ad promise] because [store proof] and [first-session proof] can make the promise believable.
+
+Test scope:
+[Platform/country/channel], [budget cap], [duration], [what we are not testing].
+
+Primary signal:
+[Metric + why it answers the test question].
+
+Guardrail:
+[Metric/event that prevents a false read].
+
+Allowed decision:
+[What this test can decide after the first readout].
+
+Blocked conclusions:
+[What this test cannot prove yet].
+
+Stop-loss:
+[Spend cap, pause condition, owner].
+
+Action rules:
+- If ad signal is weak: [creative action].
+- If store signal is weak: [store action].
+- If first-session signal is weak: [product/onboarding action].
+- If signal is mixed or sample is too small: [rerun/narrow/inconclusive rule].
+
+Readout memo format:
+- Observed pattern:
+- Decision allowed:
+- Decision blocked:
+- Next action owner:
 ```
+
+Plan field được cập nhật: **hypothesis**. Các bài Week 2 sẽ dùng field này để xây metric map, event taxonomy và test readout.
 
 ---
 
 ## Checklist Focus
 
-*   [ ] Đã viết giả thuyết UA hoàn chỉnh gồm đầy đủ 5 dòng.
-*   [ ] Đã cấu hình ngưỡng chỉ số metric chẩn đoán đi kèm quy tắc quyết định (decision rules).
-*   [ ] Đã hoàn thành 4 mục trong Bảng quy trình kiểm tra chất lượng (Hypothesis Quality Chain Check).
-*   [ ] Đã cập nhật trường giả thuyết vào Final UA Plan.
+- [ ] Hypothesis card có đủ player motivation, ad promise, store proof và first-session proof.
+- [ ] Test scope có budget cap, duration và điều không test.
+- [ ] Primary signal và guardrail metric đã gắn với câu hỏi học hỏi.
+- [ ] Action rules tách rõ weak ad, weak store, weak first session.
+- [ ] Có decision allowed và blocked conclusions để tránh over-read sample nhỏ.
+- [ ] Có stop-loss rule và owner rõ trước khi chạy.
+- [ ] Readout memo mẫu đã chuẩn bị trước khi data về.
+- [ ] Không dùng benchmark như luật cứng; chỉ dùng decision ranges cho sprint.
+- [ ] Final UA Plan field **hypothesis** đã được cập nhật.
 
 ---
 
 ## Curated References
 
-*   [Phân tích sự ra mắt của Royal Match trên Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/3/11/royal-match)
-*   Tài liệu hướng dẫn tối ưu hóa store listing của Google Play Console.
+- [Google Play Console - Store listing experiments](https://play.google.com/console/about/store-listing-experiments/) - Official Play Console surface for testing graphics and localized text to improve listing performance.
+- [Royal Match - The New King from Turkey? - Deconstructor of Fun](https://www.deconstructoroffun.com/blog/2021/3/21/royal-match-the-new-king-from-turkey) - Public puzzle teardown useful for reading gameplay promise, speed, power-up feel and player agency as continuity signals.
+- [Royal Match on Google Play](https://play.google.com/store/apps/details?hl=en_US&id=com.dreamgames.royalmatch) - Public store surface for observing how a puzzle product presents its promise.

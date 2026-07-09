@@ -42,6 +42,30 @@ Bạn cần xác định rõ **cửa sổ thời gian đọc số (ROAS windows)
 4.  **Day 30 ROAS (Đo lường điểm hòa vốn)**: Doanh thu tích lũy sau 1 tháng.
     *   *Mục đích*: Dự báo xem game có khả năng hoàn vốn (break-even) ở mốc Ngày 90 hoặc Ngày 180 hay không.
 
+### ROAS decision contract
+
+Trước khi campaign chạy, hãy viết một **ROAS decision contract**. Contract này khóa lại: mốc nào được đọc, mốc nào chưa được đọc, và team được phép làm gì tại từng checkpoint.
+
+| Contract field | Câu hỏi phải chốt trước launch | Ví dụ cho micro soft-launch |
+| --- | --- | --- |
+| Primary checkpoint | Mốc chính để ra quyết định tiền là D3, D7 hay D30? | D7 là mốc stop/iterate chính; D0 chỉ dùng để phát hiện anomaly |
+| Allowed decision | Ở checkpoint này team được phép quyết định gì? | D7 được phép hold, iterate monetization, hoặc stop-loss |
+| Blocked conclusion | Dù số đẹp, team chưa được kết luận gì? | Không kết luận LTV dài hạn, D90 payback, hoặc global scale từ D7 |
+| Freshness rule | Dữ liệu mấy giờ/ngày gần nhất bị loại khỏi quyết định? | Không dùng 48 giờ gần nhất nếu postback/revenue delay chưa ổn |
+| Cohort rule | Cohort nào được đọc? | Chỉ đọc cohort có cùng build, geo, channel, creative cell và store version |
+| Owner | Ai có quyền đổi budget hoặc stop campaign? | UA owner đề xuất, product owner xác nhận retention/monetization caveat |
+
+Blocked conclusions theo window:
+
+| Window | Được đọc | Chưa được kết luận |
+| --- | --- | --- |
+| D0 | Install quality rất sớm, anomaly, tracking/revenue event có bắn không | Winner, payback, retention, scale |
+| D3 | Onboarding monetization, rewarded ad/IAP early exposure | Long-term ROAS hoặc final stop-loss nếu sample nhỏ |
+| D7 | Directional stop/iterate decision cho micro-budget | D30/D90 payback chắc chắn |
+| D30 | Payback direction rõ hơn | Global scale nếu creative/source/cohort chưa lặp lại |
+
+Một contract tốt không làm team chậm hơn. Nó ngăn một lỗi đắt: dùng mốc ngắn để kể câu chuyện dài.
+
 ---
 
 ## Khung Ma trận Quyết định phối hợp CPI và D7 ROAS (Main framework/map mẫu)
@@ -53,11 +77,43 @@ Dưới đây là ma trận quyết định 4 ô phối hợp giữa chi phí mu
 | **CPI Thực Tế Rẻ** | **Ô 1: SCALE (Tăng tiền)**<br>Ad kéo user tốt và game kiếm tiền hiệu quả. Chỉ tăng ngân sách theo nhịp nhỏ, có kiểm soát. | **Ô 2: ITERATE GAMEPLAY**<br>Ad rẻ chứng tỏ hook quảng cáo đang ổn, nhưng game giữ chân/monetization kém. Sửa lại game, giữ ad ở mức học. |
 | **CPI Thực Tế Đắt** | **Ô 3: ITERATE CREATIVE**<br>Game giữ chân và kiếm tiền tốt, nhưng giá mua user quá cao. Tiến hành làm video quảng cáo mới để kéo CPI xuống. | **Ô 4: STOP (Tắt dừng lỗ)**<br>Chiến dịch thất bại hoàn toàn ở cả ad lẫn game. Tắt ad hoặc giảm về mức tối thiểu để tránh tiếp tục tiêu tiền vô nghĩa. |
 
+### Confidence ladder cho quyết định ROAS
+
+Ma trận CPI x ROAS chỉ đáng tin khi confidence đủ cao. Với ngân sách nhỏ, cùng một con số D7 ROAS có thể dẫn tới hai action khác nhau nếu sample, freshness hoặc revenue mix khác nhau.
+
+| Confidence layer | Câu hỏi kiểm tra | Nếu pass | Nếu fail |
+| --- | --- | --- | --- |
+| Sample sanity | Cohort có đủ installs/users để đọc directional chưa? | Có thể đưa ra call có caveat | Hold hoặc gom thêm cohort tương tự |
+| Data freshness | Postback/revenue event đã qua vùng delay chưa? | Dùng được cho D3/D7 readout | Loại 24-48h gần nhất khỏi quyết định |
+| Cohort consistency | Build, geo, channel, store, creative cell có ổn định không? | Đọc CPI/ROAS cùng một cohort | Không gọi winner/loser |
+| Revenue mix | Doanh thu đến từ nhiều user hay một whale/IAP bất thường? | Dùng ROAS direction | Ghi false positive risk, không scale |
+| Downstream support | Retention/session depth có ủng hộ monetization không? | Iterate hoặc scale có kiểm soát | Không tăng budget chỉ vì ROAS spike |
+
+Decision ladder:
+
+| Confidence | Action được phép | Action chưa được phép |
+| --- | --- | --- |
+| Low | Hold, fix measurement, extend readout window | Scale, stop, rewrite monetization lớn |
+| Medium | Iterate creative/product/monetization nhỏ, keep budget low | Scale mạnh hoặc kết luận payback |
+| High | Scale nhẹ, stop-loss, hoặc lock next sprint decision | Global scale không có cohort lặp lại |
+
+Rule: **không có confidence ladder thì không có budget change**. Nếu team chưa nói được vì sao confidence là low/medium/high, action đúng thường là hold hoặc rerun sạch hơn.
+
 ---
 
 ## Sơ đồ Quy trình ROAS windows và Độ trễ Dữ liệu (Hero visual or operating diagram)
 
-![ROAS Windows & Signal Delay Timeline](content/assets/usecases/day-12-hero-diagram.png)
+```text
+[VISUAL PLACEHOLDER: Third-party image request - ROAS Windows & Signal Delay Timeline]
+Type: hero operating diagram.
+Lesson section: Sơ đồ Quy trình ROAS windows và Độ trễ Dữ liệu (Hero visual or operating diagram).
+Previous local asset to replace: content/assets/usecases/day-12-hero-diagram.png.
+Visual brief: ROAS Windows & Signal Delay Timeline.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 > [!NOTE]
 > **Hướng dẫn đọc Sơ đồ quy trình (Hero Visual Readout)**:
@@ -69,7 +125,17 @@ Dưới đây là ma trận quyết định 4 ô phối hợp giữa chi phí mu
 
 ## Biểu đồ ma trận quyết định phối hợp CPI và D7 ROAS (Chart/visual/table)
 
-![CPI vs D7 ROAS Decision Matrix](content/assets/usecases/day-12-data-visual.png)
+```text
+[VISUAL PLACEHOLDER: Third-party image request - CPI vs D7 ROAS Decision Matrix]
+Type: data visual/chart.
+Lesson section: Biểu đồ ma trận quyết định phối hợp CPI và D7 ROAS (Chart/visual/table).
+Previous local asset to replace: content/assets/usecases/day-12-data-visual.png.
+Visual brief: CPI vs D7 ROAS Decision Matrix.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 :::chart
 title: Ngưỡng D7 ROAS mục tiêu theo từng mức giá CPI ($ USD)
@@ -92,6 +158,18 @@ Hãy chẩn đoán kết quả hoàn vốn dựa trên bảng quy tắc quyết 
 | **D7 ROAS = 5%** (Thấp hơn nhiều so với target nội bộ)<br>**D1 Retention = 35%** (Đạt) | **Under-monetized Active Users**: Game giữ chân người chơi cực kỳ tốt, nhưng hệ thống kiếm tiền bị giấu quá kỹ hoặc quá yếu. | Bật thêm quảng cáo xen kẽ (interstitial ads) ở cuối màn hoặc tạo gói IAP "No Ads" tặng kèm booster. | Tắt game vì nghĩ game thất bại (bỏ phí game có retention tốt). |
 | **D7 ROAS = 2%**<br>**D1 Retention = 12%** | **Double Failure**: Cả sản phẩm giữ chân lẫn cơ chế kiếm tiền đều thất bại. | Tắt chiến dịch ad ngay lập tức. Quay lại sửa core loop game và thiết kế lại hướng dẫn onboarding. | Tiếp tục chạy ad để "đợi máy học tự tối ưu hóa". |
 
+ROAS readout ledger:
+
+| Read question | Evidence cần có | Nếu thiếu evidence | Action an toàn |
+| --- | --- | --- | --- |
+| Revenue có bị spike bởi 1 user không? | Số paying users, ad revenue users, revenue distribution | Không biết doanh thu đến từ bao nhiêu user | Không scale, ghi false-positive risk |
+| Dữ liệu có bị delay không? | Postback freshness, revenue event timestamp, dashboard lag caveat | 48h gần nhất chưa ổn | Loại window mới nhất khỏi quyết định |
+| CPI và ROAS đang đọc cùng cohort không? | Build/geo/channel/campaign/cell/store version match | Cohort lẫn lộn | Không dùng ma trận 4 ô để chốt call |
+| ROAS yếu nhưng retention tốt không? | D1/session depth/level progression | Chưa biết user có ở lại không | Không stop product; kiểm tra monetization exposure |
+| ROAS tốt nhưng retention yếu không? | D1/D3/session depth | Không biết quality có bền không | Không tăng budget mạnh |
+
+Một câu readout tốt nên có dạng: "D7 ROAS gợi ý X với confidence Y, nhưng blocked conclusion là Z, nên next action là A." Tránh viết: "D7 ROAS thấp nên game fail" nếu retention hoặc monetization exposure chưa được đọc.
+
 ---
 
 ## Worked example: Calming Hex Puzzle
@@ -112,6 +190,46 @@ Một tựa game xếp hình lục giác thư giãn (Calming Hex Puzzle) chạy 
 *   Đây là trường hợp thuộc ô số 2 của Ma trận quyết định (CPI rẻ, game giữ chân tốt nhưng ROAS yếu). Người dùng chơi game đều đặn nhưng game chưa kích hoạt được nhu cầu nạp tiền hoặc xem quảng cáo.
 *   **Hành động quyết định**: Không tắt ad hoàn toàn (vì CPI $0.30 vẫn rẻ theo mô hình này và traffic còn hữu ích cho việc học). Nhà phát triển giữ nguyên campaign ở mức ngân sách tối thiểu $15/ngày, tiến hành cập nhật bản build game mới: đưa gói mua booster $0.99 hiển thị ngay khi người chơi bị thua ở Level 8, và đặt thêm nút hồi sinh bằng cách xem video ad nhận thưởng. Chờ thêm 3 ngày để đọc số liệu của cohort mới sau khi cập nhật.
 
+### Post-readout memo
+
+Sau khi đọc D7, hãy viết memo thay vì chỉ copy screenshot dashboard.
+
+```md
+ROAS post-readout memo - Calming Hex Puzzle
+
+Checkpoint:
+D7 ROAS, excluding the latest 48h delayed window.
+
+Cohort:
+Android, market A, build 0.7.3, store v2, relax/satisfaction campaign cells.
+
+Data health:
+Install, first_open, rewarded_ad_impression and IAP purchase events present.
+Ad revenue postback enabled, but latest 48h marked as delayed.
+
+Readout:
+CPI is healthy at $0.30.
+D1 retention is directionally healthy at 31%.
+D7 ROAS is weak at 6%.
+
+Diagnosis:
+Under-monetized active users. Acquisition is not the main problem in this read.
+
+Decision:
+Hold campaign at minimum learning spend. Do not scale.
+Iterate monetization exposure in level 6-10.
+
+Blocked conclusions:
+No D30 payback claim.
+No global scale claim.
+No final product-fail claim because retention is still healthy.
+
+Next read:
+Compare D3/D7 ROAS and D1 retention for the new monetization build.
+```
+
+Memo này bắt team ghi rõ **cohort**, **data health**, **blocked conclusions** và **next read**. Nếu không có các dòng đó, ROAS dễ biến thành một con số tạo cảm xúc hơn là một quyết định.
+
 ---
 
 ## Checklist kỹ thuật đo lường ROAS (Implementation checklist)
@@ -130,7 +248,17 @@ Một tựa game xếp hình lục giác thư giãn (Calming Hex Puzzle) chạy 
 
 ### Case Study: Rovio Sugar Blast — Tối ưu hóa ROAS dưới độ trễ postback của platform
 
-![Rovio Sugar Blast ROAS Delay optimization representational diagram](content/assets/usecases/day-12-hero-diagram.png)
+```text
+[VISUAL PLACEHOLDER: Third-party image request - Rovio Sugar Blast ROAS Delay optimization representational diagram]
+Type: public screenshot/source visual.
+Lesson section: Case Study: Rovio Sugar Blast — Tối ưu hóa ROAS dưới độ trễ postback của platform.
+Previous local asset to replace: content/assets/usecases/day-12-hero-diagram.png.
+Visual brief: Rovio Sugar Blast ROAS Delay optimization representational diagram.
+Teaching job: create a clear decision-support visual for the learner, not decorative game art.
+Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
+Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
+Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
+```
 
 > [!NOTE]
 > **Hướng dẫn đọc Sơ đồ tối ưu hóa của Rovio (Screenshot Readout)**:
@@ -152,6 +280,10 @@ Một tựa game xếp hình lục giác thư giãn (Calming Hex Puzzle) chạy 
     *   *Correction*: Khi có user nạp IAP lớn (dương tính giả), hãy giữ nguyên ngân sách thêm 3 ngày để xem có người tiếp theo nạp hay không, tránh việc scale vội vã làm loãng tệp.
 *   **Mistake 3: Đặt mục tiêu ROAS hoàn vốn 100% ngay ở Ngày 7**
     *   *Correction*: Đừng đặt kỳ vọng hoàn vốn 100% quá sớm. Hãy dùng checkpoint Day 7 như một mốc chẩn đoán xem game có đang đi đúng hướng hay không, thay vì biến nó thành đích hoàn vốn cuối cùng.
+*   **Mistake 4: Không ghi blocked conclusions**
+    *   *Correction*: Mỗi readout phải ghi điều chưa được kết luận. D7 có thể hỗ trợ stop/iterate direction, nhưng chưa chứng minh D30/D90 payback hoặc global scale.
+*   **Mistake 5: Scale vì một user mua IAP lớn**
+    *   *Correction*: Kiểm tra revenue mix trước khi đổi budget. Nếu ROAS spike đến từ một user hoặc một event bất thường, ghi false-positive risk và giữ spend ở mức học.
 
 ---
 
@@ -192,6 +324,34 @@ Dưới đây là một mẫu ROAS decision window hoàn chỉnh dạng bảng m
 | **CPI > LTV * 1.2** (Đắt) | D7 ROAS > 20% | **ITERATE AD** | Làm 2 video ad mới thay đổi intro 3 giây đầu. |
 | **CPI > LTV * 1.2** (Đắt) | D7 ROAS < 5% | **STOP** | Tắt hoàn toàn chiến dịch quảng cáo để cắt lỗ. |
 
+```md
+ROAS decision contract
+- Primary checkpoint: D7
+- Allowed decision: hold, iterate monetization, stop-loss, or small scale
+- Blocked conclusions: no D30 payback, no D90 LTV, no global scale from this read
+- Freshness rule: exclude latest 48h delayed data
+- Cohort rule: same build, geo, channel, store version and creative cell
+- Confidence: [low / medium / high] because [sample, freshness, cohort consistency, revenue mix]
+
+Post-readout memo
+- Cohort:
+- Data health:
+- Readout:
+- Diagnosis:
+- Decision:
+- Blocked conclusions:
+- Next read:
+
+ROAS sign-off:
+- Checkpoint used:
+- Data excluded for freshness:
+- Decision allowed:
+- Decision blocked:
+- Budget action:
+- Next read window:
+- Owner/date:
+```
+
 ---
 
 ## Practical Lab
@@ -203,6 +363,10 @@ Làm trực tiếp cho game của bạn:
     *   *Xử lý độ trễ*: Kịch bản ra quyết định của bạn có điều khoản loại trừ dữ liệu của 48 giờ gần nhất để tránh độ trễ postback chưa? (Đạt/Không)
     *   *Mốc số phối hợp*: Các hành động tăng/giảm ngân sách có được phối hợp chặt chẽ giữa cả hai chỉ số CPI và ROAS không (tránh nhìn một chiều)? (Đạt/Không)
     *   *Cấu hình MMP*: Hệ thống của bạn đã bật tính năng truyền gửi doanh thu ad (Ad Revenue Postback) sang MMP chưa? (Đạt/Không)
+3.  Viết **ROAS decision contract** trước khi nhìn dashboard: primary checkpoint, allowed decision, blocked conclusions, freshness rule, cohort rule và owner.
+4.  Chấm confidence cho quyết định: sample sanity, data freshness, cohort consistency, revenue mix, downstream support.
+5.  Viết **post-readout memo** sau khi đọc số. Memo phải có diagnosis, decision, blocked conclusions và next read.
+6.  Viết **ROAS sign-off** trước khi đổi budget.
 
 ---
 
@@ -216,6 +380,12 @@ Cập nhật trường **roas_decision_matrix** trong Final UA Plan theo định
 - Scale rule definition: [Điều kiện để tăng tiền chiến dịch]
 - Iterate rule definition: [Điều kiện để giữ campaign và sửa game/ad]
 - Stop rule definition: [Điều kiện bắt buộc tắt campaign cắt lỗ]
+- Freshness rule: [Dữ liệu mới nhất nào bị loại khỏi decision vì postback/revenue delay]
+- Cohort rule: [Build/geo/channel/store/creative cell phải match thế nào]
+- Confidence ladder: [Low/Medium/High và action được phép]
+- Blocked conclusions: [Điều chưa được kết luận ở D0/D3/D7/D30]
+- Post-readout memo owner: [Ai viết memo và cập nhật next read]
+- ROAS sign-off: [checkpoint / excluded data / budget action / next read / owner]
 ```
 
 ---
@@ -224,6 +394,11 @@ Cập nhật trường **roas_decision_matrix** trong Final UA Plan theo định
 
 *   [ ] Thiết lập ma trận quyết định 4 ô phối hợp chi tiết giữa CPI và D7 ROAS.
 *   [ ] Viết rõ điều khoản loại trừ dữ liệu trễ postback 48 giờ trong quy tắc vận hành.
+*   [ ] Có ROAS decision contract trước khi launch.
+*   [ ] Có confidence ladder trước khi scale/stop.
+*   [ ] Có blocked conclusions theo từng window.
+*   [ ] Có post-readout memo sau D7 hoặc checkpoint chính.
+*   [ ] Có ROAS sign-off trước khi đổi budget.
 *   [ ] Hoàn thành 4 mục trong Bảng quy trình kiểm tra chất lượng (ROAS Quality Chain Check).
 *   [ ] Cập nhật trường roas_decision_matrix vào Final UA Plan.
 
