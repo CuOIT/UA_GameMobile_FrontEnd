@@ -1,24 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
         <rect width="100%" height="100%" fill="#0f172a" rx="16"/>
-        <text x="400" y="80" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">Next-action Decision Filter</text>
-        <text x="400" y="120" font-family="Arial, sans-serif" font-size="18" fill="#94a3b8" text-anchor="middle">Filtering tasks to find the true blocker</text>
-    
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Next-Action Decision Filter Flow</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Resolving post-launch campaign blocker decisions</text>
         <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
                 <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
             </marker>
         </defs>
-        <rect x="300" y="180" width="200" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="400" y="215" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0" text-anchor="middle">Input / Trigger</text>
         
-        <path d="M 400 240 L 400 280" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
-        
-        <rect x="150" y="280" width="200" height="60" rx="8" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
-        <text x="250" y="315" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0" text-anchor="middle">Evaluate Scenario A</text>
+    <rect x="280" y="140" width="240" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="170" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">1. Identify Launch Blocker</text>
 
-        <rect x="450" y="280" width="200" height="60" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-        <text x="550" y="315" font-family="Arial, sans-serif" font-size="16" fill="#e2e8f0" text-anchor="middle">Evaluate Scenario B</text>
+    <path d="M 400 190 L 400 220" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
 
-        <path d="M 400 260 L 250 260 L 250 280" stroke="#38bdf8" stroke-width="3" fill="none" />
-        <path d="M 400 260 L 550 260 L 550 280" stroke="#38bdf8" stroke-width="3" fill="none" />
-        </svg>
+    <polygon points="400,220 520,260 400,300 280,260" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="400" y="265" font-family="Arial" font-size="13" fill="#ffffff" text-anchor="middle">Is it SDK Crash / Loss?</text>
+
+    <!-- Branch YES -->
+    <path d="M 520 260 L 600 260 L 600 320" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="560" y="240" font-family="Arial" font-size="12" fill="#ef4444">YES (Critical)</text>
+
+    <rect x="500" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="600" y="355" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Pause Campaign Instantly</text>
+
+    <!-- Branch NO -->
+    <path d="M 280 260 L 200 260 L 200 320" stroke="#34d399" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="240" y="240" font-family="Arial" font-size="12" fill="#34d399">NO</text>
+
+    <rect x="100" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="200" y="355" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Optimize Bid &amp; Creative</text>
+    
+    </svg>

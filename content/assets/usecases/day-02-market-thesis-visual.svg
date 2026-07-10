@@ -1,51 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
-  <title id="title">Day 2 market thesis visual</title>
-  <desc id="desc">Illustrative market thesis map from global and Vietnam source-backed cases.</desc>
-  <rect width="1200" height="620" fill="#f7faf8"/>
-  <rect x="36" y="34" width="1128" height="552" rx="22" fill="#ffffff" stroke="#d9e5df"/>
-  <text x="68" y="82" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#10251f">Day 2: Market thesis, not genre label</text>
-  <text x="68" y="114" font-family="Inter, Arial, sans-serif" font-size="15" fill="#5b6b64">Illustrative visual only - source-backed facts are separated from UA interpretation.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+        <rect width="100%" height="100%" fill="#0f172a" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Puzzle Market Thesis Map</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Mapping mechanic difficulty to target user segments with proper margins</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
+            </marker>
+        </defs>
+        
+    <rect x="50" y="160" width="310" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="205" y="195" font-family="Arial" font-size="18" font-weight="bold" fill="#38bdf8" text-anchor="middle">Core Gameplay Mechanic</text>
+    <text x="205" y="240" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Tap-to-pour color sorting</text>
+    <text x="205" y="280" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Satisfying visual feedback</text>
+    <text x="205" y="320" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Low movement limit constraints</text>
 
-  <g transform="translate(68 154)">
-    <rect width="512" height="260" rx="18" fill="#fff0f2" stroke="#efc6cd"/>
-    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#55202a">Global case: Candy Crush Saga</text>
-    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="14" fill="#70313d">Public fact: match-3 levels, objectives, freemium/IAP support.</text>
-    <g transform="translate(32 98)">
-      <rect width="74" height="74" rx="14" fill="#ffffff" stroke="#e5a5af"/>
-      <circle cx="24" cy="24" r="10" fill="#e4516d"/><circle cx="50" cy="24" r="10" fill="#f4b83f"/><circle cx="24" cy="50" r="10" fill="#4d8cd9"/><circle cx="50" cy="50" r="10" fill="#5ba66b"/>
-      <path d="M110 36 H210" stroke="#b45b68" stroke-width="4" stroke-linecap="round"/><path d="M200 26 l18 10 -18 10" fill="none" stroke="#b45b68" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect x="248" y="4" width="180" height="66" rx="14" fill="#ffffff" stroke="#e5a5af"/>
-      <text x="270" y="30" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" fill="#55202a">Level objective</text>
-      <text x="270" y="52" font-family="Inter, Arial, sans-serif" font-size="13" fill="#70313d">progression + fail/retry</text>
-    </g>
-    <text x="24" y="224" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#55202a">UA interpretation</text>
-    <text x="24" y="246" font-family="Inter, Arial, sans-serif" font-size="14" fill="#70313d">Market thesis must name motivation, level proof and monetization path.</text>
-  </g>
+    <path d="M 360 280 L 430 280" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
 
-  <g transform="translate(620 154)">
-    <rect width="500" height="260" rx="18" fill="#eef6ff" stroke="#c5d9ec"/>
-    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" fill="#193452">Vietnam case: Bravestars Games</text>
-    <text x="24" y="68" font-family="Inter, Arial, sans-serif" font-size="14" fill="#34516c">Public fact: portfolio shows multiple casual/puzzle promises.</text>
-    <g transform="translate(28 98)" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#193452">
-      <rect width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="20" y="28">Block escape</text>
-      <rect x="150" width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="176" y="28">Nuts/bolts</text>
-      <rect x="300" width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="327" y="28">Goods mix</text>
-      <rect y="62" width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="31" y="90">Rescue</text>
-      <rect x="150" y="62" width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="181" y="90">Color</text>
-      <rect x="300" y="62" width="132" height="44" rx="12" fill="#ffffff" stroke="#9dbeda"/><text x="330" y="90">Drawing</text>
-    </g>
-    <text x="24" y="224" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#193452">UA interpretation</text>
-    <text x="24" y="246" font-family="Inter, Arial, sans-serif" font-size="14" fill="#34516c">Do not call all of this one audience. Choose one motivation row.</text>
-  </g>
-
-  <g transform="translate(68 452)">
-    <text x="0" y="0" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" fill="#10251f">Example thesis scorecard</text>
-    <g transform="translate(0 24)" font-family="Inter, Arial, sans-serif" font-size="14" fill="#2f403a">
-      <text x="0" y="20">Audience clarity</text><rect x="150" y="8" width="260" height="16" rx="8" fill="#2f6d54"/>
-      <text x="0" y="54">Creative clarity</text><rect x="150" y="42" width="325" height="16" rx="8" fill="#2f6d54"/>
-      <text x="0" y="88">Retention path</text><rect x="150" y="76" width="130" height="16" rx="8" fill="#c49b4b"/>
-      <text x="520" y="20" font-weight="700">Read weak links first:</text>
-      <text x="520" y="54">If retention path is low, cheap CPI does not prove genre fit.</text>
-    </g>
-  </g>
-</svg>
+    <!-- Right Block: Adjusted position and width to avoid touching borders -->
+    <rect x="440" y="160" width="310" height="240" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="595" y="195" font-family="Arial" font-size="18" font-weight="bold" fill="#34d399" text-anchor="middle">Target Audience Thesis</text>
+    <text x="595" y="240" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Relaxation / satisfying seekers</text>
+    <text x="595" y="280" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Casual gamers wanting low stress</text>
+    <text x="595" y="320" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Commuters looking for quick wins</text>
+    
+    </svg>

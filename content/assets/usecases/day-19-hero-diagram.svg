@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+        <rect width="100%" height="100%" fill="#0f172a" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Competitor Teardown Decision Flow</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Determining if a competitor teardown is worth marketing team resources</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
+            </marker>
+        </defs>
+        
+    <rect x="280" y="140" width="240" height="60" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="175" font-family="Arial" font-size="15" fill="#ffffff" text-anchor="middle">Identify Target Competitor</text>
+
+    <path d="M 400 200 L 400 230" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <polygon points="400,230 520,265 400,300 280,265" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="400" y="270" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">High Scale &amp; Similar Mech?</text>
+
+    <!-- Branch YES -->
+    <path d="M 520 265 L 600 265 L 600 320" stroke="#34d399" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="560" y="250" font-family="Arial" font-size="12" fill="#34d399">YES</text>
+
+    <rect x="500" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="600" y="355" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Execute Full Teardown</text>
+
+    <!-- Branch NO -->
+    <path d="M 280 265 L 200 265 L 200 320" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="240" y="250" font-family="Arial" font-size="12" fill="#ef4444">NO</text>
+
+    <rect x="100" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="200" y="355" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Skip / Monitor Only</text>
+    
+    </svg>

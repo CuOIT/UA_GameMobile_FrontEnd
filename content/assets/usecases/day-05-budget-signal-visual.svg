@@ -1,31 +1,23 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
-  <rect width="1600" height="900" rx="32" fill="#F4F8F5"/>
-  <rect x="56" y="56" width="1488" height="788" rx="28" fill="#FFFFFF" stroke="#D8E4DC" stroke-width="2"/>
-  <text x="100" y="130" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="700">Sample and budget allocation for a $300 test</text>
-  <text x="100" y="174" fill="#4D6B61" font-family="Segoe UI, Arial, sans-serif" font-size="24">Giảm số cell để mỗi cell còn đủ signal đọc được.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+        <rect width="100%" height="100%" fill="#0f172a" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Budget Signal Threshold Matrix</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Deciding whether to scale or pause ad spend based on early metrics</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
+            </marker>
+        </defs>
+        
+    <rect x="100" y="180" width="280" height="200" rx="8" fill="#1e293b" stroke="#f43f5e" stroke-width="2"/>
+    <text x="240" y="220" font-family="Arial" font-size="20" font-weight="bold" fill="#f43f5e" text-anchor="middle">PAUSE / REFACTOR</text>
+    <text x="240" y="270" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">CTR &lt; 1.5%</text>
+    <text x="240" y="310" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Store CVR &lt; 10%</text>
+    <text x="240" y="350" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">High CPI, Low Cohort Size</text>
 
-  <rect x="110" y="270" width="620" height="72" rx="18" fill="#E7F6EC"/>
-  <rect x="110" y="270" width="420" height="72" rx="18" fill="#2FA36B"/>
-  <rect x="110" y="378" width="620" height="72" rx="18" fill="#EDF3FF"/>
-  <rect x="110" y="378" width="310" height="72" rx="18" fill="#4A83D8"/>
-  <rect x="110" y="486" width="620" height="72" rx="18" fill="#FFF4E8"/>
-  <rect x="110" y="486" width="220" height="72" rx="18" fill="#D78A30"/>
-  <rect x="110" y="594" width="620" height="72" rx="18" fill="#FDECEF"/>
-  <rect x="110" y="594" width="155" height="72" rx="18" fill="#D45574"/>
-
-  <text x="110" y="246" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Relative signal per cell</text>
-  <text x="130" y="316" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">1 cell / one main hook</text>
-  <text x="130" y="424" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">2 cells / A-B hook test</text>
-  <text x="130" y="532" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">4 cells / 2 hooks x 2 variants</text>
-  <text x="130" y="640" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">6+ cells / too thin for $300</text>
-
-  <rect x="860" y="252" width="610" height="450" rx="24" fill="#F8FBF9" stroke="#D8E4DC"/>
-  <text x="910" y="314" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Example split</text>
-  <text x="910" y="362" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Total budget: $300</text>
-  <text x="910" y="404" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Day 1-2: validate tracking + store proof = $80</text>
-  <text x="910" y="446" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Day 3-4: compare 4 cells = $120</text>
-  <text x="910" y="488" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Day 5-6: kill weak cells, hold 1-2 cells = $70</text>
-  <text x="910" y="530" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Day 7: confirm best candidate = $30</text>
-  <text x="910" y="610" fill="#18352B" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">Rule of thumb</text>
-  <text x="910" y="652" fill="#365349" font-family="Segoe UI, Arial, sans-serif" font-size="24">Nếu bạn cần quá nhiều cells để “cảm thấy yên tâm”, test đang bị thiết kế quá tham.</text>
-</svg>
+    <rect x="420" y="180" width="280" height="200" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="560" y="220" font-family="Arial" font-size="20" font-weight="bold" fill="#10b981" text-anchor="middle">SCALE BUDGET</text>
+    <text x="560" y="270" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">CTR &gt; 3.0%</text>
+    <text x="560" y="310" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Store CVR &gt; 25%</text>
+    <text x="560" y="350" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Good D1 Retention (40%+)</text>
+    
+    </svg>

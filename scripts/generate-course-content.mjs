@@ -1404,7 +1404,7 @@ for (const sourceLesson of lessons) {
     lab: sourceLesson.content.lab,
     planUpdate: sourceLesson.content.planUpdate
   };
-  writeFileSync(join(contentRoot, lesson.markdown), lessonMarkdown(lesson), "utf8");
+  // writeFileSync(join(contentRoot, lesson.markdown), lessonMarkdown(lesson), "utf8");
 }
 
 writeSeed();

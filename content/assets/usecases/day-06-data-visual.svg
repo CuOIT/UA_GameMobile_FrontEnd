@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+        <rect width="100%" height="100%" fill="#1e1b4b" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Measurement Complexity Scaling Matrix</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Detailing that lower complexity level is easier/safer for soft launches</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#34d399" />
+            </marker>
+        </defs>
+        
+    <rect x="80" y="160" width="640" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <line x1="80" y1="210" x2="720" y2="210" stroke="#38bdf8" stroke-width="2"/>
+    <line x1="280" y1="160" x2="280" y2="400" stroke="#38bdf8" stroke-width="1"/>
+    <line x1="480" y1="160" x2="480" y2="400" stroke="#38bdf8" stroke-width="1"/>
+
+    <!-- Headers -->
+    <text x="180" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Complexity Level</text>
+    <text x="380" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Integration Overhead</text>
+    <text x="600" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Soft-Launch Suitability</text>
+
+    <!-- Level 1 -->
+    <text x="180" y="250" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Level 1 (Lowest)</text>
+    <text x="380" y="250" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">1 day SDK setup</text>
+    <text x="600" y="250" font-family="Arial" font-size="14" font-weight="bold" fill="#34d399" text-anchor="middle">RECOMMENDED (Safer)</text>
+
+    <!-- Level 3 -->
+    <text x="180" y="310" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Level 3 (Medium)</text>
+    <text x="380" y="310" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Custom event tracking loops</text>
+    <text x="600" y="310" font-family="Arial" font-size="14" font-weight="bold" fill="#f59e0b" text-anchor="middle">Moderate risk</text>
+
+    <!-- Level 5 -->
+    <text x="180" y="370" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Level 5 (Highest)</text>
+    <text x="380" y="370" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Deep MMP attribution routing</text>
+    <text x="600" y="370" font-family="Arial" font-size="14" font-weight="bold" fill="#ef4444" text-anchor="middle">Not recommended for D0 test</text>
+    
+    </svg>
