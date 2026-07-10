@@ -1,0 +1,212 @@
+{
+  "mc01": [
+    "Create the Monetization thesis.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: hypothesis.",
+    "Write the next action and rollback rule."
+  ],
+  "mc02": [
+    "Create the Economy role map.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: audience.",
+    "Write the next action and rollback rule."
+  ],
+  "mc03": [
+    "Create the WTP motivation map.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: audience.",
+    "Write the next action and rollback rule."
+  ],
+  "mc04": [
+    "Create the Session rhythm map.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: metricTargets.",
+    "Write the next action and rollback rule."
+  ],
+  "mc05": [
+    "Create the Monetization hypothesis card.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: hypothesis.",
+    "Write the next action and rollback rule."
+  ],
+  "mc06": [
+    "Create the Ad format decision matrix.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: creativeMatrix.",
+    "Write the next action and rollback rule."
+  ],
+  "mc07": [
+    "Create the Monetization guardrail sheet.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: killCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc08": [
+    "Create the Ad integration boundary plan.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: tracking.",
+    "Write the next action and rollback rule."
+  ],
+  "mc09": [
+    "Create the Rewarded placement spec.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: creativeMatrix.",
+    "Write the next action and rollback rule."
+  ],
+  "mc10": [
+    "Create the Interstitial pacing rule.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: killCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc11": [
+    "Create the IAP product ladder.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: creativeMatrix.",
+    "Write the next action and rollback rule."
+  ],
+  "mc12": [
+    "Create the Store product readiness checklist.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: tracking.",
+    "Write the next action and rollback rule."
+  ],
+  "mc13": [
+    "Create the Monetization event taxonomy.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: tracking.",
+    "Write the next action and rollback rule."
+  ],
+  "mc14": [
+    "Create the Release build QA script.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: tracking.",
+    "Write the next action and rollback rule."
+  ],
+  "mc15": [
+    "Create the Test build acceptance card.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: successCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc16": [
+    "Create the Ad revenue metric map.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: metricTargets.",
+    "Write the next action and rollback rule."
+  ],
+  "mc17": [
+    "Create the IAP funnel map.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: metricTargets.",
+    "Write the next action and rollback rule."
+  ],
+  "mc18": [
+    "Create the Retention tradeoff board.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: killCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc19": [
+    "Create the Cohort readout template.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: metricTargets.",
+    "Write the next action and rollback rule."
+  ],
+  "mc20": [
+    "Create the Mediation readiness note.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: nextAction.",
+    "Write the next action and rollback rule."
+  ],
+  "mc21": [
+    "Create the Daily monetization readout.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: metricTargets.",
+    "Write the next action and rollback rule."
+  ],
+  "mc22": [
+    "Create the Metric decision rules.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: successCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc23": [
+    "Create the Offer design spec.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: creativeMatrix.",
+    "Write the next action and rollback rule."
+  ],
+  "mc24": [
+    "Create the No-ads offer policy.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: budget.",
+    "Write the next action and rollback rule."
+  ],
+  "mc25": [
+    "Create the Pricing assumption sheet.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: budget.",
+    "Write the next action and rollback rule."
+  ],
+  "mc26": [
+    "Create the Monetization cadence calendar.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: nextAction.",
+    "Write the next action and rollback rule."
+  ],
+  "mc27": [
+    "Create the Compliance risk checklist.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: tracking.",
+    "Write the next action and rollback rule."
+  ],
+  "mc28": [
+    "Create the Monetization learning log.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: nextAction.",
+    "Write the next action and rollback rule."
+  ],
+  "mc29": [
+    "Create the One-page monetization plan.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: successCriteria.",
+    "Write the next action and rollback rule."
+  ],
+  "mc30": [
+    "Create the Monetization risk register.",
+    "Name the player moment and value exchange.",
+    "List the required Unity events or QA evidence.",
+    "Update Final Monetization Plan field: nextAction.",
+    "Write the next action and rollback rule."
+  ]
+}

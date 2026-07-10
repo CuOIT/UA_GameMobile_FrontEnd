@@ -1,5 +1,6 @@
 const contentRoot = "./content";
-const stateKey = "uaBootcampState.v1";
+const activeCourseStateId = new URLSearchParams(location.search).get("course") || localStorage.getItem("uaActiveCourseId") || "ua-30d";
+const stateKey = activeCourseStateId === "ua-30d" ? "uaBootcampState.v1" : `uaBootcampState.v1.${activeCourseStateId}`;
 const appVersion = "1.5.7";
 const contentVersion = appVersion;
 
@@ -76,15 +77,22 @@ async function init() {
 
 async function loadContent() {
   const config = await fetchOptionalJson("app-config.json");
+  const catalog = await fetchOptionalJson("course-catalog.json");
+  const requestedCourseId = activeCourseStateId;
+  const courses = Array.isArray(catalog.courses) ? catalog.courses : [];
+  const activeCourse = courses.find((course) => course.id === requestedCourseId) || courses.find((course) => course.primary) || { id: "ua-30d", root: "." };
+  const courseRoot = activeCourse.root && activeCourse.root !== "." ? activeCourse.root : ".";
+  localStorage.setItem("uaActiveCourseId", activeCourse.id || "ua-30d");
+  const courseFile = (file) => courseRoot === "." ? file : `${courseRoot}/${file}`;
   const [course, glossary, quizzes, calculators, checklists, cases, version, dbContent] = await Promise.all([
-    fetchJson("course.json"),
-    fetchJson("glossary.json"),
-    fetchJson("quizzes.json"),
-    fetchJson("calculators.json"),
-    fetchJson("checklists.json"),
-    fetchJson("cases.json"),
-    fetchOptionalJson("version.json"),
-    fetchDbContent(config)
+    fetchJson(courseFile("course.json")),
+    fetchJson(courseFile("glossary.json")),
+    fetchJson(courseFile("quizzes.json")),
+    fetchJson(courseFile("calculators.json")),
+    fetchJson(courseFile("checklists.json")),
+    fetchJson(courseFile("cases.json")),
+    fetchOptionalJson(courseFile("version.json")),
+    courseRoot === "." ? fetchDbContent(config) : {}
   ]);
   const useDbContent = isCurrentDbContent(course, dbContent);
   const dbLessonMarkdown = dbContent.lessonMarkdown || {};
@@ -100,7 +108,10 @@ async function loadContent() {
     cases: useDbContent && dbContent.cases ? dbContent.cases : cases,
     lessonMarkdown: dbLessonMarkdown,
     version: version?.appVersion ? version : { appVersion, contentVersion, updatedAt: "2026-07-03" },
-    config
+    config,
+    catalog,
+    activeCourse,
+    courseRoot
   };
 }
 
@@ -193,9 +204,12 @@ async function fetchLesson(day) {
   const padded = String(day).padStart(2, "0");
   const dbMarkdown = data.lessonMarkdown?.[padded];
   if (typeof dbMarkdown === "string" && dbMarkdown.length) return dbMarkdown;
+  const lesson = data.course.lessons.find((item) => item.day === day);
+  const markdownPath = lesson?.markdown || `lessons/day-${padded}.md`;
+  const coursePrefix = data.courseRoot && data.courseRoot !== "." ? `${data.courseRoot}/` : "";
 
   try {
-    const response = await fetch(withContentVersion(`${contentRoot}/lessons/day-${padded}.md`));
+    const response = await fetch(withContentVersion(`${contentRoot}/${coursePrefix}${markdownPath}`));
     if (response.ok) return await response.text();
   } catch (err) {
     console.warn(`Could not load static day-${padded}.md`, err);
@@ -439,12 +453,14 @@ function renderDashboard() {
   title.textContent = "Dashboard";
   const next = nextLesson();
   const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  const totalLessons = data.course.lessons.length || 30;
   const progressSyncNote = currentUser 
     ? "Tiến độ khóa học của bạn đã được đồng bộ hóa trực tuyến qua tài khoản."
     : "Tiến độ khóa học hiện đang lưu tạm thời. Hãy Đăng nhập để đồng bộ hóa trực tuyến.";
   app.innerHTML = `
+    ${renderCourseSwitcher()}
     <section class="metric-row">
-      <div class="metric">${icon("book-check")}<strong>${state.completedLessons.length}/30</strong><span>lessons completed</span></div>
+      <div class="metric">${icon("book-check")}<strong>${state.completedLessons.length}/${totalLessons}</strong><span>lessons completed</span></div>
       <div class="metric">${icon("activity")}<strong>${completionPercent()}%</strong><span>course progress</span></div>
       <div class="metric">${icon("clipboard-check")}<strong>${planFields}/9</strong><span>UA plan sections</span></div>
       <div class="metric">${icon("badge-check")}<strong>${Object.keys(state.quizResults).length}</strong><span>quizzes attempted</span></div>
@@ -480,6 +496,24 @@ function renderDashboard() {
   `;
 }
 
+function renderCourseSwitcher() {
+  const courses = Array.isArray(data.catalog?.courses) ? data.catalog.courses : [];
+  if (courses.length < 2) return "";
+  const currentId = data.activeCourse?.id || "ua-30d";
+  return `
+    <section class="panel course-switcher">
+      <h2>${icon("book-open-check")}Course</h2>
+      <p>${escapeHtml(data.course.meta?.title || "Current course")}</p>
+      <div class="tag-row">
+        ${courses.map((course) => {
+          const active = course.id === currentId;
+          const href = `?course=${encodeURIComponent(course.id)}${location.hash || "#dashboard"}`;
+          return `<a class="tag ${active ? "ok" : ""}" href="${href}">${escapeHtml(course.title)}</a>`;
+        }).join("")}
+      </div>
+    </section>
+  `;
+}
 function dashboardShortcut(name, copy, href, iconName) {
   return `
     <article class="panel">
@@ -494,6 +528,7 @@ function renderLessons() {
   title.textContent = "30-Day Lessons";
   const lessons = filteredLessons();
   app.innerHTML = `
+    ${renderCourseSwitcher()}
     <section class="panel">
       <h2>Course path</h2>
       <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
@@ -1288,6 +1323,7 @@ function renderAccount() {
   const configured = Boolean(data.config?.supabaseUrl && data.config?.supabaseAnonKey);
   const completed = state.completedLessons.length;
   const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  const totalLessons = data.course.lessons.length || 30;
 
   if (!configured) {
     app.innerHTML = `
@@ -1295,7 +1331,7 @@ function renderAccount() {
         <article class="panel">
           <h2>${icon("cloud-off")}Login is not configured yet</h2>
           <p>This app is still using localStorage only. To enable login and cloud progress sync, create a Supabase project, run <code>supabase-schema.sql</code>, then fill <code>content/app-config.json</code>.</p>
-          <p class="status-line">Current local progress: ${completed}/30 lessons, ${planFields}/9 UA plan sections.</p>
+          <p class="status-line">Current local progress: ${completed}/${totalLessons} lessons, ${planFields}/9 UA plan sections.</p>
         </article>
         <article class="panel">
           <h2>${icon("database")}Why Supabase?</h2>
@@ -1325,7 +1361,7 @@ function renderAccount() {
         <h2>${icon("refresh-cw")}Progress sync</h2>
         <p>Local progress is always saved immediately in this browser. When signed in, the app also syncs lesson completion, bookmarks, quizzes, checklists, Final UA Plan, and chatbot memory to Supabase.</p>
         <div class="metric-row">
-          <div class="metric"><strong>${completed}/30</strong><span>lessons</span></div>
+          <div class="metric"><strong>${completed}/${totalLessons}</strong><span>lessons</span></div>
           <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes</span></div>
           <div class="metric"><strong>${planFields}/9</strong><span>plan fields</span></div>
           <div class="metric"><strong>${Object.values(state.checklist).filter(Boolean).length}</strong><span>checks</span></div>

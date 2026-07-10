@@ -1,0 +1,937 @@
+{
+  "meta": {
+    "id": "monetization-30d",
+    "title": "30-Day Mobile Puzzle Monetization Bootcamp for Unity Developers",
+    "audience": "Unity mobile developers building Android-first, iOS-aware puzzle games with ads plus light IAP.",
+    "capstone": "One-page monetization plan with placements, IAP ladder, tracking, guardrails and next action.",
+    "format": "25-35 minute workshop lessons with decision artifacts."
+  },
+  "references": [
+    {
+      "id": "admob-unity-start",
+      "title": "Google AdMob Unity quick start",
+      "url": "https://developers.google.com/admob/unity/quick-start",
+      "note": "Unity integration entry point for mobile ad monetization."
+    },
+    {
+      "id": "admob-unity-privacy",
+      "title": "Google AdMob Unity privacy strategies",
+      "url": "https://developers.google.com/admob/unity/privacy/strategies",
+      "note": "Consent and privacy implementation considerations for Unity games using ads."
+    },
+    {
+      "id": "unity-iap",
+      "title": "Unity In-App Purchasing package",
+      "url": "https://docs.unity3d.com/Packages/com.unity.purchasing@latest",
+      "note": "Unity package documentation for product configuration and purchase flows."
+    },
+    {
+      "id": "google-play-billing",
+      "title": "Google Play Billing overview",
+      "url": "https://developer.android.com/google/play/billing",
+      "note": "Android billing concepts that shape IAP implementation and compliance."
+    },
+    {
+      "id": "apple-subscriptions",
+      "title": "Apple auto-renewable subscriptions",
+      "url": "https://developer.apple.com/app-store/subscriptions/",
+      "note": "Subscription design, offers, retention and platform rules for iOS."
+    },
+    {
+      "id": "play-data-safety",
+      "title": "Google Play Data safety",
+      "url": "https://support.google.com/googleplay/android-developer/answer/10787469",
+      "note": "Store disclosure expectations for SDKs and collected data."
+    }
+  ],
+  "lessons": [
+    {
+      "day": 1,
+      "title": "Monetization as a player-value loop",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Frame ads and IAP as a value exchange tied to puzzle motivation, session rhythm and trust.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Monetization thesis",
+      "planField": "hypothesis",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Value exchange",
+        "ARPDAU",
+        "IAP"
+      ],
+      "quizId": "m01",
+      "checklistId": "mc01",
+      "markdown": "lessons/day-01.md",
+      "learningOutcome": "Decide what the game is allowed to monetize before adding SDKs or offers.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Puzzle economy roles: ads, IAP and progression",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Separate helper, convenience, cosmetic and content roles so monetization does not damage puzzle clarity.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Economy role map",
+      "planField": "audience",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Economy",
+        "Rewarded ad",
+        "Progression"
+      ],
+      "quizId": "m02",
+      "checklistId": "mc02",
+      "markdown": "lessons/day-02.md",
+      "learningOutcome": "Choose the monetization role that matches the puzzle loop and target player.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Audience willingness-to-pay map",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Map player motivations to likely ad tolerance and purchase triggers without guessing demographics.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "WTP motivation map",
+      "planField": "audience",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "WTP",
+        "Motivation",
+        "Segment"
+      ],
+      "quizId": "m03",
+      "checklistId": "mc03",
+      "markdown": "lessons/day-03.md",
+      "learningOutcome": "Identify which players should see ads, offers or neither in the first test.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Session design for ad-friendly puzzle games",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Place ad opportunities around natural puzzle breaks instead of interrupting solve flow.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Session rhythm map",
+      "planField": "metricTargets",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Session length",
+        "Interstitial",
+        "Rewarded ad"
+      ],
+      "quizId": "m04",
+      "checklistId": "mc04",
+      "markdown": "lessons/day-04.md",
+      "learningOutcome": "Choose where ads can appear without breaking player trust.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 5,
+      "title": "First monetization hypothesis",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Compress value, placement, metric and next action into one testable monetization hypothesis.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Monetization hypothesis card",
+      "planField": "hypothesis",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Hypothesis",
+        "ARPDAU",
+        "Retention"
+      ],
+      "quizId": "m05",
+      "checklistId": "mc05",
+      "markdown": "lessons/day-05.md",
+      "learningOutcome": "Write the first monetization hypothesis that can drive implementation.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 6,
+      "title": "Ads format choice for Unity puzzle",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Compare rewarded, interstitial, banner and app-open ads for early puzzle prototypes.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Ad format decision matrix",
+      "planField": "creativeMatrix",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Rewarded ad",
+        "Interstitial",
+        "Banner"
+      ],
+      "quizId": "m06",
+      "checklistId": "mc06",
+      "markdown": "lessons/day-06.md",
+      "learningOutcome": "Choose a first ad format based on player control, session rhythm and measurement quality.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 7,
+      "title": "Week 1 synthesis: monetization guardrails",
+      "module": "Week 1 - Monetization fundamentals",
+      "summary": "Turn the first week into non-negotiable rules for trust, pacing and test scope.",
+      "stages": [
+        "idea",
+        "prototype"
+      ],
+      "difficulty": "Beginner",
+      "artifact": "Monetization guardrail sheet",
+      "planField": "killCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Guardrail",
+        "Retention",
+        "Trust"
+      ],
+      "quizId": "m07",
+      "checklistId": "mc07",
+      "markdown": "lessons/day-07.md",
+      "learningOutcome": "Define what monetization must not do to the game experience.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap"
+      ]
+    },
+    {
+      "day": 8,
+      "title": "Ad SDK integration plan without gameplay coupling",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Plan Unity ad integration with events, services and ScriptableObject config instead of gameplay/UI coupling.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Ad integration boundary plan",
+      "planField": "tracking",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "SDK",
+        "Event",
+        "ScriptableObject"
+      ],
+      "quizId": "m08",
+      "checklistId": "mc08",
+      "markdown": "lessons/day-08.md",
+      "learningOutcome": "Decide the technical boundary for ad loading, showing and analytics.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 9,
+      "title": "Rewarded ad placement and reward economy",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Design rewarded ads where the reward helps recovery or convenience without becoming mandatory.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Rewarded placement spec",
+      "planField": "creativeMatrix",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Rewarded ad",
+        "Reward",
+        "Economy sink"
+      ],
+      "quizId": "m09",
+      "checklistId": "mc09",
+      "markdown": "lessons/day-09.md",
+      "learningOutcome": "Choose one rewarded placement and define its reward rules.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 10,
+      "title": "Interstitial pacing and fatigue control",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Set interstitial timing with cooldowns, session caps and fail-safe rules.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Interstitial pacing rule",
+      "planField": "killCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Interstitial",
+        "Cooldown",
+        "Ad fatigue"
+      ],
+      "quizId": "m10",
+      "checklistId": "mc10",
+      "markdown": "lessons/day-10.md",
+      "learningOutcome": "Write a pacing rule that protects retention before revenue.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 11,
+      "title": "IAP product ladder for puzzle games",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Build a small product ladder from starter pack to convenience pack without bloating SKU count.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "IAP product ladder",
+      "planField": "creativeMatrix",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "IAP",
+        "SKU",
+        "Starter pack"
+      ],
+      "quizId": "m11",
+      "checklistId": "mc11",
+      "markdown": "lessons/day-11.md",
+      "learningOutcome": "Select the minimum viable IAP catalog for a soft launch.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 12,
+      "title": "Store products and receipt readiness",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Plan Android-first IAP setup and receipt validation assumptions before live testing.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Store product readiness checklist",
+      "planField": "tracking",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Receipt",
+        "Billing",
+        "Catalog"
+      ],
+      "quizId": "m12",
+      "checklistId": "mc12",
+      "markdown": "lessons/day-12.md",
+      "learningOutcome": "Decide which store-product readiness checks block a monetization test.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 13,
+      "title": "Monetization event taxonomy",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Define events for ad request, impression, reward, purchase attempt and purchase result.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Monetization event taxonomy",
+      "planField": "tracking",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Event taxonomy",
+        "Impression",
+        "Purchase"
+      ],
+      "quizId": "m13",
+      "checklistId": "mc13",
+      "markdown": "lessons/day-13.md",
+      "learningOutcome": "Create the minimum event set needed to read monetization safely.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 14,
+      "title": "QA monetization in Unity release builds",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Validate ads, purchases, consent and events in a real Android release build before spend.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Release build QA script",
+      "planField": "tracking",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "QA",
+        "Release build",
+        "Consent"
+      ],
+      "quizId": "m14",
+      "checklistId": "mc14",
+      "markdown": "lessons/day-14.md",
+      "learningOutcome": "Decide whether the build is monetization-test ready.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 15,
+      "title": "Week 2 synthesis: monetization test build",
+      "module": "Week 2 - Unity implementation and tracking",
+      "summary": "Summarize integration, placements, events and QA into a single acceptance card.",
+      "stages": [
+        "prototype",
+        "live"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Test build acceptance card",
+      "planField": "successCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Acceptance criteria",
+        "QA",
+        "Build"
+      ],
+      "quizId": "m15",
+      "checklistId": "mc15",
+      "markdown": "lessons/day-15.md",
+      "learningOutcome": "Define the pass/fail rules for a monetization-ready build.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 16,
+      "title": "ARPDAU, impressions and fill rate",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Read ARPDAU through impressions, eCPM, fill, show rate and session depth.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Ad revenue metric map",
+      "planField": "metricTargets",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "ARPDAU",
+        "eCPM",
+        "Fill rate"
+      ],
+      "quizId": "m16",
+      "checklistId": "mc16",
+      "markdown": "lessons/day-16.md",
+      "learningOutcome": "Diagnose whether weak ad revenue is demand, placement or engagement.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 17,
+      "title": "Purchase funnel from offer view to paid user",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Break IAP performance into offer exposure, intent, checkout and successful purchase.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "IAP funnel map",
+      "planField": "metricTargets",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Purchase funnel",
+        "Conversion",
+        "ARPPU"
+      ],
+      "quizId": "m17",
+      "checklistId": "mc17",
+      "markdown": "lessons/day-17.md",
+      "learningOutcome": "Identify which purchase-funnel link needs fixing first.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 18,
+      "title": "Retention vs monetization tradeoff",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Separate good revenue from revenue that quietly damages D1/D7 retention.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Retention tradeoff board",
+      "planField": "killCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Retention",
+        "D1",
+        "D7"
+      ],
+      "quizId": "m18",
+      "checklistId": "mc18",
+      "markdown": "lessons/day-18.md",
+      "learningOutcome": "Set guardrails for monetization changes that should be rolled back.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 19,
+      "title": "Cohort reading for ads plus light IAP",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Read revenue and retention by install cohort instead of blending noisy users.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Cohort readout template",
+      "planField": "metricTargets",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Cohort",
+        "LTV",
+        "Payback"
+      ],
+      "quizId": "m19",
+      "checklistId": "mc19",
+      "markdown": "lessons/day-19.md",
+      "learningOutcome": "Choose which cohort signal is strong enough for a next action.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 20,
+      "title": "Ad mediation and waterfall basics",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Understand when mediation is helpful and when it is premature for a small puzzle test.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Mediation readiness note",
+      "planField": "nextAction",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Mediation",
+        "Waterfall",
+        "Bidding"
+      ],
+      "quizId": "m20",
+      "checklistId": "mc20",
+      "markdown": "lessons/day-20.md",
+      "learningOutcome": "Decide whether to keep one network or prepare mediation later.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 21,
+      "title": "Monetization dashboard readout",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Create a daily readout that combines retention, ads, purchases and technical health.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Daily monetization readout",
+      "planField": "metricTargets",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Dashboard",
+        "Readout",
+        "Anomaly"
+      ],
+      "quizId": "m21",
+      "checklistId": "mc21",
+      "markdown": "lessons/day-21.md",
+      "learningOutcome": "Write the first dashboard readout without overclaiming from small data.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 22,
+      "title": "Week 3 synthesis: metric decision rules",
+      "module": "Week 3 - Metrics and diagnosis",
+      "summary": "Convert metric patterns into iterate, hold, rollback or expand decisions.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Practical",
+      "artifact": "Metric decision rules",
+      "planField": "successCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Decision rule",
+        "Rollback",
+        "Scale"
+      ],
+      "quizId": "m22",
+      "checklistId": "mc22",
+      "markdown": "lessons/day-22.md",
+      "learningOutcome": "Define how monetization metrics will trigger action.",
+      "referenceIds": [
+        "admob-unity-start",
+        "admob-unity-privacy"
+      ]
+    },
+    {
+      "day": 23,
+      "title": "Offer design: starter packs and boosters",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Design a starter offer that solves a clear player problem without paywalling fun.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Offer design spec",
+      "planField": "creativeMatrix",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Offer",
+        "Starter pack",
+        "Booster"
+      ],
+      "quizId": "m23",
+      "checklistId": "mc23",
+      "markdown": "lessons/day-23.md",
+      "learningOutcome": "Choose one offer concept and its player-value proof.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 24,
+      "title": "Ad removal and no-ads offers",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Decide whether no-ads fits the game and how it changes future ad economics.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "No-ads offer policy",
+      "planField": "budget",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "No ads",
+        "IAP",
+        "Ad LTV"
+      ],
+      "quizId": "m24",
+      "checklistId": "mc24",
+      "markdown": "lessons/day-24.md",
+      "learningOutcome": "Choose whether to test no-ads now, later or never.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 25,
+      "title": "Pricing and regional assumptions",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Set simple price tiers and regional assumptions without pretending early data is precise.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Pricing assumption sheet",
+      "planField": "budget",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Price tier",
+        "Regional pricing",
+        "LTV"
+      ],
+      "quizId": "m25",
+      "checklistId": "mc25",
+      "markdown": "lessons/day-25.md",
+      "learningOutcome": "Pick first price points and caveats for Android-first testing.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 26,
+      "title": "LiveOps cadence for monetization tests",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Plan weekly tests, cooldowns and readouts so economy changes do not thrash the game.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Monetization cadence calendar",
+      "planField": "nextAction",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "LiveOps",
+        "Cadence",
+        "Experiment"
+      ],
+      "quizId": "m26",
+      "checklistId": "mc26",
+      "markdown": "lessons/day-26.md",
+      "learningOutcome": "Choose the first four-week monetization operating rhythm.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 27,
+      "title": "Compliance, consent and data safety",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Connect ad SDKs, IAP, consent and store disclosure to launch readiness.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Compliance risk checklist",
+      "planField": "tracking",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Consent",
+        "Data safety",
+        "Privacy"
+      ],
+      "quizId": "m27",
+      "checklistId": "mc27",
+      "markdown": "lessons/day-27.md",
+      "learningOutcome": "Decide which compliance tasks must block release.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 28,
+      "title": "Monetization post-mortem and learning log",
+      "module": "Week 4 - Offers, LiveOps and operations",
+      "summary": "Turn weak or strong results into reusable learning instead of dashboard archaeology.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Monetization learning log",
+      "planField": "nextAction",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Post-mortem",
+        "Learning log",
+        "Experiment"
+      ],
+      "quizId": "m28",
+      "checklistId": "mc28",
+      "markdown": "lessons/day-28.md",
+      "learningOutcome": "Write a monetization post-mortem that leads to the next test.",
+      "referenceIds": [
+        "admob-unity-privacy",
+        "play-data-safety",
+        "google-play-billing"
+      ]
+    },
+    {
+      "day": 29,
+      "title": "Build the one-page monetization plan",
+      "module": "Capstone",
+      "summary": "Assemble value exchange, placements, events, offers, metrics and guardrails.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "One-page monetization plan",
+      "planField": "successCriteria",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Plan",
+        "Guardrail",
+        "Soft launch"
+      ],
+      "quizId": "m29",
+      "checklistId": "mc29",
+      "markdown": "lessons/day-29.md",
+      "learningOutcome": "Create a one-page monetization plan ready for team review.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "admob-unity-privacy",
+        "play-data-safety"
+      ]
+    },
+    {
+      "day": 30,
+      "title": "Stress-test monetization risks and next action",
+      "module": "Capstone",
+      "summary": "Stress-test the plan and choose the smallest action that reduces the largest risk.",
+      "stages": [
+        "live",
+        "prototype"
+      ],
+      "difficulty": "Operator",
+      "artifact": "Monetization risk register",
+      "planField": "nextAction",
+      "caseIds": [],
+      "toolIds": [],
+      "estimatedMinutes": 30,
+      "glossaryTerms": [
+        "Risk register",
+        "Rollback",
+        "Readout"
+      ],
+      "quizId": "m30",
+      "checklistId": "mc30",
+      "markdown": "lessons/day-30.md",
+      "learningOutcome": "Choose launch, hold, reduce scope or rollback before touching live players.",
+      "referenceIds": [
+        "admob-unity-start",
+        "unity-iap",
+        "admob-unity-privacy",
+        "play-data-safety"
+      ]
+    }
+  ]
+}
