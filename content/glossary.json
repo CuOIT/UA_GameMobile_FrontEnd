@@ -2,175 +2,175 @@
   {
     "term": "UA",
     "en": "User Acquisition",
-    "vi": "Cách đưa người chơi mới vào game bằng paid, organic, store và product loops.",
+    "vi": "Cach dua nguoi choi moi vao game bang paid, organic, store va product loops.",
     "formula": "n/a"
   },
   {
     "term": "Funnel",
     "en": "Funnel",
-    "vi": "Chuỗi hành vi từ impression đến install, first session, return và revenue.",
+    "vi": "Chuoi hanh vi tu impression den install, first session, return va revenue.",
     "formula": "n/a"
   },
   {
     "term": "CPI",
     "en": "Cost per install",
-    "vi": "Chi phí trung bình để có một install.",
+    "vi": "Chi phi trung binh de co mot install.",
     "formula": "Spend / Installs"
   },
   {
     "term": "CTR",
     "en": "Click-through rate",
-    "vi": "Tỷ lệ người click sau khi thấy quảng cáo.",
+    "vi": "Ty le nguoi click sau khi thay quang cao.",
     "formula": "Clicks / Impressions"
   },
   {
     "term": "CVR",
     "en": "Conversion rate",
-    "vi": "Tỷ lệ chuyển đổi, thường là click sang install hoặc store view sang install.",
+    "vi": "Ty le chuyen doi, thuong la click sang install hoac store view sang install.",
     "formula": "Installs / Clicks"
   },
   {
     "term": "IPM",
     "en": "Installs per mille",
-    "vi": "Số install trên 1000 impressions, dùng để đọc creative efficiency.",
+    "vi": "So install tren 1000 impressions, dung de doc creative efficiency.",
     "formula": "Installs / Impressions * 1000"
   },
   {
     "term": "Retention",
     "en": "Retention",
-    "vi": "Tỷ lệ người chơi quay lại sau một khoảng thời gian.",
+    "vi": "Ty le nguoi choi quay lai sau mot khoang thoi gian.",
     "formula": "Returning users / Cohort size"
   },
   {
     "term": "Cohort",
     "en": "Cohort",
-    "vi": "Nhóm user cùng ngày install, channel, creative hoặc điều kiện test.",
+    "vi": "Nhom user cung ngay install, channel, creative hoac dieu kien test.",
     "formula": "n/a"
   },
   {
     "term": "ARPDAU",
     "en": "Average revenue per daily active user",
-    "vi": "Doanh thu trung bình trên mỗi active user trong ngày.",
+    "vi": "Doanh thu trung binh tren moi active user trong ngay.",
     "formula": "Daily revenue / DAU"
   },
   {
     "term": "LTV",
     "en": "Lifetime value",
-    "vi": "Giá trị kỳ vọng một user tạo ra trong vòng đời sử dụng game.",
+    "vi": "Gia tri ky vong mot user tao ra trong vong doi su dung game.",
     "formula": "Revenue per user over lifetime"
   },
   {
     "term": "ROAS",
     "en": "Return on ad spend",
-    "vi": "Doanh thu attributed so với spend trong một time window.",
+    "vi": "Doanh thu attributed so voi spend trong mot time window.",
     "formula": "Attributed revenue / Spend"
   },
   {
     "term": "Payback window",
     "en": "Payback window",
-    "vi": "Khoảng thời gian kỳ vọng campaign thu hồi đủ chi phí.",
+    "vi": "Khoang thoi gian ky vong campaign thu hoi du chi phi.",
     "formula": "n/a"
   },
   {
     "term": "Soft launch",
     "en": "Soft launch",
-    "vi": "Ra mắt giới hạn để học trước khi scale rộng.",
+    "vi": "Ra mat gioi han de hoc truoc khi scale rong.",
     "formula": "n/a"
   },
   {
     "term": "Genre-market fit",
     "en": "Genre-market fit",
-    "vi": "Độ phù hợp giữa genre, audience, monetization và khả năng sản xuất.",
+    "vi": "Do phu hop giua genre, audience, monetization va kha nang san xuat.",
     "formula": "n/a"
   },
   {
     "term": "Creative testing",
     "en": "Creative testing",
-    "vi": "Thử nghiệm hook/format/variant để học động lực nào kéo user chất lượng.",
+    "vi": "Thu nghiem hook/format/variant de hoc dong luc nao keo user chat luong.",
     "formula": "n/a"
   },
   {
     "term": "Creative fatigue",
     "en": "Creative fatigue",
-    "vi": "Khi asset quảng cáo giảm hiệu quả do lặp lại hoặc hết audience phù hợp.",
+    "vi": "Khi asset quang cao giam hieu qua do lap lai hoac het audience phu hop.",
     "formula": "n/a"
   },
   {
     "term": "Playable ad",
     "en": "Playable ad",
-    "vi": "Quảng cáo có trải nghiệm tương tác mô phỏng gameplay.",
+    "vi": "Quang cao co trai nghiem tuong tac mo phong gameplay.",
     "formula": "n/a"
   },
   {
     "term": "ASO",
     "en": "App Store Optimization",
-    "vi": "Tối ưu store listing để tăng discoverability và install conversion.",
+    "vi": "Toi uu store listing de tang discoverability va install conversion.",
     "formula": "n/a"
   },
   {
     "term": "Campaign",
     "en": "Campaign",
-    "vi": "Cấu trúc chạy ads gồm mục tiêu, budget, channel, audience và creatives.",
+    "vi": "Cau truc chay ads gom muc tieu, budget, channel, audience va creatives.",
     "formula": "n/a"
   },
   {
     "term": "Event taxonomy",
     "en": "Event taxonomy",
-    "vi": "Hệ thống tên event và parameter ổn định phục vụ measurement.",
+    "vi": "He thong ten event va parameter on dinh phuc vu measurement.",
     "formula": "n/a"
   },
   {
     "term": "Attribution",
     "en": "Attribution",
-    "vi": "Gán install/event/revenue về nguồn quảng cáo hoặc channel.",
+    "vi": "Gan install/event/revenue ve nguon quang cao hoac channel.",
     "formula": "n/a"
   },
   {
     "term": "ATT",
     "en": "App Tracking Transparency",
-    "vi": "Cơ chế iOS yêu cầu user consent cho cross-app tracking.",
+    "vi": "Co che iOS yeu cau user consent cho cross-app tracking.",
     "formula": "n/a"
   },
   {
     "term": "SKAN",
     "en": "SKAdNetwork",
-    "vi": "Hệ thống attribution bảo vệ privacy của Apple cho install và post-install signal.",
+    "vi": "He thong attribution bao ve privacy cua Apple cho install va post-install signal.",
     "formula": "n/a"
   },
   {
     "term": "AdAttributionKit",
     "en": "AdAttributionKit",
-    "vi": "Framework attribution của Apple cần hiểu trong bối cảnh iOS privacy.",
+    "vi": "Framework attribution cua Apple can hieu trong boi canh iOS privacy.",
     "formula": "n/a"
   },
   {
     "term": "Sample size",
     "en": "Sample size",
-    "vi": "Số observation/install đủ để đọc signal với độ tin cậy phù hợp.",
+    "vi": "So observation/install du de doc signal voi do tin cay phu hop.",
     "formula": "n/a"
   },
   {
     "term": "Hook",
     "en": "Hook",
-    "vi": "Lời hứa/angle đầu tiên trong creative để kéo sự chú ý của player.",
+    "vi": "Loi hua/angle dau tien trong creative de keo su chu y cua player.",
     "formula": "n/a"
   },
   {
     "term": "Store listing",
     "en": "Store listing",
-    "vi": "Trang store gồm icon, screenshot, video, title, description và disclosure.",
+    "vi": "Trang store gom icon, screenshot, video, title, description va disclosure.",
     "formula": "n/a"
   },
   {
     "term": "Onboarding",
     "en": "Onboarding",
-    "vi": "Trải nghiệm đầu tiên giúp player hiểu và cảm giá trị của game.",
+    "vi": "Trai nghiem dau tien giup player hieu va cam gia tri cua game.",
     "formula": "n/a"
   },
   {
     "term": "Data safety",
     "en": "Data safety",
-    "vi": "Thông tin store/compliance về dữ liệu app thu thập và chia sẻ.",
+    "vi": "Thong tin store/conpliance ve du lieu app thu thap va chia se.",
     "formula": "n/a"
   }
 ]

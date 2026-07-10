@@ -1,182 +1,182 @@
 {
-    "c01":  [
-                "Write one learning question for your first UA test.",
-                "Connect that question to one metric and one game/store/creative action.",
-                "Add the first hypothesis sentence to Final UA Plan.",
-                "Mark the biggest unknown: audience, creative, store, tracking or product."
-            ],
-    "c02":  [
-                "List two competitor/reference games and their visible promise.",
-                "Write the player motivation your puzzle game is built around.",
-                "Choose an initial region assumption for micro-budget testing.",
-                "Update the audience field in Final UA Plan."
-            ],
-    "c03":  [
-                "Write three possible player motivations for your puzzle game.",
-                "Attach one ad hook to each motivation.",
-                "Define what the first session must prove for the strongest hook.",
-                "Update target audience with behavior and motivation signals."
-            ],
-    "c04":  [
-                "Điền bảng Funnel Leak Map với ít nhất 5 link từ impression đến D1 return.",
-                "Gán đúng 1 metric và 1 cách đo cho từng link.",
-                "Điền decision range cho Store CVR và D1.",
-                "Ghi rõ link yếu nhất và hành động nếu metric dưới range."
-            ],
-    "c05":  [
-                "Chọn một learning question duy nhất cho test nhỏ.",
-                "Viết rõ budget tổng, daily cap và số creative cells.",
-                "Ghi stop-loss rule và continue signal trước khi launch.",
-                "Viết rõ test này được phép kết luận gì và không được phép kết luận gì."
-            ],
-    "c06":  [
-                "Score at least 3 channel options on budget fit, creative fit, measurement complexity and speed of learning.",
-                "Choose exactly 1 primary channel for the first sprint.",
-                "Write why that channel matches your learning question and current asset readiness.",
-                "Record 1 deferred channel and 1 thing you are not testing yet."
-            ],
-    "c07":  [
-                "Write the five-line hypothesis card.",
-                "Remove vague phrases like \u0027everyone\u0027 or \u0027fun gameplay\u0027.",
-                "Add a next action for good and bad signal.",
-                "Confirm Week 2 measurement needs."
-            ],
-    "c08":  [
-                "Map four metrics to four decisions.",
-                "Separate acquisition, retention and monetization signals.",
-                "Write one supporting metric for each primary metric.",
-                "Update metric targets in Final UA Plan."
-            ],
-    "c09":  [
-                "Write definitions for CPI, CTR, CVR and IPM in your own words.",
-                "Attach each metric to a funnel link.",
-                "Define one bad-pattern diagnosis.",
-                "Update metric decision ranges."
-            ],
-    "c10":  [
-                "Define the first-session proof events.",
-                "Mark the earliest point players can feel the core puzzle value.",
-                "Write one onboarding risk.",
-                "Update tracking checklist."
-            ],
-    "c11":  [
-                "Write conservative, expected and optimistic LTV assumptions.",
-                "Identify whether ads or light IAP is the main early revenue driver.",
-                "Set a payback window assumption.",
-                "Update metric targets with economics guardrails."
-            ],
-    "c12":  [
-                "Choose the first ROAS window you will inspect.",
-                "Write one hold rule and one stop rule.",
-                "Pair ROAS with retention and CPI.",
-                "Update success criteria."
-            ],
-    "c13":  [
-                "List metrics likely to be delayed or modeled.",
-                "Write one dashboard reconciliation risk.",
-                "Add a confidence label to your key decision metric.",
-                "Update tracking with privacy/attribution caveats."
-            ],
-    "c14":  [
-                "Write ten v1 events for the first test.",
-                "Add one purpose and one key parameter per event.",
-                "Remove events that do not support a decision.",
-                "Update tracking in Final UA Plan."
-            ],
-    "c15":  [
-                "Write six hooks grouped by motivation.",
-                "Choose three hooks for the first test.",
-                "Define expected signal for each hook.",
-                "Update creative matrix."
-            ],
-    "c16":  [
-                "Choose a format for each top hook.",
-                "Write what each format can prove.",
-                "Avoid formats that overpromise the build.",
-                "Update creative matrix with production scope."
-            ],
-    "c17":  [
-                "Build a 3x2 creative matrix.",
-                "Define one primary metric for each row.",
-                "Write the action for win, weak signal or loss.",
-                "Update creative matrix in Final UA Plan."
-            ],
-    "c18":  [
-                "Match each top hook to one store proof element.",
-                "Audit icon and first screenshot for promise continuity.",
-                "Write one store risk before spend.",
-                "Update creative/store readiness notes."
-            ],
-    "c19":  [
-                "Teardown three puzzle competitors.",
-                "Write one repeated market pattern.",
-                "Write one way your game differs honestly.",
-                "Update audience or creative matrix."
-            ],
-    "c20":  [
-                "Define refresh, variant and pivot conditions.",
-                "Attach each condition to a metric pattern.",
-                "Write how many new creatives are realistic per week.",
-                "Update success criteria."
-            ],
-    "c21":  [
-                "Finalize three hooks and six variants or a smaller honest set.",
-                "Confirm store proof for each top hook.",
-                "Write acceptance and rejection rules.",
-                "Update creative matrix in Final UA Plan."
-            ],
-    "c22":  [
-                "Write one campaign structure for the first sprint.",
-                "Limit cells to what budget can feed.",
-                "Define naming convention for reports.",
-                "Update budget and success criteria."
-            ],
-    "c23":  [
-                "Estimate installs per creative cell.",
-                "Reduce the matrix if cells are underfed.",
-                "Write confidence caveats for micro sample size.",
-                "Update budget in Final UA Plan."
-            ],
-    "c24":  [
-                "Separate metrics into creative, store, product and monetization buckets.",
-                "Write diagnosis and confidence level.",
-                "Choose one recommended call.",
-                "Update success criteria."
-            ],
-    "c25":  [
-                "Write one scale rule.",
-                "Write one iterate rule.",
-                "Write one stop or pause rule.",
-                "Update kill criteria."
-            ],
-    "c26":  [
-                "List SDKs and purpose.",
-                "Write data/consent risk per SDK.",
-                "Define event validation before campaign launch.",
-                "Update tracking checklist."
-            ],
-    "c27":  [
-                "Create a learning log template.",
-                "Fill one hypothetical test result.",
-                "Write which assumption changed.",
-                "Update success criteria or next-action notes."
-            ],
-    "c28":  [
-                "Write a weekly cadence.",
-                "Assign owner/deadline for build, creative and report tasks.",
-                "Add next decision meeting.",
-                "Update next action."
-            ],
-    "c29":  [
-                "Fill every Final UA Plan field.",
-                "Remove details that do not affect launch decisions.",
-                "Check budget, tracking and creative are aligned.",
-                "Write the first next action."
-            ],
-    "c30":  [
-                "Write top five launch risks.",
-                "Add mitigation for each risk.",
-                "Choose one smallest next action with date/owner.",
-                "Finalize the one-page plan."
-            ]
+  "c01": [
+    "Write one learning question for your first UA test.",
+    "Connect that question to one metric and one game/store/creative action.",
+    "Add the first hypothesis sentence to Final UA Plan.",
+    "Mark the biggest unknown: audience, creative, store, tracking or product."
+  ],
+  "c02": [
+    "List two competitor/reference games and their visible promise.",
+    "Write the player motivation your puzzle game is built around.",
+    "Choose an initial region assumption for micro-budget testing.",
+    "Update the audience field in Final UA Plan."
+  ],
+  "c03": [
+    "Write three possible player motivations for your puzzle game.",
+    "Attach one ad hook to each motivation.",
+    "Define what the first session must prove for the strongest hook.",
+    "Update target audience with behavior and motivation signals."
+  ],
+  "c04": [
+    "Write your funnel from impression to D1 return.",
+    "Mark which events/metrics you can measure now.",
+    "Add one decision range for store conversion or early retention.",
+    "Name the funnel link you expect to be weakest."
+  ],
+  "c05": [
+    "Pick a micro-budget range and daily cap.",
+    "Define what the test is allowed to conclude.",
+    "Write one stop-loss rule for bad early signal.",
+    "Update the budget field in Final UA Plan."
+  ],
+  "c06": [
+    "List three possible channels and one reason for each.",
+    "Choose one primary channel for the first sprint.",
+    "Write why the channel matches your creative and budget.",
+    "Record what you will not test yet."
+  ],
+  "c07": [
+    "Write the five-line hypothesis card.",
+    "Remove vague phrases like 'everyone' or 'fun gameplay'.",
+    "Add a next action for good and bad signal.",
+    "Confirm Week 2 measurement needs."
+  ],
+  "c08": [
+    "Map four metrics to four decisions.",
+    "Separate acquisition, retention and monetization signals.",
+    "Write one supporting metric for each primary metric.",
+    "Update metric targets in Final UA Plan."
+  ],
+  "c09": [
+    "Write definitions for CPI, CTR, CVR and IPM in your own words.",
+    "Attach each metric to a funnel link.",
+    "Define one bad-pattern diagnosis.",
+    "Update metric decision ranges."
+  ],
+  "c10": [
+    "Define the first-session proof events.",
+    "Mark the earliest point players can feel the core puzzle value.",
+    "Write one onboarding risk.",
+    "Update tracking checklist."
+  ],
+  "c11": [
+    "Write conservative, expected and optimistic LTV assumptions.",
+    "Identify whether ads or light IAP is the main early revenue driver.",
+    "Set a payback window assumption.",
+    "Update metric targets with economics guardrails."
+  ],
+  "c12": [
+    "Choose the first ROAS window you will inspect.",
+    "Write one hold rule and one stop rule.",
+    "Pair ROAS with retention and CPI.",
+    "Update success criteria."
+  ],
+  "c13": [
+    "List metrics likely to be delayed or modeled.",
+    "Write one dashboard reconciliation risk.",
+    "Add a confidence label to your key decision metric.",
+    "Update tracking with privacy/attribution caveats."
+  ],
+  "c14": [
+    "Write ten v1 events for the first test.",
+    "Add one purpose and one key parameter per event.",
+    "Remove events that do not support a decision.",
+    "Update tracking in Final UA Plan."
+  ],
+  "c15": [
+    "Write six hooks grouped by motivation.",
+    "Choose three hooks for the first test.",
+    "Define expected signal for each hook.",
+    "Update creative matrix."
+  ],
+  "c16": [
+    "Choose a format for each top hook.",
+    "Write what each format can prove.",
+    "Avoid formats that overpromise the build.",
+    "Update creative matrix with production scope."
+  ],
+  "c17": [
+    "Build a 3x2 creative matrix.",
+    "Define one primary metric for each row.",
+    "Write the action for win, weak signal or loss.",
+    "Update creative matrix in Final UA Plan."
+  ],
+  "c18": [
+    "Match each top hook to one store proof element.",
+    "Audit icon and first screenshot for promise continuity.",
+    "Write one store risk before spend.",
+    "Update creative/store readiness notes."
+  ],
+  "c19": [
+    "Teardown three puzzle competitors.",
+    "Write one repeated market pattern.",
+    "Write one way your game differs honestly.",
+    "Update audience or creative matrix."
+  ],
+  "c20": [
+    "Define refresh, variant and pivot conditions.",
+    "Attach each condition to a metric pattern.",
+    "Write how many new creatives are realistic per week.",
+    "Update success criteria."
+  ],
+  "c21": [
+    "Finalize three hooks and six variants or a smaller honest set.",
+    "Confirm store proof for each top hook.",
+    "Write acceptance and rejection rules.",
+    "Update creative matrix in Final UA Plan."
+  ],
+  "c22": [
+    "Write one campaign structure for the first sprint.",
+    "Limit cells to what budget can feed.",
+    "Define naming convention for reports.",
+    "Update budget and success criteria."
+  ],
+  "c23": [
+    "Estimate installs per creative cell.",
+    "Reduce the matrix if cells are underfed.",
+    "Write confidence caveats for micro sample size.",
+    "Update budget in Final UA Plan."
+  ],
+  "c24": [
+    "Separate metrics into creative, store, product and monetization buckets.",
+    "Write diagnosis and confidence level.",
+    "Choose one recommended call.",
+    "Update success criteria."
+  ],
+  "c25": [
+    "Write one scale rule.",
+    "Write one iterate rule.",
+    "Write one stop or pause rule.",
+    "Update kill criteria."
+  ],
+  "c26": [
+    "List SDKs and purpose.",
+    "Write data/consent risk per SDK.",
+    "Define event validation before campaign launch.",
+    "Update tracking checklist."
+  ],
+  "c27": [
+    "Create a learning log template.",
+    "Fill one hypothetical test result.",
+    "Write which assumption changed.",
+    "Update success criteria or next-action notes."
+  ],
+  "c28": [
+    "Write a weekly cadence.",
+    "Assign owner/deadline for build, creative and report tasks.",
+    "Add next decision meeting.",
+    "Update next action."
+  ],
+  "c29": [
+    "Fill every Final UA Plan field.",
+    "Remove details that do not affect launch decisions.",
+    "Check budget, tracking and creative are aligned.",
+    "Write the first next action."
+  ],
+  "c30": [
+    "Write top five launch risks.",
+    "Add mitigation for each risk.",
+    "Choose one smallest next action with date/owner.",
+    "Finalize the one-page plan."
+  ]
 }
