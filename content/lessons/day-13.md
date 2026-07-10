@@ -57,7 +57,7 @@ Quy tắc: metric càng xa event gameplay trực tiếp và càng bị privacy/w
 
 ## Measurement risk map mẫu
 
-![Measurement risk map mẫu](content/assets/usecases/day-13-data-visual.png)
+![Measurement risk map mẫu](content/assets/usecases/day-13-data-visual.svg)
 
 > [!NOTE]
 > **Giải thích đồ thị (Cohort Normalization)**: Biểu đồ cohort đích thực (true cohort) được chuẩn hóa (normalized) về mốc 100% tại Ngày 0 để so sánh trực quan và công bằng mức độ hao hụt người chơi (retention decay) giữa các nhóm quảng cáo khác nhau. Việc chuẩn hóa này giúp loại bỏ sự chênh lệch về quy mô người dùng ban đầu giữa các nguồn dữ liệu, giúp so sánh tỷ lệ giữ chân một cách khách quan nhất.

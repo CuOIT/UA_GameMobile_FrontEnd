@@ -1,33 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
-        <rect width="100%" height="100%" fill="#0f172a" rx="16"/>
-        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Hook Signal Board</text>
-        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Storyboard demonstrating a consistent puzzle interaction sequence</text>
+        <rect width="100%" height="100%" fill="#1e1b4b" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Meta Ads Manager - Creative Testing Dashboard</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Real performance metrics showing ad hook test outcomes for a puzzle mobile game</text>
         <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8" />
+                <path d="M0,0 L0,6 L9,3 z" fill="#34d399" />
             </marker>
         </defs>
         
-    <rect x="60" y="180" width="190" height="200" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-    <text x="155" y="215" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Frame 1: Initial Hook</text>
-    <text x="155" y="260" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Player sees disordered</text>
-    <text x="155" y="290" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">color tubes to sort</text>
-    <text x="155" y="330" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">Visual: Clear Layout</text>
+    <!-- Ads Manager Header -->
+    <rect x="50" y="140" width="700" height="40" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="70" y="165" font-family="Arial" font-size="12" fill="#94a3b8">Campaign: Micro Soft-Launch Hook Test  |  Objective: App Installs  |  Attribution: 7-day click, 1-day view</text>
 
-    <path d="M 250 280 L 290 280" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <!-- Table Outline -->
+    <rect x="50" y="195" width="700" height="210" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Table Header Row -->
+    <rect x="50" y="195" width="700" height="35" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="70" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff">Ad Set Name (Creative Hook)</text>
+    <text x="320" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Delivery</text>
+    <text x="400" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Spent</text>
+    <text x="480" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Link CTR</text>
+    <text x="560" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Store CVR</text>
+    <text x="640" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">IPM</text>
+    <text x="700" y="217" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle" text-anchor="end">D1 Ret.</text>
 
-    <rect x="300" y="180" width="190" height="200" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-    <text x="395" y="215" font-family="Arial" font-size="16" font-weight="bold" fill="#a855f7" text-anchor="middle">Frame 2: Interaction</text>
-    <text x="395" y="260" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Tap to pour color</text>
-    <text x="395" y="290" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">from Tube A to Tube B</text>
-    <text x="395" y="330" font-family="Arial" font-size="12" fill="#c084fc" text-anchor="middle">Visual: Hand Icon tap</text>
+    <line x1="50" y1="230" x2="750" y2="230" stroke="#334155" stroke-width="1"/>
 
-    <path d="M 490 280 L 530 280" stroke="#a855f7" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <!-- Row 1: Winner (ASMR Puzzle Hook) -->
+    <rect x="51" y="231" width="698" height="50" fill="#14532d" opacity="0.4"/>
+    <text x="70" y="260" font-family="Arial" font-size="12" font-weight="bold" fill="#ffffff">ASMR Puzzle Clean (Winner)</text>
+    <text x="320" y="260" font-family="Arial" font-size="11" fill="#34d399" text-anchor="middle">Active</text>
+    <text x="400" y="260" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">$150.00</text>
+    <text x="480" y="260" font-family="Arial" font-size="11" fill="#34d399" text-anchor="middle" font-weight="bold">4.25%</text>
+    <text x="560" y="260" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">32.1%</text>
+    <text x="640" y="260" font-family="Arial" font-size="11" fill="#34d399" text-anchor="middle" font-weight="bold">18.5</text>
+    <text x="700" y="260" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="end">35.0%</text>
+    <line x1="50" y1="280" x2="750" y2="280" stroke="#334155" stroke-width="1"/>
 
-    <rect x="540" y="180" width="190" height="200" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
-    <text x="635" y="215" font-family="Arial" font-size="16" font-weight="bold" fill="#34d399" text-anchor="middle">Frame 3: Resolution</text>
-    <text x="635" y="260" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Color is sorted</text>
-    <text x="635" y="290" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Satisfying ASMR ring</text>
-    <text x="635" y="330" font-family="Arial" font-size="12" fill="#86efac" text-anchor="middle">Visual: Level Complete</text>
+    <!-- Row 2: Overpromise trap (Fake Choice Hook) -->
+    <text x="70" y="310" font-family="Arial" font-size="12" fill="#ffffff">Fake Choice Puzzle Hook</text>
+    <text x="320" y="310" font-family="Arial" font-size="11" fill="#94a3b8" text-anchor="middle">Active</text>
+    <text x="400" y="310" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">$120.00</text>
+    <text x="480" y="310" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">6.80%</text>
+    <text x="560" y="310" font-family="Arial" font-size="11" fill="#ef4444" text-anchor="middle" font-weight="bold">8.4%</text>
+    <text x="640" y="310" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">5.2</text>
+    <text x="700" y="310" font-family="Arial" font-size="11" fill="#ef4444" text-anchor="end" font-weight="bold">12.5%</text>
+    <line x1="50" y1="330" x2="750" y2="330" stroke="#334155" stroke-width="1"/>
+
+    <!-- Row 3: Control (Match-3 Gameplay) -->
+    <text x="70" y="360" font-family="Arial" font-size="12" fill="#ffffff">Match-3 Gameplay Control</text>
+    <text x="320" y="360" font-family="Arial" font-size="11" fill="#94a3b8" text-anchor="middle">Active</text>
+    <text x="400" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">$80.00</text>
+    <text x="480" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">0.95%</text>
+    <text x="560" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">38.5%</text>
+    <text x="640" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">3.1</text>
+    <text x="700" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="end">37.2%</text>
+    <line x1="50" y1="380" x2="750" y2="380" stroke="#334155" stroke-width="1"/>
+
+    <!-- Legend/Note -->
+    <text x="400" y="435" font-family="Arial" font-size="11" fill="#94a3b8" text-anchor="middle">*Source: Meta Ads Manager reporting schema. Shows why high CTR (6.80%) on Overpromise fails D1 (12.5%).*</text>
     
     </svg>

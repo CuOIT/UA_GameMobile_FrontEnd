@@ -1,36 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
         <rect width="100%" height="100%" fill="#1e1b4b" rx="16"/>
-        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Confidence Threshold & Language Table</text>
-        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Defining statistical significance vocabulary and rules for UA tests</text>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Google Play Console - Store Listing Experiment Dashboard</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">A/B test results showing conversion rate performance and statistical significance</text>
         <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
                 <path d="M0,0 L0,6 L9,3 z" fill="#34d399" />
             </marker>
         </defs>
         
-    <rect x="80" y="160" width="640" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-    <line x1="80" y1="210" x2="720" y2="210" stroke="#38bdf8" stroke-width="2"/>
-    <line x1="280" y1="160" x2="280" y2="400" stroke="#38bdf8" stroke-width="1"/>
-    <line x1="480" y1="160" x2="480" y2="400" stroke="#38bdf8" stroke-width="1"/>
+    <!-- Play Console Header -->
+    <rect x="50" y="140" width="700" height="45" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="70" y="167" font-family="Arial" font-size="12" fill="#94a3b8">Experiment Name: Icon Hook Test  |  Type: Global Experiment  |  Audience split: 50% / 50%</text>
 
-    <!-- Headers -->
-    <text x="180" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Confidence Range</text>
-    <text x="380" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Significance Language</text>
-    <text x="600" y="195" font-family="Arial" font-size="16" font-weight="bold" fill="#38bdf8" text-anchor="middle">Recommended Action</text>
+    <!-- Status Banner: Significance Reached -->
+    <rect x="50" y="195" width="700" height="50" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+    <text x="70" y="225" font-family="Arial" font-size="13" font-weight="bold" fill="#34d399">✓ Statistical significance reached</text>
+    <text x="300" y="225" font-family="Arial" font-size="12" fill="#a7f3d0">Variant A (ASMR Hook) is performing 14.8% better than Control with 95% confidence interval.</text>
 
-    <!-- 95% -->
-    <text x="180" y="250" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">95% or higher</text>
-    <text x="380" y="250" font-family="Arial" font-size="14" font-weight="bold" fill="#34d399" text-anchor="middle">Statistically Significant</text>
-    <text x="600" y="250" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Scale winner immediately</text>
+    <!-- Data Table -->
+    <rect x="50" y="255" width="700" height="150" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Table Header -->
+    <rect x="50" y="255" width="700" height="30" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <text x="70" y="274" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff">Store Variant</text>
+    <text x="250" y="274" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Unique Users</text>
+    <text x="370" y="274" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Installs</text>
+    <text x="490" y="274" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Conversion Rate</text>
+    <text x="650" y="274" font-family="Arial" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">Performance vs Control</text>
 
-    <!-- 80-95% -->
-    <text x="180" y="310" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">80% - 95%</text>
-    <text x="380" y="310" font-family="Arial" font-size="14" font-weight="bold" fill="#f59e0b" text-anchor="middle">Directional Signal</text>
-    <text x="600" y="310" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Run test 3 more days</text>
+    <!-- Control Row -->
+    <text x="70" y="315" font-family="Arial" font-size="12" fill="#ffffff">Control (Original Icon)</text>
+    <text x="250" y="315" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">10,042</text>
+    <text x="370" y="315" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">2,510</text>
+    <text x="490" y="315" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">25.0%</text>
+    <text x="650" y="315" font-family="Arial" font-size="11" fill="#94a3b8" text-anchor="middle">Baseline</text>
+    <line x1="50" y1="335" x2="750" y2="335" stroke="#334155" stroke-width="1"/>
 
-    <!-- <80% -->
-    <text x="180" y="370" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Less than 80%</text>
-    <text x="380" y="370" font-family="Arial" font-size="14" font-weight="bold" fill="#ef4444" text-anchor="middle">Statistically Insignificant</text>
-    <text x="600" y="370" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Kill campaign cell</text>
+    <!-- Variant A Row -->
+    <rect x="51" y="336" width="698" height="40" fill="#14532d" opacity="0.3"/>
+    <text x="70" y="360" font-family="Arial" font-size="12" font-weight="bold" fill="#ffffff">Variant A (ASMR Hook Icon)</text>
+    <text x="250" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">10,185</text>
+    <text x="370" y="360" font-family="Arial" font-size="11" fill="#ffffff" text-anchor="middle">2,923</text>
+    <text x="490" y="360" font-family="Arial" font-size="11" fill="#34d399" text-anchor="middle" font-weight="bold">28.7%</text>
+    <text x="650" y="360" font-family="Arial" font-size="11" fill="#34d399" text-anchor="middle" font-weight="bold">+14.8% (Significant)</text>
+    
+    <!-- Footer Note -->
+    <text x="400" y="435" font-family="Arial" font-size="11" fill="#94a3b8" text-anchor="middle">*Source: Google Play Console Store Listing Experiments. Demonstrates why confidence boundaries are needed before scaling.*</text>
     
     </svg>

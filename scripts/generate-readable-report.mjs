@@ -40,7 +40,7 @@ const mapping = {
   "CPI vs D7 ROAS Decision Matrix": "day-12-data-visual.svg",
   "Rovio Sugar Blast ROAS Delay optimization representational diagram": "day-12-sugar-blast-roas.svg",
   // Day 13
-  "Measurement risk map mẫu": "day-13-data-visual.png",
+  "Measurement risk map mẫu": "day-13-data-visual.svg",
   "Hero visual: attribution confidence ladder": "day-13-hero-diagram.svg",
   // Day 14
   "Decision-backward tracking flow": "day-14-hero-diagram.svg",

@@ -83,6 +83,17 @@ const replacements = [
     search: '![First session progression funnel](content/assets/usecases/day-10-hero-diagram.png)',
     replace: '![First session progression funnel](content/assets/usecases/day-10-data-visual.png)'
   },
+  // Day 13
+  {
+    file: 'day-13.md',
+    search: 'day-13-hero-diagram.png',
+    replace: 'day-13-hero-diagram.svg'
+  },
+  {
+    file: 'day-13.md',
+    search: 'day-13-data-visual.png',
+    replace: 'day-13-data-visual.svg'
+  },
   // Day 11
   {
     file: 'day-11.md',
