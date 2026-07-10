@@ -75,11 +75,9 @@ function buildLessonRows() {
 function validateLesson(contentKey, markdown) {
   const h2Count = (markdown.match(/^## /gm) || []).length;
   const imageCount = (markdown.match(/!\[[^\]]*]\(/g) || []).length;
-  const placeholderCount = (markdown.match(/\[(VISUAL|IMAGE|THIRD-PARTY VISUAL) PLACEHOLDER/gi) || []).length;
 
   if (h2Count !== 17) fail(`${contentKey}: expected 17 H2 sections, found ${h2Count}.`);
-  if (imageCount > 0) fail(`${contentKey}: contains ${imageCount} markdown image(s); keep visuals as placeholders.`);
-  if (placeholderCount < 2) fail(`${contentKey}: expected at least 2 visual placeholders, found ${placeholderCount}.`);
+  if (imageCount === 0) fail(`${contentKey}: expected at least 1 markdown image, found 0.`);
 }
 
 async function syncRows(allRows) {
