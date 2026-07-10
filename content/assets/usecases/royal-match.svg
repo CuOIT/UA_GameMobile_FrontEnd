@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+        <rect width="100%" height="100%" fill="#1e1b4b" rx="16"/>
+        <text x="400" y="60" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Google Play Store - Royal Match Listing</text>
+        <text x="400" y="95" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Representational store proof layout showing ASO elements</text>
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="#34d399" />
+            </marker>
+        </defs>
+        
+    <!-- Store Header -->
+    <rect x="50" y="140" width="700" height="60" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="70" y="175" font-family="Arial" font-size="18" font-weight="bold" fill="#ffffff">Google Play</text>
+    <rect x="500" y="150" width="230" height="40" rx="20" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="520" y="174" font-family="Arial" font-size="14" fill="#94a3b8">Search apps &amp; games</text>
+
+    <!-- App Identity Block -->
+    <rect x="50" y="215" width="100" height="100" rx="20" fill="#eab308" stroke="#ffffff" stroke-width="2"/>
+    <!-- Icon drawing (Crown) -->
+    <path d="M 70 290 L 70 240 L 90 260 L 100 240 L 110 260 L 130 240 L 130 290 Z" fill="#ffffff"/>
+    <circle cx="100" cy="275" r="10" fill="#eab308"/>
+
+    <text x="170" y="250" font-family="Arial" font-size="24" font-weight="bold" fill="#ffffff">Royal Match</text>
+    <text x="170" y="275" font-family="Arial" font-size="14" fill="#38bdf8">Dream Games, Ltd.</text>
+    <text x="170" y="295" font-family="Arial" font-size="12" fill="#94a3b8">Contains ads • In-app purchases</text>
+
+    <!-- Install Button -->
+    <rect x="520" y="235" width="210" height="45" rx="8" fill="#10b981"/>
+    <text x="625" y="263" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Install</text>
+
+    <!-- Stats row -->
+    <line x1="50" y1="330" x2="750" y2="330" stroke="#334155" stroke-width="1"/>
+    <text x="150" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">4.6 ★</text>
+    <text x="150" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">4.87M reviews</text>
+
+    <line x1="280" y1="345" x2="280" y2="385" stroke="#334155" stroke-width="1"/>
+
+    <text x="400" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">100M+</text>
+    <text x="400" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">Downloads</text>
+
+    <line x1="520" y1="345" x2="520" y2="385" stroke="#334155" stroke-width="1"/>
+
+    <text x="650" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Everyone</text>
+    <text x="650" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">Rated for 3+</text>
+
+    <line x1="50" y1="400" x2="750" y2="400" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Store proof text note -->
+    <text x="400" y="440" font-family="Arial" font-size="14" fill="#a7f3d0" text-anchor="middle" font-weight="bold">Store Proof: Satisfies click-to-install promise with identical visual cues</text>
+    
+    </svg>

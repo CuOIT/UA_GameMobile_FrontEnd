@@ -107,16 +107,7 @@ Một ladder đơn giản:
 
 ## Hero visual: learning sprint flow
 
-```text
-![Day 5 learning sprint visual](content/assets/usecases/day-05-learning-sprint-visual.svg)Type: hero operating diagram.
-Lesson section: Hero visual: learning sprint flow.
-Previous local asset to replace: content/assets/usecases/day-05-learning-sprint-visual.svg.
-Visual brief: Micro soft-launch flow: ready, run, read, decide..
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Day 5 learning sprint visual](content/assets/usecases/day-05-learning-sprint-visual.svg)
 
 **Visual readout**
 
@@ -128,16 +119,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Budget vs signal table
 
-```text
-![Day 5 budget signal visual](content/assets/usecases/day-05-budget-signal-visual.svg)Type: hero operating diagram.
-Lesson section: Budget vs signal table.
-Previous local asset to replace: content/assets/usecases/day-05-budget-signal-visual.svg.
-Visual brief: Budget split visual showing signal dilution when too many cells share a small budget..
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Day 5 budget signal visual](content/assets/usecases/day-05-budget-signal-visual.svg)
 
 :::chart
 title: Installs per cell giả lập với budget $300 và CPI $0.60

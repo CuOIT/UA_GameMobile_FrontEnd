@@ -62,15 +62,7 @@ Nếu một motivation không thể tạo ra hook và proof cụ thể, nó chư
 
 ## Motivation map mẫu cho puzzle game
 
-```text
-![Motivation map mẫu cho puzzle game](content/assets/usecases/day-03-motivation-map-visual.svg)Type: hero operating diagram.
-Lesson section: Motivation map mẫu cho puzzle game.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Motivation map mẫu cho puzzle game](content/assets/usecases/day-03-motivation-map-visual.svg)
 
 
 | Motivation | Player wants | Ad hook | Store proof | First-session proof | Metric pattern cần đọc |
@@ -117,15 +109,7 @@ Quy tắc: nếu một test thay cả motivation, hook, store proof và tutorial
 
 ## Hero visual: motivation-to-proof chain
 
-```text
-![Hero visual: motivation-to-proof chain](content/assets/usecases/day-03-motivation-to-proof-chain.svg)Type: data visual/chart or decision board.
-Lesson section: Hero visual: motivation-to-proof chain.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: motivation-to-proof chain](content/assets/usecases/day-03-motivation-to-proof-chain.svg)
 
 
 ```text

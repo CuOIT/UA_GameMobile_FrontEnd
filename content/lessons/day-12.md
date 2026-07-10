@@ -103,16 +103,7 @@ Rule: **không có confidence ladder thì không có budget change**. Nếu team
 
 ## Sơ đồ Quy trình ROAS windows và Độ trễ Dữ liệu (Hero visual or operating diagram)
 
-```text
-![ROAS Windows & Signal Delay Timeline](content/assets/usecases/day-12-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Sơ đồ Quy trình ROAS windows và Độ trễ Dữ liệu (Hero visual or operating diagram).
-Previous local asset to replace: content/assets/usecases/day-12-hero-diagram.png.
-Visual brief: ROAS Windows & Signal Delay Timeline.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![ROAS Windows & Signal Delay Timeline](content/assets/usecases/day-12-hero-diagram.svg)
 
 > [!NOTE]
 > **Hướng dẫn đọc Sơ đồ quy trình (Hero Visual Readout)**:
@@ -124,16 +115,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Biểu đồ ma trận quyết định phối hợp CPI và D7 ROAS (Chart/visual/table)
 
-```text
-![CPI vs D7 ROAS Decision Matrix](content/assets/usecases/day-12-data-visual.svg)Type: data visual/chart.
-Lesson section: Biểu đồ ma trận quyết định phối hợp CPI và D7 ROAS (Chart/visual/table).
-Previous local asset to replace: content/assets/usecases/day-12-data-visual.png.
-Visual brief: CPI vs D7 ROAS Decision Matrix.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![CPI vs D7 ROAS Decision Matrix](content/assets/usecases/day-12-data-visual.svg)
 
 :::chart
 title: Ngưỡng D7 ROAS mục tiêu theo từng mức giá CPI ($ USD)
@@ -246,16 +228,7 @@ Memo này bắt team ghi rõ **cohort**, **data health**, **blocked conclusions*
 
 ### Case Study: Rovio Sugar Blast — Tối ưu hóa ROAS dưới độ trễ postback của platform
 
-```text
-![Rovio Sugar Blast ROAS Delay optimization representational diagram](content/assets/usecases/day-12-sugar-blast-roas.svg)Type: public screenshot/source visual.
-Lesson section: Case Study: Rovio Sugar Blast — Tối ưu hóa ROAS dưới độ trễ postback của platform.
-Previous local asset to replace: content/assets/usecases/day-12-hero-diagram.png.
-Visual brief: Rovio Sugar Blast ROAS Delay optimization representational diagram.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Rovio Sugar Blast ROAS Delay optimization representational diagram](content/assets/usecases/day-12-sugar-blast-roas.svg)
 
 > [!NOTE]
 > **Hướng dẫn đọc Sơ đồ tối ưu hóa của Rovio (Screenshot Readout)**:

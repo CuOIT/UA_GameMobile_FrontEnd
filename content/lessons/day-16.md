@@ -74,15 +74,7 @@ Nếu readiness thấp, đừng escalate format. Hãy sửa hook, proof chain ho
 
 ## Format selection matrix mẫu
 
-```text
-![Format selection matrix mẫu](content/assets/usecases/day-16-data-visual.svg)Type: hero operating diagram.
-Lesson section: Format selection matrix mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Format selection matrix mẫu](content/assets/usecases/day-16-data-visual.svg)
 
 
 Điền bảng này trước khi sản xuất asset:
@@ -114,15 +106,7 @@ Contract này làm rõ format không phải "level cao hơn" của creative. Nó
 
 ## Operating diagram: chọn format theo độ cần chứng minh
 
-```text
-![Operating diagram: chọn format theo độ cần chứng minh](content/assets/usecases/day-16-hero-diagram.svg)Type: data visual/chart or decision board.
-Lesson section: Operating diagram: chọn format theo độ cần chứng minh.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: chọn format theo độ cần chứng minh](content/assets/usecases/day-16-hero-diagram.svg)
 
 
 ```text

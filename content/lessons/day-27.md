@@ -87,15 +87,7 @@ Rule: nếu log không có `blocked conclusions`, nó chưa đủ trưởng thà
 
 ## Operating diagram: learning loop sau mỗi test
 
-```text
-![Operating diagram: learning loop sau mỗi test](content/assets/usecases/day-27-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Operating diagram: learning loop sau mỗi test.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: learning loop sau mỗi test](content/assets/usecases/day-27-hero-diagram.png)
 
 
 ```text
@@ -127,15 +119,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Evidence strength scale
 
-```text
-![Evidence strength ladder](content/assets/usecases/day-27-data-visual.png)Type: evidence ladder / confidence scale.
-Lesson section: Evidence strength scale.
-Visual brief: turn the confidence levels into a ladder from anecdote to operating rule, showing which language and action are allowed at each level.
-Teaching job: help the learner avoid turning one small campaign result into an overconfident rule.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Evidence strength ladder](content/assets/usecases/day-27-data-visual.png)
 
 | Evidence strength | Dấu hiệu thường thấy | Ngôn ngữ được phép dùng | Action phù hợp |
 | --- | --- | --- | --- |

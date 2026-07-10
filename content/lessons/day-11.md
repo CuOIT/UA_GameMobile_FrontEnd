@@ -107,16 +107,7 @@ Khi confidence khác nhau, quyết định cũng phải khác nhau. Bạn có th
 
 ## Sơ đồ tính rough LTV
 
-```text
-![LTV calculation components](content/assets/usecases/day-11-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Sơ đồ tính rough LTV.
-Previous local asset to replace: content/assets/usecases/day-11-hero-diagram.png.
-Visual brief: LTV calculation components.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![LTV calculation components](content/assets/usecases/day-11-hero-diagram.svg)
 
 > [!NOTE]
 > **Inspect**: Nhìn hai nhánh chính: retention tạo lifetime active days, còn monetization tạo `ARPDAU`. LTV direction chỉ xuất hiện khi hai nhánh này cùng tồn tại.
@@ -137,16 +128,7 @@ Các số dưới đây là **scenario example** cho một live puzzle nhỏ có
 | **Expected** | First-session ổn, D1/D7 đủ để học tiếp, ~4-6 active days | $0.035-$0.060 | $0.14-$0.36 | Có safety margin dưới LTV | Hold or run controlled tests. |
 | **Optimistic** | Retention dày hơn cohort trước, ~7-10 active days | $0.070-$0.110 | $0.49-$1.10 | Có room scale nhỏ | Scale cautiously, watch guardrails. |
 
-```text
-![LTV projection scenarios](content/assets/usecases/day-11-data-visual.svg)Type: data visual/chart.
-Lesson section: Bảng scenario LTV và CPI ceiling.
-Previous local asset to replace: content/assets/usecases/day-11-data-visual.png.
-Visual brief: LTV projection scenarios.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![LTV projection scenarios](content/assets/usecases/day-11-data-visual.svg)
 
 :::chart
 title: Rough LTV range by scenario, illustrative only

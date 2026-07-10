@@ -101,16 +101,7 @@ Quy tắc: khi first-session proof yếu, `D1` chưa được phép dùng để 
 
 ## Sơ đồ retention decay và first-session proof
 
-```text
-![Retention decay curve comparison](content/assets/usecases/day-10-hero-diagram.png)Type: data visual/chart.
-Lesson section: Sơ đồ retention decay và first-session proof.
-Previous local asset to replace: content/assets/usecases/day-10-hero-diagram.png.
-Visual brief: Retention decay curve comparison.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Retention decay curve comparison](content/assets/usecases/day-10-hero-diagram.png)
 
 > [!NOTE]
 > **Inspect**: Nhìn độ dốc từ Day 0 sang Day 1 trước. Nếu đường rơi mạnh ngay sau install, hãy kiểm first-session funnel trước khi sửa channel.
@@ -123,16 +114,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Bảng first-session funnel và cohort readout
 
-```text
-![First session progression funnel](content/assets/usecases/day-10-data-visual.png)Type: data visual/chart.
-Lesson section: Bảng first-session funnel và cohort readout.
-Previous local asset to replace: content/assets/usecases/day-10-data-visual.png.
-Visual brief: First session progression funnel.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![First session progression funnel](content/assets/usecases/day-10-data-visual.png)
 
 :::chart
 title: First-session proof funnel, scenario example

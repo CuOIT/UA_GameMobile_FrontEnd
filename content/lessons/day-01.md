@@ -98,16 +98,7 @@ Nếu không ghi dòng "cannot decide", dashboard sau test sẽ rất dễ bị 
 
 ## Sơ đồ vận hành: từ lời hứa đến quyết định
 
-```text
-![The UA Promise Chain Diagram](content/assets/usecases/day-01-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Sơ đồ vận hành: từ lời hứa đến quyết định.
-Previous local asset to replace: content/assets/usecases/day-01-hero-diagram.png.
-Visual brief: The UA Promise Chain Diagram.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![The UA Promise Chain Diagram](content/assets/usecases/day-01-hero-diagram.svg)
 
 **Visual readout**
 
@@ -119,16 +110,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Bảng đọc pattern: cheap traffic không luôn là good traffic
 
-```text
-![Funnel alignment comparison chart](content/assets/usecases/day-01-data-visual.svg)Type: data visual/chart.
-Lesson section: Bảng đọc pattern: cheap traffic không luôn là good traffic.
-Previous local asset to replace: content/assets/usecases/day-01-data-visual.png.
-Visual brief: Funnel alignment comparison chart.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Funnel alignment comparison chart](content/assets/usecases/day-01-data-visual.svg)
 
 :::chart
 title: D1 active users giả lập trên 10.000 impressions

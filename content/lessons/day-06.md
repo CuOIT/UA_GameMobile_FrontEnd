@@ -115,16 +115,7 @@ Quy tắc: nếu không viết được "not allowed conclusion", rất dễ bla
 
 ## Hero visual: decision tree chọn channel
 
-```text
-![UA selection decision tree](content/assets/usecases/day-06-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Hero visual: decision tree chọn channel.
-Previous local asset to replace: content/assets/usecases/day-06-hero-diagram.png.
-Visual brief: UA selection decision tree.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![UA selection decision tree](content/assets/usecases/day-06-hero-diagram.png)
 
 **Visual readout**
 
@@ -136,16 +127,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Channel family comparison
 
-```text
-![UA selection data visual comparison](content/assets/usecases/day-06-data-visual.svg)Type: data visual/chart.
-Lesson section: Channel family comparison.
-Previous local asset to replace: content/assets/usecases/day-06-data-visual.png.
-Visual brief: UA selection data visual comparison.
-Teaching job: create a clear decision-support visual for the learner, not decorative game art.
-Required style: clean SaaS learning infographic, light background, readable labels, mobile-safe composition.
-Must preserve the lesson readout that follows: Inspect, Conclude, and Do not infer.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![UA selection data visual comparison](content/assets/usecases/day-06-data-visual.svg)
 
 :::chart
 title: Channel fit giả lập cho first sprint, 1-5

@@ -117,15 +117,7 @@ Rule vận hành: production request chỉ được vào queue khi có `conditio
 
 ## Hero visual: fatigue decision tree
 
-```text
-![Hero visual: fatigue decision tree](content/assets/usecases/day-20-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Hero visual: fatigue decision tree.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: fatigue decision tree](content/assets/usecases/day-20-hero-diagram.svg)
 
 
 [FATIGUE DECISION TREE]
@@ -187,15 +179,7 @@ Are CTR, CVR and D1 weak across 2-3 distinct hooks with clean tracking?
 
 ## Weekly cadence board
 
-```text
-![Weekly cadence board](content/assets/usecases/day-20-data-visual.svg)Type: data visual/chart or decision board.
-Lesson section: Weekly cadence board.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Weekly cadence board](content/assets/usecases/day-20-data-visual.svg)
 
 
 | Hook family | Current asset | Metric pattern | Diagnosis | Action | Owner | Review date |

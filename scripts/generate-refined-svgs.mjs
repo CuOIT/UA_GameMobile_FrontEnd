@@ -169,8 +169,8 @@ saveSvg('day-07-hero-diagram.svg', baseSvg(
 
 // Day 8 Data: Metric Decision Map (Fix ARPDAU axis scale upper bound: $100 -> $1.00)
 saveSvg('day-08-data-visual.svg', baseSvg(
-    'Cohort ARPDAU Scaling Curve',
-    'Analyzing ARPDAU progress from initial launch to optimization ($0.00 - $1.00)',
+    'UA Metric Decision Map',
+    'Mapping ARPDAU progress from initial launch to optimization ($0.00 - $1.00)',
     `
     <rect x="100" y="160" width="600" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
     
@@ -243,8 +243,8 @@ saveSvg('day-11-hero-diagram.svg', baseSvg(
     <text x="275" y="250" font-family="Arial" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">+</text>
 
     <rect x="300" y="200" width="200" height="90" rx="8" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
-    <text x="400" y="235" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Daily IAP ARPU</text>
-    <text x="400" y="260" font-family="Arial" font-size="11" fill="#e9d5ff" text-anchor="middle">Daily IAP rev / active users</text>
+    <text x="400" y="235" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">IAP ARPDAU</text>
+    <text x="400" y="260" font-family="Arial" font-size="11" fill="#e9d5ff" text-anchor="middle">Daily IAP revenue / active users</text>
 
     <path d="M 500 245 L 540 245" stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
 
@@ -1179,4 +1179,201 @@ saveSvg('day-30-hero-diagram.svg', baseSvg(
     `
 ));
 
+// Day 9 Hero: Vanity Trap Diagnosis Tree (Simplified SVG)
+saveSvg('day-09-hero-diagram.svg', baseSvg(
+    'Vanity Trap Diagnosis Tree',
+    'Differentiating vanity metrics from actual cohort health triggers',
+    `
+    <rect x="280" y="140" width="240" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="170" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Check Vanity Metric Spike</text>
+
+    <path d="M 400 190 L 400 220" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <polygon points="400,220 520,260 400,300 280,260" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="400" y="265" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">Are Installs Rising but D1 Falling?</text>
+
+    <!-- Branch YES -->
+    <path d="M 520 260 L 600 260 L 600 320" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="560" y="240" font-family="Arial" font-size="12" fill="#ef4444">YES (Vanity Trap)</text>
+
+    <rect x="500" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="600" y="350" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Low-Quality Acquisition</text>
+    <text x="600" y="365" font-family="Arial" font-size="11" fill="#fca5a5" text-anchor="middle">Action: Pause campaign source</text>
+
+    <!-- Branch NO -->
+    <path d="M 280 260 L 200 260 L 200 320" stroke="#34d399" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="240" y="240" font-family="Arial" font-size="12" fill="#34d399">NO (Healthy)</text>
+
+    <rect x="100" y="320" width="200" height="60" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="200" y="350" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">True Cohort Quality</text>
+    <text x="200" y="365" font-family="Arial" font-size="11" fill="#a7f3d0" text-anchor="middle">Action: Scale cell budget</text>
+    `
+));
+
+// Day 12 Sugar Blast representational ROAS delay
+saveSvg('day-12-sugar-blast-roas.svg', baseSvg(
+    'Rovio Sugar Blast ROAS Delay Optimization',
+    'Optimizing budget allocation considering postback signal delays',
+    `
+    <rect x="100" y="160" width="180" height="200" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="190" y="200" font-family="Arial" font-size="18" fill="#ef4444" text-anchor="middle">D0 Postback</text>
+    <text x="190" y="240" font-family="Arial" font-size="13" fill="#e2e8f0" text-anchor="middle">Immediate signal</text>
+    <text x="190" y="280" font-family="Arial" font-size="13" fill="#ffffff" text-anchor="middle">High Privacy Noise</text>
+    <text x="190" y="320" font-family="Arial" font-size="13" fill="#94a3b8" text-anchor="middle">Accuracy: 40%</text>
+
+    <path d="M 280 260 L 310 260" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <rect x="320" y="160" width="180" height="200" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="410" y="200" font-family="Arial" font-size="18" fill="#f59e0b" text-anchor="middle">D3 Postback</text>
+    <text x="410" y="240" font-family="Arial" font-size="13" fill="#e2e8f0" text-anchor="middle">Delayed 72 hours</text>
+    <text x="410" y="280" font-family="Arial" font-size="13" fill="#ffffff" text-anchor="middle">Medium Noise</text>
+    <text x="410" y="320" font-family="Arial" font-size="13" fill="#94a3b8" text-anchor="middle">Accuracy: 75%</text>
+
+    <path d="M 500 260 L 530 260" stroke="#a855f7" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <rect x="540" y="160" width="180" height="200" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="630" y="200" font-family="Arial" font-size="18" fill="#34d399" text-anchor="middle">D7 Postback</text>
+    <text x="630" y="240" font-family="Arial" font-size="13" fill="#e2e8f0" text-anchor="middle">Delayed 168 hours</text>
+    <text x="630" y="280" font-family="Arial" font-size="13" fill="#ffffff" text-anchor="middle">Low Privacy Noise</text>
+    <text x="630" y="320" font-family="Arial" font-size="13" fill="#94a3b8" text-anchor="middle">Accuracy: 95%</text>
+    
+    <text x="400" y="420" font-family="Arial" font-size="12" fill="#ef4444" text-anchor="middle" font-weight="bold">*Representational readout (non-SKAN postback model, shown for visual clarification)</text>
+    `,
+    false
+));
+
+// Day 13 Hero: Attribution Confidence Ladder (Confidence High/Medium)
+saveSvg('day-13-hero-diagram.svg', baseSvg(
+    'Attribution Confidence Ladder',
+    'Attribution paths and privacy thresholds for iOS and Android',
+    `
+    <!-- Android path -->
+    <rect x="80" y="160" width="280" height="240" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="220" y="195" font-family="Arial" font-size="18" font-weight="bold" fill="#10b981" text-anchor="middle">Android GAID Path</text>
+    <text x="220" y="240" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Direct Device Match</text>
+    <text x="220" y="280" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Instant D0 attribution</text>
+    <text x="220" y="320" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">No privacy threshold gate</text>
+    <text x="220" y="370" font-family="Arial" font-size="14" fill="#34d399" font-weight="bold" text-anchor="middle">Confidence: High (Direct ID)</text>
+
+    <!-- iOS path -->
+    <rect x="440" y="160" width="280" height="240" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="580" y="195" font-family="Arial" font-size="18" font-weight="bold" fill="#38bdf8" text-anchor="middle">iOS SKAN Path</text>
+    <text x="580" y="240" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Crowd Anonymity Gated</text>
+    <text x="580" y="280" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">24-48h Random Delay</text>
+    <text x="580" y="320" font-family="Arial" font-size="14" fill="#e2e8f0" text-anchor="middle">Privacy thresholds drop data</text>
+    <text x="580" y="370" font-family="Arial" font-size="14" fill="#60a5fa" font-weight="bold" text-anchor="middle">Confidence: Medium (Modeled)</text>
+    `
+));
+
+// Royal Match public Google Play screenshot mockup
+saveSvg('royal-match.svg', baseSvg(
+    'Google Play Store - Royal Match Listing',
+    'Representational store proof layout showing ASO elements',
+    `
+    <!-- Store Header -->
+    <rect x="50" y="140" width="700" height="60" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="70" y="175" font-family="Arial" font-size="18" font-weight="bold" fill="#ffffff">Google Play</text>
+    <rect x="500" y="150" width="230" height="40" rx="20" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+    <text x="520" y="174" font-family="Arial" font-size="14" fill="#94a3b8">Search apps &amp; games</text>
+
+    <!-- App Identity Block -->
+    <rect x="50" y="215" width="100" height="100" rx="20" fill="#eab308" stroke="#ffffff" stroke-width="2"/>
+    <!-- Icon drawing (Crown) -->
+    <path d="M 70 290 L 70 240 L 90 260 L 100 240 L 110 260 L 130 240 L 130 290 Z" fill="#ffffff"/>
+    <circle cx="100" cy="275" r="10" fill="#eab308"/>
+
+    <text x="170" y="250" font-family="Arial" font-size="24" font-weight="bold" fill="#ffffff">Royal Match</text>
+    <text x="170" y="275" font-family="Arial" font-size="14" fill="#38bdf8">Dream Games, Ltd.</text>
+    <text x="170" y="295" font-family="Arial" font-size="12" fill="#94a3b8">Contains ads • In-app purchases</text>
+
+    <!-- Install Button -->
+    <rect x="520" y="235" width="210" height="45" rx="8" fill="#10b981"/>
+    <text x="625" y="263" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Install</text>
+
+    <!-- Stats row -->
+    <line x1="50" y1="330" x2="750" y2="330" stroke="#334155" stroke-width="1"/>
+    <text x="150" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">4.6 ★</text>
+    <text x="150" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">4.87M reviews</text>
+
+    <line x1="280" y1="345" x2="280" y2="385" stroke="#334155" stroke-width="1"/>
+
+    <text x="400" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">100M+</text>
+    <text x="400" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">Downloads</text>
+
+    <line x1="520" y1="345" x2="520" y2="385" stroke="#334155" stroke-width="1"/>
+
+    <text x="650" y="360" font-family="Arial" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="middle">Everyone</text>
+    <text x="650" y="380" font-family="Arial" font-size="12" fill="#94a3b8" text-anchor="middle">Rated for 3+</text>
+
+    <line x1="50" y1="400" x2="750" y2="400" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Store proof text note -->
+    <text x="400" y="440" font-family="Arial" font-size="14" fill="#a7f3d0" text-anchor="middle" font-weight="bold">Store Proof: Satisfies click-to-install promise with identical visual cues</text>
+    `,
+    false
+));
+
+// Day 14 Hero: Decision-Backward Tracking Flow
+saveSvg('day-14-hero-diagram.svg', baseSvg(
+    'Decision-Backward Tracking Flow',
+    'Designing event tracking backwards from required business decisions',
+    `
+    <!-- Decision Block -->
+    <rect x="50" y="180" width="200" height="90" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="150" y="215" font-family="Arial" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">1. Target Decision</text>
+    <text x="150" y="240" font-family="Arial" font-size="11" fill="#fca5a5" text-anchor="middle">e.g. Pause ad source</text>
+
+    <!-- Backwards Arrow -->
+    <path d="M 300 220 L 260 220" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="280" y="210" font-family="Arial" font-size="11" fill="#38bdf8" text-anchor="middle">Requires</text>
+
+    <!-- Metric Block -->
+    <rect x="300" y="180" width="200" height="90" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="400" y="215" font-family="Arial" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">2. Required Metric</text>
+    <text x="400" y="240" font-family="Arial" font-size="11" fill="#fef08a" text-anchor="middle">e.g. D1 Retention &lt; 25%</text>
+
+    <!-- Backwards Arrow -->
+    <path d="M 550 220 L 510 220" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="530" y="210" font-family="Arial" font-size="11" fill="#38bdf8" text-anchor="middle">Requires</text>
+
+    <!-- Event Block -->
+    <rect x="550" y="180" width="200" height="90" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="650" y="215" font-family="Arial" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Specific Event</text>
+    <text x="650" y="240" font-family="Arial" font-size="11" fill="#a7f3d0" text-anchor="middle">e.g. session_start, level_1</text>
+    `
+));
+
+// Day 24 Hero: UA Game Performance Diagnosis Flow (UA-specific)
+saveSvg('day-24-hero-diagram.svg', baseSvg(
+    'UA Game Performance Diagnosis Flow',
+    'Step-by-step diagnostic paths for mobile game UA anomalies',
+    `
+    <rect x="280" y="140" width="240" height="50" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="400" y="170" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">UA Metric Alert: ROI Drop</text>
+
+    <path d="M 400 190 L 400 220" stroke="#38bdf8" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+    <polygon points="400,220 520,260 400,300 280,260" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <text x="400" y="265" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">Is CTR high (&gt; 2.5%)?</text>
+
+    <!-- YES Branch -->
+    <path d="M 520 260 L 600 260 L 600 320" stroke="#34d399" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="560" y="250" font-family="Arial" font-size="12" fill="#34d399">YES</text>
+
+    <rect x="500" y="320" width="200" height="70" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+    <text x="600" y="350" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Check Onboarding</text>
+    <text x="600" y="370" font-family="Arial" font-size="11" fill="#a7f3d0" text-anchor="middle">Store proof or D1 issue</text>
+
+    <!-- NO Branch -->
+    <path d="M 280 260 L 200 260 L 200 320" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+    <text x="240" y="250" font-family="Arial" font-size="12" fill="#ef4444">NO</text>
+
+    <rect x="100" y="320" width="200" height="70" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <text x="200" y="350" font-family="Arial" font-size="14" fill="#ffffff" text-anchor="middle">Rotate Creative</text>
+    <text x="200" y="370" font-family="Arial" font-size="11" fill="#fca5a5" text-anchor="middle">Hook mismatch or ad fatigue</text>
+    `
+));
+
 console.log("SVG generation script complete.");
+
+

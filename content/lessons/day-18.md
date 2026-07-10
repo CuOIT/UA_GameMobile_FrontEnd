@@ -95,15 +95,7 @@ Nếu không có `not allowed to imply`, store rất dễ thêm promise phụ đ
 
 ## Operating diagram: đọc store continuity
 
-```text
-![Operating diagram: đọc store continuity](content/assets/usecases/day-18-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Operating diagram: đọc store continuity.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: đọc store continuity](content/assets/usecases/day-18-hero-diagram.png)
 
 
 ```text
@@ -137,15 +129,7 @@ Visual readout:
 
 ## Chart: promise-chain risk
 
-```text
-![Chart: promise-chain risk](content/assets/usecases/day-18-data-visual.svg)Type: data visual/chart or decision board.
-Lesson section: Chart: promise-chain risk.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Chart: promise-chain risk](content/assets/usecases/day-18-data-visual.svg)
 
 
 :::chart

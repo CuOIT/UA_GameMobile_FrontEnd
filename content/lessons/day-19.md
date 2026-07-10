@@ -84,15 +84,7 @@ Rule: pattern chỉ được vào `Creative matrix` hoặc `Store proof` khi con
 
 ## Hero visual: teardown decision flow
 
-```text
-![Hero visual: teardown decision flow](content/assets/usecases/day-19-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Hero visual: teardown decision flow.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: teardown decision flow](content/assets/usecases/day-19-hero-diagram.svg)
 
 
 [TEARDOWN DECISION FLOW]
@@ -152,15 +144,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Pattern confidence grid
 
-```text
-![Competitor pattern confidence grid](content/assets/usecases/day-19-data-visual.svg)Type: confidence grid / transferability matrix.
-Lesson section: Pattern confidence grid.
-Visual brief: convert the pattern confidence chart and transferability ledger into a 2-axis matrix: repeated in market vs provable by our prototype, with test/hold/reject zones.
-Teaching job: help the learner decide which competitor patterns are worth testing without copying execution.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Competitor pattern confidence grid](content/assets/usecases/day-19-data-visual.svg)
 
 :::chart
 title: Example competitor pattern confidence, 1-5

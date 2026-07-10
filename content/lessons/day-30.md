@@ -70,15 +70,7 @@ Decision rule: if two launch calls seem possible, choose the call that protects 
 
 ## Risk heatmap: chọn blocker thật
 
-```text
-![Risk heatmap: chọn blocker thật](content/assets/usecases/day-30-data-visual.png)Type: hero operating diagram.
-Lesson section: Risk heatmap: chọn blocker thật.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Risk heatmap: chọn blocker thật](content/assets/usecases/day-30-data-visual.png)
 
 
 | Likelihood \ Severity | Low severity | Medium severity | High severity |
@@ -95,15 +87,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Next-action filter
 
-```text
-![Next-action decision filter](content/assets/usecases/day-30-hero-diagram.png)Type: decision filter / action funnel.
-Lesson section: Next-action filter.
-Visual brief: turn the next-action filter into a funnel where candidate actions must pass small, dated, owner, measurable, and reduces-top-risk gates before becoming the final next action.
-Teaching job: help the learner choose one executable action instead of ending the course with a vague backlog.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Next-action decision filter](content/assets/usecases/day-30-hero-diagram.png)
 
 Chạy mọi candidate action qua filter này:
 

@@ -68,15 +68,7 @@ Decision rule: mỗi hook chỉ được vào launch packet khi có ít nhất m
 
 ## Readiness gate diagram
 
-```text
-![Readiness gate diagram](content/assets/usecases/day-21-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Readiness gate diagram.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Readiness gate diagram](content/assets/usecases/day-21-hero-diagram.svg)
 
 
 | Gate order | Pass evidence | Hold evidence | Launch decision |
@@ -96,15 +88,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Packet completeness scorecard
 
-```text
-![Creative packet gate scorecard](content/assets/usecases/day-21-data-visual.svg)Type: scorecard / launch gate heatmap.
-Lesson section: Packet completeness scorecard.
-Visual brief: turn the packet scorecard and triage rule into a compact heatmap where each hook family shows weakest gate, launch call, and next action.
-Teaching job: help the learner identify why a hook is launch-ready, held, repaired, or removed from the Week 4 packet.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Creative packet gate scorecard](content/assets/usecases/day-21-data-visual.svg)
 
 | Hook family | Hook clarity | Store proof | First-session proof | Event proof | Decision rule | Launch call |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |

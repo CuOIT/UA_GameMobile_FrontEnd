@@ -75,15 +75,7 @@ Contract này bảo vệ cadence khỏi một lỗi rất phổ biến: giữ ng
 
 ## Operating diagram: weekly UA loop
 
-```text
-![Operating diagram: weekly UA loop](content/assets/usecases/day-28-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Operating diagram: weekly UA loop.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: weekly UA loop](content/assets/usecases/day-28-hero-diagram.png)
 
 
 ```text
@@ -127,15 +119,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Capacity board: scope theo bottleneck thật
 
-```text
-![Capacity board: scope theo bottleneck thật](content/assets/usecases/day-28-data-visual.png)Type: data visual/chart or decision board.
-Lesson section: Capacity board: scope theo bottleneck thật.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Capacity board: scope theo bottleneck thật](content/assets/usecases/day-28-data-visual.png)
 
 
 | Workstream | Healthy weekly capacity cho team nhỏ | Nếu quá tải sẽ thấy | Scope rule |

@@ -76,15 +76,7 @@ Contract này giúp team phân biệt **hook đẹp tai** với **hook có thể
 
 ## Hook motivation operating map
 
-```text
-![Hook motivation operating map](content/assets/usecases/day-15-data-visual.svg)Type: hero operating diagram.
-Lesson section: Hook motivation operating map.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hook motivation operating map](content/assets/usecases/day-15-data-visual.svg)
 
 
 | Step | Challenge lane | Satisfaction lane | Relaxation lane | Mastery lane | Progression lane |
@@ -103,15 +95,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Hook signal board
 
-```text
-![Hook signal board](content/assets/usecases/day-15-hero-diagram.svg)Type: data visual/chart or decision board.
-Lesson section: Hook signal board.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hook signal board](content/assets/usecases/day-15-hero-diagram.svg)
 
 
 | Signal pattern | Likely meaning | Bad conclusion to avoid | Next action |

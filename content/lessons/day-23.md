@@ -125,15 +125,7 @@ Rule: budget sheet không chỉ là calculator. Nó là **quyền hành pháp l�
 
 ## Hero visual: sample-size funnel
 
-```text
-![Hero visual: sample-size funnel](content/assets/usecases/day-23-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Hero visual: sample-size funnel.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: sample-size funnel](content/assets/usecases/day-23-hero-diagram.svg)
 
 
 ```text
@@ -167,15 +159,7 @@ Visual readout:
 
 ## Data visual: confidence language table
 
-```text
-![Data visual: confidence language table](content/assets/usecases/day-23-data-visual.svg)Type: data visual/chart or decision board.
-Lesson section: Data visual: confidence language table.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Data visual: confidence language table](content/assets/usecases/day-23-data-visual.svg)
 
 
 | Metric layer | Signal thường có trong micro test | Allowed language | Forbidden language | Next action |

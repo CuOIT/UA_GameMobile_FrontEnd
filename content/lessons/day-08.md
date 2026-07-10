@@ -53,15 +53,7 @@ Metric decision map luôn đọc theo cặp: `primary metric` cho tín hiệu ch
 
 ## Metric decision map mẫu
 
-```text
-![Metric decision map mẫu](content/assets/usecases/day-08-data-visual.svg)Type: hero operating diagram.
-Lesson section: Metric decision map mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Metric decision map mẫu](content/assets/usecases/day-08-data-visual.svg)
 
 
 | Decision question | Primary metric | Supporting metric | Scenario range để đọc | Nếu yếu thì làm gì |
@@ -120,15 +112,7 @@ Rule: quyết định phải đi theo metric có confidence cao nhất ở mắt
 
 ## Hero visual: metric funnel decision map
 
-```text
-![Hero visual: metric funnel decision map](content/assets/usecases/day-08-hero-diagram.png)Type: data visual/chart or decision board.
-Lesson section: Hero visual: metric funnel decision map.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: metric funnel decision map](content/assets/usecases/day-08-hero-diagram.png)
 
 
 [METRIC FUNNEL DECISION MAP]

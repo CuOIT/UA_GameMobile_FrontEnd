@@ -6,7 +6,7 @@ const mapping = {
   "The UA Promise Chain Diagram": "day-01-hero-diagram.svg",
   "Funnel alignment comparison chart": "day-01-data-visual.svg",
   // Day 02
-  "Puzzle market thesis map mẫu": "day-02-market-thesis-visual.png",
+  "Puzzle market thesis map mẫu": "day-02-market-thesis-visual.svg",
   "Hero visual: thesis chain operating diagram": "day-02-market-thesis-visual.svg",
   // Day 03
   "Motivation map mẫu cho puzzle game": "day-03-motivation-map-visual.svg",
@@ -22,12 +22,12 @@ const mapping = {
   "UA selection data visual comparison": "day-06-data-visual.svg",
   // Day 07
   "UA hypothesis chain decision diagram": "day-07-hero-diagram.svg",
-  "Royal Match public Google Play screenshot": "royal-match.png",
+  "Royal Match public Google Play screenshot": "royal-match.svg",
   // Day 08
   "Metric decision map mẫu": "day-08-data-visual.svg",
   "Hero visual: metric funnel decision map": "day-08-hero-diagram.png",
   // Day 09
-  "Vanity trap diagnosis tree": "day-09-hero-diagram.png",
+  "Vanity trap diagnosis tree": "day-09-hero-diagram.svg",
   "Acquisition metric trap board": "day-09-data-visual.svg",
   // Day 10 (Swapped)
   "Retention decay curve comparison": "day-10-hero-diagram.png",
@@ -43,8 +43,8 @@ const mapping = {
   "Measurement risk map mẫu": "day-13-data-visual.png",
   "Hero visual: attribution confidence ladder": "day-13-hero-diagram.svg",
   // Day 14
-  "Decision-backward tracking flow": "day-14-hero-diagram.png",
-  "Event coverage heatmap": "day-14-data-visual.png",
+  "Decision-backward tracking flow": "day-14-hero-diagram.svg",
+  "Event coverage funnel": "day-14-data-visual.png",
   // Day 15
   "Hook motivation operating map": "day-15-data-visual.svg",
   "Hook signal board": "day-15-hero-diagram.svg",
@@ -73,7 +73,7 @@ const mapping = {
   "Hero visual: sample-size funnel": "day-23-hero-diagram.svg",
   "Data visual: confidence language table": "day-23-data-visual.svg",
   // Day 24
-  "Hero visual: report diagnosis map": "day-24-hero-diagram.png",
+  "Hero visual: report diagnosis map": "day-24-hero-diagram.svg",
   "Data visual: call selection table": "day-24-data-visual.svg",
   // Day 25
   "Hero visual: decision rule ladder": "day-25-hero-diagram.svg",

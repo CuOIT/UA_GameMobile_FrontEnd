@@ -1,4 +1,4 @@
-﻿---
+---
 day: 13
 title: "Attribution, ATT, SKAN and Android privacy signals"
 module: "Week 2 - Metrics and measurement"
@@ -57,15 +57,11 @@ Quy tắc: metric càng xa event gameplay trực tiếp và càng bị privacy/w
 
 ## Measurement risk map mẫu
 
-```text
-![Measurement risk map mẫu](content/assets/usecases/day-13-data-visual.png)Type: hero operating diagram.
-Lesson section: Measurement risk map mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Measurement risk map mẫu](content/assets/usecases/day-13-data-visual.png)
+
+> [!NOTE]
+> **Giải thích đồ thị (Cohort Normalization)**: Biểu đồ cohort đích thực (true cohort) được chuẩn hóa (normalized) về mốc 100% tại Ngày 0 để so sánh trực quan và công bằng mức độ hao hụt người chơi (retention decay) giữa các nhóm quảng cáo khác nhau. Việc chuẩn hóa này giúp loại bỏ sự chênh lệch về quy mô người dùng ban đầu giữa các nguồn dữ liệu, giúp so sánh tỷ lệ giữ chân một cách khách quan nhất.
+
 
 
 | Decision | Primary signal | Risk | Confidence | Allowed decision | Not allowed |
@@ -97,15 +93,7 @@ Rule vận hành: **decision size không được lớn hơn confidence level**.
 
 ## Hero visual: attribution confidence ladder
 
-```text
-![Hero visual: attribution confidence ladder](content/assets/usecases/day-13-hero-diagram.svg)Type: data visual/chart or decision board.
-Lesson section: Hero visual: attribution confidence ladder.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: attribution confidence ladder](content/assets/usecases/day-13-hero-diagram.svg)
 
 
 [ATTRIBUTION CONFIDENCE LADDER]

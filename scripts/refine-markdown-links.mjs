@@ -50,6 +50,11 @@ const replacements = [
     search: 'day-07-hero-diagram.png',
     replace: 'day-07-hero-diagram.svg'
   },
+  {
+    file: 'day-07.md',
+    search: 'royal-match.png',
+    replace: 'royal-match.svg'
+  },
   // Day 8
   {
     file: 'day-08.md',
@@ -61,6 +66,11 @@ const replacements = [
     file: 'day-09.md',
     search: 'day-09-data-visual.png',
     replace: 'day-09-data-visual.svg'
+  },
+  {
+    file: 'day-09.md',
+    search: 'day-09-hero-diagram.png',
+    replace: 'day-09-hero-diagram.svg'
   },
   // Day 10 (Swap visuals)
   {
@@ -105,6 +115,18 @@ const replacements = [
     file: 'day-13.md',
     search: '![Hero visual: attribution confidence ladder](content/assets/usecases/day-13-hero-diagram.png)',
     replace: '![Hero visual: attribution confidence ladder](content/assets/usecases/day-13-hero-diagram.svg)'
+  },
+  // Day 15
+  // Day 14
+  {
+    file: 'day-14.md',
+    search: 'day-14-hero-diagram.png',
+    replace: 'day-14-hero-diagram.svg'
+  },
+  {
+    file: 'day-14.md',
+    search: '![Event coverage heatmap](content/assets/usecases/day-14-data-visual.png)',
+    replace: '![Event coverage funnel](content/assets/usecases/day-14-data-visual.png)'
   },
   // Day 15
   {
@@ -199,6 +221,12 @@ const replacements = [
     file: 'day-23.md',
     search: 'day-23-hero-diagram.png',
     replace: 'day-23-hero-diagram.svg'
+  },
+  // Day 24
+  {
+    file: 'day-24.md',
+    search: 'day-24-hero-diagram.png',
+    replace: 'day-24-hero-diagram.svg'
   }
 ];
 

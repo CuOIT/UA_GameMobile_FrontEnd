@@ -130,15 +130,7 @@ Evidence pack tốt có thể kết luận "smoke only" hoặc "hold launch". Đ
 
 ## Hero visual: SDK risk map
 
-```text
-![Hero visual: SDK risk map](content/assets/usecases/day-26-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Hero visual: SDK risk map.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: SDK risk map](content/assets/usecases/day-26-hero-diagram.png)
 
 
 ```text
@@ -168,15 +160,7 @@ Visual readout:
 
 ## Data visual: event validation board
 
-```text
-![Data visual: event validation board](content/assets/usecases/day-26-data-visual.png)Type: data visual/chart or decision board.
-Lesson section: Data visual: event validation board.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Data visual: event validation board](content/assets/usecases/day-26-data-visual.png)
 
 
 | Event | Trigger | Required params | Pass condition | Decision blocked if fail |

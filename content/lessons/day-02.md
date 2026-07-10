@@ -57,15 +57,7 @@ Quy tắc: nếu thesis không gợi ra được ít nhất 2 creative hook và 
 
 ## Puzzle market thesis map mẫu
 
-```text
-![Puzzle market thesis map mẫu](content/assets/usecases/day-02-market-thesis-visual.svg)Type: hero operating diagram.
-Lesson section: Puzzle market thesis map mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Puzzle market thesis map mẫu](content/assets/usecases/day-02-market-thesis-visual.svg)
 
 
 | Puzzle angle | Motivation chính | Ad promise | Store proof cần có | First-session proof | Metric đọc sớm | Rủi ro kinh tế |
@@ -137,15 +129,7 @@ Contract tốt thường rất cụ thể: "Nếu CTR yếu nhưng CVR/D1 ổn, 
 
 ## Hero visual: thesis chain operating diagram
 
-```text
-![Hero visual: thesis chain operating diagram](content/assets/usecases/day-02-market-thesis-visual.svg)Type: data visual/chart or decision board.
-Lesson section: Hero visual: thesis chain operating diagram.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Hero visual: thesis chain operating diagram](content/assets/usecases/day-02-market-thesis-visual.svg)
 
 
 ```text

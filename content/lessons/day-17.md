@@ -54,15 +54,7 @@ Không trộn nhiều cell type trong cùng một test nhỏ.
 
 ## Creative test matrix mẫu
 
-```text
-![Creative test matrix mẫu](content/assets/usecases/day-17-data-visual.svg)Type: hero operating diagram.
-Lesson section: Creative test matrix mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Creative test matrix mẫu](content/assets/usecases/day-17-data-visual.svg)
 
 
 | Hook family | Variant A | Variant B | One variable changed | Learning goal | Primary metric | Next action |
@@ -118,15 +110,7 @@ Nếu production brief không điền được, row đó chưa đủ chín để
 
 ## Operating diagram: creative test flow
 
-```text
-![Operating diagram: creative test flow](content/assets/usecases/day-17-hero-diagram.svg)Type: data visual/chart or decision board.
-Lesson section: Operating diagram: creative test flow.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: creative test flow](content/assets/usecases/day-17-hero-diagram.svg)
 
 
 ```text

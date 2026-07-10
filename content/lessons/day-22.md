@@ -66,15 +66,7 @@ Rule: nếu một cell không trả lời được "cell này giúp mình quyế
 
 ## Campaign cell map
 
-```text
-![Campaign cell map](content/assets/usecases/day-22-hero-diagram.svg)Type: hero operating diagram.
-Lesson section: Campaign cell map.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Campaign cell map](content/assets/usecases/day-22-hero-diagram.svg)
 
 
 | Tree level | Example | What it controls | What it must not hide |
@@ -94,15 +86,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Budget per cell compression
 
-```text
-![Budget per cell compression board](content/assets/usecases/day-22-data-visual.svg)Type: budget compression chart / cell-count decision board.
-Lesson section: Budget per cell compression.
-Visual brief: show how a fixed micro-budget gets thinner as cells increase, and mark which cell counts allow directional learning versus noise.
-Teaching job: help the learner decide whether to run 3, 6, 9, or 12 cells before spending money.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Budget per cell compression board](content/assets/usecases/day-22-data-visual.svg)
 
 | Total budget | CPI scenario | Cells | Budget/cell | Approx installs/cell | Decision allowed |
 | ---: | ---: | ---: | ---: | ---: | --- |

@@ -105,15 +105,7 @@ No-launch if:
 
 ## Operating diagram: one-page plan flow
 
-```text
-![Operating diagram: one-page plan flow](content/assets/usecases/day-29-hero-diagram.png)Type: hero operating diagram.
-Lesson section: Operating diagram: one-page plan flow.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Operating diagram: one-page plan flow](content/assets/usecases/day-29-hero-diagram.png)
 
 
 ```text
@@ -146,15 +138,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Readiness scorecard
 
-```text
-![One-page launch readiness board](content/assets/usecases/day-29-data-visual.png)Type: readiness scorecard / risk heatmap.
-Lesson section: Readiness scorecard.
-Visual brief: turn the readiness table into a compact board that highlights the lowest-scoring launch risk, not an average score.
-Teaching job: help the learner see which field blocks launch even when the rest of the page looks polished.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![One-page launch readiness board](content/assets/usecases/day-29-data-visual.png)
 
 Chấm nhanh trước khi launch. Điểm thấp nhất là launch risk chính.
 

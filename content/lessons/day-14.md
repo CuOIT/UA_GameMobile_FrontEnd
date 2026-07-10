@@ -85,15 +85,7 @@ Rule vận hành: metric chỉ được xuất hiện trong `successCriteria` ho
 
 ## Sơ đồ decision-backward tracking
 
-```text
-![Decision-backward tracking flow](content/assets/usecases/day-14-hero-diagram.png)Type: process flow / decision map.
-Lesson section: Sơ đồ decision-backward tracking.
-Visual brief: create a left-to-right flow showing how a UA decision becomes a funnel question, then an event, parameters, QA proof, dashboard readout, and next action.
-Teaching job: help a Unity dev stop logging from code convenience and start logging from launch decisions.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Decision-backward tracking flow](content/assets/usecases/day-14-hero-diagram.svg)
 
 | Layer | Câu hỏi cần trả lời | Output phải có | Nếu thiếu layer này |
 | --- | --- | --- | --- |
@@ -112,15 +104,7 @@ Do not generate final image inside this repo; this placeholder is for a third-pa
 
 ## Event coverage heatmap
 
-```text
-![Event coverage heatmap](content/assets/usecases/day-14-data-visual.png)Type: hero operating diagram.
-Lesson section: Event coverage heatmap.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Event coverage funnel](content/assets/usecases/day-14-data-visual.png)
 
 
 | Stage | Required coverage | Green signal | Yellow signal | Red signal |

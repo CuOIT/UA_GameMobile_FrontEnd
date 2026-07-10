@@ -76,15 +76,7 @@ Các range trong bài là **decision ranges**, không phải benchmark universal
 
 ## Funnel leak map mẫu
 
-```text
-![Funnel leak map mẫu](content/assets/usecases/day-04-funnel-leak-map.svg)Type: hero operating diagram.
-Lesson section: Funnel leak map mẫu.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Funnel leak map mẫu](content/assets/usecases/day-04-funnel-leak-map.svg)
 
 
 | Link | Metric to read | Evidence needed | Leak diagnosis | First action |
@@ -100,15 +92,7 @@ Minimum rule: mỗi link phải có **metric**, **owner**, **next action**, **ca
 
 ## Funnel leak operating diagram
 
-```text
-![Funnel leak operating diagram](content/assets/usecases/day-04-funnel-leak-operating-diagram.svg)Type: data visual/chart or decision board.
-Lesson section: Funnel leak operating diagram.
-Visual brief: turn the framework/table in this section into a clean, readable learning visual.
-Teaching job: help the learner inspect the decision logic faster than prose alone.
-Required style: premium SaaS learning infographic, light background, clear labels, no decorative game art.
-Must include: Inspect / Conclude / Do not infer cues from the surrounding section.
-Do not generate final image inside this repo; this placeholder is for a third-party visual pass.
-```
+![Funnel leak operating diagram](content/assets/usecases/day-04-funnel-leak-operating-diagram.svg)
 
 
 | Stage | What user believes | What must prove it | If it leaks | Do first |
