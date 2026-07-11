@@ -1,6 +1,7 @@
 const contentRoot = "./content";
 const activeCourseStateId = new URLSearchParams(location.search).get("course") || localStorage.getItem("uaActiveCourseId") || "ua-30d";
 const stateKey = activeCourseStateId === "ua-30d" ? "uaBootcampState.v1" : `uaBootcampState.v1.${activeCourseStateId}`;
+const authReturnKey = "uaAuthReturnRoute.v1";
 const appVersion = "1.5.7";
 const contentVersion = appVersion;
 
@@ -68,10 +69,13 @@ async function init() {
     saveState();
     renderRoute();
   });
+  document.querySelector("#topbarSignInBtn").addEventListener("click", rememberAuthReturnRoute);
+  document.querySelector("#topbarSignUpBtn").addEventListener("click", rememberAuthReturnRoute);
   document.querySelector("#topbarLogoutBtn").addEventListener("click", signOutAccount);
   updateAuthActions();
   window.addEventListener("hashchange", renderRoute);
-  if (!location.hash) location.hash = "#dashboard";
+  restoreAuthReturnRoute();
+  if (!location.hash || !isAppRouteHash(location.hash)) location.hash = "#dashboard";
   renderRoute();
 }
 
@@ -235,6 +239,28 @@ function loadState() {
 function saveState(options = {}) {
   localStorage.setItem(stateKey, JSON.stringify(state));
   if (!options.skipCloud) scheduleCloudSave();
+}
+
+function isAppRouteHash(hash) {
+  return /^#(dashboard|lessons|lesson-\d+|glossary|tools|cases|chat|plan|account|signin|signup)(\?|$)/.test(hash || "");
+}
+
+function rememberAuthReturnRoute() {
+  const hash = isAppRouteHash(location.hash) ? location.hash : "#dashboard";
+  localStorage.setItem(authReturnKey, `${location.pathname}${location.search}${hash}`);
+}
+
+function restoreAuthReturnRoute() {
+  const savedRoute = localStorage.getItem(authReturnKey);
+  if (!savedRoute) return false;
+  localStorage.removeItem(authReturnKey);
+
+  const target = new URL(savedRoute, window.location.origin);
+  if (target.origin !== window.location.origin) return false;
+
+  const hash = isAppRouteHash(target.hash) ? target.hash : "#dashboard";
+  history.replaceState(null, "", `${target.pathname}${target.search}${hash}`);
+  return true;
 }
 
 function renderVersionNote() {
@@ -1232,8 +1258,9 @@ async function submitAccountAuth(mode) {
 
   notify(`Signed in as ${currentUser.email}`, "success");
   await pullCloudProgress();
-  location.hash = "#dashboard";
+  if (!restoreAuthReturnRoute()) location.hash = "#dashboard";
   updateAuthActions();
+  renderRoute();
 }
 
 async function signInWithGoogle() {
@@ -1242,11 +1269,11 @@ async function signInWithGoogle() {
     return;
   }
 
+  rememberAuthReturnRoute();
+  const redirectTo = `${window.location.origin}${window.location.pathname}${window.location.search}`;
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: "google",
-    options: {
-      redirectTo: `${window.location.origin}${window.location.pathname}`
-    }
+    options: { redirectTo }
   });
 
   if (error) notify(error.message, "error");
