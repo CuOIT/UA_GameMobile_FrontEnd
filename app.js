@@ -61,6 +61,7 @@ async function init() {
   renderLoading();
   data = await loadContent();
   renderVersionNote();
+  renderCourseNavOptions();
   applyConfiguredDefaults();
   await initAuth();
   stageSelect.value = state.stage;
@@ -486,7 +487,6 @@ function renderDashboard() {
     ? "Tiến độ khóa học của bạn đã được đồng bộ hóa trực tuyến qua tài khoản."
     : "Tiến độ khóa học hiện đang lưu tạm thời. Hãy Đăng nhập để đồng bộ hóa trực tuyến.";
   app.innerHTML = `
-    ${renderCourseSwitcher()}
     <section class="metric-row">
       <div class="metric">${icon("book-check")}<strong>${state.completedLessons.length}/${totalLessons}</strong><span>lessons completed</span></div>
       <div class="metric">${icon("activity")}<strong>${completionPercent()}%</strong><span>course progress</span></div>
@@ -524,24 +524,22 @@ function renderDashboard() {
   `;
 }
 
-function renderCourseSwitcher() {
+function renderCourseNavOptions() {
+  const container = document.querySelector("#courseNavOptions");
+  if (!container) return;
   const courses = Array.isArray(data.catalog?.courses) ? data.catalog.courses : [];
-  if (courses.length < 2) return "";
+  if (courses.length < 2) {
+    container.replaceChildren();
+    return;
+  }
   const currentId = data.activeCourse?.id || "ua-30d";
-  return `
-    <section class="panel course-switcher">
-      <h2>${icon("book-open-check")}Course</h2>
-      <p>${escapeHtml(data.course.meta?.title || "Current course")}</p>
-      <div class="tag-row">
-        ${courses.map((course) => {
-          const active = course.id === currentId;
-          const href = `?course=${encodeURIComponent(course.id)}${location.hash || "#dashboard"}`;
-          return `<a class="tag ${active ? "ok" : ""}" href="${href}">${escapeHtml(course.title)}</a>`;
-        }).join("")}
-      </div>
-    </section>
-  `;
+  container.innerHTML = courses.map((course) => {
+    const active = course.id === currentId;
+    const href = `?course=${encodeURIComponent(course.id)}#lessons`;
+    return `<a class="nav-course-option ${active ? "active" : ""}" href="${href}">${escapeHtml(course.title)}</a>`;
+  }).join("");
 }
+
 function dashboardShortcut(name, copy, href, iconName) {
   return `
     <article class="panel">
@@ -556,7 +554,6 @@ function renderLessons() {
   title.textContent = "30-Day Lessons";
   const lessons = filteredLessons();
   app.innerHTML = `
-    ${renderCourseSwitcher()}
     <section class="panel">
       <h2>Course path</h2>
       <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
@@ -823,6 +820,7 @@ async function toggleBookmark(day) {
 
 function renderGlossary(termParam = "") {
   title.textContent = "Glossary";
+  const glossaryTerms = Array.isArray(data.glossary) ? data.glossary : [];
   app.innerHTML = `
     <section class="panel">
       <h2>${icon("languages")}UA terms, explained for Unity developers</h2>
@@ -831,13 +829,13 @@ function renderGlossary(termParam = "") {
       </div>
     </section>
     <section class="term-grid" id="termGrid">
-      ${renderTermCards(data.glossary)}
+      ${renderTermCards(glossaryTerms)}
     </section>
   `;
   const searchInput = document.querySelector("#termSearch");
   searchInput.addEventListener("input", (event) => {
     const query = event.target.value.trim().toLowerCase();
-    const terms = data.glossary.filter((term) =>
+    const terms = glossaryTerms.filter((term) =>
       [term.term, term.vi, term.en, term.analogy].join(" ").toLowerCase().includes(query)
     );
     document.querySelector("#termGrid").innerHTML = renderTermCards(terms);
@@ -1171,7 +1169,8 @@ async function buildChatContext(prompt) {
       return `Day ${lesson.day}: ${lesson.title}\n${stripFrontmatter(markdown).slice(0, 1800)}`;
     })
   );
-  const glossary = data.glossary
+  const glossaryTerms = Array.isArray(data.glossary) ? data.glossary : [];
+  const glossary = glossaryTerms
     .filter((term) => query.includes(term.term.toLowerCase()) || scoreText(query, `${term.vi} ${term.en}`) > 0)
     .slice(0, 8)
     .map((term) => `${term.term}: ${term.vi} Formula: ${term.formula || "n/a"}`)
@@ -1877,7 +1876,7 @@ function inlineMarkdown(value, seenTerms = null) {
 }
 
 function parseGlossaryTerms(text, seenTerms = null) {
-  if (!data || !data.glossary) return text;
+  if (!data || !Array.isArray(data.glossary) || !data.glossary.length) return text;
   
   let result = text;
   const sortedTerms = [...data.glossary].sort((a, b) => b.term.length - a.term.length);

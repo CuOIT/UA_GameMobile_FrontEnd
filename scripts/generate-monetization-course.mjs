@@ -338,7 +338,7 @@ const checklists = Object.fromEntries(lessons.map((lesson) => [lesson.checklistI
 writeJson(join(root, "course.json"), course);
 writeJson(join(root, "quizzes.json"), quizzes);
 writeJson(join(root, "checklists.json"), checklists);
-writeJson(join(root, "glossary.json"), {});
+writeJson(join(root, "glossary.json"), []);
 writeJson(join(root, "cases.json"), []);
 writeJson(join(root, "calculators.json"), []);
 writeJson(join(root, "version.json"), {

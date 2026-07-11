@@ -199,6 +199,79 @@ svg,
   box-shadow: inset 3px 0 0 #76e4d8;
 }
 
+.nav-course-dropdown {
+  min-width: 0;
+}
+
+.nav-course-dropdown summary {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 11px;
+  border-radius: 10px;
+  color: #d5deeb;
+  font-weight: 720;
+  font-size: 0.94rem;
+  list-style: none;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.nav-course-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-course-dropdown summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 160ms ease;
+}
+
+.nav-course-dropdown[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.nav-course-dropdown summary:hover,
+.nav-course-dropdown summary.active {
+  background: rgba(255, 255, 255, 0.11);
+  color: #ffffff;
+}
+
+.nav-course-dropdown summary.active {
+  box-shadow: inset 3px 0 0 #76e4d8;
+}
+
+.nav-course-options {
+  display: grid;
+  gap: 6px;
+  padding: 4px 0 8px 34px;
+}
+
+.nav-course-option {
+  display: block;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #cbd7e6;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nav-course-option:hover,
+.nav-course-option.active {
+  background: rgba(118, 228, 216, 0.14);
+  border-color: rgba(118, 228, 216, 0.45);
+  color: #ffffff;
+}
+
 .nav-list a:hover {
   transform: translateX(1px);
 }

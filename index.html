@@ -22,7 +22,10 @@
         </a>
         <nav class="nav-list">
           <a href="#dashboard" data-nav="dashboard"><i data-lucide="layout-dashboard"></i>Dashboard</a>
-          <a href="#lessons" data-nav="lessons"><i data-lucide="book-open-check"></i>30-Day Lessons</a>
+          <details class="nav-course-dropdown" id="courseNavDropdown">
+            <summary data-nav="lessons"><i data-lucide="book-open-check"></i>30-Day Lessons</summary>
+            <div class="nav-course-options" id="courseNavOptions"></div>
+          </details>
           <a href="#glossary" data-nav="glossary"><i data-lucide="languages"></i>Glossary</a>
           <a href="#tools" data-nav="tools"><i data-lucide="calculator"></i>Tools</a>
           <a href="#cases" data-nav="cases"><i data-lucide="file-search"></i>Case Studies</a>
