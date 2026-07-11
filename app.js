@@ -279,10 +279,11 @@ function renderRoute() {
   }
 
   navLinks.forEach((link) => link.classList.toggle("active", cleanRoute.startsWith(link.dataset.nav)));
+  updateAuthActions();
 
   if (cleanRoute.startsWith("lesson-")) {
     const day = Number(cleanRoute.split("-")[1]);
-    renderLesson(day);
+    renderLesson(day).then(updateAuthActions);
     return;
   }
 
@@ -298,7 +299,6 @@ function renderRoute() {
     signin: () => renderAuthPage("signin"),
     signup: () => renderAuthPage("signup")
   };
-  updateAuthActions();
   (routes[cleanRoute] || renderDashboard)();
   hydrateIcons();
 }
@@ -334,11 +334,13 @@ async function initAuth() {
     currentUser = sessionData.session?.user || null;
     cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Cloud login ready.";
 
-    supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+    supabaseClient.auth.onAuthStateChange(async (event, session) => {
+      const wasSignedIn = Boolean(currentUser);
       currentUser = session?.user || null;
       cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Signed out. Local progress is still available.";
       if (currentUser) await pullCloudProgress();
-      renderRoute();
+      updateAuthActions();
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || wasSignedIn !== Boolean(currentUser)) renderRoute();
     });
 
     if (currentUser) await pullCloudProgress();
