@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.5.7",
-  "contentVersion": "monetization-1.0.0",
-  "updatedAt": "2026-07-10",
-  "changeLevel": "minor",
-  "notes": "Adds a 30-day Mobile Puzzle Monetization course for Unity developers."
+    "appVersion":  "1.5.8",
+    "contentVersion":  "monetization-1.0.1",
+    "updatedAt":  "2026-07-11",
+    "changeLevel":  "patch",
+    "notes":  "Moves course selection into nav dropdown and fixes empty glossary handling."
 }

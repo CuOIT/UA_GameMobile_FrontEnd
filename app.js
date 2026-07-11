@@ -2,7 +2,7 @@ const contentRoot = "./content";
 const activeCourseStateId = new URLSearchParams(location.search).get("course") || localStorage.getItem("uaActiveCourseId") || "ua-30d";
 const stateKey = activeCourseStateId === "ua-30d" ? "uaBootcampState.v1" : `uaBootcampState.v1.${activeCourseStateId}`;
 const authReturnKey = "uaAuthReturnRoute.v1";
-const appVersion = "1.5.7";
+const appVersion = "1.5.8";
 const contentVersion = appVersion;
 
 const defaultState = {

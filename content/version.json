@@ -1,7 +1,7 @@
 {
-  "appVersion": "1.5.7",
-  "contentVersion": "1.5.7",
-  "updatedAt": "2026-07-09",
-  "changeLevel": "patch",
-  "notes": "Switches lesson body loading to DB-first with static Markdown fallback."
+    "appVersion":  "1.5.8",
+    "contentVersion":  "1.5.8",
+    "updatedAt":  "2026-07-11",
+    "changeLevel":  "patch",
+    "notes":  "Moves course selection into the lessons nav dropdown and fixes monetization lesson loading."
 }
