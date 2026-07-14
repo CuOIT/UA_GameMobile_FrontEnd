@@ -1,7 +1,7 @@
 {
-    "appVersion":  "1.5.8",
-    "contentVersion":  "1.5.8",
-    "updatedAt":  "2026-07-11",
+    "appVersion":  "1.5.9",
+    "contentVersion":  "1.5.9",
+    "updatedAt":  "2026-07-13",
     "changeLevel":  "patch",
-    "notes":  "Moves course selection into the lessons nav dropdown and fixes monetization lesson loading."
+    "notes":  "Makes lessons and navigation available offline, fixes Android asset loading, and bundles login dependencies."
 }

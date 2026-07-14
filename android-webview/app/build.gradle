@@ -1,0 +1,29 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.uamarketing.bootcamp"
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.uamarketing.bootcamp"
+        minSdk 23
+        targetSdk 36
+        versionCode 3
+        versionName "1.0.2"
+    }
+}
+
+tasks.register("syncWebAssets", Copy) {
+    from(project.rootProject.file("..")) {
+        include "index.html"
+        include "app.js"
+        include "styles.css"
+        include "vendor/**"
+        include "content/**"
+    }
+    into(layout.projectDirectory.dir("src/main/assets/public"))
+}
+
+preBuild.dependsOn("syncWebAssets")
