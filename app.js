@@ -1,6 +1,8 @@
 const contentRoot = "./content";
-const stateKey = "uaBootcampState.v1";
-const appVersion = "1.5.7";
+const activeCourseStateId = new URLSearchParams(location.search).get("course") || localStorage.getItem("uaActiveCourseId") || "ua-30d";
+const stateKey = activeCourseStateId === "ua-30d" ? "uaBootcampState.v1" : `uaBootcampState.v1.${activeCourseStateId}`;
+const authReturnKey = "uaAuthReturnRoute.v1";
+const appVersion = "1.5.9";
 const contentVersion = appVersion;
 
 const defaultState = {
@@ -42,6 +44,11 @@ const title = document.querySelector("#pageTitle");
 const stageSelect = document.querySelector("#stageSelect");
 const versionNote = document.querySelector("#appVersionNote");
 const navLinks = [...document.querySelectorAll("[data-nav]")];
+const topbarEyebrow = document.querySelector(".topbar .eyebrow");
+const mobileNavToggle = document.querySelector("#mobileNavToggle");
+const mobileNavClose = document.querySelector("#mobileNavClose");
+const mobileNavOverlay = document.querySelector("#mobileNavOverlay");
+const mobileProgressPill = document.querySelector("#mobileProgressPill");
 let data = {};
 let state = loadState();
 let supabaseClient = null;
@@ -57,51 +64,105 @@ window.addEventListener("load", hydrateIcons);
 
 async function init() {
   renderLoading();
-  data = await loadContent();
+  try {
+    data = await loadContent();
+  } catch (error) {
+    title.textContent = "Unable to start";
+    app.innerHTML = `
+      <section class="panel">
+        <h2>Course content could not be loaded</h2>
+        <p>The bundled lesson files are unavailable. Reinstall the latest APK and try again.</p>
+        <p class="status-line">${escapeHtml(error.message || String(error))}</p>
+      </section>
+    `;
+    return;
+  }
   renderVersionNote();
+  renderCourseNavOptions();
   applyConfiguredDefaults();
-  await initAuth();
   stageSelect.value = state.stage;
   stageSelect.addEventListener("change", () => {
     state.stage = stageSelect.value;
     saveState();
     renderRoute();
   });
+  document.querySelector("#topbarSignInBtn").addEventListener("click", rememberAuthReturnRoute);
+  document.querySelector("#topbarSignUpBtn").addEventListener("click", rememberAuthReturnRoute);
   document.querySelector("#topbarLogoutBtn").addEventListener("click", signOutAccount);
+  setupMobileNavigation();
   updateAuthActions();
   window.addEventListener("hashchange", renderRoute);
-  if (!location.hash) location.hash = "#dashboard";
+  restoreAuthReturnRoute();
+  if (!location.hash || !isAppRouteHash(location.hash)) location.hash = "#dashboard";
   renderRoute();
+  initializeRemoteServices();
 }
 
 async function loadContent() {
   const config = await fetchOptionalJson("app-config.json");
-  const [course, glossary, quizzes, calculators, checklists, cases, version, dbContent] = await Promise.all([
-    fetchJson("course.json"),
-    fetchJson("glossary.json"),
-    fetchJson("quizzes.json"),
-    fetchJson("calculators.json"),
-    fetchJson("checklists.json"),
-    fetchJson("cases.json"),
-    fetchOptionalJson("version.json"),
-    fetchDbContent(config)
+  const catalog = await fetchOptionalJson("course-catalog.json");
+  const requestedCourseId = activeCourseStateId;
+  const courses = Array.isArray(catalog.courses) ? catalog.courses : [];
+  const activeCourse = courses.find((course) => course.id === requestedCourseId) || courses.find((course) => course.primary) || { id: "ua-30d", root: "." };
+  const courseRoot = activeCourse.root && activeCourse.root !== "." ? activeCourse.root : ".";
+  localStorage.setItem("uaActiveCourseId", activeCourse.id || "ua-30d");
+  const courseFile = (file) => courseRoot === "." ? file : `${courseRoot}/${file}`;
+  const [course, glossary, quizzes, calculators, checklists, cases, version] = await Promise.all([
+    fetchJson(courseFile("course.json")),
+    fetchJson(courseFile("glossary.json")),
+    fetchJson(courseFile("quizzes.json")),
+    fetchJson(courseFile("calculators.json")),
+    fetchJson(courseFile("checklists.json")),
+    fetchJson(courseFile("cases.json")),
+    fetchOptionalJson(courseFile("version.json"))
   ]);
-  const useDbContent = isCurrentDbContent(course, dbContent);
-  const dbLessonMarkdown = dbContent.lessonMarkdown || {};
-  if (hasMeaningfulDbContent(dbContent) && !useDbContent) {
-    console.warn("Keeping static JSON content because DB course content is missing or legacy. DB lesson markdown can still be used.");
-  }
   return {
-    course: useDbContent && dbContent.course ? dbContent.course : course,
-    glossary: useDbContent && dbContent.glossary ? dbContent.glossary : glossary,
-    quizzes: useDbContent && dbContent.quizzes ? dbContent.quizzes : quizzes,
-    calculators: useDbContent && dbContent.calculators ? dbContent.calculators : calculators,
-    checklists: useDbContent && dbContent.checklists ? dbContent.checklists : checklists,
-    cases: useDbContent && dbContent.cases ? dbContent.cases : cases,
-    lessonMarkdown: dbLessonMarkdown,
+    course,
+    glossary,
+    quizzes,
+    calculators,
+    checklists,
+    cases,
+    lessonMarkdown: {},
     version: version?.appVersion ? version : { appVersion, contentVersion, updatedAt: "2026-07-03" },
-    config
+    config,
+    catalog,
+    activeCourse,
+    courseRoot
   };
+}
+
+async function initializeRemoteServices() {
+  await initAuth();
+  updateAuthActions();
+
+  if (/^#(signin|signup|account)/.test(location.hash)) renderRoute();
+  if (data.courseRoot !== ".") return;
+
+  const dbContent = await fetchDbContent(data.config);
+  if (mergeRemoteContent(dbContent)) renderRoute();
+}
+
+function mergeRemoteContent(dbContent = {}) {
+  if (!hasMeaningfulDbContent(dbContent)) return false;
+
+  const useDbContent = isCurrentDbContent(data.course, dbContent);
+  const lessonMarkdown = dbContent.lessonMarkdown || {};
+  if (!useDbContent) {
+    console.warn("Keeping bundled JSON content because DB course content is missing or legacy. DB lesson markdown can still be used.");
+  }
+
+  data = {
+    ...data,
+    course: useDbContent && dbContent.course ? dbContent.course : data.course,
+    glossary: useDbContent && dbContent.glossary ? dbContent.glossary : data.glossary,
+    quizzes: useDbContent && dbContent.quizzes ? dbContent.quizzes : data.quizzes,
+    calculators: useDbContent && dbContent.calculators ? dbContent.calculators : data.calculators,
+    checklists: useDbContent && dbContent.checklists ? dbContent.checklists : data.checklists,
+    cases: useDbContent && dbContent.cases ? dbContent.cases : data.cases,
+    lessonMarkdown: { ...data.lessonMarkdown, ...lessonMarkdown }
+  };
+  return useDbContent || Object.keys(lessonMarkdown).length > 0;
 }
 
 function isCurrentDbContent(staticCourse, dbContent = {}) {
@@ -141,7 +202,8 @@ async function fetchJson(file) {
 async function getSupabaseClient(config) {
   if (supabaseClient) return supabaseClient;
   if (!config?.supabaseUrl || !config?.supabaseAnonKey) return null;
-  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+  const createClient = window.supabase?.createClient;
+  if (typeof createClient !== "function") throw new Error("Bundled Supabase client is unavailable.");
   supabaseClient = createClient(config.supabaseUrl, config.supabaseAnonKey, {
     auth: { persistSession: true, autoRefreshToken: true }
   });
@@ -193,9 +255,12 @@ async function fetchLesson(day) {
   const padded = String(day).padStart(2, "0");
   const dbMarkdown = data.lessonMarkdown?.[padded];
   if (typeof dbMarkdown === "string" && dbMarkdown.length) return dbMarkdown;
+  const lesson = data.course.lessons.find((item) => item.day === day);
+  const markdownPath = lesson?.markdown || `lessons/day-${padded}.md`;
+  const coursePrefix = data.courseRoot && data.courseRoot !== "." ? `${data.courseRoot}/` : "";
 
   try {
-    const response = await fetch(withContentVersion(`${contentRoot}/lessons/day-${padded}.md`));
+    const response = await fetch(withContentVersion(`${contentRoot}/${coursePrefix}${markdownPath}`));
     if (response.ok) return await response.text();
   } catch (err) {
     console.warn(`Could not load static day-${padded}.md`, err);
@@ -223,6 +288,28 @@ function saveState(options = {}) {
   if (!options.skipCloud) scheduleCloudSave();
 }
 
+function isAppRouteHash(hash) {
+  return /^#(dashboard|lessons|lesson-\d+|glossary|tools|cases|chat|plan|account|signin|signup)(\?|$)/.test(hash || "");
+}
+
+function rememberAuthReturnRoute() {
+  const hash = isAppRouteHash(location.hash) ? location.hash : "#dashboard";
+  localStorage.setItem(authReturnKey, `${location.pathname}${location.search}${hash}`);
+}
+
+function restoreAuthReturnRoute() {
+  const savedRoute = localStorage.getItem(authReturnKey);
+  if (!savedRoute) return false;
+  localStorage.removeItem(authReturnKey);
+
+  const target = new URL(savedRoute, window.location.origin);
+  if (target.origin !== window.location.origin) return false;
+
+  const hash = isAppRouteHash(target.hash) ? target.hash : "#dashboard";
+  history.replaceState(null, "", `${target.pathname}${target.search}${hash}`);
+  return true;
+}
+
 function renderVersionNote() {
   if (!versionNote) return;
   const version = data.version?.appVersion || appVersion;
@@ -231,7 +318,21 @@ function renderVersionNote() {
 }
 
 function renderLoading() {
-  app.replaceChildren(document.querySelector("#loadingTemplate").content.cloneNode(true));
+  const isLesson = title.textContent.startsWith("Day ");
+  app.innerHTML = `
+    <section class="panel mobile-loading-state" aria-busy="true" aria-live="polite">
+      <p class="eyebrow">${isLesson ? "Loading lesson" : "Preparing your course"}</p>
+      <h2>${isLesson ? "Loading your lesson..." : "Loading your learning space..."}</h2>
+      <p>${isLesson ? "Restoring your saved position and bilingual content." : "Reading the bundled course content on this device."}</p>
+      <div class="lesson-skeleton" aria-hidden="true">
+        <span class="skeleton-line short"></span>
+        <span class="skeleton-line"></span>
+        <span class="skeleton-line"></span>
+        <span class="skeleton-block"></span>
+        <span class="skeleton-line medium"></span>
+      </div>
+    </section>
+  `;
 }
 function notify(message, variant = "info") {
   cloudStatus = `[${new Date().toLocaleTimeString()}] ${message}`;
@@ -265,10 +366,15 @@ function renderRoute() {
   }
 
   navLinks.forEach((link) => link.classList.toggle("active", cleanRoute.startsWith(link.dataset.nav)));
+  updateAuthActions();
+  updateMobileChrome(cleanRoute);
+  setMobileNavigationOpen(false);
 
   if (cleanRoute.startsWith("lesson-")) {
     const day = Number(cleanRoute.split("-")[1]);
-    renderLesson(day);
+    renderLesson(day)
+      .then(updateAuthActions)
+      .catch((error) => renderLessonLoadError(day, error));
     return;
   }
 
@@ -284,8 +390,67 @@ function renderRoute() {
     signin: () => renderAuthPage("signin"),
     signup: () => renderAuthPage("signup")
   };
-  updateAuthActions();
   (routes[cleanRoute] || renderDashboard)();
+  hydrateIcons();
+}
+
+function setupMobileNavigation() {
+  mobileNavToggle?.addEventListener("click", () => setMobileNavigationOpen(true));
+  mobileNavClose?.addEventListener("click", () => setMobileNavigationOpen(false));
+  mobileNavOverlay?.addEventListener("click", () => setMobileNavigationOpen(false));
+  document.querySelector(".sidebar")?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMobileNavigationOpen(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMobileNavigationOpen(false);
+  });
+}
+
+function setMobileNavigationOpen(open) {
+  document.body.classList.toggle("mobile-nav-open", open);
+  mobileNavToggle?.setAttribute("aria-expanded", String(open));
+}
+
+function updateMobileChrome(route) {
+  const total = data.course?.lessons?.length || 30;
+  const lessonDay = route.startsWith("lesson-") ? Number(route.split("-")[1]) : null;
+  const routeName = lessonDay ? "lesson" : route;
+  document.body.dataset.route = routeName;
+
+  if (mobileProgressPill) {
+    mobileProgressPill.textContent = lessonDay
+      ? `${lessonDay}/${total}`
+      : route === "lessons"
+        ? `${state.completedLessons.length}/${total}`
+        : `${completionPercent()}%`;
+  }
+
+  if (!topbarEyebrow) return;
+  const context = {
+    dashboard: "Your learning home",
+    lessons: "Course path",
+    glossary: "Reference library",
+    tools: "Unity-ready calculators",
+    cases: "Decision practice",
+    chat: "Course-aware assistant",
+    plan: "Final UA plan",
+    account: "Profile and sync",
+    signin: "Secure account access",
+    signup: "Create your account"
+  };
+  topbarEyebrow.textContent = lessonDay ? `Day ${lessonDay} of ${total} · Mobile Puzzle` : (context[route] || "Mobile Game UA");
+}
+
+function renderLessonLoadError(day, error) {
+  title.textContent = `Day ${day}`;
+  app.innerHTML = `
+    <section class="panel">
+      <h2>Lesson could not be opened</h2>
+      <p>This lesson is included in the app, but its content file could not be read.</p>
+      <p class="status-line">${escapeHtml(error.message || String(error))}</p>
+      <a class="button" href="#lessons">Back to all lessons</a>
+    </section>
+  `;
   hydrateIcons();
 }
 
@@ -320,11 +485,13 @@ async function initAuth() {
     currentUser = sessionData.session?.user || null;
     cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Cloud login ready.";
 
-    supabaseClient.auth.onAuthStateChange(async (_event, session) => {
+    supabaseClient.auth.onAuthStateChange(async (event, session) => {
+      const wasSignedIn = Boolean(currentUser);
       currentUser = session?.user || null;
       cloudStatus = currentUser ? `Signed in as ${currentUser.email}` : "Signed out. Local progress is still available.";
       if (currentUser) await pullCloudProgress();
-      renderRoute();
+      updateAuthActions();
+      if (event === "SIGNED_IN" || event === "SIGNED_OUT" || wasSignedIn !== Boolean(currentUser)) renderRoute();
     });
 
     if (currentUser) await pullCloudProgress();
@@ -439,12 +606,13 @@ function renderDashboard() {
   title.textContent = "Dashboard";
   const next = nextLesson();
   const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  const totalLessons = data.course.lessons.length || 30;
   const progressSyncNote = currentUser 
     ? "Tiến độ khóa học của bạn đã được đồng bộ hóa trực tuyến qua tài khoản."
     : "Tiến độ khóa học hiện đang lưu tạm thời. Hãy Đăng nhập để đồng bộ hóa trực tuyến.";
   app.innerHTML = `
     <section class="metric-row">
-      <div class="metric">${icon("book-check")}<strong>${state.completedLessons.length}/30</strong><span>lessons completed</span></div>
+      <div class="metric">${icon("book-check")}<strong>${state.completedLessons.length}/${totalLessons}</strong><span>lessons completed</span></div>
       <div class="metric">${icon("activity")}<strong>${completionPercent()}%</strong><span>course progress</span></div>
       <div class="metric">${icon("clipboard-check")}<strong>${planFields}/9</strong><span>UA plan sections</span></div>
       <div class="metric">${icon("badge-check")}<strong>${Object.keys(state.quizResults).length}</strong><span>quizzes attempted</span></div>
@@ -480,6 +648,22 @@ function renderDashboard() {
   `;
 }
 
+function renderCourseNavOptions() {
+  const container = document.querySelector("#courseNavOptions");
+  if (!container) return;
+  const courses = Array.isArray(data.catalog?.courses) ? data.catalog.courses : [];
+  if (courses.length < 2) {
+    container.replaceChildren();
+    return;
+  }
+  const currentId = data.activeCourse?.id || "ua-30d";
+  container.innerHTML = courses.map((course) => {
+    const active = course.id === currentId;
+    const href = `?course=${encodeURIComponent(course.id)}#lessons`;
+    return `<a class="nav-course-option ${active ? "active" : ""}" href="${href}">${escapeHtml(course.title)}</a>`;
+  }).join("");
+}
+
 function dashboardShortcut(name, copy, href, iconName) {
   return `
     <article class="panel">
@@ -493,30 +677,53 @@ function dashboardShortcut(name, copy, href, iconName) {
 function renderLessons() {
   title.textContent = "30-Day Lessons";
   const lessons = filteredLessons();
+  const total = data.course.lessons.length || 30;
+  const current = nextLesson();
+  const progress = completionPercent();
   app.innerHTML = `
-    <section class="panel">
+    <section class="mobile-course-progress" aria-label="Course progress">
+      <div><strong>Day ${Math.min(current.day, total)} of ${total}</strong><span>${progress}%</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+    </section>
+    <nav class="mobile-quick-actions" aria-label="Quick access">
+      <a href="#lessons"><span>${icon("book-open")}</span>Lessons</a>
+      <a href="#lesson-${current.day}"><span>${icon("target")}</span>Practice</a>
+      <a href="#glossary"><span>${icon("languages")}</span>Glossary</a>
+      <a href="#tools"><span>${icon("calculator")}</span>Tools</a>
+    </nav>
+    <section class="panel lessons-intro">
       <h2>Course path</h2>
+      <span class="lesson-count">${lessons.length} lessons</span>
       <p>Current stage filter: <strong>${stageLabels[state.stage]}</strong>. Mỗi bài có nội dung song ngữ, glossary liên quan, quiz ngắn và checklist thực hành.</p>
     </section>
     <section class="lesson-list">
       ${lessons.map(renderLessonCard).join("")}
     </section>
+    <a class="button lessons-primary-action" href="#lesson-${current.day}">${icon("arrow-right")}Continue Day ${current.day}</a>
   `;
 }
 
 function renderLessonCard(lesson) {
   const done = state.completedLessons.includes(lesson.day);
+  const current = lesson.day === nextLesson().day;
+  const status = done ? "Review" : current ? "Continue" : "Open";
   return `
-    <article class="lesson-card ${done ? "done" : ""}">
-      <div class="tag-row">
-        <span class="tag ${done ? "ok" : "warn"}">${done ? "Done" : `Day ${lesson.day}`}</span>
-        <span class="tag">${lesson.module}</span>
+    <article class="lesson-card ${done ? "done" : ""} ${current ? "current" : ""}">
+      <div class="lesson-card-leading" aria-hidden="true">
+        <span>${done ? icon("check") : lesson.day}</span>
       </div>
-      <h3>${escapeHtml(lesson.title)}</h3>
-      <p>${escapeHtml(lesson.summary)}</p>
-      ${lesson.artifact ? `<p><strong>Artifact:</strong> ${escapeHtml(lesson.artifact)}</p>` : ""}
-      <div class="tag-row">${renderTags(lesson.stages.map((stage) => stageLabels[stage]), "blue")}</div>
-      <a class="button" href="#lesson-${lesson.day}">${icon("book-open")}Open lesson</a>
+      <div class="lesson-card-copy">
+        <div class="tag-row lesson-card-tags">
+          <span class="tag ${done ? "ok" : "warn"}">${done ? "Done" : `Day ${lesson.day}`}</span>
+          <span class="tag">${escapeHtml(lesson.module)}</span>
+        </div>
+        <h3>${escapeHtml(lesson.title)}</h3>
+        <p class="lesson-card-meta">${lesson.estimatedMinutes || 20} min · ${done ? "Complete" : current ? "In progress" : "Available"}</p>
+        <p class="lesson-card-summary">${escapeHtml(lesson.summary)}</p>
+        ${lesson.artifact ? `<p class="lesson-card-artifact"><strong>Artifact:</strong> ${escapeHtml(lesson.artifact)}</p>` : ""}
+        <div class="tag-row lesson-card-stages">${renderTags(lesson.stages.map((stage) => stageLabels[stage]), "blue")}</div>
+      </div>
+      <a class="lesson-card-action" href="#lesson-${lesson.day}" aria-label="${status} Day ${lesson.day}">${status}${icon("chevron-right")}</a>
     </article>
   `;
 }
@@ -740,13 +947,58 @@ async function answerQuiz(quizId, answer) {
   renderRoute();
 }
 
+function renderLessonComplete(day) {
+  const lesson = data.course.lessons.find((item) => item.day === day);
+  if (!lesson) {
+    renderLessons();
+    return;
+  }
+  const next = data.course.lessons.find((item) => item.day === day + 1);
+  const total = data.course.lessons.length || 30;
+  title.textContent = `Day ${day} Complete`;
+  document.body.dataset.route = "complete";
+  if (topbarEyebrow) topbarEyebrow.textContent = "Lesson complete";
+  if (mobileProgressPill) mobileProgressPill.textContent = `${day}/${total}`;
+  app.innerHTML = `
+    <section class="lesson-complete-view" aria-live="polite">
+      <p class="eyebrow">Lesson complete</p>
+      <h2>You completed Day ${day}</h2>
+      <section class="completion-feedback">
+        <span>${icon("check")}</span>
+        <div><strong>Day ${day} is complete</strong><p>Reading, answers and completion status are saved.</p></div>
+      </section>
+      <section class="panel completion-outcomes">
+        <h3>What you can now do</h3>
+        <p>${icon("check")}<span>${escapeHtml(lesson.learningOutcome || lesson.summary)}</span></p>
+        <p>${icon("check")}<span>${escapeHtml(lesson.artifact || "Apply the lesson decision rule in your game.")}</span></p>
+        <p>${icon("check")}<span>Return to this lesson and review your saved practice at any time.</span></p>
+      </section>
+      ${next ? `
+        <section class="panel completion-next">
+          <p class="eyebrow">Up next · Day ${next.day}</p>
+          <h3>${escapeHtml(next.title)}</h3>
+          <p>${escapeHtml(next.summary)}</p>
+        </section>
+      ` : ""}
+      <div class="completion-actions">
+        <button class="ghost-button" id="undoCompleteBtn" type="button">${icon("rotate-ccw")}Undo</button>
+        <a class="button" href="${next ? `#lesson-${next.day}` : "#lessons"}">${icon("arrow-right")}${next ? `Continue Day ${next.day}` : "Back to lessons"}</a>
+      </div>
+    </section>
+  `;
+  document.querySelector("#undoCompleteBtn")?.addEventListener("click", () => toggleLesson(day));
+  hydrateIcons();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 async function toggleLesson(day) {
   const set = new Set(state.completedLessons);
-  set.has(day) ? set.delete(day) : set.add(day);
+  const completed = !set.has(day);
+  completed ? set.add(day) : set.delete(day);
   state.completedLessons = [...set].sort((a, b) => a - b);
   saveState({ skipCloud: true });
   if (currentUser) await pushCloudProgress();
-  renderRoute();
+  completed ? renderLessonComplete(day) : renderRoute();
 }
 
 async function toggleBookmark(day) {
@@ -760,6 +1012,7 @@ async function toggleBookmark(day) {
 
 function renderGlossary(termParam = "") {
   title.textContent = "Glossary";
+  const glossaryTerms = Array.isArray(data.glossary) ? data.glossary : [];
   app.innerHTML = `
     <section class="panel">
       <h2>${icon("languages")}UA terms, explained for Unity developers</h2>
@@ -768,13 +1021,13 @@ function renderGlossary(termParam = "") {
       </div>
     </section>
     <section class="term-grid" id="termGrid">
-      ${renderTermCards(data.glossary)}
+      ${renderTermCards(glossaryTerms)}
     </section>
   `;
   const searchInput = document.querySelector("#termSearch");
   searchInput.addEventListener("input", (event) => {
     const query = event.target.value.trim().toLowerCase();
-    const terms = data.glossary.filter((term) =>
+    const terms = glossaryTerms.filter((term) =>
       [term.term, term.vi, term.en, term.analogy].join(" ").toLowerCase().includes(query)
     );
     document.querySelector("#termGrid").innerHTML = renderTermCards(terms);
@@ -1108,7 +1361,8 @@ async function buildChatContext(prompt) {
       return `Day ${lesson.day}: ${lesson.title}\n${stripFrontmatter(markdown).slice(0, 1800)}`;
     })
   );
-  const glossary = data.glossary
+  const glossaryTerms = Array.isArray(data.glossary) ? data.glossary : [];
+  const glossary = glossaryTerms
     .filter((term) => query.includes(term.term.toLowerCase()) || scoreText(query, `${term.vi} ${term.en}`) > 0)
     .slice(0, 8)
     .map((term) => `${term.term}: ${term.vi} Formula: ${term.formula || "n/a"}`)
@@ -1195,8 +1449,9 @@ async function submitAccountAuth(mode) {
 
   notify(`Signed in as ${currentUser.email}`, "success");
   await pullCloudProgress();
-  location.hash = "#dashboard";
+  if (!restoreAuthReturnRoute()) location.hash = "#dashboard";
   updateAuthActions();
+  renderRoute();
 }
 
 async function signInWithGoogle() {
@@ -1205,11 +1460,11 @@ async function signInWithGoogle() {
     return;
   }
 
+  rememberAuthReturnRoute();
+  const redirectTo = `${window.location.origin}${window.location.pathname}${window.location.search}`;
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: "google",
-    options: {
-      redirectTo: `${window.location.origin}${window.location.pathname}`
-    }
+    options: { redirectTo }
   });
 
   if (error) notify(error.message, "error");
@@ -1267,7 +1522,7 @@ function renderAuthPage(mode) {
           </label>
         ` : ""}
         <button type="submit">${icon("log-in")}${isSignup ? "Sign up" : "Sign in"}</button>
-        <button class="ghost-button" id="googleAuthBtn" type="button">${icon("chrome")}Continue with Google</button>
+        <button class="ghost-button" id="googleAuthBtn" type="button">${icon("key-round")}Continue with Google</button>
         <a class="button ghost-button" href="#${isSignup ? "signin" : "signup"}">${icon("arrow-right-left")}${isSignup ? "Already have an account? Sign in" : "Need an account? Sign up"}</a>
       </form>
       <article class="panel">
@@ -1288,6 +1543,7 @@ function renderAccount() {
   const configured = Boolean(data.config?.supabaseUrl && data.config?.supabaseAnonKey);
   const completed = state.completedLessons.length;
   const planFields = Object.values(state.plan).filter((value) => value.trim()).length;
+  const totalLessons = data.course.lessons.length || 30;
 
   if (!configured) {
     app.innerHTML = `
@@ -1295,7 +1551,7 @@ function renderAccount() {
         <article class="panel">
           <h2>${icon("cloud-off")}Login is not configured yet</h2>
           <p>This app is still using localStorage only. To enable login and cloud progress sync, create a Supabase project, run <code>supabase-schema.sql</code>, then fill <code>content/app-config.json</code>.</p>
-          <p class="status-line">Current local progress: ${completed}/30 lessons, ${planFields}/9 UA plan sections.</p>
+          <p class="status-line">Current local progress: ${completed}/${totalLessons} lessons, ${planFields}/9 UA plan sections.</p>
         </article>
         <article class="panel">
           <h2>${icon("database")}Why Supabase?</h2>
@@ -1325,7 +1581,7 @@ function renderAccount() {
         <h2>${icon("refresh-cw")}Progress sync</h2>
         <p>Local progress is always saved immediately in this browser. When signed in, the app also syncs lesson completion, bookmarks, quizzes, checklists, Final UA Plan, and chatbot memory to Supabase.</p>
         <div class="metric-row">
-          <div class="metric"><strong>${completed}/30</strong><span>lessons</span></div>
+          <div class="metric"><strong>${completed}/${totalLessons}</strong><span>lessons</span></div>
           <div class="metric"><strong>${Object.keys(state.quizResults).length}</strong><span>quizzes</span></div>
           <div class="metric"><strong>${planFields}/9</strong><span>plan fields</span></div>
           <div class="metric"><strong>${Object.values(state.checklist).filter(Boolean).length}</strong><span>checks</span></div>
@@ -1716,12 +1972,13 @@ function renderMarkdownTable(rows, seenTerms = null) {
   if (parsed.length < 2) return parsed.map((cells) => `<p>${inlineMarkdown(cells.join(" | "), seenTerms)}</p>`).join("");
   const separatorIndex = parsed.findIndex((cells) => cells.every((cell) => /^:?-{3,}:?$/.test(cell)));
   const header = parsed[0];
+  const columnLabels = header.map((cell, index) => plainMarkdown(cell) || `Column ${index + 1}`);
   const body = parsed.filter((_, index) => index !== 0 && index !== separatorIndex);
   return `
     <div class="markdown-table-wrap">
       <table class="markdown-table">
         <thead><tr>${header.map((cell) => `<th>${inlineMarkdown(cell, seenTerms)}</th>`).join("")}</tr></thead>
-        <tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${inlineMarkdown(cell, seenTerms)}</td>`).join("")}</tr>`).join("")}</tbody>
+        <tbody>${body.map((row) => `<tr>${row.map((cell, index) => `<td data-label="${escapeHtml(columnLabels[index] || `Column ${index + 1}`)}">${inlineMarkdown(cell, seenTerms)}</td>`).join("")}</tr>`).join("")}</tbody>
       </table>
     </div>
   `;
@@ -1812,7 +2069,7 @@ function inlineMarkdown(value, seenTerms = null) {
 }
 
 function parseGlossaryTerms(text, seenTerms = null) {
-  if (!data || !data.glossary) return text;
+  if (!data || !Array.isArray(data.glossary) || !data.glossary.length) return text;
   
   let result = text;
   const sortedTerms = [...data.glossary].sort((a, b) => b.term.length - a.term.length);

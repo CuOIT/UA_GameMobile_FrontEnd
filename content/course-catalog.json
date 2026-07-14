@@ -1,0 +1,20 @@
+{
+  "courses": [
+    {
+      "id": "ua-30d",
+      "title": "30-Day UA Marketing Bootcamp for Unity Indie Developers",
+      "root": ".",
+      "summary": "UA, soft-launch, creative, tracking and campaign operation for Android-first mobile puzzle games.",
+      "days": 30,
+      "primary": true
+    },
+    {
+      "id": "monetization-30d",
+      "title": "30-Day Mobile Puzzle Monetization Bootcamp for Unity Developers",
+      "root": "courses/monetization-30d",
+      "summary": "Ads plus light IAP, Unity implementation boundaries, monetization tracking, guardrails and LiveOps decisions for mobile puzzle games.",
+      "days": 30,
+      "primary": false
+    }
+  ]
+}

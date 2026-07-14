@@ -1,0 +1,332 @@
+{
+  "m01": {
+    "question": "Day 1: What is the main decision in \"Monetization as a player-value loop\"?",
+    "options": [
+      "Decide what the game is allowed to monetize before adding SDKs or offers.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m02": {
+    "question": "Day 2: What is the main decision in \"Puzzle economy roles: ads, IAP and progression\"?",
+    "options": [
+      "Choose the monetization role that matches the puzzle loop and target player.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m03": {
+    "question": "Day 3: What is the main decision in \"Audience willingness-to-pay map\"?",
+    "options": [
+      "Identify which players should see ads, offers or neither in the first test.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m04": {
+    "question": "Day 4: What is the main decision in \"Session design for ad-friendly puzzle games\"?",
+    "options": [
+      "Choose where ads can appear without breaking player trust.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m05": {
+    "question": "Day 5: What is the main decision in \"First monetization hypothesis\"?",
+    "options": [
+      "Write the first monetization hypothesis that can drive implementation.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m06": {
+    "question": "Day 6: What is the main decision in \"Ads format choice for Unity puzzle\"?",
+    "options": [
+      "Choose a first ad format based on player control, session rhythm and measurement quality.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m07": {
+    "question": "Day 7: What is the main decision in \"Week 1 synthesis: monetization guardrails\"?",
+    "options": [
+      "Define what monetization must not do to the game experience.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m08": {
+    "question": "Day 8: What is the main decision in \"Ad SDK integration plan without gameplay coupling\"?",
+    "options": [
+      "Decide the technical boundary for ad loading, showing and analytics.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m09": {
+    "question": "Day 9: What is the main decision in \"Rewarded ad placement and reward economy\"?",
+    "options": [
+      "Choose one rewarded placement and define its reward rules.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m10": {
+    "question": "Day 10: What is the main decision in \"Interstitial pacing and fatigue control\"?",
+    "options": [
+      "Write a pacing rule that protects retention before revenue.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m11": {
+    "question": "Day 11: What is the main decision in \"IAP product ladder for puzzle games\"?",
+    "options": [
+      "Select the minimum viable IAP catalog for a soft launch.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m12": {
+    "question": "Day 12: What is the main decision in \"Store products and receipt readiness\"?",
+    "options": [
+      "Decide which store-product readiness checks block a monetization test.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m13": {
+    "question": "Day 13: What is the main decision in \"Monetization event taxonomy\"?",
+    "options": [
+      "Create the minimum event set needed to read monetization safely.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m14": {
+    "question": "Day 14: What is the main decision in \"QA monetization in Unity release builds\"?",
+    "options": [
+      "Decide whether the build is monetization-test ready.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m15": {
+    "question": "Day 15: What is the main decision in \"Week 2 synthesis: monetization test build\"?",
+    "options": [
+      "Define the pass/fail rules for a monetization-ready build.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m16": {
+    "question": "Day 16: What is the main decision in \"ARPDAU, impressions and fill rate\"?",
+    "options": [
+      "Diagnose whether weak ad revenue is demand, placement or engagement.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m17": {
+    "question": "Day 17: What is the main decision in \"Purchase funnel from offer view to paid user\"?",
+    "options": [
+      "Identify which purchase-funnel link needs fixing first.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m18": {
+    "question": "Day 18: What is the main decision in \"Retention vs monetization tradeoff\"?",
+    "options": [
+      "Set guardrails for monetization changes that should be rolled back.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m19": {
+    "question": "Day 19: What is the main decision in \"Cohort reading for ads plus light IAP\"?",
+    "options": [
+      "Choose which cohort signal is strong enough for a next action.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m20": {
+    "question": "Day 20: What is the main decision in \"Ad mediation and waterfall basics\"?",
+    "options": [
+      "Decide whether to keep one network or prepare mediation later.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m21": {
+    "question": "Day 21: What is the main decision in \"Monetization dashboard readout\"?",
+    "options": [
+      "Write the first dashboard readout without overclaiming from small data.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m22": {
+    "question": "Day 22: What is the main decision in \"Week 3 synthesis: metric decision rules\"?",
+    "options": [
+      "Define how monetization metrics will trigger action.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m23": {
+    "question": "Day 23: What is the main decision in \"Offer design: starter packs and boosters\"?",
+    "options": [
+      "Choose one offer concept and its player-value proof.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m24": {
+    "question": "Day 24: What is the main decision in \"Ad removal and no-ads offers\"?",
+    "options": [
+      "Choose whether to test no-ads now, later or never.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m25": {
+    "question": "Day 25: What is the main decision in \"Pricing and regional assumptions\"?",
+    "options": [
+      "Pick first price points and caveats for Android-first testing.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m26": {
+    "question": "Day 26: What is the main decision in \"LiveOps cadence for monetization tests\"?",
+    "options": [
+      "Choose the first four-week monetization operating rhythm.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m27": {
+    "question": "Day 27: What is the main decision in \"Compliance, consent and data safety\"?",
+    "options": [
+      "Decide which compliance tasks must block release.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m28": {
+    "question": "Day 28: What is the main decision in \"Monetization post-mortem and learning log\"?",
+    "options": [
+      "Write a monetization post-mortem that leads to the next test.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m29": {
+    "question": "Day 29: What is the main decision in \"Build the one-page monetization plan\"?",
+    "options": [
+      "Create a one-page monetization plan ready for team review.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  },
+  "m30": {
+    "question": "Day 30: What is the main decision in \"Stress-test monetization risks and next action\"?",
+    "options": [
+      "Choose launch, hold, reduce scope or rollback before touching live players.",
+      "Add every available ad format before measuring retention",
+      "Judge monetization only from total revenue",
+      "Delay tracking until after the first paid traffic test"
+    ],
+    "answer": 0,
+    "explanation": "The course treats monetization as a testable value exchange with metrics and rollback rules."
+  }
+}
